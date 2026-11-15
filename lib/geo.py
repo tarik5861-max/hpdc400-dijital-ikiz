@@ -74,6 +74,12 @@ if BACKEND == "freecad":
     def export_step(shapes, path):
         Part.Compound(list(shapes)).exportStep(path)
 
+    def polyprism(pts_yz, x0, x1):
+        """YZ duzleminde kapali poligon (x=x0), +X yonunde x1'e kadar ekstrude."""
+        vs = [V(x0, y, z) for y, z in pts_yz] + [V(x0, pts_yz[0][0], pts_yz[0][1])]
+        f = Part.Face(Part.makePolygon(vs))
+        return f.extrude(V(x1 - x0, 0, 0))
+
 # ---------------------------------------------------------------- OCP
 else:
     from OCP.BRepPrimAPI import BRepPrimAPI_MakeBox, BRepPrimAPI_MakeCylinder
@@ -137,6 +143,17 @@ else:
     def is_valid(s):
         return BRepCheck_Analyzer(s).IsValid()
 
+    def polyprism(pts_yz, x0, x1):
+        """YZ duzleminde kapali poligon (x=x0), +X yonunde x1'e kadar ekstrude."""
+        from OCP.BRepBuilderAPI import BRepBuilderAPI_MakePolygon, BRepBuilderAPI_MakeFace
+        from OCP.BRepPrimAPI import BRepPrimAPI_MakePrism
+        mp = BRepBuilderAPI_MakePolygon()
+        for y, z in pts_yz:
+            mp.Add(gp_Pnt(x0, y, z))
+        mp.Close()
+        face = BRepBuilderAPI_MakeFace(mp.Wire()).Face()
+        return BRepPrimAPI_MakePrism(face, gp_Vec(x1 - x0, 0, 0)).Shape()
+
     def export_step(shapes, path):
         c = TopoDS_Compound(); bld = BRep_Builder(); bld.MakeCompound(c)
         for s in shapes:
@@ -157,3 +174,24 @@ def place(s, pos, rot_deg):
     if ry: s = rot(s, "y", ry)
     if rz: s = rot(s, "z", rz)
     return move(s, *pos)
+
+
+def gear_x(teeth, module, x0, x1, bore_d=0.0, phase_deg=0.0, cy=0.0, cz=0.0):
+    """Duz disli (basitlestirilmis trapez dis), ekseni X, merkezi (cy, cz), x0..x1 genislik.
+    phase_deg: bir disin ortasinin YZ duzleminde atan2(z, y) acisi.
+    Pitch R = m*z/2, dis basi R+m, dis dibi R-1.25m. Ayni modullu iki disli, faz dogru verilirse
+    (kinematics.gear_phase) birbirine girmeden kavrar."""
+    R = module * teeth / 2.0
+    ra, rf = R + module, R - 1.25 * module
+    p = 2 * math.pi / teeth
+    ph = math.radians(phase_deg)
+    pts = []
+    for k in range(teeth):
+        t = ph + k * p
+        for a, r in ((-0.30, rf), (-0.12, ra), (0.12, ra), (0.30, rf)):
+            pts.append((cy + r * math.cos(t + a * p), cz + r * math.sin(t + a * p)))
+    s = polyprism(pts, x0, x1)
+    if bore_d > 0:
+        b = move(cyl(bore_d / 2.0, (x1 - x0) + 2, "x", center=False), x0 - 1, cy, cz)
+        s = cut(s, b)
+    return s

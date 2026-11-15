@@ -186,7 +186,38 @@
   "overall_width_incl_accessories": 1830,
   "est_mass_t": 18,
   "ejector_overall_length": 425.0,
-  "clamp_piston_d": 160.0
+  "clamp_piston_d": 160.0,
+  "die_height_drive": {
+   "type": "elektrikli helisel redüktörlü motor -> pinyon -> merkez disli -> 4 somun dislisi",
+   "module": 4,
+   "z_central": 210,
+   "z_nut": 48,
+   "z_pinion": 20,
+   "gear_plane_x": [
+    1865.0,
+    1915.0
+   ],
+   "central_pitch_d": 840,
+   "nut_pitch_d": 192,
+   "pinion_pitch_d": 80,
+   "pinion_center_yz": [
+    0,
+    460
+   ],
+   "center_dist_central_nut": 516.6,
+   "center_dist_central_pinion": 460,
+   "thread_pitch_mm": 6.0,
+   "gearbox_ratio": 35,
+   "motor_kW": 1.1,
+   "motor_rpm": 1450,
+   "output_rpm": 41.4,
+   "nut_rpm": 17.3,
+   "adjust_speed_mm_min": 103.6,
+   "full_range_time_min": 5.3,
+   "torque_note": "Somun basina eksenel 5 kN, tan(lambda+rho')=0.18, d2=116 -> 52 Nm/somun; merkez 910 Nm; pinyon 87 Nm; P~0.38 kW verimlerle ~0.75 kW -> 1.1 kW secildi (yaklasik, sahada dogrulanmali).",
+   "mm_per_central_rev": 26.25,
+   "note": "Kalip yuksekligi ayari kalip SOKULU iken yapilir (dh<400'de kaliplar carpisir)."
+  }
  },
  "parts": {
   "A11": {
@@ -832,7 +863,9 @@
      ],
      "module": 4,
      "teeth": 48,
-     "note": "teeth may be simplified to a d200 cylinder; od must not exceed 200 (10 mm above rail top)"
+     "note": "Disler g.gear_x ile cizilir; faz instance 'gear_phase_deg' alanindan gelir (merkez disliyle carpismasiz kavrama icin hesaplandi). OD 200.",
+     "teeth_modelled": true,
+     "profile": "g.gear_x(teeth, module, x0, x1, bore, d['gear_phase_deg'], 0, 0)"
     },
     "chamfer": 4
    },
@@ -857,7 +890,8 @@
       1925.0,
       450.0,
       480.0
-     ]
+     ],
+     "gear_phase_deg": 3.274
     },
     {
      "name": "A26_2",
@@ -878,7 +912,8 @@
       1925.0,
       450.0,
       -280.0
-     ]
+     ],
+     "gear_phase_deg": 4.226
     },
     {
      "name": "A26_3",
@@ -899,7 +934,8 @@
       1925.0,
       -250.0,
       480.0
-     ]
+     ],
+     "gear_phase_deg": 4.226
     },
     {
      "name": "A26_4",
@@ -920,7 +956,8 @@
       1925.0,
       -250.0,
       -280.0
-     ]
+     ],
+     "gear_phase_deg": 3.274
     }
    ]
   },
@@ -2670,6 +2707,317 @@
      ]
     }
    ]
+  },
+  "A91": {
+   "name": "Merkez disli (z210 m4)",
+   "dims": {
+    "teeth": 210,
+    "module": 4,
+    "width": 50,
+    "bore_d": 600,
+    "phase_deg": 0.0,
+    "lightening_holes": {
+     "d": 70,
+     "count": 12,
+     "pcd": 510,
+     "optional": true
+    }
+   },
+   "local_origin": "Disli merkezi (makine ekseni), -X yuzu. Genislik +X (x 0..50). Disler g.gear_x(210,4,0,50,600,phase_deg).",
+   "instances": [
+    {
+     "name": "A91_1",
+     "pos": [
+      1865.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1865.0,
+      -424,
+      -424,
+      1915.0,
+      424,
+      424
+     ]
+    }
+   ]
+  },
+  "A92": {
+   "name": "Merkez disli tasiyici yatak halkasi",
+   "dims": {
+    "tube_od": 600,
+    "tube_id": 460,
+    "length": 125,
+    "lip_od": 680,
+    "lip1_local_x": [
+     45,
+     60
+    ],
+    "lip2_local_x": [
+     110,
+     125
+    ],
+    "note": "Tup x 0..125 (arka plaka arka yuzunden). Merkez disli lip1 ile lip2 arasinda (x 60..110) doner. ID 460: A35 flans koseleri r212."
+   },
+   "local_origin": "Makine ekseni, arka plaka arka yuzu (temas yuzeyi). Tup ekseni +X.",
+   "instances": [
+    {
+     "name": "A92_1",
+     "pos": [
+      1805.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      -340,
+      -340,
+      1930.0,
+      340,
+      340
+     ]
+    }
+   ]
+  },
+  "A93": {
+   "name": "Pinyon (z20 m4) + mil",
+   "dims": {
+    "teeth": 20,
+    "module": 4,
+    "width": 50,
+    "phase_deg": 0.0,
+    "shaft_d": 40,
+    "shaft_local_x": [
+     50,
+     135
+    ],
+    "note": "Mil redüktör cikis deligine girer (A94 x 0..40 icine 40 mm)."
+   },
+   "local_origin": "Pinyon ekseni, pinyon -X yuzu. Pinyon x 0..50, mil x 50..135. Disler g.gear_x(20,4,0,50,0,phase_deg) (merkez 0,0 lokal).",
+   "instances": [
+    {
+     "name": "A93_1",
+     "pos": [
+      1865.0,
+      0,
+      460.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1865.0,
+      -44,
+      416,
+      2000.0,
+      44,
+      504
+     ]
+    }
+   ]
+  },
+  "A94": {
+   "name": "Redüktör (helisel, i=35)",
+   "dims": {
+    "box_x": 220,
+    "box_y": 180,
+    "box_z": 200,
+    "output_shaft_hole_d": 40,
+    "output_hole_depth": 40,
+    "flange_d": 250,
+    "flange_thk": 15,
+    "flange_local_x": [
+     205,
+     220
+    ],
+    "fillet_hint": 10
+   },
+   "local_origin": "Cikis mili ekseni, govdenin -X yuzu. Govde x 0..220, y +-90, z +-100 (eksen merkezde). Motor tarafi flans x 205..220 (d250).",
+   "instances": [
+    {
+     "name": "A94_1",
+     "pos": [
+      1960.0,
+      0,
+      460.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1960.0,
+      -125,
+      335,
+      2180.0,
+      125,
+      585
+     ]
+    }
+   ]
+  },
+  "A95": {
+   "name": "Elektrik motoru 1.1 kW 4 kutup (IEC 90L)",
+   "dims": {
+    "flange_d": 200,
+    "flange_thk": 12,
+    "body_d": 180,
+    "body_local_x": [
+     12,
+     290
+    ],
+    "fan_cover_d": 170,
+    "fan_cover_local_x": [
+     290,
+     320
+    ],
+    "terminal_box": {
+     "size_xyz": [
+      90,
+      90,
+      60
+     ],
+     "local_center_x": 150,
+     "on_top": true
+    },
+    "cooling_fins": {
+     "optional": true
+    }
+   },
+   "local_origin": "Motor ekseni, flans -X yuzu (redüktöre temas). Govde +X.",
+   "instances": [
+    {
+     "name": "A95_1",
+     "pos": [
+      2180.0,
+      0,
+      460.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      2180.0,
+      -100,
+      360,
+      2500.0,
+      100,
+      610
+     ]
+    }
+   ]
+  },
+  "A96": {
+   "name": "Motor-redüktör braketi",
+   "dims": {
+    "plate": {
+     "local_x": [
+      0,
+      20
+     ],
+     "y": [
+      -120,
+      120
+     ],
+     "local_z": [
+      0,
+      110
+     ]
+    },
+    "arm": {
+     "local_x": [
+      0,
+      155
+     ],
+     "y": [
+      -120,
+      120
+     ],
+     "local_z": [
+      80,
+      110
+     ]
+    },
+    "gusset": {
+     "optional": true
+    }
+   },
+   "local_origin": "Arka plaka arka yuzu (x=1805), y=0, z=430. Dikey plaka arka plakaya civatali; kol +X yonunde redüktör -X yuzune (x=1960) dayanir.",
+   "instances": [
+    {
+     "name": "A96_1",
+     "pos": [
+      1805.0,
+      0,
+      430.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      -120,
+      430,
+      1960.0,
+      120,
+      540
+     ]
+    }
+   ]
+  },
+  "A97": {
+   "name": "Motor enkoderi",
+   "dims": {
+    "d": 70,
+    "length": 50,
+    "cable_gland": {
+     "d": 16,
+     "length": 20,
+     "optional": true
+    }
+   },
+   "local_origin": "Enkoder ekseni, -X yuzu (motor fan kapagina temas).",
+   "instances": [
+    {
+     "name": "A97_1",
+     "pos": [
+      2500.0,
+      0,
+      460.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      2500.0,
+      -35,
+      425,
+      2550.0,
+      35,
+      495
+     ]
+    }
+   ]
   }
  },
  "mates": [
@@ -3156,7 +3504,54 @@
    [
     "A35",
     "A37"
+   ],
+   [
+    "A91",
+    "A92"
+   ],
+   [
+    "A91",
+    "A26"
+   ],
+   [
+    "A91",
+    "A93"
+   ],
+   [
+    "A92",
+    "A23"
+   ],
+   [
+    "A93",
+    "A94"
+   ],
+   [
+    "A94",
+    "A95"
+   ],
+   [
+    "A95",
+    "A97"
+   ],
+   [
+    "A96",
+    "A23"
+   ],
+   [
+    "A96",
+    "A94"
    ]
-  ]
+  ],
+  "mesh_pairs": [
+   [
+    "A91",
+    "A26"
+   ],
+   [
+    "A91",
+    "A93"
+   ]
+  ],
+  "mesh_note": "Disli kavramalari: izinli temas ama girisim hacmi <50 mm3 olmali (faz hatasi ~5 cm3 verir)."
  }
 }

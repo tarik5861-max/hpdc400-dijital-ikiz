@@ -1,8 +1,11 @@
-# HPDC-400 - kapama unitesi (mengene) hareket animasyonu
-# Once HPDC400_ac.FCMacro ile montaj acik olmali.
-# Konsol komutlari:  hpdc_poz(0.5)   -> yari acik konum (0 = kapali/kilitli, 1 = tam acik)
-#                    hpdc_baslat()   -> surekli ac-kapa animasyonu
-#                    hpdc_durdur()   -> durdur, kapali konuma don
+# HPDC-400 - kapama unitesi hareketleri (mengene + kalip yuksekligi ayari)
+# Once HPDC400_ac.FCMacro ile montaj acik olmali (HPDC400_yukle.FCMacro ikisini birden yapar).
+# Konsol komutlari:
+#   hpdc_poz(0.5)            -> mafsal konumu (0 = kapali/kilitli, 1 = tam acik)
+#   hpdc_poz(0, 650)         -> mafsal kapali, kalip yuksekligi 650 mm
+#   hpdc_baslat()            -> surekli ac-kapa animasyonu
+#   hpdc_kalip_ayar(650)     -> redüktörlü motorla kalip yuksekligini 650 mm'ye goturur (kaliplar gizlenir)
+#   hpdc_durdur()            -> durdur, kapali + nominal kalip yuksekligine don
 import os, sys, json, math, importlib
 import FreeCAD as App, FreeCADGui as Gui
 from PySide import QtCore
@@ -13,70 +16,120 @@ if os.path.join(_ROOT, "lib") not in sys.path:
 import kinematics
 importlib.reload(kinematics)
 _P = json.load(open(os.path.join(_ROOT, "params", "params.json"), encoding="utf-8"))
+_G = _P["global"]
 _doc = App.getDocument("HPDC400")
 
 
-def _plc(tr):
-    if tr[0] == "T":
-        return App.Placement(App.Vector(tr[1], 0, tr[2]), App.Rotation())
-    _, p0, deg, p1 = tr
-    rot = App.Rotation(App.Vector(0, 1, 0), deg)
-    base = App.Vector(p1[0], 0, p1[1]) - rot.multVec(App.Vector(p0[0], 0, p0[1]))
-    return App.Placement(base, rot)
+def _plc(M):
+    R, t = M
+    m = App.Matrix(R[0][0], R[0][1], R[0][2], t[0],
+                   R[1][0], R[1][1], R[1][2], t[1],
+                   R[2][0], R[2][1], R[2][2], t[2],
+                   0, 0, 0, 1)
+    return App.Placement(m)
 
 
-# Taban yerlesim: FreeCAD, montaj konumunu nesnenin Placement'inda tutar.
-# Hareket = delta * taban. Taban, nesneye "HPDC_Base" ozelligi olarak bir kez yazilir (makro tekrar calissa da kaybolmaz).
+# Taban yerlesim: FreeCAD montaj konumunu nesnenin Placement'inda tutar. Hareket = delta * taban.
 def _base(o):
     if not hasattr(o, "HPDC_Base"):
-        o.addProperty("App::PropertyPlacement", "HPDC_Base", "HPDC", "s=0 (kapali) montaj yerlesimi")
+        o.addProperty("App::PropertyPlacement", "HPDC_Base", "HPDC", "s=0, nominal kalip yuksekligi montaj yerlesimi")
         o.HPDC_Base = o.Placement
         o.setEditorMode("HPDC_Base", 1)
     return o.HPDC_Base
 
 
-def hpdc_poz(s):
-    trs, info = kinematics.pose(s, _P)
-    for name, tr in trs.items():
+_state = {"t": 0.0, "timer": None, "s": 0.0, "dh": _G["die_height_current"], "mode": None, "dh_from": None, "dh_to": None}
+
+
+def hpdc_poz(s, dh=None):
+    if dh is None:
+        dh = _state["dh"]
+    trs, info = kinematics.pose_full(s, _P, dh)
+    for name, M in trs.items():
         o = _doc.getObject(name)
         if o is not None:
-            o.Placement = _plc(tr).multiply(_base(o))
+            o.Placement = _plc(M).multiply(_base(o))
+    _state["s"], _state["dh"] = s, dh
     Gui.updateGui()
     return info
 
 
-_state = {"t": 0.0, "timer": None}
-PERIOD_S = 6.0      # bir tam ac-kapa cevrimi (s)
+def _durum(info):
+    Gui.getMainWindow().statusBar().showMessage(
+        f"HPDC-400  mafsal s={info['theta'] / _G['toggle']['open_big_link_deg']:.2f} ({info['theta']:.1f} deg)  "
+        f"plaka acikligi={info['dx_platen']:.0f} mm  |  kalip yuksekligi={info['die_height']:.0f} mm  "
+        f"motor={info['motor_rev']:.0f} devir  somun={info['nut_deg'] / 360:.1f} tur")
+
+
+def _kaliplar(gorunur):
+    for n in ("A81_1", "A82_1"):
+        o = _doc.getObject(n)
+        if o is not None:
+            o.ViewObject.Visibility = gorunur
+
+
+PERIOD_S = 6.0      # ac-kapa cevrimi (s)
 DT_MS = 40
+DH_SPEED = 110.0    # animasyonda kalip yuksekligi hizi mm/s (gercekte ~104 mm/dk; 60x hizlandirilmis)
 
 
 def _tick():
     _state["t"] += DT_MS / 1000.0
-    ph = (_state["t"] % PERIOD_S) / PERIOD_S          # 0..1
-    # kapali bekle -> ac -> acik bekle -> kapa (yumusak, kosinus)
-    if ph < 0.15:   s = 0.0
-    elif ph < 0.5:  s = 0.5 - 0.5 * math.cos(math.pi * (ph - 0.15) / 0.35)
-    elif ph < 0.65: s = 1.0
-    else:           s = 0.5 + 0.5 * math.cos(math.pi * (ph - 0.65) / 0.35)
-    info = hpdc_poz(s)
-    Gui.getMainWindow().statusBar().showMessage(
-        f"HPDC-400 kapama  s={s:.2f}  mafsal={info['theta']:.1f} deg  plaka acikligi={info['dx_platen']:.0f} mm  capraz kafa={info['dx_crosshead']:.0f} mm")
+    if _state["mode"] == "mengene":
+        ph = (_state["t"] % PERIOD_S) / PERIOD_S
+        if ph < 0.15:   s = 0.0
+        elif ph < 0.5:  s = 0.5 - 0.5 * math.cos(math.pi * (ph - 0.15) / 0.35)
+        elif ph < 0.65: s = 1.0
+        else:           s = 0.5 + 0.5 * math.cos(math.pi * (ph - 0.65) / 0.35)
+        _durum(hpdc_poz(s))
+    elif _state["mode"] == "kalip":
+        a, b = _state["dh_from"], _state["dh_to"]
+        L = abs(b - a); T = max(L / DH_SPEED, 0.5)
+        u = min(_state["t"] / T, 1.0)
+        u = 0.5 - 0.5 * math.cos(math.pi * u)
+        _durum(hpdc_poz(0.0, a + (b - a) * u))
+        if _state["t"] >= T:
+            hpdc_durdur(reset=False)
+            print(f"Kalip yuksekligi {b:.0f} mm. Kaliplar gizli; gormek icin: hpdc_kaliplar(True)")
 
 
-def hpdc_baslat():
+def _timer_start(mode):
     hpdc_durdur(reset=False)
+    _state["t"] = 0.0
+    _state["mode"] = mode
     t = QtCore.QTimer()
     t.timeout.connect(_tick)
     t.start(DT_MS)
     _state["timer"] = t
 
 
+def hpdc_baslat():
+    _timer_start("mengene")
+
+
+def hpdc_kalip_ayar(hedef_mm):
+    lo, hi = _G["die_height_min"], _G["die_height_max"]
+    if not lo <= hedef_mm <= hi:
+        print(f"Kalip yuksekligi {lo:.0f}-{hi:.0f} mm araliginda olmali.")
+        return
+    hpdc_poz(0.0)            # once mafsal kilitli konuma
+    _kaliplar(False)         # ayar kalip sokulu yapilir
+    _state["dh_from"], _state["dh_to"] = _state["dh"], float(hedef_mm)
+    _timer_start("kalip")
+
+
+def hpdc_kaliplar(gorunur=True):
+    _kaliplar(gorunur)
+
+
 def hpdc_durdur(reset=True):
     if _state["timer"] is not None:
         _state["timer"].stop()
         _state["timer"] = None
+    _state["mode"] = None
     if reset:
-        hpdc_poz(0.0)
+        hpdc_poz(0.0, _G["die_height_current"])
+        _kaliplar(True)
 
 
 hpdc_baslat()

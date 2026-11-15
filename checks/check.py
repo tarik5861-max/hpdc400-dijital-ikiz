@@ -56,7 +56,8 @@ def main():
             continue
         v = geo.volume(geo.common(placed[a][2], placed[b][2]))
         # izinli temas = yuzey temasi / nominal-esit gecme: hacim ~0 olmali. Buyuk hacim -> gomulme.
-        lim = TOL_ALLOWED if is_allowed else TOL_VOL
+        mesh = {frozenset(x) for x in P["clearances"].get("mesh_pairs", [])}
+        lim = TOL_VOL if frozenset((pa, pb)) in mesh else (TOL_ALLOWED if is_allowed else TOL_VOL)
         if v > lim:
             errors.append({"part": f"{a} x {b}", "type": "GOMULME" if is_allowed else "CAKISMA",
                            "msg": f"{v/1000:.1f} cm3"})

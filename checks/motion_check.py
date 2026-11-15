@@ -11,22 +11,33 @@ from assemble import assemble  # noqa
 TOL = 50.0
 
 
-def apply(shp, tr):
-    if tr[0] == "T":
-        return geo.move(shp, tr[1], 0, tr[2])
-    _, p0, deg, p1 = tr
-    s = geo.rot(shp, "y", deg, p0[0], 0, p0[1])
-    return geo.move(s, p1[0] - p0[0], 0, p1[1] - p0[1])
+def apply(shp, M):
+    """(R, t) matrisini sekle uygula."""
+    from OCP.gp import gp_Trsf
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_Transform
+    R, t = M
+    tr = gp_Trsf()
+    tr.SetValues(R[0][0], R[0][1], R[0][2], t[0], R[1][0], R[1][1], R[1][2], t[1], R[2][0], R[2][1], R[2][2], t[2])
+    return BRepBuilderAPI_Transform(shp, tr, True).Shape()
 
 
 def main():
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 8
+    args = [a for a in sys.argv[1:] if not a.startswith("--")]
+    n = int(args[0]) if args else 8
+    die_sweep = "--kalip-yuksekligi" in sys.argv
     placed, _, P, _ = assemble()
+    G = P["global"]
+    if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir
+        placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82")}
     allowed = {frozenset(p) for p in P["clearances"]["allowed_contacts"]}
+    mesh = {frozenset(p) for p in P["clearances"].get("mesh_pairs", [])}
     worst = {}
     for i in range(n + 1):
-        s = i / n
-        tr, info = kinematics.pose(s, P)
+        if die_sweep:
+            s = 0.0; dh = G["die_height_min"] + (G["die_height_max"] - G["die_height_min"]) * i / n
+        else:
+            s = i / n; dh = None
+        tr, info = kinematics.pose_full(s, P, dh)
         cur = {k: (v[0], apply(v[2], tr[k]) if k in tr else v[2]) for k, v in placed.items()}
         bb = {k: geo.bbox(v[1]) for k, v in cur.items()}
         for a, b in itertools.combinations(cur, 2):
@@ -35,12 +46,13 @@ def main():
             if not all(bb[a][j] <= bb[b][j + 3] and bb[b][j] <= bb[a][j + 3] for j in range(3)):
                 continue
             v = geo.volume(geo.common(cur[a][1], cur[b][1]))
-            lim = 5000.0 if frozenset((cur[a][0], cur[b][0])) in allowed else TOL
+            pr = frozenset((cur[a][0], cur[b][0]))
+            lim = TOL if pr in mesh else (5000.0 if pr in allowed else TOL)
             if v > lim:
                 key = (a, b)
                 if key not in worst or v > worst[key][1]:
-                    worst[key] = (s, v)
-        print(f"s={s:.3f}  plaka dx={info['dx_platen']:6.1f}  kafa dx={info['dx_crosshead']:6.1f}")
+                    worst[key] = (s if not die_sweep else info['die_height'], v)
+        print(f"s={s:.3f} kalip_yuk={info['die_height']:6.1f} plaka dx={info['dx_platen']:6.1f} kafa dx={info['dx_crosshead']:6.1f} somun={info['nut_deg']:8.0f} deg")
     print(f"\nCARPISMA cifti: {len(worst)}")
     for (a, b), (s, v) in sorted(worst.items(), key=lambda x: -x[1][1]):
         print(f"  {a:8s} x {b:8s}  en kotu s={s:.2f}  {v/1000:8.1f} cm3")

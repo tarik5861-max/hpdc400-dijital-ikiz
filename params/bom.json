@@ -56,6 +56,19 @@
         "A81",
         "A82"
       ]
+    },
+    {
+      "phase": 5,
+      "name": "Kalip yuksekligi ayar tahriki",
+      "items": [
+        "A91",
+        "A92",
+        "A93",
+        "A94",
+        "A95",
+        "A96",
+        "A97"
+      ]
     }
   ],
   "tree": [
@@ -284,6 +297,54 @@
           "name": "Hareketli kalip yarisi",
           "qty": 1,
           "script": "parts/A82_hareketli_kalip.py"
+        }
+      ]
+    },
+    {
+      "id": "A90",
+      "name": "Kalip yuksekligi ayar tahriki (elektrikli redüktörlü motor)",
+      "children": [
+        {
+          "id": "A91",
+          "name": "Merkez disli (z210 m4)",
+          "qty": 1,
+          "script": "parts/A91_merkez_disli.py"
+        },
+        {
+          "id": "A92",
+          "name": "Merkez disli tasiyici yatak halkasi",
+          "qty": 1,
+          "script": "parts/A92_yatak_halkasi.py"
+        },
+        {
+          "id": "A93",
+          "name": "Pinyon (z20 m4) + mil",
+          "qty": 1,
+          "script": "parts/A93_pinyon.py"
+        },
+        {
+          "id": "A94",
+          "name": "Redüktör (helisel, i=35)",
+          "qty": 1,
+          "script": "parts/A94_reduktor.py"
+        },
+        {
+          "id": "A95",
+          "name": "Elektrik motoru 1.1 kW 4 kutup",
+          "qty": 1,
+          "script": "parts/A95_motor.py"
+        },
+        {
+          "id": "A96",
+          "name": "Motor-redüktör braketi",
+          "qty": 1,
+          "script": "parts/A96_braket.py"
+        },
+        {
+          "id": "A97",
+          "name": "Motor enkoderi (kalip yuksekligi sayimi)",
+          "qty": 1,
+          "script": "parts/A97_enkoder.py"
         }
       ]
     }

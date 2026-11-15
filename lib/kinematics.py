@@ -78,3 +78,88 @@ if __name__ == "__main__":
     P = json.load(open(os.path.join(os.path.dirname(__file__), "..", "params", "params.json")))
     for s in (0, 0.25, 0.5, 0.75, 1.0):
         print(s, {k: round(v, 1) for k, v in pose(s, P)[1].items()})
+
+
+# ---------------------------------------------------------------- genel dönüşüm (matris) + kalıp yüksekliği ayarı
+# M = (R, t): R 3x3 satır listesi, t = (tx, ty, tz).  p' = R p + t
+I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar, sabit plaka, şase: hareket etmez
+                          "A51", "A52", "A54", "A55", "A56", "A57", "A61", "A62", "A71", "A72")
+
+
+def _mat_ry(deg):
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return ((c, 0, s), (0, 1, 0), (-s, 0, c))
+
+
+def _mat_rx(deg):
+    c, s = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return ((1, 0, 0), (0, c, -s), (0, s, c))
+
+
+def _mv(R, p):
+    return tuple(sum(R[i][j] * p[j] for j in range(3)) for i in range(3))
+
+
+def _compose(A, B):
+    """A ∘ B : önce B, sonra A."""
+    Ra, ta = A; Rb, tb = B
+    R = tuple(tuple(sum(Ra[i][k] * Rb[k][j] for k in range(3)) for j in range(3)) for i in range(3))
+    t = tuple(_mv(Ra, tb)[i] + ta[i] for i in range(3))
+    return (R, t)
+
+
+def to_matrix(tr):
+    """pose() çıktısındaki ('T'/'R') dönüşümü matrise çevir."""
+    if tr[0] == "T":
+        return (I3, (tr[1], 0.0, tr[2]))
+    _, p0, deg, p1 = tr
+    R = _mat_ry(deg)
+    q = _mv(R, (p0[0], 0.0, p0[1]))
+    return (R, (p1[0] - q[0], 0.0, p1[1] - q[2]))
+
+
+def _rot_x_about(deg, cy, cz):
+    R = _mat_rx(deg)
+    q = _mv(R, (0.0, cy, cz))
+    return (R, (0.0, cy - q[1], cz - q[2]))
+
+
+def die_height_angles(delta, P):
+    """Kalıp yüksekliği değişimi delta (mm, + = büyür) -> dişli açıları (derece, +X ekseni etrafında)."""
+    D = P["global"]["die_height_drive"]
+    nut = delta / D["thread_pitch_mm"] * 360.0
+    central = -nut * D["z_nut"] / D["z_central"]
+    pinion = -central * D["z_central"] / D["z_pinion"]
+    motor_rev = pinion / 360.0 * D["gearbox_ratio"]
+    return {"nut_deg": nut, "central_deg": central, "pinion_deg": pinion, "motor_rev": motor_rev}
+
+
+def pose_full(s, P, die_height=None):
+    """Mafsal konumu s + kalıp yüksekliği -> {instance: (R, t)}.
+    Kalıp yüksekliği değişince arka plaka ve ona bağlı her şey (mafsal, hareketli plaka, tahrik) +X'te delta kadar kayar;
+    somunlar ve dişliler kendi eksenlerinde döner. Kolonlar, sabit plaka, şase, enjeksiyon sabit."""
+    G = P["global"]
+    dh = G["die_height_current"] if die_height is None else die_height
+    delta = dh - G["die_height_current"]
+    tog, info = pose(s, P)
+    ang = die_height_angles(delta, P)
+    shift = (I3, (delta, 0.0, 0.0))
+    out = {}
+    for pid, part in P["parts"].items():
+        if pid in DIE_HEIGHT_GROUP_FIXED:
+            continue
+        for inst in part["instances"]:
+            n = inst["name"]
+            M = to_matrix(tog[n]) if n in tog else (I3, (0.0, 0.0, 0.0))
+            if pid == "A26":
+                _, y, z = inst["pos"]
+                M = _compose(_rot_x_about(ang["nut_deg"], y, z), M)
+            elif pid == "A91":
+                M = _compose(_rot_x_about(ang["central_deg"], 0.0, 0.0), M)
+            elif pid == "A93":
+                _, y, z = inst["pos"]
+                M = _compose(_rot_x_about(ang["pinion_deg"], y, z), M)
+            out[n] = _compose(shift, M)
+    info = dict(info); info.update(ang); info["die_height"] = dh; info["delta"] = delta
+    return out, info
