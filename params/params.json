@@ -1,0 +1,2861 @@
+{
+ "meta": {
+  "design_basis": "400 t horizontal cold-chamber HPDC machine, 5-point double toggle; Buhler H-400D as primary baseline (platens, tie bars, die height, ejector, injection force), Idra OLCS 400 / HPM II-400 for platen thicknesses, mass and motor. Simplified-but-realistic digital twin geometry.",
+  "notes": [
+   "Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.",
+   "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).",
+   "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.",
+   "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.",
+   "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.",
+   "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).",
+   "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.",
+   "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.",
+   "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.",
+   "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.",
+   "BOM GAP: a 5-point toggle needs a small crosshead link (D-E) per side; bom.json has none. It is modelled as two rigid arms fused to crosshead A31 in the locked pose. Recommend adding e.g. A36 'capraz kafa kolu' x2 if motion is to be simulated. 10 pins = joints A,B,C,D,E x top/bottom.",
+   "Toggle Y layers (each side of center): crosshead arm |Y|<=50; A23 inner lugs 60..125; big links A32 130..200 (center 165); front links A33 205..275 (center 240) and A23 outer lugs 205..275; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.",
+   "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.",
+   "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).",
+   "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.",
+   "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center.",
+   "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.",
+   "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.",
+   "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.",
+   "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox."
+  ],
+  "state": "die_closed_at_die_height_400",
+  "units": "mm, deg",
+  "rotation_convention": "R = Rz*Ry*Rx, then translate by pos"
+ },
+ "global": {
+  "axis_height": 1150.0,
+  "floor_z": -1150.0,
+  "clamp_force_kN": 4000,
+  "tie_bar_spacing_h": 700.0,
+  "tie_bar_spacing_v": 760.0,
+  "tie_bar_d": 120.0,
+  "clear_between_tie_bars_h": 580.0,
+  "clear_between_tie_bars_v": 640.0,
+  "tie_bar_root_stress_MPa": 100.354,
+  "platen_width_y": 920.0,
+  "platen_height_z": 980.0,
+  "fixed_platen_thk": 220.0,
+  "moving_platen_thk": 200.0,
+  "rear_platen_thk": 180.0,
+  "die_height_min": 200.0,
+  "die_height_max": 750.0,
+  "die_height_current": 400.0,
+  "fixed_die_thk": 170.0,
+  "moving_die_thk": 230.0,
+  "opening_stroke": 420.0,
+  "opening_stroke_reference_H400D": 600,
+  "shot_offset_z": -150.0,
+  "x_fixed_platen_face": 0,
+  "x_fixed_platen_back": -220.0,
+  "x_parting": 170.0,
+  "x_moving_platen_face": 400.0,
+  "x_moving_platen_back": 600.0,
+  "x_rear_platen_front": 1625.0,
+  "x_rear_platen_back": 1805.0,
+  "x_tie_bar_start": -350.0,
+  "x_tie_bar_end": 2305.0,
+  "frame_top_z": -530.0,
+  "rail_top_z": -490.0,
+  "frame_x_min": -2700.0,
+  "frame_x_max": 2400.0,
+  "frame_width_y": 1000.0,
+  "toggle": {
+   "pivot_z": 400.0,
+   "L1_big_link": 335.0,
+   "L2_front_link": 320.0,
+   "aC_moving_lug_offset": 140.0,
+   "aA_rear_lug_offset": 230.0,
+   "pin_d": 90.0,
+   "A_xz": [
+    1395.0,
+    400.0
+   ],
+   "B_xz": [
+    1060.0,
+    400.0
+   ],
+   "C_xz": [
+    740.0,
+    400.0
+   ],
+   "E_xz": [
+    1245.0,
+    400.0
+   ],
+   "D_xz": [
+    1290.0,
+    200.0
+   ],
+   "E_from_A": 150.0,
+   "crosshead_link": 205.0,
+   "crosshead_travel": 237.978,
+   "open_knee_z": 94.927,
+   "open_big_link_deg": 65.597,
+   "open_front_link_deg": 72.431,
+   "mirrored_about": "Z=0 (top and bottom halves)"
+  },
+  "plunger_d": 80.0,
+  "plunger_d_options": [
+   70,
+   80,
+   90
+  ],
+  "plunger_stroke": 500.0,
+  "plunger_stroke_reference_H400D": 400,
+  "injection_force_kN": 430,
+  "casting_pressure_MPa": {
+   "70": 111.733,
+   "80": 85.546,
+   "90": 67.592
+  },
+  "injection_cyl_bore": 140.0,
+  "intensifier_ratio": 2.041,
+  "system_pressure_bar": 140,
+  "ejector_stroke": 145.0,
+  "ejector_force_kN": 220,
+  "clamp_cylinder_stroke": 260.0,
+  "pump_motor_kW": 30,
+  "overall_length": 5100.0,
+  "overall_width_incl_accessories": 1830,
+  "est_mass_t": 18
+ },
+ "parts": {
+  "A11": {
+   "name": "Ana sase (kaynakli govde)",
+   "dims": {
+    "x_min": -2700.0,
+    "x_max": 2400.0,
+    "length": 5100.0,
+    "width_y": 1000.0,
+    "height": 620.0,
+    "top_plate_thk": 40,
+    "side_wall_thk": 25,
+    "end_plate_thk": 25,
+    "construction": "hollow welded shell, open bottom, interior empty",
+    "cross_ribs_x": [
+     -2000,
+     -1300,
+     -600,
+     -235,
+     700,
+     1400,
+     2000
+    ],
+    "cross_rib_thk": 20,
+    "top_opening_biscuit_drop": {
+     "x_min": 20,
+     "x_max": 580,
+     "y_min": -240,
+     "y_max": 240,
+     "note": "through top plate only, under die zone"
+    },
+    "foot_pads": {
+     "count": 8,
+     "size": [
+      200,
+      150,
+      20
+     ],
+     "optional": true,
+     "note": "cosmetic; must stay inside outer box footprint, z 0..20 replaced material"
+    },
+    "corner_fillet_hint": 10
+   },
+   "local_origin": "Point on floor directly below global origin (global [0,0,-1150]). Local axes parallel to global. Outer box spans local x x_min..x_max, y -500..+500, z 0..620 (top surface at global Z=-530).",
+   "instances": [
+    {
+     "name": "A11_1",
+     "pos": [
+      0,
+      0,
+      -1150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -2700.0,
+      -500,
+      -1150.0,
+      2400.0,
+      500,
+      -530.0
+     ]
+    }
+   ]
+  },
+  "A12": {
+   "name": "Hareketli plaka kizak raylari",
+   "dims": {
+    "length": 2375.0,
+    "width_y": 100.0,
+    "height": 40.0,
+    "chamfer": 3,
+    "bolt_holes": {
+     "d": 18,
+     "pitch": 250,
+     "optional": true
+    }
+   },
+   "local_origin": "Center of the bottom face at the -X end. Length along +X, width along Y (+-50), height along +Z (0..40). Top surface at global Z=-490 carries all three platens.",
+   "instances": [
+    {
+     "name": "A12_1",
+     "pos": [
+      -220.0,
+      350.0,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -220.0,
+      300.0,
+      -530.0,
+      2155.0,
+      400.0,
+      -490.0
+     ]
+    },
+    {
+     "name": "A12_2",
+     "pos": [
+      -220.0,
+      -350.0,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -220.0,
+      -400.0,
+      -530.0,
+      2155.0,
+      -300.0,
+      -490.0
+     ]
+    }
+   ]
+  },
+  "A21": {
+   "name": "Sabit plaka",
+   "dims": {
+    "width_y": 920.0,
+    "height_z": 980.0,
+    "thickness": 220.0,
+    "tie_bar_holes": {
+     "d": 120.0,
+     "centers_yz": [
+      [
+       350.0,
+       380.0
+      ],
+      [
+       350.0,
+       -380.0
+      ],
+      [
+       -350.0,
+       380.0
+      ],
+      [
+       -350.0,
+       -380.0
+      ]
+     ],
+     "fit": "nominal fit on tie bar shank (allowed contact)"
+    },
+    "shot_hole": {
+     "d": 140.0,
+     "center_yz": [
+      0,
+      -150.0
+     ],
+     "through": true,
+     "fit": "sleeve OD nominal fit"
+    },
+    "edge_chamfer": 5,
+    "t_slots": {
+     "optional": true,
+     "count": 4,
+     "direction": "along Y",
+     "z_positions": [
+      -240,
+      240,
+      -330,
+      330
+     ],
+     "width": 28,
+     "depth": 20,
+     "y_range": [
+      -460,
+      -300
+     ],
+     "note": "cosmetic; if drawn keep only outside die footprint or omit"
+    }
+   },
+   "local_origin": "Center of the die mounting face (= global origin). Plate thickness along -X (body x -220..0), width along Y, height along Z.",
+   "instances": [
+    {
+     "name": "A21_1",
+     "pos": [
+      0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -220.0,
+      -460.0,
+      -490.0,
+      0,
+      460.0,
+      490.0
+     ]
+    }
+   ]
+  },
+  "A22": {
+   "name": "Hareketli plaka",
+   "dims": {
+    "width_y": 920.0,
+    "height_z": 980.0,
+    "thickness": 200.0,
+    "tie_bar_holes": {
+     "d": 150,
+     "centers_yz": [
+      [
+       350.0,
+       380.0
+      ],
+      [
+       350.0,
+       -380.0
+      ],
+      [
+       -350.0,
+       380.0
+      ],
+      [
+       -350.0,
+       -380.0
+      ]
+     ],
+     "note": "bore for bushing A28 (press fit)"
+    },
+    "central_hole": {
+     "d": 80,
+     "center_yz": [
+      0,
+      0
+     ],
+     "through": true
+    },
+    "ejector_rod_holes": {
+     "d": 42,
+     "centers_yz": [
+      [
+       140,
+       140
+      ],
+      [
+       140,
+       -140
+      ],
+      [
+       -140,
+       140
+      ],
+      [
+       -140,
+       -140
+      ]
+     ],
+     "through": true
+    },
+    "toggle_lugs": {
+     "count": 2,
+     "description": "one wide lug top, one bottom, on the back (+X) face, integral with platen",
+     "pin_center_local_xz": [
+      [
+       340.0,
+       400.0
+      ],
+      [
+       340.0,
+       -400.0
+      ]
+     ],
+     "y_min": -200,
+     "y_max": 200,
+     "height_z": 180.0,
+     "x_extent_local": [
+      200.0,
+      430.0
+     ],
+     "end_radius": 90.0,
+     "pin_hole_d": 90.0,
+     "pin_axis": "Y"
+    },
+    "edge_chamfer": 5
+   },
+   "local_origin": "Center of the die mounting (front, -X) face. Plate thickness along +X (body x 0..200), lugs beyond x=200. Width along Y, height along Z.",
+   "instances": [
+    {
+     "name": "A22_1",
+     "pos": [
+      400.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      400.0,
+      -460.0,
+      -490.0,
+      830.0,
+      460.0,
+      490.0
+     ]
+    }
+   ]
+  },
+  "A23": {
+   "name": "Arka plaka (mafsal tasiyici)",
+   "dims": {
+    "width_y": 920.0,
+    "height_z": 980.0,
+    "thickness": 180.0,
+    "tie_bar_holes": {
+     "d": 120.0,
+     "centers_yz": [
+      [
+       350.0,
+       380.0
+      ],
+      [
+       350.0,
+       -380.0
+      ],
+      [
+       -350.0,
+       380.0
+      ],
+      [
+       -350.0,
+       -380.0
+      ]
+     ],
+     "note": "slides over tie-bar thread; nominal fit (allowed contact)"
+    },
+    "central_hole": {
+     "d": 110,
+     "center_yz": [
+      0,
+      0
+     ],
+     "through": true,
+     "note": "clamp cylinder rod d90 passes with 10 radial clearance"
+    },
+    "toggle_lugs": {
+     "count": 8,
+     "description": "4 lug plates top + 4 bottom on the front (-X) face, extending toward -X; big link A32 sits between an inner and an outer lug (double shear)",
+     "pin_center_local_xz": [
+      [
+       -230.0,
+       400.0
+      ],
+      [
+       -230.0,
+       -400.0
+      ]
+     ],
+     "y_ranges": [
+      [
+       60,
+       125
+      ],
+      [
+       205,
+       275
+      ],
+      [
+       -125,
+       -60
+      ],
+      [
+       -275,
+       -205
+      ]
+     ],
+     "height_z": 180.0,
+     "x_extent_local": [
+      -320.0,
+      0
+     ],
+     "end_radius": 90.0,
+     "pin_hole_d": 90.0,
+     "pin_axis": "Y",
+     "note": "gap |Y|<60 must stay free: crosshead arm (|Y|<=50) swings through it when opening"
+    },
+    "edge_chamfer": 5
+   },
+   "local_origin": "Center of the front (toggle side, -X) face. Plate thickness along +X (body x 0..180); lugs extend to x=-320. Width along Y, height along Z.",
+   "instances": [
+    {
+     "name": "A23_1",
+     "pos": [
+      1625.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1305.0,
+      -460.0,
+      -490.0,
+      1805.0,
+      460.0,
+      490.0
+     ]
+    }
+   ]
+  },
+  "A24": {
+   "name": "Kolon (tie bar)",
+   "dims": {
+    "d": 120.0,
+    "length": 2655.0,
+    "thread": "M120x6",
+    "thread_major": 120.0,
+    "thread_minor": 112.639,
+    "thread_pitch": 6.0,
+    "front_thread_len": 135,
+    "rear_thread_len": 720.0,
+    "rear_thread_start_local_x": 1935.0,
+    "end_chamfer": 4,
+    "thread_modelling": "draw as plain d120 cylinder (optionally cosmetic grooves <=1 deep)"
+   },
+   "local_origin": "Center of the -X (injection side) end face. Bar axis along +X, length 0..L.",
+   "instances": [
+    {
+     "name": "A24_1",
+     "pos": [
+      -350.0,
+      350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -350.0,
+      290.0,
+      320.0,
+      2305.0,
+      410.0,
+      440.0
+     ]
+    },
+    {
+     "name": "A24_2",
+     "pos": [
+      -350.0,
+      350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -350.0,
+      290.0,
+      -440.0,
+      2305.0,
+      410.0,
+      -320.0
+     ]
+    },
+    {
+     "name": "A24_3",
+     "pos": [
+      -350.0,
+      -350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -350.0,
+      -410.0,
+      320.0,
+      2305.0,
+      -290.0,
+      440.0
+     ]
+    },
+    {
+     "name": "A24_4",
+     "pos": [
+      -350.0,
+      -350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -350.0,
+      -410.0,
+      -440.0,
+      2305.0,
+      -290.0,
+      -320.0
+     ]
+    }
+   ]
+  },
+  "A25": {
+   "name": "Kolon on somunu (sabit plaka)",
+   "dims": {
+    "od": 190,
+    "thickness": 110.0,
+    "bore_d": 120.0,
+    "thread": "M120x6",
+    "chamfer": 5,
+    "spanner_slots": {
+     "count": 4,
+     "width": 20,
+     "depth": 10,
+     "optional": true
+    }
+   },
+   "local_origin": "Center of the +X face (face that bears on the fixed platen rear face). Nut body along -X (x -110..0), axis = X.",
+   "instances": [
+    {
+     "name": "A25_1",
+     "pos": [
+      -220.0,
+      350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -330.0,
+      255.0,
+      285.0,
+      -220.0,
+      445.0,
+      475.0
+     ]
+    },
+    {
+     "name": "A25_2",
+     "pos": [
+      -220.0,
+      350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -330.0,
+      255.0,
+      -475.0,
+      -220.0,
+      445.0,
+      -285.0
+     ]
+    },
+    {
+     "name": "A25_3",
+     "pos": [
+      -220.0,
+      -350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -330.0,
+      -445.0,
+      285.0,
+      -220.0,
+      -255.0,
+      475.0
+     ]
+    },
+    {
+     "name": "A25_4",
+     "pos": [
+      -220.0,
+      -350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -330.0,
+      -445.0,
+      -475.0,
+      -220.0,
+      -255.0,
+      -285.0
+     ]
+    }
+   ]
+  },
+  "A26": {
+   "name": "Kalip yuksekligi ayar somunu (disli, arka plaka)",
+   "dims": {
+    "body_od": 180,
+    "thickness": 120.0,
+    "bore_d": 120.0,
+    "thread": "M120x6",
+    "gear_ring": {
+     "od": 200,
+     "width": 50,
+     "local_x_range": [
+      60,
+      110
+     ],
+     "module": 4,
+     "teeth": 48,
+     "note": "teeth may be simplified to a d200 cylinder; od must not exceed 200 (10 mm above rail top)"
+    },
+    "chamfer": 4
+   },
+   "local_origin": "Center of the -X face (face that bears on rear platen back face). Nut body along +X (x 0..120), axis = X.",
+   "instances": [
+    {
+     "name": "A26_1",
+     "pos": [
+      1805.0,
+      350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      250.0,
+      280.0,
+      1925.0,
+      450.0,
+      480.0
+     ]
+    },
+    {
+     "name": "A26_2",
+     "pos": [
+      1805.0,
+      350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      250.0,
+      -480.0,
+      1925.0,
+      450.0,
+      -280.0
+     ]
+    },
+    {
+     "name": "A26_3",
+     "pos": [
+      1805.0,
+      -350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      -450.0,
+      280.0,
+      1925.0,
+      -250.0,
+      480.0
+     ]
+    },
+    {
+     "name": "A26_4",
+     "pos": [
+      1805.0,
+      -350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1805.0,
+      -450.0,
+      -480.0,
+      1925.0,
+      -250.0,
+      -280.0
+     ]
+    }
+   ]
+  },
+  "A28": {
+   "name": "Hareketli plaka kolon burcu",
+   "dims": {
+    "od": 150,
+    "id": 120.0,
+    "length": 200.0,
+    "chamfer": 2,
+    "material_hint": "bronze",
+    "oil_groove": {
+     "optional": true
+    }
+   },
+   "local_origin": "Center of the -X end face. Tube axis along +X (x 0..200); flush with both faces of A22.",
+   "instances": [
+    {
+     "name": "A28_1",
+     "pos": [
+      400.0,
+      350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      400.0,
+      275.0,
+      305.0,
+      600.0,
+      425.0,
+      455.0
+     ]
+    },
+    {
+     "name": "A28_2",
+     "pos": [
+      400.0,
+      350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      400.0,
+      275.0,
+      -455.0,
+      600.0,
+      425.0,
+      -305.0
+     ]
+    },
+    {
+     "name": "A28_3",
+     "pos": [
+      400.0,
+      -350.0,
+      380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      400.0,
+      -425.0,
+      305.0,
+      600.0,
+      -275.0,
+      455.0
+     ]
+    },
+    {
+     "name": "A28_4",
+     "pos": [
+      400.0,
+      -350.0,
+      -380.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      400.0,
+      -425.0,
+      -455.0,
+      600.0,
+      -275.0,
+      -305.0
+     ]
+    }
+   ]
+  },
+  "A31": {
+   "name": "Capraz kafa (crosshead)",
+   "dims": {
+    "body": {
+     "len_x": 140.0,
+     "width_y": 200,
+     "height_z": 540.0,
+     "note": "box centered on local origin"
+    },
+    "pin_D_holes": {
+     "d": 90.0,
+     "centers_local_xz": [
+      [
+       0,
+       200.0
+      ],
+      [
+       0,
+       -200.0
+      ]
+     ],
+     "axis": "Y"
+    },
+    "integral_link_arms": {
+     "count": 2,
+     "description": "crosshead links D-E modelled as rigid arms fused to the body in the locked pose (real machine: separate links, see meta.notes)",
+     "D_local_xz": [
+      [
+       0,
+       200.0
+      ],
+      [
+       0,
+       -200.0
+      ]
+     ],
+     "E_local_xz": [
+      [
+       -45.0,
+       400.0
+      ],
+      [
+       -45.0,
+       -400.0
+      ]
+     ],
+     "center_distance": 205.0,
+     "bar_width_in_plane": 120,
+     "thickness_y": 100,
+     "y_range": [
+      -50,
+      50
+     ],
+     "eye_radius": 60,
+     "E_hole_d": 90.0,
+     "angle_to_machine_axis_deg": 77.32
+    },
+    "rod_seat": {
+     "face": "+X face of body (local x=+70)",
+     "d": 90,
+     "note": "clamp rod A35 butts here (contact)"
+    }
+   },
+   "local_origin": "Center of body on machine axis, at the X of the D pins. Local axes parallel to global; body x -70..+70; arms lie in the XZ plane, lean toward -X up to the E pins.",
+   "instances": [
+    {
+     "name": "A31_1",
+     "pos": [
+      1290.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1185.0,
+      -100,
+      -460.0,
+      1360.0,
+      100,
+      460.0
+     ]
+    }
+   ]
+  },
+  "A32": {
+   "name": "Buyuk mafsal kolu (arka plaka tarafi)",
+   "dims": {
+    "center_distance_A_B": 335.0,
+    "hole_E_distance_from_A": 150.0,
+    "holes_d": 90.0,
+    "holes_in_line": true,
+    "thickness_y": 70,
+    "width_in_plane": 180.0,
+    "end_radius": 90.0,
+    "edge_chamfer": 3,
+    "shape": "flat bar with full-radius ends, 3 pin holes on the centerline at x=0 (A), 150 (E), 335 (B)"
+   },
+   "local_origin": "Center of pin hole A (rear-platen pivot) at mid-thickness. Bar length along local +X to hole B at x=335; thickness along local Y (+-35); width along local Z (+-90). Instance rot [0,180,0] points local +X to global -X.",
+   "instances": [
+    {
+     "name": "A32_1",
+     "pos": [
+      1395.0,
+      165,
+      400.0
+     ],
+     "rot": [
+      0,
+      180,
+      0
+     ],
+     "bbox": [
+      970.0,
+      130,
+      310.0,
+      1485.0,
+      200,
+      490.0
+     ]
+    },
+    {
+     "name": "A32_2",
+     "pos": [
+      1395.0,
+      -165,
+      400.0
+     ],
+     "rot": [
+      0,
+      180,
+      0
+     ],
+     "bbox": [
+      970.0,
+      -200,
+      310.0,
+      1485.0,
+      -130,
+      490.0
+     ]
+    },
+    {
+     "name": "A32_3",
+     "pos": [
+      1395.0,
+      165,
+      -400.0
+     ],
+     "rot": [
+      0,
+      180,
+      0
+     ],
+     "bbox": [
+      970.0,
+      130,
+      -490.0,
+      1485.0,
+      200,
+      -310.0
+     ]
+    },
+    {
+     "name": "A32_4",
+     "pos": [
+      1395.0,
+      -165,
+      -400.0
+     ],
+     "rot": [
+      0,
+      180,
+      0
+     ],
+     "bbox": [
+      970.0,
+      -200,
+      -490.0,
+      1485.0,
+      -130,
+      -310.0
+     ]
+    }
+   ]
+  },
+  "A33": {
+   "name": "On mafsal kolu (hareketli plaka tarafi)",
+   "dims": {
+    "center_distance_C_B": 320.0,
+    "holes_d": 90.0,
+    "thickness_y": 70,
+    "width_in_plane": 180.0,
+    "end_radius": 90.0,
+    "edge_chamfer": 3,
+    "shape": "flat bar with full-radius ends, 2 pin holes at x=0 (C) and x=320 (B)"
+   },
+   "local_origin": "Center of pin hole C (moving-platen pivot) at mid-thickness. Bar length along local +X (= global +X) to hole B at x=320; thickness along Y (+-35); width along Z (+-90).",
+   "instances": [
+    {
+     "name": "A33_1",
+     "pos": [
+      740.0,
+      240,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      650.0,
+      205,
+      310.0,
+      1150.0,
+      275,
+      490.0
+     ]
+    },
+    {
+     "name": "A33_2",
+     "pos": [
+      740.0,
+      -240,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      650.0,
+      -275,
+      310.0,
+      1150.0,
+      -205,
+      490.0
+     ]
+    },
+    {
+     "name": "A33_3",
+     "pos": [
+      740.0,
+      240,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      650.0,
+      205,
+      -490.0,
+      1150.0,
+      275,
+      -310.0
+     ]
+    },
+    {
+     "name": "A33_4",
+     "pos": [
+      740.0,
+      -240,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      650.0,
+      -275,
+      -490.0,
+      1150.0,
+      -205,
+      -310.0
+     ]
+    }
+   ]
+  },
+  "A34": {
+   "name": "Mafsal pimi",
+   "dims": {
+    "d": 90.0,
+    "lengths": {
+     "A": 560,
+     "B": 560,
+     "C": 560,
+     "E": 420,
+     "D": 220
+    },
+    "chamfer": 3,
+    "note": "per-instance 'length' field gives the length; A/B/C pins must not exceed 560 (tie bar surface at |Y|=290)"
+   },
+   "local_origin": "Center of the pin (mid-length on its axis). Pin axis along local Y (= global Y), length symmetric +-L/2.",
+   "instances": [
+    {
+     "name": "A34_AT",
+     "pos": [
+      1395.0,
+      0,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "A",
+     "role": "rear platen lugs + big links",
+     "bbox": [
+      1350.0,
+      -280.0,
+      355.0,
+      1440.0,
+      280.0,
+      445.0
+     ]
+    },
+    {
+     "name": "A34_BT",
+     "pos": [
+      1060.0,
+      0,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "B",
+     "role": "knee: big links + front links",
+     "bbox": [
+      1015.0,
+      -280.0,
+      355.0,
+      1105.0,
+      280.0,
+      445.0
+     ]
+    },
+    {
+     "name": "A34_CT",
+     "pos": [
+      740.0,
+      0,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "C",
+     "role": "moving platen lug + front links",
+     "bbox": [
+      695.0,
+      -280.0,
+      355.0,
+      785.0,
+      280.0,
+      445.0
+     ]
+    },
+    {
+     "name": "A34_ET",
+     "pos": [
+      1245.0,
+      0,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 420,
+     "joint": "E",
+     "role": "big links + crosshead arm",
+     "bbox": [
+      1200.0,
+      -210.0,
+      355.0,
+      1290.0,
+      210.0,
+      445.0
+     ]
+    },
+    {
+     "name": "A34_DT",
+     "pos": [
+      1290.0,
+      0,
+      200.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 220,
+     "joint": "D",
+     "role": "crosshead body",
+     "bbox": [
+      1245.0,
+      -110.0,
+      155.0,
+      1335.0,
+      110.0,
+      245.0
+     ]
+    },
+    {
+     "name": "A34_AB",
+     "pos": [
+      1395.0,
+      0,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "A",
+     "role": "rear platen lugs + big links",
+     "bbox": [
+      1350.0,
+      -280.0,
+      -445.0,
+      1440.0,
+      280.0,
+      -355.0
+     ]
+    },
+    {
+     "name": "A34_BB",
+     "pos": [
+      1060.0,
+      0,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "B",
+     "role": "knee: big links + front links",
+     "bbox": [
+      1015.0,
+      -280.0,
+      -445.0,
+      1105.0,
+      280.0,
+      -355.0
+     ]
+    },
+    {
+     "name": "A34_CB",
+     "pos": [
+      740.0,
+      0,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 560,
+     "joint": "C",
+     "role": "moving platen lug + front links",
+     "bbox": [
+      695.0,
+      -280.0,
+      -445.0,
+      785.0,
+      280.0,
+      -355.0
+     ]
+    },
+    {
+     "name": "A34_EB",
+     "pos": [
+      1245.0,
+      0,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 420,
+     "joint": "E",
+     "role": "big links + crosshead arm",
+     "bbox": [
+      1200.0,
+      -210.0,
+      -445.0,
+      1290.0,
+      210.0,
+      -355.0
+     ]
+    },
+    {
+     "name": "A34_DB",
+     "pos": [
+      1290.0,
+      0,
+      -200.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 220,
+     "joint": "D",
+     "role": "crosshead body",
+     "bbox": [
+      1245.0,
+      -110.0,
+      -245.0,
+      1335.0,
+      110.0,
+      -155.0
+     ]
+    }
+   ]
+  },
+  "A35": {
+   "name": "Kapama silindiri",
+   "dims": {
+    "flange": {
+     "size_yz": [
+      300,
+      300
+     ],
+     "thickness": 40,
+     "bolt_holes": {
+      "d": 26,
+      "count": 4,
+      "square_pitch": 240,
+      "optional": true
+     }
+    },
+    "barrel": {
+     "od": 200,
+     "bore": 160,
+     "length": 400.0,
+     "local_x_range": [
+      40,
+      440.0
+     ]
+    },
+    "rear_cap": {
+     "od": 200,
+     "thickness": 40
+    },
+    "total_body_length": 480.0,
+    "rod": {
+     "d": 90,
+     "exposed_length_toward_minus_x": 445.0,
+     "note": "locked (extended) state; rod end butts crosshead +X face"
+    },
+    "stroke": 260.0,
+    "required_crosshead_travel": 237.978,
+    "ports": {
+     "d": 30,
+     "optional": true
+    }
+   },
+   "local_origin": "Center of the flange mounting face (bears on rear platen back face). Cylinder body along +X (x 0..480); piston rod along -X through A23 central hole to x=-rod length.",
+   "instances": [
+    {
+     "name": "A35_1",
+     "pos": [
+      1805.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1360.0,
+      -150,
+      -150,
+      2285.0,
+      150,
+      150
+     ]
+    }
+   ]
+  },
+  "A41": {
+   "name": "Hidrolik itici silindiri",
+   "dims": {
+    "standoff_posts": {
+     "count": 4,
+     "d": 36,
+     "centers_yz": [
+      [
+       95,
+       95
+      ],
+      [
+       95,
+       -95
+      ],
+      [
+       -95,
+       95
+      ],
+      [
+       -95,
+       -95
+      ]
+     ],
+     "local_x_range": [
+      0,
+      230
+     ],
+     "note": "bolted to A22 back face; also guide A42"
+    },
+    "flange": {
+     "size_yz": [
+      250,
+      250
+     ],
+     "thickness": 30,
+     "local_x_range": [
+      230,
+      260
+     ]
+    },
+    "barrel": {
+     "od": 170,
+     "bore": 140,
+     "local_x_range": [
+      260,
+      490
+     ]
+    },
+    "rear_cap": {
+     "od": 170,
+     "local_x_range": [
+      490,
+      510
+     ]
+    },
+    "rod": {
+     "d": 70,
+     "local_x_range": [
+      200,
+      230
+     ],
+     "note": "retracted; rod end face contacts A42 rear face"
+    },
+    "stroke": 145.0,
+    "force_kN_at_140bar": 215.513
+   },
+   "local_origin": "Center of the standoff-post foot plane on the moving platen back face (machine axis). Everything extends along +X (posts 0..230, flange, barrel to 510).",
+   "instances": [
+    {
+     "name": "A41_1",
+     "pos": [
+      600.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      600.0,
+      -125,
+      -125,
+      1110.0,
+      125,
+      125
+     ]
+    }
+   ]
+  },
+  "A42": {
+   "name": "Itici plakasi",
+   "dims": {
+    "plate": {
+     "size_yz": [
+      340,
+      340
+     ],
+     "thickness": 50.0
+    },
+    "guide_holes": {
+     "d": 36,
+     "centers_yz": [
+      [
+       95,
+       95
+      ],
+      [
+       95,
+       -95
+      ],
+      [
+       -95,
+       95
+      ],
+      [
+       -95,
+       -95
+      ]
+     ],
+     "note": "slide on A41 posts (allowed contact)"
+    },
+    "ejector_rods": {
+     "count": 4,
+     "d": 36,
+     "centers_yz": [
+      [
+       140,
+       140
+      ],
+      [
+       140,
+       -140
+      ],
+      [
+       -140,
+       140
+      ],
+      [
+       -140,
+       -140
+      ]
+     ],
+     "length": 345.0,
+     "note": "fused to plate front face, run along -X through A22 d42 holes, end 5 mm short of platen die face (retracted)"
+    },
+    "stroke": 145.0,
+    "edge_chamfer": 3
+   },
+   "local_origin": "Center of the plate front (-X) face. Plate thickness along +X (x 0..50); ejector rods along -X (x -345..0). Shown retracted.",
+   "instances": [
+    {
+     "name": "A42_1",
+     "pos": [
+      750.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      405.0,
+      -170,
+      -170,
+      800.0,
+      170,
+      170
+     ]
+    }
+   ]
+  },
+  "A51": {
+   "name": "Dolum burcu (shot sleeve)",
+   "dims": {
+    "bore_d": 80.0,
+    "od": 140.0,
+    "length": 470.0,
+    "flange": {
+     "od": 190,
+     "thickness": 25,
+     "local_x_range": [
+      -245.0,
+      -220.0
+     ],
+     "note": "locating collar bearing on fixed platen rear face"
+    },
+    "pour_hole": {
+     "side": "+Z (top)",
+     "center_local_x": -300,
+     "length_x": 100,
+     "width_y": 60,
+     "corner_radius": 30,
+     "through_wall_only": true
+    },
+    "front_chamfer": 2,
+    "fill_volume_cm3_at_stroke": 2513.274
+   },
+   "local_origin": "Center of the front end face (flush with fixed platen die face = fixed die entry). Sleeve axis along -X (x -470..0).",
+   "instances": [
+    {
+     "name": "A51_1",
+     "pos": [
+      0,
+      0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -470.0,
+      -95,
+      -245.0,
+      0,
+      95,
+      -55.0
+     ]
+    }
+   ]
+  },
+  "A52": {
+   "name": "Enjeksiyon pistonu + piston kolu",
+   "dims": {
+    "tip": {
+     "d": 80.0,
+     "length": 100.0,
+     "front_chamfer": 2
+    },
+    "rod": {
+     "d": 50,
+     "length": 620.0
+    },
+    "coupling": {
+     "d": 110,
+     "length": 100.0
+    },
+    "total_length": 820.0,
+    "stroke": 500.0,
+    "alt_tip_diameters": [
+     70,
+     80,
+     90
+    ]
+   },
+   "local_origin": "Center of the plunger tip front face. Axis along -X: tip x -100..0, rod x -720..-100, coupling x -820..-720. Shown retracted (tip face 10 mm behind pour hole).",
+   "instances": [
+    {
+     "name": "A52_1",
+     "pos": [
+      -360.0,
+      0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1180.0,
+      -55,
+      -205.0,
+      -360.0,
+      55,
+      -95.0
+     ]
+    }
+   ]
+  },
+  "A54": {
+   "name": "Enjeksiyon silindiri",
+   "dims": {
+    "front_head": {
+     "size_yz": [
+      300.0,
+      300.0
+     ],
+     "thickness": 80.0,
+     "local_x_range": [
+      -80.0,
+      0
+     ]
+    },
+    "barrel": {
+     "od": 180,
+     "bore": 140.0,
+     "length": 660.0,
+     "local_x_range": [
+      -740.0,
+      -80.0
+     ]
+    },
+    "rear_head": {
+     "size_yz": [
+      300.0,
+      300.0
+     ],
+     "thickness": 80.0,
+     "local_x_range": [
+      -820.0,
+      -740.0
+     ]
+    },
+    "rod": {
+     "d": 90,
+     "protrusion_plus_x": 80.0,
+     "note": "retracted; rod end face contacts A52 coupling"
+    },
+    "tie_rods": {
+     "count": 4,
+     "d": 30,
+     "square_pitch": 240,
+     "optional": true
+    },
+    "stroke": 500.0,
+    "total_length": 820.0
+   },
+   "local_origin": "Center of the front head front (+X) face. Body along -X (x -820..0); piston rod protrudes +X (x 0..80). Square heads have flat bottoms resting on A57 saddles.",
+   "instances": [
+    {
+     "name": "A54_1",
+     "pos": [
+      -1260.0,
+      0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -2080.0,
+      -150,
+      -300.0,
+      -1180.0,
+      150,
+      0.0
+     ]
+    }
+   ]
+  },
+  "A55": {
+   "name": "Carpan (multiplikator)",
+   "dims": {
+    "flange": {
+     "od": 280,
+     "thickness": 40,
+     "local_x_range": [
+      -40,
+      0
+     ]
+    },
+    "body": {
+     "od": 260,
+     "length": 410.0,
+     "local_x_range": [
+      -450.0,
+      -40
+     ]
+    },
+    "total_length": 450.0,
+    "internal": {
+     "piston_d": 200.0,
+     "plunger_d": 140.0,
+     "pressure_ratio": 2.041,
+     "model": "may be drawn solid"
+    },
+    "end_dome_radius_hint": 20
+   },
+   "local_origin": "Center of the front (+X) flange face, bolted to A54 rear head. Axis along -X (x -450..0).",
+   "instances": [
+    {
+     "name": "A55_1",
+     "pos": [
+      -2080.0,
+      0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -2530.0,
+      -140,
+      -290.0,
+      -2080.0,
+      140,
+      -10.0
+     ]
+    }
+   ]
+  },
+  "A56": {
+   "name": "Akumulator tupu",
+   "dims": {
+    "od": 220,
+    "length": 1300.0,
+    "dome_height": 60,
+    "foot_ring": {
+     "od": 220,
+     "height": 40
+    },
+    "top_valve": {
+     "d": 50,
+     "height": 60,
+     "included_in_length": true
+    }
+   },
+   "local_origin": "Center of the bottom face. Bottle axis vertical along +Z (z 0..1300); stands on frame top plate.",
+   "instances": [
+    {
+     "name": "A56_1",
+     "pos": [
+      -1450,
+      -330,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1560,
+      -440,
+      -530.0,
+      -1340,
+      -220,
+      770.0
+     ]
+    },
+    {
+     "name": "A56_2",
+     "pos": [
+      -1800,
+      -330,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1910,
+      -440,
+      -530.0,
+      -1690,
+      -220,
+      770.0
+     ]
+    }
+   ]
+  },
+  "A57": {
+   "name": "Enjeksiyon tasiyici konsol",
+   "dims": {
+    "base_plate": {
+     "len_x": 920,
+     "width_y": 400,
+     "thickness": 30
+    },
+    "saddles": {
+     "count": 2,
+     "len_x": 80.0,
+     "width_y": 300,
+     "local_z_range": [
+      30,
+      230.0
+     ],
+     "center_local_x": [
+      370.0,
+      -370.0
+     ],
+     "note": "flat tops under A54 square heads"
+    },
+    "gussets": {
+     "optional": true,
+     "thk": 15,
+     "note": "must stay inside base plate footprint and below z=230"
+    }
+   },
+   "local_origin": "Center of the base plate bottom face (on frame top plate). Local axes parallel to global; base x -460..+460, y -200..+200, z 0..30; saddles z 30..230.",
+   "instances": [
+    {
+     "name": "A57_1",
+     "pos": [
+      -1670.0,
+      0,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -2130.0,
+      -200,
+      -530.0,
+      -1210.0,
+      200,
+      -300.0
+     ]
+    }
+   ]
+  },
+  "A61": {
+   "name": "Hidrolik tank",
+   "dims": {
+    "len_x": 1600,
+    "width_y": 700,
+    "height": 700,
+    "wall_thk": 6,
+    "volume_l": 784.0,
+    "filler_cap": {
+     "d": 100,
+     "height": 40,
+     "local_xy": [
+      -650,
+      0
+     ],
+     "optional": true
+    },
+    "level_gauge": {
+     "optional": true
+    },
+    "model": "may be drawn as solid box"
+   },
+   "local_origin": "Center of the bottom face (on floor). Local axes parallel to global; z 0..700.",
+   "instances": [
+    {
+     "name": "A61_1",
+     "pos": [
+      1100,
+      -900,
+      -1150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      300,
+      -1250,
+      -1150.0,
+      1900,
+      -550,
+      -450.0
+     ]
+    }
+   ]
+  },
+  "A62": {
+   "name": "Motor-pompa grubu",
+   "dims": {
+    "base_plate": {
+     "len_x": 1300,
+     "width_y": 500,
+     "thickness": 30
+    },
+    "shaft_axis_height_above_origin": 250,
+    "motor": {
+     "d": 400,
+     "local_x_range": [
+      -570,
+      130
+     ],
+     "power_kW": 30,
+     "fins_optional": true,
+     "terminal_box": {
+      "size": [
+       200,
+       150,
+       100
+      ],
+      "on": "+Z",
+      "optional": true
+     }
+    },
+    "bell_housing": {
+     "d": 300,
+     "local_x_range": [
+      130,
+      290
+     ]
+    },
+    "pump": {
+     "d": 220,
+     "local_x_range": [
+      290,
+      570
+     ]
+    },
+    "motor_feet": {
+     "note": "block 500x360 from z=30 to z=80 under motor",
+     "optional": true
+    }
+   },
+   "local_origin": "Center of the base plate bottom face (on tank top). Shaft axis along local X at z=250; motor at -X end, pump at +X end.",
+   "instances": [
+    {
+     "name": "A62_1",
+     "pos": [
+      1100,
+      -900,
+      -450.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      450,
+      -1150,
+      -450.0,
+      1750,
+      -650,
+      0.0
+     ]
+    }
+   ]
+  },
+  "A71": {
+   "name": "Operator koruma kapisi",
+   "dims": {
+    "panel": {
+     "len_x": 1500,
+     "thickness_y": 40,
+     "height": 1400,
+     "frame_profile": 40
+    },
+    "window": {
+     "local_x_range": [
+      250,
+      1250
+     ],
+     "local_z_range": [
+      500,
+      1200
+     ],
+     "glazing_thk": 8,
+     "optional": true
+    },
+    "bottom_track": {
+     "local_x_range": [
+      0,
+      2400
+     ],
+     "local_y_range": [
+      -60,
+      20
+     ],
+     "local_z_range": [
+      -40,
+      0
+     ],
+     "note": "bolted to frame operator-side wall (Y=+500); door panel slides on it toward +X to open"
+    },
+    "handle": {
+     "optional": true,
+     "on": "+Y face"
+    }
+   },
+   "local_origin": "Midpoint of the panel bottom edge at its -X end, at panel mid-thickness. Panel along +X (0..1500), up +Z (0..1400), thickness +-20 in Y. Shown closed (covers die space).",
+   "instances": [
+    {
+     "name": "A71_1",
+     "pos": [
+      -100,
+      560,
+      -530.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -100,
+      500,
+      -570.0,
+      2300,
+      580,
+      870.0
+     ]
+    }
+   ]
+  },
+  "A72": {
+   "name": "Elektrik panosu",
+   "dims": {
+    "len_x": 1200,
+    "depth_y": 500,
+    "height": 2000,
+    "plinth_height": 100,
+    "doors": {
+     "count": 2,
+     "on": "-Y face",
+     "optional": true
+    },
+    "hmi_optional": true
+   },
+   "local_origin": "Center of the bottom face (on floor). Local axes parallel to global; z 0..2000.",
+   "instances": [
+    {
+     "name": "A72_1",
+     "pos": [
+      -1400,
+      -900,
+      -1150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -2000,
+      -1150,
+      -1150.0,
+      -800,
+      -650,
+      850.0
+     ]
+    }
+   ]
+  },
+  "A81": {
+   "name": "Sabit kalip yarisi",
+   "dims": {
+    "width_y": 540.0,
+    "height_z": 600.0,
+    "thickness": 170.0,
+    "sleeve_bore": {
+     "d": 80.0,
+     "center_yz": [
+      0,
+      -150.0
+     ],
+     "through": true,
+     "note": "continuation of shot sleeve bore to parting line (biscuit 30 mm)"
+    },
+    "clamp_slots": {
+     "optional": true,
+     "width": 30,
+     "depth": 25,
+     "height_from_back": 30
+    },
+    "edge_chamfer": 5
+   },
+   "local_origin": "Center of the back face (contact with fixed platen die face = global origin). Thickness along +X (x 0..170).",
+   "instances": [
+    {
+     "name": "A81_1",
+     "pos": [
+      0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      0,
+      -270.0,
+      -300.0,
+      170.0,
+      270.0,
+      300.0
+     ]
+    }
+   ]
+  },
+  "A82": {
+   "name": "Hareketli kalip yarisi",
+   "dims": {
+    "width_y": 540.0,
+    "height_z": 600.0,
+    "thickness": 230.0,
+    "cavity_pocket": {
+     "on": "parting face (local x=-230)",
+     "size_yz": [
+      300,
+      260
+     ],
+     "center_yz": [
+      0,
+      80
+     ],
+     "depth": 15,
+     "optional": true
+    },
+    "runner_groove": {
+     "from_yz": [
+      0,
+      -150.0
+     ],
+     "to_yz": [
+      0,
+      -50
+     ],
+     "width": 30,
+     "depth": 10,
+     "optional": true
+    },
+    "edge_chamfer": 5
+   },
+   "local_origin": "Center of the back face (contact with moving platen die face). Thickness along -X (x -230..0); parting face at local x=-230 = global X=170.",
+   "instances": [
+    {
+     "name": "A82_1",
+     "pos": [
+      400.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      170.0,
+      -270.0,
+      -300.0,
+      400.0,
+      270.0,
+      300.0
+     ]
+    }
+   ]
+  }
+ },
+ "mates": [
+  {
+   "a": "A12",
+   "face": "top plate (Z=-530)",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A21",
+   "face": "top",
+   "b": "A12",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A22",
+   "face": "top",
+   "b": "A12",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A23",
+   "face": "top",
+   "b": "A12",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A24",
+   "face": "tie-bar holes",
+   "b": "A21",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A24",
+   "face": "bore",
+   "b": "A28",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A28",
+   "face": "tie-bar holes d150",
+   "b": "A22",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A24",
+   "face": "tie-bar holes",
+   "b": "A23",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A25",
+   "face": "rear face (X=-220)",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A26",
+   "face": "back face",
+   "b": "A23",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A81",
+   "face": "die face (X=0)",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A82",
+   "face": "die face",
+   "b": "A22",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A81",
+   "face": "parting",
+   "b": "A82",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A51",
+   "face": "shot hole",
+   "b": "A21",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A51",
+   "face": "back face / sleeve bore",
+   "b": "A81",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A51",
+   "face": "rear face",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A52",
+   "face": "bore",
+   "b": "A51",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A52",
+   "face": "rod end",
+   "b": "A54",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A55",
+   "face": "rear head",
+   "b": "A54",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A54",
+   "face": "saddle tops",
+   "b": "A57",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A57",
+   "face": "top plate",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A56",
+   "face": "top plate",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "lug holes",
+   "b": "A23",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "holes A/E/B",
+   "b": "A32",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "holes B/C",
+   "b": "A33",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "lug holes",
+   "b": "A22",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "body D holes / arm E holes",
+   "b": "A31",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A32",
+   "face": "side (at knee B)",
+   "b": "A33",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A32",
+   "face": "lug sides",
+   "b": "A23",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A33",
+   "face": "lug side",
+   "b": "A22",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A35",
+   "face": "back face",
+   "b": "A23",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A35",
+   "face": "central hole d110",
+   "b": "A23",
+   "type": "clearance",
+   "gap": 10
+  },
+  {
+   "a": "A35",
+   "face": "body +X face",
+   "b": "A31",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A41",
+   "face": "back face",
+   "b": "A22",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A41",
+   "face": "plate rear face",
+   "b": "A42",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A42",
+   "face": "posts",
+   "b": "A41",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A42",
+   "face": "holes d42",
+   "b": "A22",
+   "type": "clearance",
+   "gap": 3
+  },
+  {
+   "a": "A26",
+   "face": "top (Z=-490)",
+   "b": "A12",
+   "type": "clearance",
+   "gap": 10
+  },
+  {
+   "a": "A62",
+   "face": "top",
+   "b": "A61",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A71",
+   "face": "operator side wall (Y=500)",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A61",
+   "face": "side (Y=-500)",
+   "b": "A11",
+   "type": "clearance",
+   "gap": 50
+  },
+  {
+   "a": "A72",
+   "face": "side (Y=-500)",
+   "b": "A11",
+   "type": "clearance",
+   "gap": 150
+  }
+ ],
+ "clearances": {
+  "min_gap_default": 2.0,
+  "allowed_contacts": [
+   [
+    "A11",
+    "A12"
+   ],
+   [
+    "A11",
+    "A56"
+   ],
+   [
+    "A11",
+    "A57"
+   ],
+   [
+    "A11",
+    "A71"
+   ],
+   [
+    "A12",
+    "A21"
+   ],
+   [
+    "A12",
+    "A22"
+   ],
+   [
+    "A12",
+    "A23"
+   ],
+   [
+    "A21",
+    "A24"
+   ],
+   [
+    "A21",
+    "A25"
+   ],
+   [
+    "A24",
+    "A25"
+   ],
+   [
+    "A21",
+    "A51"
+   ],
+   [
+    "A21",
+    "A81"
+   ],
+   [
+    "A22",
+    "A28"
+   ],
+   [
+    "A24",
+    "A28"
+   ],
+   [
+    "A22",
+    "A82"
+   ],
+   [
+    "A81",
+    "A82"
+   ],
+   [
+    "A22",
+    "A34"
+   ],
+   [
+    "A22",
+    "A41"
+   ],
+   [
+    "A23",
+    "A24"
+   ],
+   [
+    "A23",
+    "A26"
+   ],
+   [
+    "A24",
+    "A26"
+   ],
+   [
+    "A23",
+    "A34"
+   ],
+   [
+    "A23",
+    "A35"
+   ],
+   [
+    "A31",
+    "A34"
+   ],
+   [
+    "A32",
+    "A34"
+   ],
+   [
+    "A33",
+    "A34"
+   ],
+   [
+    "A31",
+    "A35"
+   ],
+   [
+    "A41",
+    "A42"
+   ],
+   [
+    "A51",
+    "A52"
+   ],
+   [
+    "A51",
+    "A81"
+   ],
+   [
+    "A52",
+    "A54"
+   ],
+   [
+    "A54",
+    "A55"
+   ],
+   [
+    "A54",
+    "A57"
+   ],
+   [
+    "A61",
+    "A62"
+   ]
+  ]
+ }
+}

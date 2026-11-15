@@ -1,0 +1,57 @@
+{
+  "machine": "HPDC-400 soguk kamarali yatay dokum makinesi (toggle kapama) - dijital ikiz",
+  "units": "mm",
+  "coordinate_system": "Origin = sabit plaka kalip baglama yuzeyi merkezi (makine ekseni). +X = sabit plakadan hareketli/arka plakaya (kapama yonu). +Z = yukari. +Y = operator tarafi. Enjeksiyon unitesi -X tarafinda. Zemin Z = -axis_height.",
+  "phases": [
+    {"phase": 1, "name": "Omurga: sase + plakalar + kolonlar", "items": ["A11","A12","A21","A22","A23","A24","A25","A26","A28"]},
+    {"phase": 2, "name": "Mafsal (toggle) + kapama silindiri + itici", "items": ["A31","A32","A33","A34","A35","A41","A42"]},
+    {"phase": 3, "name": "Enjeksiyon unitesi", "items": ["A51","A52","A54","A55","A56","A57"]},
+    {"phase": 4, "name": "Hidrolik, kalip, guvenlik", "items": ["A61","A62","A71","A72","A81","A82"]}
+  ],
+  "tree": [
+    {"id": "A10", "name": "Sase grubu", "children": [
+      {"id": "A11", "name": "Ana sase (kaynakli govde)", "qty": 1, "script": "parts/A11_ana_sase.py"},
+      {"id": "A12", "name": "Hareketli plaka kizak raylari", "qty": 2, "script": "parts/A12_kizak_rayi.py"}
+    ]},
+    {"id": "A20", "name": "Kapama unitesi", "children": [
+      {"id": "A21", "name": "Sabit plaka", "qty": 1, "script": "parts/A21_sabit_plaka.py"},
+      {"id": "A22", "name": "Hareketli plaka", "qty": 1, "script": "parts/A22_hareketli_plaka.py"},
+      {"id": "A23", "name": "Arka plaka (mafsal tasiyici)", "qty": 1, "script": "parts/A23_arka_plaka.py"},
+      {"id": "A24", "name": "Kolon (tie bar)", "qty": 4, "script": "parts/A24_kolon.py"},
+      {"id": "A25", "name": "Kolon on somunu (sabit plaka)", "qty": 4, "script": "parts/A25_kolon_on_somun.py"},
+      {"id": "A26", "name": "Kalip yuksekligi ayar somunu (disli, arka plaka)", "qty": 4, "script": "parts/A26_ayar_somunu.py"},
+      {"id": "A28", "name": "Hareketli plaka kolon burcu", "qty": 4, "script": "parts/A28_burc.py"}
+    ]},
+    {"id": "A30", "name": "Mafsal mekanizmasi (5 noktali cift mafsal)", "children": [
+      {"id": "A31", "name": "Capraz kafa (crosshead)", "qty": 1, "script": "parts/A31_capraz_kafa.py"},
+      {"id": "A32", "name": "Buyuk mafsal kolu (arka plaka tarafi)", "qty": 4, "script": "parts/A32_buyuk_kol.py"},
+      {"id": "A33", "name": "On mafsal kolu (hareketli plaka tarafi)", "qty": 4, "script": "parts/A33_on_kol.py"},
+      {"id": "A34", "name": "Mafsal pimi", "qty": 10, "script": "parts/A34_pim.py"},
+      {"id": "A35", "name": "Kapama silindiri", "qty": 1, "script": "parts/A35_kapama_silindiri.py"}
+    ]},
+    {"id": "A40", "name": "Itici unitesi", "children": [
+      {"id": "A41", "name": "Hidrolik itici silindiri", "qty": 1, "script": "parts/A41_itici_silindir.py"},
+      {"id": "A42", "name": "Itici plakasi", "qty": 1, "script": "parts/A42_itici_plakasi.py"}
+    ]},
+    {"id": "A50", "name": "Enjeksiyon unitesi", "children": [
+      {"id": "A51", "name": "Dolum burcu (shot sleeve)", "qty": 1, "script": "parts/A51_dolum_burcu.py"},
+      {"id": "A52", "name": "Enjeksiyon pistonu + piston kolu", "qty": 1, "script": "parts/A52_piston.py"},
+      {"id": "A54", "name": "Enjeksiyon silindiri", "qty": 1, "script": "parts/A54_enjeksiyon_silindiri.py"},
+      {"id": "A55", "name": "Carpan (multiplikator)", "qty": 1, "script": "parts/A55_carpan.py"},
+      {"id": "A56", "name": "Akumulator tupu", "qty": 2, "script": "parts/A56_akumulator.py"},
+      {"id": "A57", "name": "Enjeksiyon tasiyici konsol", "qty": 1, "script": "parts/A57_enj_konsol.py"}
+    ]},
+    {"id": "A60", "name": "Hidrolik unite", "children": [
+      {"id": "A61", "name": "Hidrolik tank", "qty": 1, "script": "parts/A61_tank.py"},
+      {"id": "A62", "name": "Motor-pompa grubu", "qty": 1, "script": "parts/A62_motor_pompa.py"}
+    ]},
+    {"id": "A70", "name": "Guvenlik / elektrik", "children": [
+      {"id": "A71", "name": "Operator koruma kapisi", "qty": 1, "script": "parts/A71_koruma_kapisi.py"},
+      {"id": "A72", "name": "Elektrik panosu", "qty": 1, "script": "parts/A72_pano.py"}
+    ]},
+    {"id": "A80", "name": "Kalip (temsili)", "children": [
+      {"id": "A81", "name": "Sabit kalip yarisi", "qty": 1, "script": "parts/A81_sabit_kalip.py"},
+      {"id": "A82", "name": "Hareketli kalip yarisi", "qty": 1, "script": "parts/A82_hareketli_kalip.py"}
+    ]}
+  ]
+}
