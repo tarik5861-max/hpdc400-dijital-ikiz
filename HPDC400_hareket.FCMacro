@@ -1,0 +1,82 @@
+# HPDC-400 - kapama unitesi (mengene) hareket animasyonu
+# Once HPDC400_ac.FCMacro ile montaj acik olmali.
+# Konsol komutlari:  hpdc_poz(0.5)   -> yari acik konum (0 = kapali/kilitli, 1 = tam acik)
+#                    hpdc_baslat()   -> surekli ac-kapa animasyonu
+#                    hpdc_durdur()   -> durdur, kapali konuma don
+import os, sys, json, math, importlib
+import FreeCAD as App, FreeCADGui as Gui
+from PySide import QtCore
+
+_ROOT = os.environ.get("HPDC_ROOT") or r"C:\Users\tarik\projects\hpdc400"
+if os.path.join(_ROOT, "lib") not in sys.path:
+    sys.path.insert(0, os.path.join(_ROOT, "lib"))
+import kinematics
+importlib.reload(kinematics)
+_P = json.load(open(os.path.join(_ROOT, "params", "params.json"), encoding="utf-8"))
+_doc = App.getDocument("HPDC400")
+
+
+def _plc(tr):
+    if tr[0] == "T":
+        return App.Placement(App.Vector(tr[1], 0, tr[2]), App.Rotation())
+    _, p0, deg, p1 = tr
+    rot = App.Rotation(App.Vector(0, 1, 0), deg)
+    base = App.Vector(p1[0], 0, p1[1]) - rot.multVec(App.Vector(p0[0], 0, p0[1]))
+    return App.Placement(base, rot)
+
+
+# Taban yerlesim: FreeCAD, montaj konumunu nesnenin Placement'inda tutar.
+# Hareket = delta * taban. Taban, nesneye "HPDC_Base" ozelligi olarak bir kez yazilir (makro tekrar calissa da kaybolmaz).
+def _base(o):
+    if not hasattr(o, "HPDC_Base"):
+        o.addProperty("App::PropertyPlacement", "HPDC_Base", "HPDC", "s=0 (kapali) montaj yerlesimi")
+        o.HPDC_Base = o.Placement
+        o.setEditorMode("HPDC_Base", 1)
+    return o.HPDC_Base
+
+
+def hpdc_poz(s):
+    trs, info = kinematics.pose(s, _P)
+    for name, tr in trs.items():
+        o = _doc.getObject(name)
+        if o is not None:
+            o.Placement = _plc(tr).multiply(_base(o))
+    Gui.updateGui()
+    return info
+
+
+_state = {"t": 0.0, "timer": None}
+PERIOD_S = 6.0      # bir tam ac-kapa cevrimi (s)
+DT_MS = 40
+
+
+def _tick():
+    _state["t"] += DT_MS / 1000.0
+    ph = (_state["t"] % PERIOD_S) / PERIOD_S          # 0..1
+    # kapali bekle -> ac -> acik bekle -> kapa (yumusak, kosinus)
+    if ph < 0.15:   s = 0.0
+    elif ph < 0.5:  s = 0.5 - 0.5 * math.cos(math.pi * (ph - 0.15) / 0.35)
+    elif ph < 0.65: s = 1.0
+    else:           s = 0.5 + 0.5 * math.cos(math.pi * (ph - 0.65) / 0.35)
+    info = hpdc_poz(s)
+    Gui.getMainWindow().statusBar().showMessage(
+        f"HPDC-400 kapama  s={s:.2f}  mafsal={info['theta']:.1f} deg  plaka acikligi={info['dx_platen']:.0f} mm  capraz kafa={info['dx_crosshead']:.0f} mm")
+
+
+def hpdc_baslat():
+    hpdc_durdur(reset=False)
+    t = QtCore.QTimer()
+    t.timeout.connect(_tick)
+    t.start(DT_MS)
+    _state["timer"] = t
+
+
+def hpdc_durdur(reset=True):
+    if _state["timer"] is not None:
+        _state["timer"].stop()
+        _state["timer"] = None
+    if reset:
+        hpdc_poz(0.0)
+
+
+hpdc_baslat()

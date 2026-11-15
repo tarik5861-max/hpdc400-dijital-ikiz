@@ -12,8 +12,6 @@
    "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.",
    "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.",
    "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.",
-   "BOM GAP: a 5-point toggle needs a small crosshead link (D-E) per side; bom.json has none. It is modelled as two rigid arms fused to crosshead A31 in the locked pose. Recommend adding e.g. A36 'capraz kafa kolu' x2 if motion is to be simulated. 10 pins = joints A,B,C,D,E x top/bottom.",
-   "Toggle Y layers (each side of center): crosshead arm |Y|<=50; A23 inner lugs 60..125; big links A32 130..200 (center 165); front links A33 205..275 (center 240) and A23 outer lugs 205..275; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.",
    "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.",
    "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).",
    "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.",
@@ -21,7 +19,12 @@
    "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.",
    "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.",
    "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.",
-   "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox."
+   "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.",
+   "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.",
+   "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.",
+   "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.",
+   "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.",
+   "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance."
   ],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
@@ -97,7 +100,66 @@
    "open_knee_z": 94.927,
    "open_big_link_deg": 65.597,
    "open_front_link_deg": 72.431,
-   "mirrored_about": "Z=0 (top and bottom halves)"
+   "mirrored_about": "Z=0 (top and bottom halves)",
+   "crosshead_link_angle_locked_deg": 77.3196,
+   "y_layers": {
+    "A31_tongue": [
+     -20,
+     20
+    ],
+    "A36_links": [
+     [
+      25,
+      55
+     ],
+     [
+      -55,
+      -25
+     ]
+    ],
+    "A23_inner_lugs": [
+     [
+      60,
+      125
+     ],
+     [
+      -125,
+      -60
+     ]
+    ],
+    "A32_big_links": [
+     [
+      130,
+      200
+     ],
+     [
+      -200,
+      -130
+     ]
+    ],
+    "A33_front_links": [
+     [
+      205,
+      275
+     ],
+     [
+      -275,
+      -205
+     ]
+    ],
+    "A34_B_split_pins": [
+     [
+      127.5,
+      277.5
+     ],
+     [
+      -277.5,
+      -127.5
+     ]
+    ],
+    "ejector_envelope_max_abs_y": 120,
+    "note": "everything on the moving platen axis (A41/A42) stays within |Y|<=120 so the folded knees (|Y|>=127.5) pass beside it"
+   }
   },
   "plunger_d": 80.0,
   "plunger_d_options": [
@@ -122,7 +184,9 @@
   "pump_motor_kW": 30,
   "overall_length": 5100.0,
   "overall_width_incl_accessories": 1830,
-  "est_mass_t": 18
+  "est_mass_t": 18,
+  "ejector_overall_length": 425.0,
+  "clamp_piston_d": 160.0
  },
  "parts": {
   "A11": {
@@ -369,22 +433,22 @@
      "through": true
     },
     "ejector_rod_holes": {
-     "d": 42,
+     "d": 46,
      "centers_yz": [
       [
-       140,
+       90,
        140
       ],
       [
-       140,
+       90,
        -140
       ],
       [
-       -140,
+       -90,
        140
       ],
       [
-       -140,
+       -90,
        -140
       ]
      ],
@@ -476,7 +540,7 @@
       0
      ],
      "through": true,
-     "note": "clamp cylinder rod d90 passes with 10 radial clearance"
+     "note": "piston rod A37 d90 passes with 10 radial clearance"
     },
     "toggle_lugs": {
      "count": 8,
@@ -517,7 +581,7 @@
      "end_radius": 90.0,
      "pin_hole_d": 90.0,
      "pin_axis": "Y",
-     "note": "gap |Y|<60 must stay free: crosshead arm (|Y|<=50) swings through it when opening"
+     "note": "gap |Y|<60 must stay free: crosshead links A36 (|Y| 25..55) and tongue swing through it when opening"
     },
     "edge_chamfer": 5
    },
@@ -963,11 +1027,17 @@
   "A31": {
    "name": "Capraz kafa (crosshead)",
    "dims": {
-    "body": {
+    "hub": {
      "len_x": 140.0,
-     "width_y": 200,
+     "width_y": 200.0,
+     "height_z": 260.0,
+     "note": "central block centered on local origin; |Z|<=130 keeps 10 mm under the A36 link eyes (D eye bottom at |Z|=140)"
+    },
+    "tongue": {
+     "len_x": 140.0,
+     "width_y": 40.0,
      "height_z": 540.0,
-     "note": "box centered on local origin"
+     "note": "vertical plate centered on local origin, fused with hub; carries both D holes; A36 links straddle it (5 mm side gap)"
     },
     "pin_D_holes": {
      "d": 90.0,
@@ -981,49 +1051,17 @@
        -200.0
       ]
      ],
-     "axis": "Y"
-    },
-    "integral_link_arms": {
-     "count": 2,
-     "description": "crosshead links D-E modelled as rigid arms fused to the body in the locked pose (real machine: separate links, see meta.notes)",
-     "D_local_xz": [
-      [
-       0,
-       200.0
-      ],
-      [
-       0,
-       -200.0
-      ]
-     ],
-     "E_local_xz": [
-      [
-       -45.0,
-       400.0
-      ],
-      [
-       -45.0,
-       -400.0
-      ]
-     ],
-     "center_distance": 205.0,
-     "bar_width_in_plane": 120,
-     "thickness_y": 100,
-     "y_range": [
-      -50,
-      50
-     ],
-     "eye_radius": 60,
-     "E_hole_d": 90.0,
-     "angle_to_machine_axis_deg": 77.32
+     "axis": "Y",
+     "note": "through the tongue only"
     },
     "rod_seat": {
-     "face": "+X face of body (local x=+70)",
+     "face": "+X face of hub (local x=+70)",
      "d": 90,
-     "note": "clamp rod A35 butts here (contact)"
-    }
+     "note": "piston rod A37 butts here (contact)"
+    },
+    "dropped": "integral_link_arms REMOVED (now separate part A36). Old 140x200x540 body REMOVED: outside the hub the crosshead is only the 40 mm tongue. No central bore needed (ejector stops 13 mm short of the hub at full opening)."
    },
-   "local_origin": "Center of body on machine axis, at the X of the D pins. Local axes parallel to global; body x -70..+70; arms lie in the XZ plane, lean toward -X up to the E pins.",
+   "local_origin": "Center of hub on machine axis, at the X of the D pins. Local axes parallel to global; hub and tongue x -70..+70.",
    "instances": [
     {
      "name": "A31_1",
@@ -1038,12 +1076,12 @@
       0
      ],
      "bbox": [
-      1185.0,
+      1220.0,
       -100,
-      -460.0,
+      -270.0,
       1360.0,
       100,
-      460.0
+      270.0
      ]
     }
    ]
@@ -1254,13 +1292,13 @@
     "d": 90.0,
     "lengths": {
      "A": 560,
-     "B": 560,
+     "B": 150,
      "C": 560,
-     "E": 420,
-     "D": 220
+     "E": 400,
+     "D": 120
     },
     "chamfer": 3,
-    "note": "per-instance 'length' field gives the length; A/B/C pins must not exceed 560 (tie bar surface at |Y|=290)"
+    "note": "per-instance 'length' gives the length. Knee (B) pins are SPLIT: one 150 mm pin per side (Y +-127.5..277.5) so |Y|<127.5 is free for the ejector at full opening. B pin single shear 1000 kN / d90 = 157 MPa (same as joint C)."
    },
    "local_origin": "Center of the pin (mid-length on its axis). Pin axis along local Y (= global Y), length symmetric +-L/2.",
    "instances": [
@@ -1289,10 +1327,10 @@
      ]
     },
     {
-     "name": "A34_BT",
+     "name": "A34_BT1",
      "pos": [
       1060.0,
-      0,
+      202.5,
       400.0
      ],
      "rot": [
@@ -1300,15 +1338,39 @@
       0,
       0
      ],
-     "length": 560,
+     "length": 150,
      "joint": "B",
-     "role": "knee: big links + front links",
+     "role": "knee: big link + front link, one side",
      "bbox": [
       1015.0,
-      -280.0,
+      127.5,
       355.0,
       1105.0,
-      280.0,
+      277.5,
+      445.0
+     ]
+    },
+    {
+     "name": "A34_BT2",
+     "pos": [
+      1060.0,
+      -202.5,
+      400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 150,
+     "joint": "B",
+     "role": "knee: big link + front link, one side",
+     "bbox": [
+      1015.0,
+      -277.5,
+      355.0,
+      1105.0,
+      -127.5,
       445.0
      ]
     },
@@ -1348,15 +1410,15 @@
       0,
       0
      ],
-     "length": 420,
+     "length": 400,
      "joint": "E",
-     "role": "big links + crosshead arm",
+     "role": "big links + 2 crosshead links A36",
      "bbox": [
       1200.0,
-      -210.0,
+      -200.0,
       355.0,
       1290.0,
-      210.0,
+      200.0,
       445.0
      ]
     },
@@ -1372,15 +1434,15 @@
       0,
       0
      ],
-     "length": 220,
+     "length": 120,
      "joint": "D",
-     "role": "crosshead body",
+     "role": "crosshead tongue + 2 crosshead links A36",
      "bbox": [
       1245.0,
-      -110.0,
+      -60.0,
       155.0,
       1335.0,
-      110.0,
+      60.0,
       245.0
      ]
     },
@@ -1409,10 +1471,10 @@
      ]
     },
     {
-     "name": "A34_BB",
+     "name": "A34_BB1",
      "pos": [
       1060.0,
-      0,
+      202.5,
       -400.0
      ],
      "rot": [
@@ -1420,15 +1482,39 @@
       0,
       0
      ],
-     "length": 560,
+     "length": 150,
      "joint": "B",
-     "role": "knee: big links + front links",
+     "role": "knee: big link + front link, one side",
      "bbox": [
       1015.0,
-      -280.0,
+      127.5,
       -445.0,
       1105.0,
-      280.0,
+      277.5,
+      -355.0
+     ]
+    },
+    {
+     "name": "A34_BB2",
+     "pos": [
+      1060.0,
+      -202.5,
+      -400.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "length": 150,
+     "joint": "B",
+     "role": "knee: big link + front link, one side",
+     "bbox": [
+      1015.0,
+      -277.5,
+      -445.0,
+      1105.0,
+      -127.5,
       -355.0
      ]
     },
@@ -1468,15 +1554,15 @@
       0,
       0
      ],
-     "length": 420,
+     "length": 400,
      "joint": "E",
-     "role": "big links + crosshead arm",
+     "role": "big links + 2 crosshead links A36",
      "bbox": [
       1200.0,
-      -210.0,
+      -200.0,
       -445.0,
       1290.0,
-      210.0,
+      200.0,
       -355.0
      ]
     },
@@ -1492,15 +1578,15 @@
       0,
       0
      ],
-     "length": 220,
+     "length": 120,
      "joint": "D",
-     "role": "crosshead body",
+     "role": "crosshead tongue + 2 crosshead links A36",
      "bbox": [
       1245.0,
-      -110.0,
+      -60.0,
       -245.0,
       1335.0,
-      110.0,
+      60.0,
       -155.0
      ]
     }
@@ -1515,12 +1601,14 @@
       300
      ],
      "thickness": 40,
+     "rod_hole_d": 100,
      "bolt_holes": {
       "d": 26,
       "count": 4,
       "square_pitch": 240,
       "optional": true
-     }
+     },
+     "note": "front head; rod hole d100 THROUGH (rod d90, 5 radial)"
     },
     "barrel": {
      "od": 200,
@@ -1529,26 +1617,27 @@
      "local_x_range": [
       40,
       440.0
-     ]
+     ],
+     "note": "hollow tube, bore must be EMPTY (piston belongs to A37)"
     },
     "rear_cap": {
      "od": 200,
-     "thickness": 40
+     "thickness": 40,
+     "local_x_range": [
+      440.0,
+      480.0
+     ]
     },
     "total_body_length": 480.0,
-    "rod": {
-     "d": 90,
-     "exposed_length_toward_minus_x": 445.0,
-     "note": "locked (extended) state; rod end butts crosshead +X face"
-    },
     "stroke": 260.0,
     "required_crosshead_travel": 237.978,
     "ports": {
      "d": 30,
      "optional": true
-    }
+    },
+    "dropped": "rod and piston REMOVED (now part A37, moves with crosshead). Nothing of A35 may extend to local x<0."
    },
-   "local_origin": "Center of the flange mounting face (bears on rear platen back face). Cylinder body along +X (x 0..480); piston rod along -X through A23 central hole to x=-rod length.",
+   "local_origin": "Center of the flange mounting face (bears on rear platen back face). Body along +X (x 0..480). Hollow: flange hole d100 + bore d160 open into each other.",
    "instances": [
     {
      "name": "A35_1",
@@ -1563,7 +1652,7 @@
       0
      ],
      "bbox": [
-      1360.0,
+      1805.0,
       -150,
       -150,
       2285.0,
@@ -1581,66 +1670,67 @@
      "d": 36,
      "centers_yz": [
       [
-       95,
-       95
+       85,
+       85
       ],
       [
-       95,
-       -95
+       85,
+       -85
       ],
       [
-       -95,
-       95
+       -85,
+       85
       ],
       [
-       -95,
-       -95
+       -85,
+       -85
       ]
      ],
      "local_x_range": [
       0,
-      230
+      205
      ],
      "note": "bolted to A22 back face; also guide A42"
     },
     "flange": {
      "size_yz": [
-      250,
-      250
-     ],
-     "thickness": 30,
-     "local_x_range": [
       230,
-      260
+      230
+     ],
+     "thickness": 25,
+     "local_x_range": [
+      205,
+      230
      ]
     },
     "barrel": {
      "od": 170,
      "bore": 140,
      "local_x_range": [
-      260,
-      490
+      230,
+      405
      ]
     },
     "rear_cap": {
      "od": 170,
      "local_x_range": [
-      490,
-      510
+      405,
+      425
      ]
     },
     "rod": {
      "d": 70,
      "local_x_range": [
       200,
-      230
+      205
      ],
      "note": "retracted; rod end face contacts A42 rear face"
     },
     "stroke": 145.0,
-    "force_kN_at_140bar": 215.513
+    "force_kN_at_140bar": 215.513,
+    "envelope_note": "overall length 425 (was 510): at full opening rear cap is at X=1445, crosshead hub front at 1458. Whole unit within |Y|<=115."
    },
-   "local_origin": "Center of the standoff-post foot plane on the moving platen back face (machine axis). Everything extends along +X (posts 0..230, flange, barrel to 510).",
+   "local_origin": "Center of the standoff-post foot plane on the moving platen back face (machine axis). Everything extends along +X (posts 0..205, flange 205..230, barrel 230..405, cap to 425).",
    "instances": [
     {
      "name": "A41_1",
@@ -1656,11 +1746,11 @@
      ],
      "bbox": [
       600.0,
-      -125,
-      -125,
-      1110.0,
-      125,
-      125
+      -115,
+      -115,
+      1025.0,
+      115,
+      115
      ]
     }
    ]
@@ -1670,7 +1760,7 @@
    "dims": {
     "plate": {
      "size_yz": [
-      340,
+      240,
       340
      ],
      "thickness": 50.0
@@ -1679,20 +1769,20 @@
      "d": 36,
      "centers_yz": [
       [
-       95,
-       95
+       85,
+       85
       ],
       [
-       95,
-       -95
+       85,
+       -85
       ],
       [
-       -95,
-       95
+       -85,
+       85
       ],
       [
-       -95,
-       -95
+       -85,
+       -85
       ]
      ],
      "note": "slide on A41 posts (allowed contact)"
@@ -1702,19 +1792,19 @@
      "d": 36,
      "centers_yz": [
       [
-       140,
+       90,
        140
       ],
       [
-       140,
+       90,
        -140
       ],
       [
-       -140,
+       -90,
        140
       ],
       [
-       -140,
+       -90,
        -140
       ]
      ],
@@ -1722,7 +1812,8 @@
      "note": "fused to plate front face, run along -X through A22 d42 holes, end 5 mm short of platen die face (retracted)"
     },
     "stroke": 145.0,
-    "edge_chamfer": 3
+    "edge_chamfer": 3,
+    "envelope_note": "plate narrowed to 240 in Y (|Y|<=120) so the folded big links (|Y|>=130) and split knee pins pass beside it; plate sweeps local x 5..200 over the 145 stroke (ejects toward -X)."
    },
    "local_origin": "Center of the plate front (-X) face. Plate thickness along +X (x 0..50); ejector rods along -X (x -345..0). Shown retracted.",
    "instances": [
@@ -1740,10 +1831,10 @@
      ],
      "bbox": [
       405.0,
-      -170,
+      -120,
       -170,
       800.0,
-      170,
+      120,
       170
      ]
     }
@@ -2419,6 +2510,166 @@
      ]
     }
    ]
+  },
+  "A36": {
+   "name": "Capraz kafa baglanti kolu",
+   "dims": {
+    "center_distance_E_D": 205.0,
+    "holes_d": 90.0,
+    "thickness_y": 30.0,
+    "width_in_plane": 120.0,
+    "end_radius": 60.0,
+    "edge_chamfer": 2,
+    "shape": "flat bar with full-radius ends (same construction as A32/A33), 2 pin holes at local x=0 (E) and x=205 (D)",
+    "bearing_check": "locked: link force ~640 kN per half (140 kN/cos 77.3deg) -> 2 links x 30 x d90 = 119 MPa; tongue 40 x d90 = 178 MPa (peak, short duration)"
+   },
+   "local_origin": "Center of pin hole E (big-link end) at mid-thickness. Bar along local +X to hole D at x=205; thickness along local Y (+-15); width along local Z (+-60). Instance rot [0,+-77.32,0] (Ry) points local +X from E down/back to D.",
+   "instances": [
+    {
+     "name": "A36_1",
+     "pos": [
+      1245.0,
+      40,
+      400.0
+     ],
+     "rot": [
+      0,
+      77.3196,
+      0
+     ],
+     "bbox": [
+      1185.0,
+      25,
+      140.0,
+      1350.0,
+      55,
+      460.0
+     ]
+    },
+    {
+     "name": "A36_2",
+     "pos": [
+      1245.0,
+      -40,
+      400.0
+     ],
+     "rot": [
+      0,
+      77.3196,
+      0
+     ],
+     "bbox": [
+      1185.0,
+      -55,
+      140.0,
+      1350.0,
+      -25,
+      460.0
+     ]
+    },
+    {
+     "name": "A36_3",
+     "pos": [
+      1245.0,
+      40,
+      -400.0
+     ],
+     "rot": [
+      0,
+      -77.3196,
+      0
+     ],
+     "bbox": [
+      1185.0,
+      25,
+      -460.0,
+      1350.0,
+      55,
+      -140.0
+     ]
+    },
+    {
+     "name": "A36_4",
+     "pos": [
+      1245.0,
+      -40,
+      -400.0
+     ],
+     "rot": [
+      0,
+      -77.3196,
+      0
+     ],
+     "bbox": [
+      1185.0,
+      -55,
+      -460.0,
+      1350.0,
+      -25,
+      -140.0
+     ]
+    }
+   ]
+  },
+  "A37": {
+   "name": "Kapama silindiri piston kolu",
+   "dims": {
+    "rod": {
+     "d": 90.0,
+     "local_x_range": [
+      0,
+      495.0
+     ]
+    },
+    "piston": {
+     "d": 160.0,
+     "local_x_range": [
+      495.0,
+      555.0
+     ],
+     "note": "nominal sliding fit in A35 bore d160 (allowed contact)"
+    },
+    "total_length": 555.0,
+    "end_chamfer": 3,
+    "travel": {
+     "s0_piston_global_x": [
+      1855.0,
+      1915.0
+     ],
+     "s1_piston_global_x": [
+      2093.0,
+      2153.0
+     ],
+     "bore_global_x": [
+      1845.0,
+      2245.0
+     ]
+    }
+   },
+   "local_origin": "Center of the rod front end face (butts crosshead hub +X face). Rod along local +X (x 0..495), piston x 495..555, axis = machine axis.",
+   "instances": [
+    {
+     "name": "A37_1",
+     "pos": [
+      1360.0,
+      0,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      1360.0,
+      -80,
+      -80,
+      1915.0,
+      80,
+      80
+     ]
+    }
+   ]
   }
  },
  "mates": [
@@ -2605,13 +2856,6 @@
    "gap": 0
   },
   {
-   "a": "A34",
-   "face": "body D holes / arm E holes",
-   "b": "A31",
-   "type": "coaxial",
-   "gap": 0
-  },
-  {
    "a": "A32",
    "face": "side (at knee B)",
    "b": "A33",
@@ -2640,20 +2884,6 @@
    "gap": 0
   },
   {
-   "a": "A35",
-   "face": "central hole d110",
-   "b": "A23",
-   "type": "clearance",
-   "gap": 10
-  },
-  {
-   "a": "A35",
-   "face": "body +X face",
-   "b": "A31",
-   "type": "contact",
-   "gap": 0
-  },
-  {
    "a": "A41",
    "face": "back face",
    "b": "A22",
@@ -2676,10 +2906,10 @@
   },
   {
    "a": "A42",
-   "face": "holes d42",
+   "face": "holes d46",
    "b": "A22",
    "type": "clearance",
-   "gap": 3
+   "gap": 5
   },
   {
    "a": "A26",
@@ -2715,6 +2945,69 @@
    "b": "A11",
    "type": "clearance",
    "gap": 150
+  },
+  {
+   "a": "A34",
+   "face": "tongue D holes",
+   "b": "A31",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A34",
+   "face": "holes E/D",
+   "b": "A36",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A36",
+   "face": "tongue sides",
+   "b": "A31",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A36",
+   "face": "inner lug sides",
+   "b": "A23",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A37",
+   "face": "rod end / hub +X face",
+   "b": "A31",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A37",
+   "face": "piston / bore d160",
+   "b": "A35",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A37",
+   "face": "rod / flange hole d100",
+   "b": "A35",
+   "type": "clearance",
+   "gap": 5
+  },
+  {
+   "a": "A37",
+   "face": "rod / central hole d110",
+   "b": "A23",
+   "type": "clearance",
+   "gap": 10
+  },
+  {
+   "a": "A41",
+   "face": "rear cap / hub front at s=1",
+   "b": "A31",
+   "type": "clearance",
+   "gap": 13
   }
  ],
  "clearances": {
@@ -2825,10 +3118,6 @@
     "A34"
    ],
    [
-    "A31",
-    "A35"
-   ],
-   [
     "A41",
     "A42"
    ],
@@ -2855,6 +3144,18 @@
    [
     "A61",
     "A62"
+   ],
+   [
+    "A34",
+    "A36"
+   ],
+   [
+    "A31",
+    "A37"
+   ],
+   [
+    "A35",
+    "A37"
    ]
   ]
  }
