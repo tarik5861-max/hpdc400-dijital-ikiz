@@ -6,10 +6,10 @@ Ortak adres: ürün ağacındaki ID'ler (A24, A56…). Hidrolik eleman, kablo, s
 | Kademe | İçerik | Durum |
 |---|---|---|
 | 0. Mekanik iskelet | Geometri, montaj, mafsal + kalıp yüksekliği kinematiği, otomatik çakışma kontrolleri, agent ekibi, GitHub + MCP | ✅ Bitti (71 parça) |
-| 1. Gerçek makineye geçiş | Pilot makinenin gerçek ölçüleri; ürün ağacına valf/sensör/pompa/kart ID'leri; doküman arşivi | ⏳ Sırada — pilot makine ve dokümanlar bekleniyor |
-| 2. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | Bekliyor |
-| 3. PLC ve sıralama | Program → durum makinesi; duruşta "hangi adım, hangi koşul, hangi sensör" | Bekliyor |
-| 4. Elektrik ve kartlar | Güç/kontrol devresi, güvenlik zinciri, kablo no, kart + test noktası | Bekliyor |
+| 1. Makineyi tamamlamak | Eksik mekanik: itici ileri konumu, A81 itici pim delikleri, enjeksiyon–sabit plaka bağlantı çubukları; satın alınan parçalar (pompa, valf blokları, borulama); pilot makinenin (LK) gerçek ölçüleri | ⏳ Sırada — **öncelik 1** |
+| 2. Elektrik ve kartlar | Elektrik şemasından: güç/kontrol devresi, güvenlik zinciri, I/O listesi, kablo/klemens no, bobin ve sensör ID'leri, kart + test noktası | Öncelik 2 — LK (Microstar) şeması geliyor |
+| 3. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | Öncelik 3 |
+| 4. Yazılım (PLC ve sıralama) | Program → durum makinesi; duruşta "hangi adım, hangi koşul, hangi sensör". Seçenek: kontrol yazılımını kendimiz yazmak | Öncelik 4 |
 | 5. Pnömatik ve yağlama | Sprey havası, tutucular, merkezi yağlama ↔ mafsal aşınması | Bekliyor |
 | 6. Hücre çevresi | Kepçe, sprey robotu, parça alma, çapak presi, kalıp ısıtma, vakum, kilitlemeler | Bekliyor |
 | 7. Teşhis motoru | Sebep-sonuç grafiği, aday daraltma, test önerisi, zorunlu güvenlik adımları; arızalı parça FreeCAD'de kırmızı | Bekliyor |
@@ -29,7 +29,7 @@ Amaç: tonajdan (230–850 t ve ötesi) otomatik ölçülendirme; "makine filosu
 6. **İlk test:** mevcut 400 t modeli birebir yeniden üretmek; sonra pilot makine ve filodaki diğer makineler.
 Sınır: katalog tahmini gerçekçi olur ama birebir değildir; teşhis için gerçek makine ölçüleri girilmelidir.
 
-## Kademe 1 için gerekenler
+## Kademe 1–2 için gerekenler
 - Pilot makine: marka / model / kontrol sistemi
 - Hidrolik şema (ISO 1219), elektrik projesi (EPLAN), PLC programı ve I/O listesi
 - Valf ve kart datasheet'leri
