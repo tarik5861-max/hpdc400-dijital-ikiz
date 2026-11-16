@@ -4,6 +4,7 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 
 | Tarih | Karar | Neden |
 |---|---|---|
+| 2026-11-17 | Boyutlandırma (hesap) motoru "Alt plan A" olarak yol haritasına alındı; en son işlerden biri olacak | Kullanıcı kararı: önce gerçek makine ve teşhis kademeleri |
 | 2026-11-17 | Bağlam kuralları: bir sohbet = bir iş, `/devam` ile başla, `/kapanis` ile bitir; proje hafızası depoda (DURUM, KARARLAR, YOL_HARITASI) | Sohbet bağlamı büyüyüp pahalılaşıyordu |
 | 2026-11-16 | MCP sunucusu hafif; geometri çekirdeği (cadquery-ocp-novtk) yalnızca kontrol araçlarında, ayrı uv ortamında | VTK (77 MB) yavaş ağda sunucunun açılmasını engelliyordu |
 | 2026-11-16 | GitHub özel depo `tarik5861-max/hpdc400-dijital-ikiz`, çoklu PC, projeye özel `hpdc400` MCP sunucusu | Birden fazla bilgisayarda ortak çalışma |
