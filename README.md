@@ -2,6 +2,9 @@
 
 400 t soğuk kamaralı yatay döküm makinesi. Toggle kapamalı, 5 noktalı çift mafsal. Parametrik ve ürün ağacına bağlı FreeCAD modeli.
 
+## Birden fazla bilgisayar
+Kurulum ve günlük akış: [docs/COKLU_PC_KURULUM.md](docs/COKLU_PC_KURULUM.md). FreeCAD'de açmak: Makro → `HPDC400_yukle.FCMacro`.
+
 ## Hızlı başlangıç (PC, VS Code terminali)
 1. FreeCAD 1.0+ kur. `git clone https://github.com/neka-nat/freecad-mcp` yap ve `addon/FreeCADMCP` klasörünü `%APPDATA%\FreeCAD\Mod\` içine kopyala. FreeCAD'i yeniden başlat, "MCP Addon" tezgâhında **Start RPC Server**'a bas.
 2. `uv` kur (uvx için). Bu klasörde `claude` çalıştır, ardından `/mcp` ile `freecad` bağlantısını gör.

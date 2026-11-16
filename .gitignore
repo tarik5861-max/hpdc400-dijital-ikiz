@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+out/
+*.FCStd1
+*.FCBak
+.venv/
+*.tgz
+*.zip

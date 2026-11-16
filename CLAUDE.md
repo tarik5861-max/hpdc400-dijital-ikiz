@@ -27,3 +27,8 @@ for faz in 1..4:
 - Her parça kendi lokal koordinatında çizilir; yerleşimi SADECE params.instances yapar.
 - Her tur sonunda `python3 checks/check.py` sonucu `out/check_report.json`'a yazılır; commit mesajına hata sayısı eklenir.
 - Kullanıcıya her faz sonunda 3 satırlık özet + ekran görüntüsü.
+
+## MCP sunucuları ve çoklu bilgisayar
+- `hpdc400` (mcp_server/hpdc_mcp.py): proje bilgisi, statik_kontrol, hareket_kontrolu, canlı FreeCAD komutları. test-kosucu kontrolleri bu araçlarla da çalıştırabilir.
+- `freecad` (neka-nat/freecad-mcp): düşük seviye FreeCAD erişimi.
+- Oturum başında `git pull`, sonunda kontroller YEŞİL ise commit + push. Ayrıntı: docs/COKLU_PC_KURULUM.md

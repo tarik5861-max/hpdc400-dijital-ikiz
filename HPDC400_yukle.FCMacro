@@ -1,0 +1,49 @@
+# HPDC-400 dijital ikiz: montaji kur, renklendir, hareketi baslat.
+# Calistirma: FreeCAD > Makro > Makrolar... > bu dosya   (veya konsoldan exec ile)
+# Proje klasoru sirasiyla: HPDC_ROOT ortam degiskeni -> bu dosyanin klasoru -> ~/Desktop/hpdc400 -> ~/hpdc400
+import os, sys
+import FreeCAD as App, FreeCADGui as Gui
+
+
+def _hpdc_root():
+    cands = [os.environ.get("HPDC_ROOT")]
+    try:
+        cands.append(os.path.dirname(os.path.abspath(__file__)))
+    except NameError:
+        pass
+    home = os.path.expanduser("~")
+    cands += [os.path.join(home, "Desktop", "hpdc400"), os.path.join(home, "hpdc400"),
+              os.path.join(home, "projects", "hpdc400"), os.path.join(home, "OneDrive", "Desktop", "hpdc400")]
+    for c in cands:
+        if c and os.path.isfile(os.path.join(c, "assembly", "assemble.py")):
+            return c
+    raise RuntimeError("hpdc400 proje klasoru bulunamadi; HPDC_ROOT ortam degiskenini ayarla.")
+
+
+R = _hpdc_root()
+os.environ["HPDC_ROOT"] = R
+try:
+    hpdc_durdur(reset=False)          # onceki animasyon calisiyorsa durdur
+except Exception:
+    pass
+if "HPDC400" in App.listDocuments():
+    App.closeDocument("HPDC400")
+for _m in ("geo", "assemble", "kinematics"):
+    sys.modules.pop(_m, None)
+_p = os.path.join(R, "assembly", "assemble.py")
+sys.argv = ["assemble.py"]
+exec(open(_p, encoding="utf-8").read(), {"__file__": _p, "__name__": "__main__"})
+
+_COL = {"A1": (0.48, 0.50, 0.53), "A2": (0.23, 0.43, 0.65), "A3": (0.82, 0.55, 0.17), "A4": (0.54, 0.35, 0.66),
+        "A5": (0.75, 0.22, 0.17), "A6": (0.18, 0.55, 0.34), "A7": (0.89, 0.77, 0.29), "A8": (0.37, 0.62, 0.63),
+        "A9": (0.30, 0.30, 0.32)}
+_ps = [o for o in App.ActiveDocument.Objects if o.TypeId == "Part::Feature"]
+for o in _ps:
+    o.ViewObject.ShapeColor = _COL.get(o.Name[:2], (0.7, 0.7, 0.7))
+    if o.Name[:2] in ("A6", "A7"):      # hidrolik unite ve koruma/pano: gorunumu acik tutmak icin gizli
+        o.ViewObject.Visibility = False
+exec(open(os.path.join(R, "HPDC400_hareket.FCMacro"), encoding="utf-8").read(), globals())
+print("HPDC400 PARCA", len(_ps), "GECERSIZ", [o.Name for o in _ps if not o.Shape.isValid()], "KOK", R)
+_v = Gui.activeDocument().activeView()
+_v.viewIsometric()
+_v.fitAll()
