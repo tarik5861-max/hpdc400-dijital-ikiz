@@ -8,7 +8,9 @@ Claude Code (veya herhangi bir MCP istemcisi) bu sunucu ile projeyi tek bir aray
     (FreeCAD'de neka-nat/freecad-mcp eklentisinin RPC sunucusu acik olmali: MCP Addon > Start RPC Server)
 
 Calistirma (proje kokunden; .mcp.json bunu otomatik yapar):
-  uv run --with "mcp[cli]" --with freecad-mcp --with cadquery-ocp --with matplotlib python mcp_server/hpdc_mcp.py
+  uv run --no-project --python 3.12 --with "mcp[cli]" --with freecad-mcp python mcp_server/hpdc_mcp.py
+Sunucu hafiftir (saniyeler icinde acilir). Kontrol araclari geometri cekirdegini (OCP) gerektirir; sunucunun
+ortaminda OCP yoksa kontroller ayri bir uv ortaminda cadquery-ocp-novtk ile calisir (ilk cagri paketi indirir).
 Ortam degiskenleri: FREECAD_HOST (localhost), FREECAD_PORT (9875), FREECAD_MCP_TOKEN (opsiyonel)
 """
 import base64
@@ -32,8 +34,17 @@ def _load(name):
         return json.load(f)
 
 
-def _run(args, timeout=900):
-    p = subprocess.run([sys.executable] + args, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+def _python_cmd():
+    """Kontrol scriptlerini calistiracak Python: OCP varsa bu ortam, yoksa uv ile VTK'siz OCP ortami."""
+    import importlib.util, shutil
+    if importlib.util.find_spec("OCP") is not None:
+        return [sys.executable]
+    uv = shutil.which("uv") or os.path.join(os.path.expanduser("~"), ".local", "bin", "uv.exe")
+    return [uv, "run", "--no-project", "--python", "3.12", "--with", "cadquery-ocp-novtk", "python"]
+
+
+def _run(args, timeout=1800):
+    p = subprocess.run(_python_cmd() + args, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
     out = (p.stdout or "") + (("\n[stderr]\n" + p.stderr[-2000:]) if p.returncode not in (0, 1) and p.stderr else "")
     return p.returncode, out.strip()
 
@@ -118,7 +129,8 @@ def parca_bilgisi(parca_id: str) -> str:
 @mcp.tool()
 def statik_kontrol(faz: int = 0) -> str:
     """Kalite kapisi: geometri gecerliligi, BOM adetleri, beklenen bbox sapmasi, parca cakisma/gomulme, zemin alti.
-    faz=0 tum makine; faz=N sadece N. faza kadar olan parcalar."""
+    faz=0 tum makine; faz=N sadece N. faza kadar olan parcalar.
+    Bir bilgisayardaki ILK cagri geometri cekirdegini indirir (~60 MB, birkac dakika surebilir)."""
     args = ["checks/check.py"] + (["--phase", str(faz)] if faz else [])
     code, out = _run(args)
     return ("YESIL - hata yok\n" if code == 0 else "HATA VAR\n") + out

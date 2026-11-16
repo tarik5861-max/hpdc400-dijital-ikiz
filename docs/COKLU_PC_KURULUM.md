@@ -13,7 +13,7 @@ Depo: `https://github.com/tarik5861-max/hpdc400-dijital-ikiz` (özel). Tek doğr
 3. FreeCAD MCP eklentisi: `git clone https://github.com/neka-nat/freecad-mcp` → `addon\FreeCADMCP` klasörünü
    `%APPDATA%\FreeCAD\Mod\` içine kopyala → FreeCAD'i yeniden başlat → **MCP Addon** tezgâhı → **Auto-Start Server** işaretle.
 4. VS Code'da `hpdc400` klasörünü aç, terminalde `claude` → `/mcp` ile **freecad** ve **hpdc400** sunucularının bağlı olduğunu gör
-   (ilk açılışta `uv` bağımlılıkları indirir, 1-2 dk sürebilir).
+   (sunucu birkaç saniyede açılır; `statik_kontrol` / `hareket_kontrolu` bir bilgisayarda ilk kez çağrılınca geometri çekirdeğini (~60 MB) indirir, yavaş ağda birkaç dakika sürebilir).
 
 ## Her çalışma oturumu
 ```

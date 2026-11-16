@@ -2,13 +2,24 @@
   "mcpServers": {
     "freecad": {
       "command": "uvx",
-      "args": ["freecad-mcp"]
+      "args": [
+        "freecad-mcp"
+      ]
     },
     "hpdc400": {
       "command": "uv",
-      "args": ["run", "--no-project", "--python", "3.12",
-               "--with", "mcp[cli]", "--with", "freecad-mcp", "--with", "cadquery-ocp", "--with", "matplotlib",
-               "python", "mcp_server/hpdc_mcp.py"]
+      "args": [
+        "run",
+        "--no-project",
+        "--python",
+        "3.12",
+        "--with",
+        "mcp[cli]",
+        "--with",
+        "freecad-mcp",
+        "python",
+        "mcp_server/hpdc_mcp.py"
+      ]
     }
   }
 }
