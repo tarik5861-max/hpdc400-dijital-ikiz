@@ -382,6 +382,16 @@
      "through": true,
      "fit": "sleeve OD nominal fit"
     },
+    "ejector_return_holes": {
+     "d": 32.0,
+     "centers_yz": [
+      [90, 140], [90, 46], [90, -46], [90, -140],
+      [30, 140], [30, 46], [30, -46], [30, -140],
+      [-30, 140], [-30, 46], [-30, -46], [-30, -140],
+      [-90, 140], [-90, 46], [-90, -46], [-90, -140]
+     ],
+     "note": "16 ejector return / push-back pin clearance holes on fixed platen"
+    },
     "edge_chamfer": 5,
     "t_slots": {
      "optional": true,
