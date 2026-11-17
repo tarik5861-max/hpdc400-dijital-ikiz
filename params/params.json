@@ -2462,28 +2462,6 @@
      "depth": 25,
      "height_from_back": 30
     },
-    "ejector_holes": {
-     "d": 38,
-     "centers_yz": [
-      [
-       90,
-       140
-      ],
-      [
-       90,
-       -140
-      ],
-      [
-       -90,
-       140
-      ],
-      [
-       -90,
-       -140
-      ]
-     ],
-     "note": "clearance holes for ejector pins passing through fixed die if needed"
-    },
     "edge_chamfer": 5
    },
    "local_origin": "Center of the back face (contact with fixed platen die face = global origin). Thickness along +X (x 0..170).",
