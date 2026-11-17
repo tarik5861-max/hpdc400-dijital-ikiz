@@ -4,6 +4,8 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 
 | Tarih | Karar | Neden |
 |---|---|---|
+| 2026-11-17 | Sabit plakaya (A21) 16 adet d32 itici dönüş/pim geçiş deliği eklendi; sabit kalıptan (A81) itici delikleri kaldırıldı | Gerçek 400 t kalıp ve plaka standardı; itici mekanizması yalnız hareketli taraftadır |
+| 2026-11-17 | Enjeksiyon ünitesi ile sabit plaka arasına 45 mm çapında A58 bağlantı çubukları (2 adet) eklendi | Enjeksiyon eksenel itme kuvvetine karşı mekanik denge ve kararlılık |
 | 2026-11-17 | Öncelik sırası: makineyi tamamlamak → elektrik → hidrolik → yazılım (PLC). Yazılımı kendimiz yazma seçeneği açık | Kullanıcı kararı; LK (Microstar) elektrik şeması geliyor |
 | 2026-11-17 | Boyutlandırma (hesap) motoru "Alt plan A" olarak yol haritasına alındı; en son işlerden biri olacak | Kullanıcı kararı: önce gerçek makine ve teşhis kademeleri |
 | 2026-11-17 | Bağlam kuralları: bir sohbet = bir iş, `/devam` ile başla, `/kapanis` ile bitir; proje hafızası depoda (DURUM, KARARLAR, YOL_HARITASI) | Sohbet bağlamı büyüyüp pahalılaşıyordu |

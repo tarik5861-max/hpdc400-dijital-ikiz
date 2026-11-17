@@ -6,7 +6,7 @@ Ortak adres: ürün ağacındaki ID'ler (A24, A56…). Hidrolik eleman, kablo, s
 | Kademe | İçerik | Durum |
 |---|---|---|
 | 0. Mekanik iskelet | Geometri, montaj, mafsal + kalıp yüksekliği kinematiği, otomatik çakışma kontrolleri, agent ekibi, GitHub + MCP | ✅ Bitti (71 parça) |
-| 1. Makineyi tamamlamak | Eksik mekanik: itici ileri konumu, A81 itici pim delikleri, enjeksiyon–sabit plaka bağlantı çubukları; satın alınan parçalar (pompa, valf blokları, borulama); pilot makinenin (LK) gerçek ölçüleri | ⏳ Sırada — **öncelik 1** |
+| 1. Makineyi tamamlamak | Eksik mekanik tamamlanıyor: itici / pim düzeni (sabit plaka 16 delik), enjeksiyon–sabit plaka bağlantı çubukları (A58); satın alınan parçalar; pilot makinenin (LK) gerçek ölçüleri | 🔄 Devam ediyor |
 | 2. Elektrik ve kartlar | Elektrik şemasından: güç/kontrol devresi, güvenlik zinciri, I/O listesi, kablo/klemens no, bobin ve sensör ID'leri, kart + test noktası | Öncelik 2 — LK (Microstar) şeması geliyor |
 | 3. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | Öncelik 3 |
 | 4. Yazılım (PLC ve sıralama) | Program → durum makinesi; duruşta "hangi adım, hangi koşul, hangi sensör". Seçenek: kontrol yazılımını kendimiz yazmak | Öncelik 4 |
