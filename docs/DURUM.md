@@ -17,7 +17,8 @@ Depodaki durum tutarsız: A21 sabit plakada hâlâ 16×Ø32 delik var ("kaldır�
 Önerilen düzeltme (kullanıcı onayı bekleniyor):
 1. A21: 16 delik tamamen kaldırılır (sabit tarafta itici deliği olmaz).
 2. A22: 5 konumlu desen kalır (merkez Ø80 + (±90,±140) 4×Ø46) — itici plakası 240×340 mafsal boşluğu (7,5 mm) yüzünden büyütülemez.
-3. A42: 4 köşe çubuğu kalır (+ isteğe bağlı merkez çubuğu).
+3. A41 → ÇİFT SİLİNDİRLİ itici grubu (kullanıcı: gerçek makinelerde 2 silindir, bizimki tek). İki silindir itici plakasını simetrik iter, merkez boşalır. Konum (sağ-sol / alt-üst) ve çap: kullanıcıdan / LK şemasından; yoksa yatay simetrik. Mafsal boşluğu (diz pimi–A42 7,5 mm) ile yerleşim hesabı gerekir (4 turda çözülmezse Fable).
+   A42: 4 köşe çubuğu kalır (+ isteğe bağlı merkez çubuğu); iki silindire bağlantı noktaları eklenir.
 4. A82: arkasına itici kutusu: kalıp itici plakası + 24 itici pimi + 4 geri dönüş pimi ("24" kalıbın pimleridir).
 5. checks: kural kontrolü — sabit tarafta itici deliği yok; A22 delikleri = A42 çubukları; kalıp pimleri kalıp sınırında; commit/KARARLAR iddiaları params ile karşılaştırılır.
 
