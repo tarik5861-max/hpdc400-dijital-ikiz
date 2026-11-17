@@ -3,7 +3,7 @@
 _Son güncelleme: 2026-11-17. Her `/kapanis`'ta yeniden yazılır (en fazla ~60 satır)._
 
 ## Şu an
-- Kademe 1 (Makineyi tamamlamak): İtici ve pim delikleri düzenlendi (sabit plaka A21 üzerine 16 adet itici dönüş/pim geçiş deliği eklendi; sabit kalıp A81 temizlendi).
+- Kademe 1 (Makineyi tamamlamak): İtici ve pim delikleri güncellendi (sabit plaka A21'deki delikler kaldırıldı; hareketli plaka A22, itici plakası A42 ve hareketli kalıp A82 üzerine 24 adet itici/pim geçiş deliği/kolu eklendi).
 - Enjeksiyon ünitesi ile sabit plaka arasına 45 mm çapında sağlam A58 bağlantı çubukları (2 adet) eklendi ve silindir/akümülatör çakışmaları çözüldü.
 - Tüm statik ve hareket kontrolleri 0 hata ile YEŞİL.
 

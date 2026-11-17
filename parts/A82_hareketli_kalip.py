@@ -11,4 +11,8 @@ def build(d, G, g):
     z0, z1 = r["from_yz"][1], r["to_yz"][1]
     cuts.append(g.move(g.box(r["depth"] + 1, r["width"], abs(z1 - z0)),
                        -t + (r["depth"] - 1) / 2, r["from_yz"][0], (z0 + z1) / 2))
+    if "ejector_pin_holes" in d:
+        eph = d["ejector_pin_holes"]
+        for y, z in eph["centers_yz"]:
+            cuts.append(g.move(g.cyl(eph["d"] / 2, t + 2, "x", center=False), -t - 1, y, z))
     return g.cut(s, *cuts)
