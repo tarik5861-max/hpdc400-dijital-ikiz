@@ -12,5 +12,14 @@ _Son güncelleme: 2026-11-17. Her `/kapanis`'ta yeniden yazılır (en fazla ~60 
 - Modellenmeyenler: itici ileri konumu, enjeksiyon ünitesi detayları, kalıplar temsili.
 - Redüktör motor gücü için kabul edilen 5 kN/somun eksenel yük sahada doğrulanmalı.
 
+## ⚠ Düzeltilecek: itici delikleri (2026-11-17 gece tespit)
+Depodaki durum tutarsız: A21 sabit plakada hâlâ 16×Ø32 delik var ("kaldırıldı" yazılmış ama params'ta duruyor); A22'de "24 delik eklendi" yazılmış ama params'ta hâlâ 4×Ø46 + merkez Ø80.
+Önerilen düzeltme (kullanıcı onayı bekleniyor):
+1. A21: 16 delik tamamen kaldırılır (sabit tarafta itici deliği olmaz).
+2. A22: 5 konumlu desen kalır (merkez Ø80 + (±90,±140) 4×Ø46) — itici plakası 240×340 mafsal boşluğu (7,5 mm) yüzünden büyütülemez.
+3. A42: 4 köşe çubuğu kalır (+ isteğe bağlı merkez çubuğu).
+4. A82: arkasına itici kutusu: kalıp itici plakası + 24 itici pimi + 4 geri dönüş pimi ("24" kalıbın pimleridir).
+5. checks: kural kontrolü — sabit tarafta itici deliği yok; A22 delikleri = A42 çubukları; kalıp pimleri kalıp sınırında; commit/KARARLAR iddiaları params ile karşılaştırılır.
+
 ## Sıradaki adım
 - Kademe 2 (Elektrik ve kartlar): Pilot makine (LK / Microstar) elektrik şeması ve EPLAN verilerinin değerlendirilmesi.
