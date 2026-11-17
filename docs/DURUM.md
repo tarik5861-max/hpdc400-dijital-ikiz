@@ -3,7 +3,7 @@
 _Son güncelleme: 2026-11-17. Her `/kapanis`'te yeniden yazılır (en fazla ~60 satır)._
 
 ## Şu an
-- Kademe 1 (Makineyi tamamlamak): Hareketli plaka A22 üzerine ortamerkez ağırlıklı 8'li altıgen itici delik düzeni eklendi; A42 itici plakası 8 dayamaya düşürülerek A22 delikleriyle tam uyumlu hale getirildi.
+- Kademe 1 (Makineyi tamamlamak): Hareketli plaka A22 üzerindeki ortamerkez ağırlıklı 8'li altıgen itici delik düzeninin aralıkları 3 katına çıkarılarak genişletildi; A42 itici plakası dayamaları bu yeni düzene tam uyarlanarak güncellendi.
 - Statik ve geometrik kontroller 0 hata ile tamamen **YEŞİL**.
 
 ## Açık noktalar
