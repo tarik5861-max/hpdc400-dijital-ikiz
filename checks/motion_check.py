@@ -27,8 +27,8 @@ def main():
     die_sweep = "--kalip-yuksekligi" in sys.argv
     placed, _, P, _ = assemble()
     G = P["global"]
-    if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir
-        placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82")}
+    if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir; A83/84/85 (itici seti) kaydirma disinda
+        placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82", "A83", "A84", "A85")}
     allowed = {frozenset(p) for p in P["clearances"]["allowed_contacts"]}
     mesh = {frozenset(p) for p in P["clearances"].get("mesh_pairs", [])}
     worst = {}

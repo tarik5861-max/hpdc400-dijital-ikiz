@@ -4,6 +4,8 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 
 | Tarih | Karar | Neden |
 |---|---|---|
+| 2026-11-18 | İtici grubu uygulandı: A21'de itici deliği yok; A41 çift silindir (Ø100/Ø56, 140 bar, iki silindir toplam 22,4 t itme), A42 390 mm çubuk, A82 itici kutusu + A83 itici plakası + 24×A84 Ø10 pim + 4×A85 Ø25 geri dönüş pimi (kalıp strok ayarı 65) | 2026-11-17 kararının uygulaması; hesaplar docs/olcu_notlari.md |
+| 2026-11-18 | Sabit plaka (A21) şaseye 2 adet A13 destek direğiyle bağlanır (taban + kolon + üçgen gusset, M36/M30 cıvata); A21 kızakta kaymaz, sabittir | Kullanıcı isteği: plakayı şaseye bağlayan direkler; kapama kuvveti plaka-kolon çevriminde dengelenir, destekler ağırlık + kazara yatay yük taşır |
 | 2026-11-17 | İtici grubu çift silindirli, yatay simetrik; sabit tarafta itici deliği yok; A22 5 konumlu desen (merkez + 4); 24 itici pimi + 4 geri dönüş pimi kalıpta (A82 itici kutusu) | Gerçek makine düzeni; "24" kalıp pimleri; itici plakası mafsal boşluğu yüzünden büyütülemez |
 | 2026-11-17 | Sabit plaka (A21) delikleri kaldırıldı; hareketli plakaya (A22) 24 adet itici/pim geçiş deliği eklendi (itici plakası A42 ve hareketli kalıp A82 güncellendi) | Kullanıcı isteği: itici delikleri hareketli plakada ve 24 adet |
 | 2026-11-17 | Sabit plakaya (A21) 16 adet d32 itici dönüş/pim geçiş deliği eklendi; sabit kalıptan (A81) itici delikleri kaldırıldı → değişti: 2026-11-17 | Gerçek 400 t kalıp ve plaka standardı; itici mekanizması yalnız hareketli taraftadır |

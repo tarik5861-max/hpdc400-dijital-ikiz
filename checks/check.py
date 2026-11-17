@@ -15,6 +15,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "assembly")); sys.path.insert(0, os.path.join(ROOT, "lib"))
 import geo                      # noqa
 from assemble import assemble   # noqa
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from kurallar import kural_kontrol  # noqa
 
 TOL_VOL = 50.0      # mm3 altı çakışma = sayısal gürültü
 TOL_ALLOWED = 5000.0  # izinli temas çiftinde bile 5 cm3 üstü örtüşme = gömülme hatası
@@ -61,6 +63,8 @@ def main():
         if v > lim:
             errors.append({"part": f"{a} x {b}", "type": "GOMULME" if is_allowed else "CAKISMA",
                            "msg": f"{v/1000:.1f} cm3"})
+
+    errors += kural_kontrol(P)
 
     res = {"phase": phase, "parts_placed": len(names), "errors": errors, "warnings": warns,
            "bboxes": {n: [round(x, 1) for x in boxes[n]] for n in names}}
