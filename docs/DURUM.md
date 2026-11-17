@@ -4,8 +4,8 @@ _Son güncelleme: 2026-11-17 (öncelik sırası işlendi). Her `/kapanis`'ta yen
 
 ## Şu an
 - Kademe 0 bitti: 71 parça, statik kontrol 0 hata, mengene ve kalıp yüksekliği hareket taramaları 0 çarpışma.
-- FreeCAD'de açılır: Makro → `HPDC400_yukle.FCMacro` veya `hpdc400` MCP aracı `freecad_montaji_yukle`.
-- İki bilgisayar depoya bağlı (masaüstündeki `hpdc400` klasörü). İkinci bilgisayarda MCP zinciri gerçek FreeCAD'de uçtan uca test edildi.
+- `cadquery-ocp-novtk` ve `matplotlib` yerel ortamda kuruldu; `checks/check.py`, `checks/motion_check.py`, `checks/render.py` ve `assembly/assemble.py` başarıyla çalışıyor.
+- Kademe 1 eksik mekanik unsurlarından itici ve kalıp pim delikleri analizi yapıldı.
 
 ## Açık noktalar
 - İkinci bilgisayarda `statik_kontrol` ilk çalıştırmada geometri çekirdeğini indiriyordu; sonucu `out/mcp_test2.log`'da kontrol et.
