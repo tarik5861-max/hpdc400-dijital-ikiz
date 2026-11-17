@@ -1,0 +1,509 @@
+{
+  "communities": {
+    "0": [
+      "base64",
+      "image",
+      "json",
+      "mcp_server_fastmcp",
+      "mcp_server_hpdc_mcp",
+      "mcp_server_hpdc_mcp_ensure_loaded",
+      "mcp_server_hpdc_mcp_fc_exec",
+      "mcp_server_hpdc_mcp_freecad",
+      "mcp_server_hpdc_mcp_freecad_animasyon",
+      "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "mcp_server_hpdc_mcp_freecad_konum",
+      "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "mcp_server_hpdc_mcp_load",
+      "mcp_server_hpdc_mcp_main_call",
+      "mcp_server_hpdc_mcp_parca_bilgisi",
+      "mcp_server_hpdc_mcp_proje_durumu",
+      "mcp_server_hpdc_mcp_python_cmd",
+      "mcp_server_hpdc_mcp_rationale_1",
+      "mcp_server_hpdc_mcp_rationale_119",
+      "mcp_server_hpdc_mcp_rationale_131",
+      "mcp_server_hpdc_mcp_rationale_141",
+      "mcp_server_hpdc_mcp_rationale_151",
+      "mcp_server_hpdc_mcp_rationale_158",
+      "mcp_server_hpdc_mcp_rationale_167",
+      "mcp_server_hpdc_mcp_rationale_174",
+      "mcp_server_hpdc_mcp_rationale_181",
+      "mcp_server_hpdc_mcp_rationale_38",
+      "mcp_server_hpdc_mcp_rationale_60",
+      "mcp_server_hpdc_mcp_rationale_89",
+      "mcp_server_hpdc_mcp_rationale_99",
+      "mcp_server_hpdc_mcp_run",
+      "mcp_server_hpdc_mcp_statik_kontrol",
+      "mcp_server_mcpserver",
+      "subprocess",
+      "tool"
+    ],
+    "1": [
+      "freecad",
+      "lib_geo",
+      "lib_geo_bbox",
+      "lib_geo_box",
+      "lib_geo_common",
+      "lib_geo_cut",
+      "lib_geo_cyl",
+      "lib_geo_export_step",
+      "lib_geo_fuse",
+      "lib_geo_gear_x",
+      "lib_geo_is_valid",
+      "lib_geo_move",
+      "lib_geo_place",
+      "lib_geo_polyprism",
+      "lib_geo_rationale_1",
+      "lib_geo_rationale_147",
+      "lib_geo_rationale_166",
+      "lib_geo_rationale_171",
+      "lib_geo_rationale_180",
+      "lib_geo_rationale_78",
+      "lib_geo_rot",
+      "lib_geo_tr",
+      "lib_geo_tube",
+      "lib_geo_volume",
+      "ocp_bnd",
+      "ocp_brepalgoapi",
+      "ocp_brepbndlib",
+      "ocp_brepbuilderapi",
+      "ocp_brepcheck",
+      "ocp_brepgprop",
+      "ocp_brepprimapi",
+      "ocp_gp",
+      "ocp_gprop",
+      "ocp_shapeupgrade",
+      "ocp_stepcontrol",
+      "part"
+    ],
+    "2": [
+      "serena_project",
+      "serena_project_activation_command",
+      "serena_project_activation_command_timeout",
+      "serena_project_added_modes",
+      "serena_project_agent_interface",
+      "serena_project_default_modes",
+      "serena_project_encoding",
+      "serena_project_excluded_apis",
+      "serena_project_excluded_tools",
+      "serena_project_fixed_tools",
+      "serena_project_ignore_all_files_in_gitignore",
+      "serena_project_ignored_memory_patterns",
+      "serena_project_ignored_paths",
+      "serena_project_included_apis",
+      "serena_project_included_optional_tools",
+      "serena_project_initial_prompt",
+      "serena_project_language_backend",
+      "serena_project_language_servers",
+      "serena_project_line_ending",
+      "serena_project_ls_additional_workspace_folders",
+      "serena_project_ls_specific_settings",
+      "serena_project_ls_workspace_folders",
+      "serena_project_project_name",
+      "serena_project_read_only",
+      "serena_project_read_only_memory_patterns",
+      "serena_project_symbol_info_budget"
+    ],
+    "3": [
+      "assembly_assemble",
+      "assembly_assemble_assemble",
+      "assembly_assemble_assemble_local_for",
+      "assembly_assemble_build_part",
+      "assembly_assemble_leaves",
+      "assembly_assemble_load_params",
+      "assembly_assemble_rationale_1",
+      "assembly_assemble_to_freecad_doc",
+      "checks_check",
+      "checks_check_bbox_overlap",
+      "checks_check_main",
+      "checks_check_rationale_1",
+      "checks_motion_check",
+      "checks_motion_check_apply",
+      "checks_motion_check_main",
+      "checks_motion_check_rationale_1",
+      "checks_motion_check_rationale_15",
+      "importlib_util",
+      "itertools",
+      "os",
+      "sys",
+      "traceback"
+    ],
+    "4": [
+      "lib_kinematics",
+      "lib_kinematics_ang_y",
+      "lib_kinematics_compose",
+      "lib_kinematics_die_height_angles",
+      "lib_kinematics_joints",
+      "lib_kinematics_mat_rx",
+      "lib_kinematics_mat_ry",
+      "lib_kinematics_mv",
+      "lib_kinematics_pose",
+      "lib_kinematics_pose_full",
+      "lib_kinematics_rationale_1",
+      "lib_kinematics_rationale_105",
+      "lib_kinematics_rationale_113",
+      "lib_kinematics_rationale_129",
+      "lib_kinematics_rationale_139",
+      "lib_kinematics_rationale_18",
+      "lib_kinematics_rationale_23",
+      "lib_kinematics_rot_x_about",
+      "lib_kinematics_to_matrix",
+      "math"
+    ],
+    "5": [
+      "checks_render",
+      "checks_render_main",
+      "checks_render_rationale_1",
+      "checks_render_tris",
+      "matplotlib",
+      "matplotlib_pyplot",
+      "mpl_toolkits_mplot3d_art3d",
+      "numpy",
+      "ocp_brep",
+      "ocp_brepmesh",
+      "ocp_topabs",
+      "ocp_topexp",
+      "ocp_toploc",
+      "ocp_topods"
+    ],
+    "6": [
+      "mcp",
+      "mcp_command_uv",
+      "mcp_command_uvx",
+      "mcp_mcp_server_freecad",
+      "mcp_mcp_server_hpdc400",
+      "mcp_package_freecad_mcp"
+    ],
+    "7": [
+      "parts_a32_buyuk_kol",
+      "parts_a32_buyuk_kol_build",
+      "parts_a32_buyuk_kol_link"
+    ],
+    "8": [
+      "parts_a52_piston",
+      "parts_a52_piston_build",
+      "parts_a52_piston_build_seg"
+    ],
+    "9": [
+      "parts_a54_enjeksiyon_silindiri",
+      "parts_a54_enjeksiyon_silindiri_build",
+      "parts_a54_enjeksiyon_silindiri_build_blk"
+    ],
+    "10": [
+      "parts_a55_carpan",
+      "parts_a55_carpan_build",
+      "parts_a55_carpan_build_seg"
+    ],
+    "11": [
+      "parts_a95_motor",
+      "parts_a95_motor_build",
+      "parts_a95_motor_build_seg"
+    ],
+    "12": [
+      "parts_a96_braket",
+      "parts_a96_braket_build",
+      "parts_a96_braket_build_blk"
+    ],
+    "13": [
+      "parts_a11_ana_sase",
+      "parts_a11_ana_sase_build"
+    ],
+    "14": [
+      "parts_a12_kizak_rayi",
+      "parts_a12_kizak_rayi_build"
+    ],
+    "15": [
+      "parts_a21_sabit_plaka",
+      "parts_a21_sabit_plaka_build"
+    ],
+    "16": [
+      "parts_a22_hareketli_plaka",
+      "parts_a22_hareketli_plaka_build"
+    ],
+    "17": [
+      "parts_a23_arka_plaka",
+      "parts_a23_arka_plaka_build"
+    ],
+    "18": [
+      "parts_a24_kolon",
+      "parts_a24_kolon_build"
+    ],
+    "19": [
+      "parts_a25_kolon_on_somun",
+      "parts_a25_kolon_on_somun_build"
+    ],
+    "20": [
+      "parts_a26_ayar_somunu",
+      "parts_a26_ayar_somunu_build"
+    ],
+    "21": [
+      "parts_a28_burc",
+      "parts_a28_burc_build"
+    ],
+    "22": [
+      "parts_a31_capraz_kafa",
+      "parts_a31_capraz_kafa_build"
+    ],
+    "23": [
+      "parts_a33_on_kol",
+      "parts_a33_on_kol_build"
+    ],
+    "24": [
+      "parts_a34_pim",
+      "parts_a34_pim_build"
+    ],
+    "25": [
+      "parts_a35_kapama_silindiri",
+      "parts_a35_kapama_silindiri_build"
+    ],
+    "26": [
+      "parts_a36_capraz_kafa_kolu",
+      "parts_a36_capraz_kafa_kolu_build"
+    ],
+    "27": [
+      "parts_a37_kapama_piston_kolu",
+      "parts_a37_kapama_piston_kolu_build"
+    ],
+    "28": [
+      "parts_a41_itici_silindir",
+      "parts_a41_itici_silindir_build"
+    ],
+    "29": [
+      "parts_a42_itici_plakasi",
+      "parts_a42_itici_plakasi_build"
+    ],
+    "30": [
+      "parts_a51_dolum_burcu",
+      "parts_a51_dolum_burcu_build"
+    ],
+    "31": [
+      "parts_a56_akumulator",
+      "parts_a56_akumulator_build"
+    ],
+    "32": [
+      "parts_a57_enj_konsol",
+      "parts_a57_enj_konsol_build"
+    ],
+    "33": [
+      "parts_a58_enj_baglanti_cubugu",
+      "parts_a58_enj_baglanti_cubugu_build"
+    ],
+    "34": [
+      "parts_a61_tank",
+      "parts_a61_tank_build"
+    ],
+    "35": [
+      "parts_a62_motor_pompa",
+      "parts_a62_motor_pompa_build"
+    ],
+    "36": [
+      "parts_a71_koruma_kapisi",
+      "parts_a71_koruma_kapisi_build"
+    ],
+    "37": [
+      "parts_a72_pano",
+      "parts_a72_pano_build"
+    ],
+    "38": [
+      "parts_a81_sabit_kalip",
+      "parts_a81_sabit_kalip_build"
+    ],
+    "39": [
+      "parts_a82_hareketli_kalip",
+      "parts_a82_hareketli_kalip_build"
+    ],
+    "40": [
+      "parts_a91_merkez_disli",
+      "parts_a91_merkez_disli_build"
+    ],
+    "41": [
+      "parts_a92_yatak_halkasi",
+      "parts_a92_yatak_halkasi_build"
+    ],
+    "42": [
+      "parts_a93_pinyon",
+      "parts_a93_pinyon_build"
+    ],
+    "43": [
+      "parts_a94_reduktor",
+      "parts_a94_reduktor_build"
+    ],
+    "44": [
+      "parts_a97_enkoder",
+      "parts_a97_enkoder_build"
+    ]
+  },
+  "cohesion": {
+    "0": 0.09388335704125178,
+    "1": 0.0746031746031746,
+    "2": 0.07692307692307693,
+    "3": 0.16017316017316016,
+    "4": 0.18421052631578946,
+    "5": 0.18681318681318682,
+    "6": 0.4,
+    "7": 1.0,
+    "8": 0.6666666666666666,
+    "9": 0.6666666666666666,
+    "10": 0.6666666666666666,
+    "11": 0.6666666666666666,
+    "12": 0.6666666666666666,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0,
+    "24": 1.0,
+    "25": 1.0,
+    "26": 1.0,
+    "27": 1.0,
+    "28": 1.0,
+    "29": 1.0,
+    "30": 1.0,
+    "31": 1.0,
+    "32": 1.0,
+    "33": 1.0,
+    "34": 1.0,
+    "35": 1.0,
+    "36": 1.0,
+    "37": 1.0,
+    "38": 1.0,
+    "39": 1.0,
+    "40": 1.0,
+    "41": 1.0,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0
+  },
+  "gods": [
+    {
+      "id": "checks_check_main",
+      "label": "main()",
+      "degree": 8
+    },
+    {
+      "id": "assembly_assemble_assemble",
+      "label": "assemble()",
+      "degree": 7
+    },
+    {
+      "id": "lib_geo_gear_x",
+      "label": "gear_x()",
+      "degree": 7
+    },
+    {
+      "id": "lib_kinematics_pose_full",
+      "label": "pose_full()",
+      "degree": 7
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_main_call",
+      "label": "_main_call()",
+      "degree": 7
+    },
+    {
+      "id": "checks_motion_check_main",
+      "label": "main()",
+      "degree": 6
+    },
+    {
+      "id": "lib_geo_move",
+      "label": "move()",
+      "degree": 6
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_fc_exec",
+      "label": "_fc_exec()",
+      "degree": 6
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "label": "freecad_ekran_goruntusu()",
+      "degree": 6
+    },
+    {
+      "id": "checks_render_main",
+      "label": "main()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "main()",
+      "target": "assemble()",
+      "source_files": [
+        "checks/render.py",
+        "assembly/assemble.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "main()",
+      "target": "assemble()",
+      "source_files": [
+        "checks/check.py",
+        "assembly/assemble.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    },
+    {
+      "source": "main()",
+      "target": "assemble()",
+      "source_files": [
+        "checks/motion_check.py",
+        "assembly/assemble.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "calls",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `main()` connect `Community 3` to `Community 0`, `Community 1`?",
+      "why": "High betweenness centrality (0.019) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 3 inferred relationships involving `assemble()` (e.g. with `main()` and `main()`) actually correct?",
+      "why": "`assemble()` has 3 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `uvx`, `uv` to the rest of the system?",
+      "why": "2 weakly-connected nodes found - possible missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.09388335704125178 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `main()` connect `Community 3` to `Community 1`, `Community 4`?",
+      "why": "High betweenness centrality (0.011) - this node is a cross-community bridge."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 1` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.0746031746031746 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 2` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07692307692307693 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

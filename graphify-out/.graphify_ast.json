@@ -1,0 +1,5232 @@
+{
+  "nodes": [
+    {
+      "id": "mcp",
+      "label": ".mcp.json",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_config_file"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_mcp_server_freecad",
+      "label": "freecad",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_command_uvx",
+      "label": "uvx",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_package_freecad_mcp",
+      "label": "freecad-mcp",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_package"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_mcp_server_hpdc400",
+      "label": "hpdc400",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_server"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_command_uv",
+      "label": "uv",
+      "file_type": "code",
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "metadata": {
+        "mcp_kind": "mcp_command"
+      },
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project",
+      "label": "project.yml",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_project_name",
+      "label": "project_name",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_language_servers",
+      "label": "language_servers",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L42",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_encoding",
+      "label": "encoding",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L47",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_activation_command",
+      "label": "activation_command",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L56",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_activation_command_timeout",
+      "label": "activation_command_timeout",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L60",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_line_ending",
+      "label": "line_ending",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L65",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_language_backend",
+      "label": "language_backend",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L72",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_agent_interface",
+      "label": "agent_interface",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L77",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ignore_all_files_in_gitignore",
+      "label": "ignore_all_files_in_gitignore",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L80",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ls_specific_settings",
+      "label": "ls_specific_settings",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L86",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ls_workspace_folders",
+      "label": "ls_workspace_folders",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L97",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ls_additional_workspace_folders",
+      "label": "ls_additional_workspace_folders",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L109",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ignored_paths",
+      "label": "ignored_paths",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L121",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_read_only",
+      "label": "read_only",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L126",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_excluded_tools",
+      "label": "excluded_tools",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L131",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_included_optional_tools",
+      "label": "included_optional_tools",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L137",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_fixed_tools",
+      "label": "fixed_tools",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L142",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_excluded_apis",
+      "label": "excluded_apis",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L147",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_included_apis",
+      "label": "included_apis",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L152",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_default_modes",
+      "label": "default_modes",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L162",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_added_modes",
+      "label": "added_modes",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L167",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_initial_prompt",
+      "label": "initial_prompt",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L171",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_symbol_info_budget",
+      "label": "symbol_info_budget",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L177",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_read_only_memory_patterns",
+      "label": "read_only_memory_patterns",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L181",
+      "_origin": "ast"
+    },
+    {
+      "id": "serena_project_ignored_memory_patterns",
+      "label": "ignored_memory_patterns",
+      "file_type": "code",
+      "source_file": ".serena/project.yml",
+      "source_location": "L189",
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble",
+      "label": "assemble.py",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_load_params",
+      "label": "load_params()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_leaves",
+      "label": "leaves()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_build_part",
+      "label": "build_part()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_assemble",
+      "label": "assemble()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_assemble_local_for",
+      "label": "local_for()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L68",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_to_freecad_doc",
+      "label": "to_freecad_doc()",
+      "file_type": "code",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L87",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "assembly_assemble_rationale_1",
+      "label": "assemble.py - Ürün ağacına göre tüm parçaları çizer, params.json konumlarına…",
+      "file_type": "rationale",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_check",
+      "label": "check.py",
+      "file_type": "code",
+      "source_file": "checks/check.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_check_bbox_overlap",
+      "label": "bbox_overlap()",
+      "file_type": "code",
+      "source_file": "checks/check.py",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_check_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "checks/check.py",
+      "source_location": "L27",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_check_rationale_1",
+      "label": "check.py - Otomatik kalite kapısı (agent'ların her turda çalıştırdığı test).…",
+      "file_type": "rationale",
+      "source_file": "checks/check.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_motion_check",
+      "label": "motion_check.py",
+      "file_type": "code",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_motion_check_apply",
+      "label": "apply()",
+      "file_type": "code",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L14",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_motion_check_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L24",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_motion_check_rationale_1",
+      "label": "motion_check.py - Kapama hareketi boyunca carpisma taramasi. Kullanim: python3…",
+      "file_type": "rationale",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_motion_check_rationale_15",
+      "label": "(R, t) matrisini sekle uygula.",
+      "file_type": "rationale",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_render",
+      "label": "render.py",
+      "file_type": "code",
+      "source_file": "checks/render.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_render_tris",
+      "label": "tris()",
+      "file_type": "code",
+      "source_file": "checks/render.py",
+      "source_location": "L23",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_render_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "checks/render.py",
+      "source_location": "L41",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "checks_render_rationale_1",
+      "label": "render.py - FreeCAD olmadan montaj önizlemesi (OCP tessellation + matplotlib).…",
+      "file_type": "rationale",
+      "source_file": "checks/render.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo",
+      "label": "geo.py",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_box",
+      "label": "box()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L28",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_cyl",
+      "label": "cyl()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L34",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_cut",
+      "label": "cut()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L41",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_fuse",
+      "label": "fuse()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_common",
+      "label": "common()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L51",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_move",
+      "label": "move()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L54",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rot",
+      "label": "rot()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L59",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_volume",
+      "label": "volume()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L64",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_bbox",
+      "label": "bbox()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L67",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_is_valid",
+      "label": "is_valid()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L71",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_export_step",
+      "label": "export_step()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L74",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_polyprism",
+      "label": "polyprism()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L77",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_tr",
+      "label": "_tr()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L99",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_tube",
+      "label": "tube()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L165",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_place",
+      "label": "place()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L170",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_gear_x",
+      "label": "gear_x()",
+      "file_type": "code",
+      "source_file": "lib/geo.py",
+      "source_location": "L179",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_1",
+      "label": "geo.py - Arka uçtan bağımsız ince geometri katmanı. Aynı parça scripti iki…",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_78",
+      "label": "YZ duzleminde kapali poligon (x=x0), +X yonunde x1'e kadar ekstrude.",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L78",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_147",
+      "label": "YZ duzleminde kapali poligon (x=x0), +X yonunde x1'e kadar ekstrude.",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L147",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_166",
+      "label": "İçi boş silindir (silindir gövdesi, burç, somun).",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L166",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_171",
+      "label": "params.json instance yerleşimi: önce X, sonra Y, sonra Z dönüşü (lokal orijin…",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L171",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_geo_rationale_180",
+      "label": "Duz disli (basitlestirilmis trapez dis), ekseni X, merkezi (cy, cz), x0..x1…",
+      "file_type": "rationale",
+      "source_file": "lib/geo.py",
+      "source_location": "L180",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics",
+      "label": "kinematics.py",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_ang_y",
+      "label": "_ang_y()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L17",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_joints",
+      "label": "joints()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L22",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_pose",
+      "label": "pose()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L41",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_mat_ry",
+      "label": "_mat_ry()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L90",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_mat_rx",
+      "label": "_mat_rx()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L95",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_mv",
+      "label": "_mv()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L100",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_compose",
+      "label": "_compose()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L104",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_to_matrix",
+      "label": "to_matrix()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L112",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rot_x_about",
+      "label": "_rot_x_about()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L122",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_die_height_angles",
+      "label": "die_height_angles()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L128",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_pose_full",
+      "label": "pose_full()",
+      "file_type": "code",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L138",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_1",
+      "label": "kinematics.py - 5 noktali cift mafsal (toggle) kapama kinematigi. s = 0 ->…",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_18",
+      "label": "v0 -> v1 (XZ duzlemi) icin +Y ekseni etrafinda sag el kurali acisi (derece).",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L18",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_23",
+      "label": "Bir yarim (sz=+1 ust, -1 alt) icin eklem konumlari (x, z).",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L23",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_105",
+      "label": "A ∘ B : önce B, sonra A.",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L105",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_113",
+      "label": "pose() çıktısındaki ('T'/'R') dönüşümü matrise çevir.",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L113",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_129",
+      "label": "Kalıp yüksekliği değişimi delta (mm, + = büyür) -> dişli açıları (derece, +X…",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L129",
+      "_origin": "ast"
+    },
+    {
+      "id": "lib_kinematics_rationale_139",
+      "label": "Mafsal konumu s + kalıp yüksekliği -> {instance: (R, t)}. Kalıp yüksekliği…",
+      "file_type": "rationale",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L139",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp",
+      "label": "hpdc_mcp.py",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_load",
+      "label": "_load()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L32",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_python_cmd",
+      "label": "_python_cmd()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_run",
+      "label": "_run()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L46",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad",
+      "label": "_freecad()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L52",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_fc_exec",
+      "label": "_fc_exec()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L59",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_ensure_loaded",
+      "label": "_ensure_loaded()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L73",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "label": "freecad_montaji_yukle_impl()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L80",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_main_call",
+      "label": "_main_call()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L88",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "tool",
+      "label": "tool",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_proje_durumu",
+      "label": "proje_durumu()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L98",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "label": "parca_bilgisi()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L118",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_statik_kontrol",
+      "label": "statik_kontrol()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L130",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "label": "hareket_kontrolu()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L140",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "label": "freecad_montaji_yukle()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L150",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_konum",
+      "label": "freecad_konum()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L157",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_animasyon",
+      "label": "freecad_animasyon()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L166",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "label": "freecad_kalip_yuksekligi_ayarla()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L173",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "label": "freecad_ekran_goruntusu()",
+      "file_type": "code",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L180",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "image",
+      "label": "Image",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_1",
+      "label": "hpdc_mcp.py - HPDC-400 dijital ikiz projesinin MCP sunucusu. Claude Code (veya…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_38",
+      "label": "Kontrol scriptlerini calistiracak Python: OCP varsa bu ortam, yoksa uv ile…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L38",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_60",
+      "label": "FreeCAD icinde kod calistir; hata metnini anlasilir dondur.",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L60",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_89",
+      "label": "__main__ isim alanindaki hpdc_* fonksiyonlarini cagir (makro oraya yuklenir).",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L89",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_99",
+      "label": "Projenin ozeti: urun agaci gruplari, faz listesi, parca ve instance sayilari,…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L99",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_119",
+      "label": "Bir parcanin (or. 'A24', 'A91') urun agaci kaydi, olculeri, lokal orijini,…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L119",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_131",
+      "label": "Kalite kapisi: geometri gecerliligi, BOM adetleri, beklenen bbox sapmasi, parca…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L131",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_141",
+      "label": "Hareket boyunca carpisma taramasi. Varsayilan: mengene kapali->tam acik…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L141",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_151",
+      "label": "Acik FreeCAD'de montaji bastan kurar (renkler, urun agaci gruplari) ve ac-kapa…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L151",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_158",
+      "label": "Makineyi bir konumda sabitler. mafsal: 0 = kapali/kilitli, 1 = tam acik.…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L158",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_167",
+      "label": "Mengene ac-kapa animasyonunu baslatir (baslat=True) ya da durdurup kapali…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L167",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_174",
+      "label": "Redüktorlu motorla kalip yuksekligini hedefe goturur (200-750 mm, animasyonlu;…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L174",
+      "_origin": "ast"
+    },
+    {
+      "id": "mcp_server_hpdc_mcp_rationale_181",
+      "label": "FreeCAD aktif gorunumunun ekran goruntusu. gorunum: Isometric, Front, Top,…",
+      "file_type": "rationale",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L181",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a11_ana_sase",
+      "label": "A11_ana_sase.py",
+      "file_type": "code",
+      "source_file": "parts/A11_ana_sase.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a11_ana_sase_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A11_ana_sase.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a12_kizak_rayi",
+      "label": "A12_kizak_rayi.py",
+      "file_type": "code",
+      "source_file": "parts/A12_kizak_rayi.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a12_kizak_rayi_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A12_kizak_rayi.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a21_sabit_plaka",
+      "label": "A21_sabit_plaka.py",
+      "file_type": "code",
+      "source_file": "parts/A21_sabit_plaka.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a21_sabit_plaka_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A21_sabit_plaka.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a22_hareketli_plaka",
+      "label": "A22_hareketli_plaka.py",
+      "file_type": "code",
+      "source_file": "parts/A22_hareketli_plaka.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a22_hareketli_plaka_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A22_hareketli_plaka.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a23_arka_plaka",
+      "label": "A23_arka_plaka.py",
+      "file_type": "code",
+      "source_file": "parts/A23_arka_plaka.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a23_arka_plaka_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A23_arka_plaka.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a24_kolon",
+      "label": "A24_kolon.py",
+      "file_type": "code",
+      "source_file": "parts/A24_kolon.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a24_kolon_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A24_kolon.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a25_kolon_on_somun",
+      "label": "A25_kolon_on_somun.py",
+      "file_type": "code",
+      "source_file": "parts/A25_kolon_on_somun.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a25_kolon_on_somun_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A25_kolon_on_somun.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a26_ayar_somunu",
+      "label": "A26_ayar_somunu.py",
+      "file_type": "code",
+      "source_file": "parts/A26_ayar_somunu.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a26_ayar_somunu_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A26_ayar_somunu.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a28_burc",
+      "label": "A28_burc.py",
+      "file_type": "code",
+      "source_file": "parts/A28_burc.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a28_burc_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A28_burc.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a31_capraz_kafa",
+      "label": "A31_capraz_kafa.py",
+      "file_type": "code",
+      "source_file": "parts/A31_capraz_kafa.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a31_capraz_kafa_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A31_capraz_kafa.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a32_buyuk_kol",
+      "label": "A32_buyuk_kol.py",
+      "file_type": "code",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a32_buyuk_kol_link",
+      "label": "_link()",
+      "file_type": "code",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a32_buyuk_kol_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L10",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a33_on_kol",
+      "label": "A33_on_kol.py",
+      "file_type": "code",
+      "source_file": "parts/A33_on_kol.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a33_on_kol_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A33_on_kol.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a34_pim",
+      "label": "A34_pim.py",
+      "file_type": "code",
+      "source_file": "parts/A34_pim.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a34_pim_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A34_pim.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a35_kapama_silindiri",
+      "label": "A35_kapama_silindiri.py",
+      "file_type": "code",
+      "source_file": "parts/A35_kapama_silindiri.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a35_kapama_silindiri_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A35_kapama_silindiri.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a36_capraz_kafa_kolu",
+      "label": "A36_capraz_kafa_kolu.py",
+      "file_type": "code",
+      "source_file": "parts/A36_capraz_kafa_kolu.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a36_capraz_kafa_kolu_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A36_capraz_kafa_kolu.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a37_kapama_piston_kolu",
+      "label": "A37_kapama_piston_kolu.py",
+      "file_type": "code",
+      "source_file": "parts/A37_kapama_piston_kolu.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a37_kapama_piston_kolu_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A37_kapama_piston_kolu.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a41_itici_silindir",
+      "label": "A41_itici_silindir.py",
+      "file_type": "code",
+      "source_file": "parts/A41_itici_silindir.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a41_itici_silindir_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A41_itici_silindir.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a42_itici_plakasi",
+      "label": "A42_itici_plakasi.py",
+      "file_type": "code",
+      "source_file": "parts/A42_itici_plakasi.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a42_itici_plakasi_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A42_itici_plakasi.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a51_dolum_burcu",
+      "label": "A51_dolum_burcu.py",
+      "file_type": "code",
+      "source_file": "parts/A51_dolum_burcu.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a51_dolum_burcu_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A51_dolum_burcu.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a52_piston",
+      "label": "A52_piston.py",
+      "file_type": "code",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a52_piston_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a52_piston_build_seg",
+      "label": "seg()",
+      "file_type": "code",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L3",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a54_enjeksiyon_silindiri",
+      "label": "A54_enjeksiyon_silindiri.py",
+      "file_type": "code",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a54_enjeksiyon_silindiri_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a54_enjeksiyon_silindiri_build_blk",
+      "label": "blk()",
+      "file_type": "code",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L3",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a55_carpan",
+      "label": "A55_carpan.py",
+      "file_type": "code",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a55_carpan_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a55_carpan_build_seg",
+      "label": "seg()",
+      "file_type": "code",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L3",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a56_akumulator",
+      "label": "A56_akumulator.py",
+      "file_type": "code",
+      "source_file": "parts/A56_akumulator.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a56_akumulator_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A56_akumulator.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a57_enj_konsol",
+      "label": "A57_enj_konsol.py",
+      "file_type": "code",
+      "source_file": "parts/A57_enj_konsol.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a57_enj_konsol_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A57_enj_konsol.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a58_enj_baglanti_cubugu",
+      "label": "A58_enj_baglanti_cubugu.py",
+      "file_type": "code",
+      "source_file": "parts/A58_enj_baglanti_cubugu.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a58_enj_baglanti_cubugu_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A58_enj_baglanti_cubugu.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a61_tank",
+      "label": "A61_tank.py",
+      "file_type": "code",
+      "source_file": "parts/A61_tank.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a61_tank_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A61_tank.py",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a62_motor_pompa",
+      "label": "A62_motor_pompa.py",
+      "file_type": "code",
+      "source_file": "parts/A62_motor_pompa.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a62_motor_pompa_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A62_motor_pompa.py",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a71_koruma_kapisi",
+      "label": "A71_koruma_kapisi.py",
+      "file_type": "code",
+      "source_file": "parts/A71_koruma_kapisi.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a71_koruma_kapisi_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A71_koruma_kapisi.py",
+      "source_location": "L6",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a72_pano",
+      "label": "A72_pano.py",
+      "file_type": "code",
+      "source_file": "parts/A72_pano.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a72_pano_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A72_pano.py",
+      "source_location": "L5",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a81_sabit_kalip",
+      "label": "A81_sabit_kalip.py",
+      "file_type": "code",
+      "source_file": "parts/A81_sabit_kalip.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a81_sabit_kalip_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A81_sabit_kalip.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a82_hareketli_kalip",
+      "label": "A82_hareketli_kalip.py",
+      "file_type": "code",
+      "source_file": "parts/A82_hareketli_kalip.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a82_hareketli_kalip_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A82_hareketli_kalip.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a91_merkez_disli",
+      "label": "A91_merkez_disli.py",
+      "file_type": "code",
+      "source_file": "parts/A91_merkez_disli.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a91_merkez_disli_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A91_merkez_disli.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a92_yatak_halkasi",
+      "label": "A92_yatak_halkasi.py",
+      "file_type": "code",
+      "source_file": "parts/A92_yatak_halkasi.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a92_yatak_halkasi_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A92_yatak_halkasi.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a93_pinyon",
+      "label": "A93_pinyon.py",
+      "file_type": "code",
+      "source_file": "parts/A93_pinyon.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a93_pinyon_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A93_pinyon.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a94_reduktor",
+      "label": "A94_reduktor.py",
+      "file_type": "code",
+      "source_file": "parts/A94_reduktor.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a94_reduktor_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A94_reduktor.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a95_motor",
+      "label": "A95_motor.py",
+      "file_type": "code",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a95_motor_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a95_motor_build_seg",
+      "label": "seg()",
+      "file_type": "code",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L2",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a96_braket",
+      "label": "A96_braket.py",
+      "file_type": "code",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a96_braket_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a96_braket_build_blk",
+      "label": "blk()",
+      "file_type": "code",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L2",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a97_enkoder",
+      "label": "A97_enkoder.py",
+      "file_type": "code",
+      "source_file": "parts/A97_enkoder.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "parts_a97_enkoder_build",
+      "label": "build()",
+      "file_type": "code",
+      "source_file": "parts/A97_enkoder.py",
+      "source_location": "L1",
+      "_callable": true,
+      "_origin": "ast"
+    }
+  ],
+  "edges": [
+    {
+      "source": "mcp",
+      "target": "mcp_mcp_server_freecad",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_mcp_server_freecad",
+      "target": "mcp_command_uvx",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_mcp_server_freecad",
+      "target": "mcp_package_freecad_mcp",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "package",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp",
+      "target": "mcp_mcp_server_hpdc400",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_mcp_server_hpdc400",
+      "target": "mcp_command_uv",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "command",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_mcp_server_hpdc400",
+      "target": "mcp_package_freecad_mcp",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".mcp.json",
+      "source_location": "L1",
+      "weight": 1.0,
+      "context": "package",
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_project_name",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_language_servers",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_encoding",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_activation_command",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_activation_command_timeout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_line_ending",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L65",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_language_backend",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_agent_interface",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ignore_all_files_in_gitignore",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ls_specific_settings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ls_workspace_folders",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ls_additional_workspace_folders",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ignored_paths",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_read_only",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L126",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_excluded_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_included_optional_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_fixed_tools",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_excluded_apis",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_included_apis",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_default_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L162",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_added_modes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_initial_prompt",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_symbol_info_budget",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L177",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_read_only_memory_patterns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "serena_project",
+      "target": "serena_project_ignored_memory_patterns",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".serena/project.yml",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "importlib_util",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "traceback",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "geo",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "assembly_assemble_load_params",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "assembly_assemble_leaves",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "assembly_assemble_build_part",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "assembly_assemble_assemble",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_assemble",
+      "target": "assembly_assemble_assemble_local_for",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble",
+      "target": "assembly_assemble_to_freecad_doc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_assemble",
+      "target": "assembly_assemble_load_params",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_assemble",
+      "target": "assembly_assemble_leaves",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_assemble",
+      "target": "assembly_assemble_assemble_local_for",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_assemble_local_for",
+      "target": "assembly_assemble_build_part",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "assembly_assemble_rationale_1",
+      "target": "assembly_assemble",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "assembly/assemble.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "itertools",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "geo",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "assemble",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "checks_check_bbox_overlap",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check",
+      "target": "checks_check_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "checks_check_bbox_overlap",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_rationale_1",
+      "target": "checks_check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/check.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "itertools",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "geo",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "kinematics",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "assemble",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "checks_motion_check_apply",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check",
+      "target": "checks_motion_check_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_main",
+      "target": "checks_motion_check_apply",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_rationale_1",
+      "target": "checks_motion_check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_rationale_15",
+      "target": "checks_motion_check_apply",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/motion_check.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L4",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "assemble",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "matplotlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "mpl_toolkits_mplot3d_art3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_brepmesh",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_topexp",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_topabs",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_topods",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_brep",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "ocp_toploc",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "checks_render_tris",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render",
+      "target": "checks_render_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_main",
+      "target": "checks_render_tris",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_rationale_1",
+      "target": "checks_render",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "checks/render.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "freecad",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "part",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_box",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_cyl",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_cut",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_fuse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_common",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_move",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_rot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_volume",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_bbox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_is_valid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_export_step",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_polyprism",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepprimapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepalgoapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepbuilderapi",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_gp",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_gprop",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepgprop",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_bnd",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepbndlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brepcheck",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_topods",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_brep",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_stepcontrol",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "ocp_shapeupgrade",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_tr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_move",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_rot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L106",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_box",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_cyl",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_cut",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_fuse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_common",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_volume",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L133",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_bbox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_is_valid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L143",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_polyprism",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_export_step",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_tube",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L165",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_place",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L170",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo",
+      "target": "lib_geo_gear_x",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L179",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_move",
+      "target": "lib_geo_tr",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rot",
+      "target": "lib_geo_tr",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_box",
+      "target": "lib_geo_move",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_cyl",
+      "target": "lib_geo_move",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_tube",
+      "target": "lib_geo_cut",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_tube",
+      "target": "lib_geo_cyl",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_place",
+      "target": "lib_geo_rot",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_place",
+      "target": "lib_geo_move",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L176",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_gear_x",
+      "target": "lib_geo_polyprism",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L193",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_gear_x",
+      "target": "lib_geo_move",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_gear_x",
+      "target": "lib_geo_cyl",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_gear_x",
+      "target": "lib_geo_cut",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L196",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_1",
+      "target": "lib_geo",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_78",
+      "target": "lib_geo_polyprism",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_147",
+      "target": "lib_geo_polyprism",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L147",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_166",
+      "target": "lib_geo_tube",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_171",
+      "target": "lib_geo_place",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rationale_180",
+      "target": "lib_geo_gear_x",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/geo.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_ang_y",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_joints",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_pose",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_mat_ry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_mat_rx",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_mv",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_compose",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L104",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_to_matrix",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_rot_x_about",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_die_height_angles",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics",
+      "target": "lib_kinematics_pose_full",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose",
+      "target": "lib_kinematics_joints",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L44",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose",
+      "target": "lib_kinematics_ang_y",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_compose",
+      "target": "lib_kinematics_mv",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_to_matrix",
+      "target": "lib_kinematics_mat_ry",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_to_matrix",
+      "target": "lib_kinematics_mv",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rot_x_about",
+      "target": "lib_kinematics_mat_rx",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rot_x_about",
+      "target": "lib_kinematics_mv",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose_full",
+      "target": "lib_kinematics_pose",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose_full",
+      "target": "lib_kinematics_die_height_angles",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose_full",
+      "target": "lib_kinematics_to_matrix",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose_full",
+      "target": "lib_kinematics_compose",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_pose_full",
+      "target": "lib_kinematics_rot_x_about",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_1",
+      "target": "lib_kinematics",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_18",
+      "target": "lib_kinematics_ang_y",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_23",
+      "target": "lib_kinematics_joints",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_105",
+      "target": "lib_kinematics_compose",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_113",
+      "target": "lib_kinematics_to_matrix",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_129",
+      "target": "lib_kinematics_die_height_angles",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_rationale_139",
+      "target": "lib_kinematics_pose_full",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "lib/kinematics.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "subprocess",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_mcpserver",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_fastmcp",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_load",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_python_cmd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_fc_exec",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_ensure_loaded",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_main_call",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_proje_durumu",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_proje_durumu",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L98",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_statik_kontrol",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L129",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_statik_kontrol",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L139",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_konum",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L156",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_konum",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_animasyon",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L165",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_animasyon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L172",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L173",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "target": "tool",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L179",
+      "weight": 1.0,
+      "context": "decorator",
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp",
+      "target": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "target": "image",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_run",
+      "target": "mcp_server_hpdc_mcp_python_cmd",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_fc_exec",
+      "target": "mcp_server_hpdc_mcp_freecad",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_ensure_loaded",
+      "target": "mcp_server_hpdc_mcp_fc_exec",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_ensure_loaded",
+      "target": "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "target": "mcp_server_hpdc_mcp_fc_exec",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_main_call",
+      "target": "mcp_server_hpdc_mcp_ensure_loaded",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_main_call",
+      "target": "mcp_server_hpdc_mcp_fc_exec",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_proje_durumu",
+      "target": "mcp_server_hpdc_mcp_load",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "target": "mcp_server_hpdc_mcp_load",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_statik_kontrol",
+      "target": "mcp_server_hpdc_mcp_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L135",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "target": "mcp_server_hpdc_mcp_run",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "target": "mcp_server_hpdc_mcp_freecad_montaji_yukle_impl",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_konum",
+      "target": "mcp_server_hpdc_mcp_main_call",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_animasyon",
+      "target": "mcp_server_hpdc_mcp_main_call",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L168",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "target": "mcp_server_hpdc_mcp_main_call",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L175",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "target": "mcp_server_hpdc_mcp_freecad",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L184",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_1",
+      "target": "mcp_server_hpdc_mcp",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_38",
+      "target": "mcp_server_hpdc_mcp_python_cmd",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_60",
+      "target": "mcp_server_hpdc_mcp_fc_exec",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_89",
+      "target": "mcp_server_hpdc_mcp_main_call",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_99",
+      "target": "mcp_server_hpdc_mcp_proje_durumu",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_119",
+      "target": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_131",
+      "target": "mcp_server_hpdc_mcp_statik_kontrol",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_141",
+      "target": "mcp_server_hpdc_mcp_hareket_kontrolu",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L141",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_151",
+      "target": "mcp_server_hpdc_mcp_freecad_montaji_yukle",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_158",
+      "target": "mcp_server_hpdc_mcp_freecad_konum",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L158",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_167",
+      "target": "mcp_server_hpdc_mcp_freecad_animasyon",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L167",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_174",
+      "target": "mcp_server_hpdc_mcp_freecad_kalip_yuksekligi_ayarla",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L174",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_rationale_181",
+      "target": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L181",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a11_ana_sase",
+      "target": "parts_a11_ana_sase_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A11_ana_sase.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a12_kizak_rayi",
+      "target": "parts_a12_kizak_rayi_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A12_kizak_rayi.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a21_sabit_plaka",
+      "target": "parts_a21_sabit_plaka_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A21_sabit_plaka.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a22_hareketli_plaka",
+      "target": "parts_a22_hareketli_plaka_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A22_hareketli_plaka.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a23_arka_plaka",
+      "target": "parts_a23_arka_plaka_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A23_arka_plaka.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a24_kolon",
+      "target": "parts_a24_kolon_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A24_kolon.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a25_kolon_on_somun",
+      "target": "parts_a25_kolon_on_somun_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A25_kolon_on_somun.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a26_ayar_somunu",
+      "target": "parts_a26_ayar_somunu_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A26_ayar_somunu.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a28_burc",
+      "target": "parts_a28_burc_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A28_burc.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a31_capraz_kafa",
+      "target": "parts_a31_capraz_kafa_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A31_capraz_kafa.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a32_buyuk_kol",
+      "target": "parts_a32_buyuk_kol_link",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a32_buyuk_kol",
+      "target": "parts_a32_buyuk_kol_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a32_buyuk_kol_build",
+      "target": "parts_a32_buyuk_kol_link",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A32_buyuk_kol.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a33_on_kol",
+      "target": "parts_a33_on_kol_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A33_on_kol.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a34_pim",
+      "target": "parts_a34_pim_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A34_pim.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a35_kapama_silindiri",
+      "target": "parts_a35_kapama_silindiri_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A35_kapama_silindiri.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a36_capraz_kafa_kolu",
+      "target": "parts_a36_capraz_kafa_kolu_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A36_capraz_kafa_kolu.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a37_kapama_piston_kolu",
+      "target": "parts_a37_kapama_piston_kolu_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A37_kapama_piston_kolu.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a41_itici_silindir",
+      "target": "parts_a41_itici_silindir_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A41_itici_silindir.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a42_itici_plakasi",
+      "target": "parts_a42_itici_plakasi_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A42_itici_plakasi.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a51_dolum_burcu",
+      "target": "parts_a51_dolum_burcu_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A51_dolum_burcu.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a52_piston",
+      "target": "parts_a52_piston_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a52_piston_build",
+      "target": "parts_a52_piston_build_seg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a52_piston_build",
+      "target": "parts_a52_piston_build_seg",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A52_piston.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a54_enjeksiyon_silindiri",
+      "target": "parts_a54_enjeksiyon_silindiri_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a54_enjeksiyon_silindiri_build",
+      "target": "parts_a54_enjeksiyon_silindiri_build_blk",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a54_enjeksiyon_silindiri_build",
+      "target": "parts_a54_enjeksiyon_silindiri_build_blk",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A54_enjeksiyon_silindiri.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a55_carpan",
+      "target": "parts_a55_carpan_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a55_carpan_build",
+      "target": "parts_a55_carpan_build_seg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a55_carpan_build",
+      "target": "parts_a55_carpan_build_seg",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A55_carpan.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a56_akumulator",
+      "target": "parts_a56_akumulator_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A56_akumulator.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a57_enj_konsol",
+      "target": "parts_a57_enj_konsol_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A57_enj_konsol.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a58_enj_baglanti_cubugu",
+      "target": "parts_a58_enj_baglanti_cubugu_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A58_enj_baglanti_cubugu.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a61_tank",
+      "target": "parts_a61_tank_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A61_tank.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a62_motor_pompa",
+      "target": "parts_a62_motor_pompa_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A62_motor_pompa.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a71_koruma_kapisi",
+      "target": "parts_a71_koruma_kapisi_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A71_koruma_kapisi.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a72_pano",
+      "target": "parts_a72_pano_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A72_pano.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a81_sabit_kalip",
+      "target": "parts_a81_sabit_kalip_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A81_sabit_kalip.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a82_hareketli_kalip",
+      "target": "parts_a82_hareketli_kalip_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A82_hareketli_kalip.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a91_merkez_disli",
+      "target": "parts_a91_merkez_disli_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A91_merkez_disli.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a92_yatak_halkasi",
+      "target": "parts_a92_yatak_halkasi_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A92_yatak_halkasi.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a93_pinyon",
+      "target": "parts_a93_pinyon_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A93_pinyon.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a94_reduktor",
+      "target": "parts_a94_reduktor_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A94_reduktor.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a95_motor",
+      "target": "parts_a95_motor_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a95_motor_build",
+      "target": "parts_a95_motor_build_seg",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a95_motor_build",
+      "target": "parts_a95_motor_build_seg",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A95_motor.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a96_braket",
+      "target": "parts_a96_braket_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a96_braket_build",
+      "target": "parts_a96_braket_build_blk",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a96_braket_build",
+      "target": "parts_a96_braket_build_blk",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A96_braket.py",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "parts_a97_enkoder",
+      "target": "parts_a97_enkoder_build",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "parts/A97_enkoder.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "assembly_assemble_assemble",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "checks/check.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_main",
+      "target": "assembly_assemble_assemble",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "checks/motion_check.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_main",
+      "target": "assembly_assemble_assemble",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "checks/render.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "geo",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/check.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "itertools",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/check.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "os",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/check.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/check.py",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_check_main",
+      "target": "sys",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/check.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_main",
+      "target": "kinematics",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/motion_check.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_main",
+      "target": "geo",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/motion_check.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_motion_check_main",
+      "target": "itertools",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/motion_check.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_tris",
+      "target": "numpy",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/render.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_main",
+      "target": "numpy",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/render.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "checks_render_main",
+      "target": "matplotlib_pyplot",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "checks/render.py",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_rot",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/geo.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_geo_gear_x",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/geo.py",
+      "source_location": "L187",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_ang_y",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/kinematics.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_joints",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/kinematics.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_mat_ry",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/kinematics.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "lib_kinematics_mat_rx",
+      "target": "math",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib/kinematics.py",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_load",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_run",
+      "target": "subprocess",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_proje_durumu",
+      "target": "subprocess",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_parca_bilgisi",
+      "target": "json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "mcp_server_hpdc_mcp_freecad_ekran_goruntusu",
+      "target": "base64",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "mcp_server/hpdc_mcp.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "failed_sources": [],
+  "skipped_sources": [
+    "C:\\Users\\pc\\Desktop\\hpdc400\\params\\bom.json",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\params\\params.json"
+  ],
+  "extracted_sources": [
+    "C:\\Users\\pc\\Desktop\\hpdc400\\.mcp.json",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\.serena\\project.yml",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\assembly\\assemble.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\checks\\check.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\checks\\motion_check.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\checks\\render.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\lib\\geo.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\lib\\kinematics.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\mcp_server\\hpdc_mcp.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\params\\bom.json",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\params\\params.json",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A11_ana_sase.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A12_kizak_rayi.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A21_sabit_plaka.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A22_hareketli_plaka.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A23_arka_plaka.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A24_kolon.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A25_kolon_on_somun.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A26_ayar_somunu.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A28_burc.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A31_capraz_kafa.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A32_buyuk_kol.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A33_on_kol.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A34_pim.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A35_kapama_silindiri.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A36_capraz_kafa_kolu.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A37_kapama_piston_kolu.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A41_itici_silindir.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A42_itici_plakasi.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A51_dolum_burcu.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A52_piston.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A54_enjeksiyon_silindiri.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A55_carpan.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A56_akumulator.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A57_enj_konsol.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A58_enj_baglanti_cubugu.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A61_tank.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A62_motor_pompa.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A71_koruma_kapisi.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A72_pano.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A81_sabit_kalip.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A82_hareketli_kalip.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A91_merkez_disli.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A92_yatak_halkasi.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A93_pinyon.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A94_reduktor.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A95_motor.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A96_braket.py",
+    "C:\\Users\\pc\\Desktop\\hpdc400\\parts\\A97_enkoder.py"
+  ]
+}
