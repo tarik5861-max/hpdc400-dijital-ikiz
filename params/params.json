@@ -2218,6 +2218,58 @@
     }
    ]
   },
+  "A58": {
+   "name": "Enjeksiyon sabit plaka baglanti cubugu",
+   "dims": {
+    "d": 40.0,
+    "length": 1450.0
+   },
+   "local_origin": "Center of -X end face at injection console front (X=-1670). Axis along +X (x 0..1450).",
+   "instances": [
+    {
+     "name": "A58_1",
+     "pos": [
+      -1670.0,
+      180.0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1670.0,
+      160.0,
+      -170.0,
+      -220.0,
+      200.0,
+      -130.0
+     ]
+    },
+    {
+     "name": "A58_2",
+     "pos": [
+      -1670.0,
+      -180.0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1670.0,
+      -200.0,
+      -170.0,
+      -220.0,
+      -160.0,
+      -130.0
+     ]
+    }
+   ]
+  },
   "A61": {
    "name": "Hidrolik tank",
    "dims": {
@@ -2520,6 +2572,28 @@
      "width": 30,
      "depth": 10,
      "optional": true
+    },
+    "ejector_pin_holes": {
+     "d": 36,
+     "centers_yz": [
+      [
+       90,
+       140
+      ],
+      [
+       90,
+       -140
+      ],
+      [
+       -90,
+       140
+      ],
+      [
+       -90,
+       -140
+      ]
+     ],
+     "note": "clearance / pin guides matching A42 ejector rods"
     },
     "edge_chamfer": 5
    },

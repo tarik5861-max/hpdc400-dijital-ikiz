@@ -42,7 +42,8 @@
         "A54",
         "A55",
         "A56",
-        "A57"
+        "A57",
+        "A58"
       ]
     },
     {
@@ -243,6 +244,12 @@
           "name": "Enjeksiyon tasiyici konsol",
           "qty": 1,
           "script": "parts/A57_enj_konsol.py"
+        },
+        {
+          "id": "A58",
+          "name": "Enjeksiyon sabit plaka baglanti cubugu",
+          "qty": 2,
+          "script": "parts/A58_enj_baglanti_cubugu.py"
         }
       ]
     },
