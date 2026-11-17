@@ -4,6 +4,7 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 
 | Tarih | Karar | Neden |
 |---|---|---|
+| 2026-11-17 | İtici grubu çift silindirli, yatay simetrik; sabit tarafta itici deliği yok; A22 5 konumlu desen (merkez + 4); 24 itici pimi + 4 geri dönüş pimi kalıpta (A82 itici kutusu) | Gerçek makine düzeni; "24" kalıp pimleri; itici plakası mafsal boşluğu yüzünden büyütülemez |
 | 2026-11-17 | Sabit plaka (A21) delikleri kaldırıldı; hareketli plakaya (A22) 24 adet itici/pim geçiş deliği eklendi (itici plakası A42 ve hareketli kalıp A82 güncellendi) | Kullanıcı isteği: itici delikleri hareketli plakada ve 24 adet |
 | 2026-11-17 | Sabit plakaya (A21) 16 adet d32 itici dönüş/pim geçiş deliği eklendi; sabit kalıptan (A81) itici delikleri kaldırıldı → değişti: 2026-11-17 | Gerçek 400 t kalıp ve plaka standardı; itici mekanizması yalnız hareketli taraftadır |
 | 2026-11-17 | Enjeksiyon ünitesi ile sabit plaka arasına 45 mm çapında A58 bağlantı çubukları (2 adet) eklendi | Enjeksiyon eksenel itme kuvvetine karşı mekanik denge ve kararlılık |
