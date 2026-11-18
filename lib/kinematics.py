@@ -34,7 +34,7 @@ def joints(theta_deg, sz, T):
     return {"A": (Ax, Az), "B": B, "C": C, "E": E, "D": D}
 
 
-MOVING_PLATEN_GROUP = ("A22", "A28", "A82", "A41", "A42")
+MOVING_PLATEN_GROUP = ("A22", "A28", "A82", "A41", "A42", "A83", "A84", "A85")
 CROSSHEAD_GROUP = ("A31", "A37")          # capraz kafa + kapama piston kolu (A35 govdesi sabit)
 
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 # M = (R, t): R 3x3 satır listesi, t = (tx, ty, tz).  p' = R p + t
 I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar, sabit plaka, şase: hareket etmez
-                          "A51", "A52", "A54", "A55", "A56", "A57", "A61", "A62", "A71", "A72")
+                          "A13", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72")
 
 
 def _mat_ry(deg):

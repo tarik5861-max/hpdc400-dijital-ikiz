@@ -1,31 +1,7 @@
 {
  "meta": {
   "design_basis": "400 t horizontal cold-chamber HPDC machine, 5-point double toggle; Buhler H-400D as primary baseline (platens, tie bars, die height, ejector, injection force), Idra OLCS 400 / HPM II-400 for platen thicknesses, mass and motor. Simplified-but-realistic digital twin geometry.",
-  "notes": [
-   "Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.",
-   "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).",
-   "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.",
-   "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.",
-   "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.",
-   "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).",
-   "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.",
-   "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.",
-   "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.",
-   "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.",
-   "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.",
-   "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).",
-   "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.",
-   "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center.",
-   "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.",
-   "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.",
-   "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.",
-   "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.",
-   "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.",
-   "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.",
-   "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.",
-   "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.",
-   "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance."
-  ],
+  "notes": ["Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.", "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).", "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.", "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.", "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.", "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).", "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.", "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.", "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.", "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.", "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.", "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).", "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.", "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center.", "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.", "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.", "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.", "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.", "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.", "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.", "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.", "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.", "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance.", "EJECTOR 2026-11-18 (karar 2026-11-17): fixed platen has NO ejector holes. A22 pattern kept (centre d80 + 4 x d46 at (+-90,+-140)) = A42 4 corner rods (+ optional centre rod).", "A41 twin cylinders (formula): F_req = 215.5 kN (old single d140 @140 bar) -> 107.8 kN/cyl; d = sqrt(4F/(pi p)) = 99.0 -> bore 100 / rod 56 (ISO 3320). Push 110.0 kN/cyl, 219.9 kN total (22.4 t, H-400D 22 t); return (annulus) 75.5 kN/cyl, 150.9 kN total.", "A41 strength (formula): tube 100x115 Lame hoop 100.8 MPa (test 1.5x 151); rear cap 20 flat clamped 0.75pa^2/t^2 = 65.6 MPa; rod d56 44.6 MPa, Euler K=2 L=370 Pcr 1827 kN (SF 17); M42x2 rod thread on return 60 MPa; tie posts M30 (As 561) 98 MPa.", "A41 bridge 240x200x35 42CrMo4+QT: load 110 kN/cyl spread over d115 between posts Z+-70 (span 140): M = F/2(L/2-c/4) = 2.27 kNm; b_eff 57 (rod hole d58) -> W 11638 mm3 -> 195 MPa, Re>=650 -> SF 3.3. Length budget 425 = 205 (5 gap+145 stroke+50 plate+5) + 35 bridge + 165 chamber (145+20 piston) + 20 cap.", "A42 plate 50 thick 42CrMo4+QT: rod at (62.5,0) to knock-out rods (90,+-140): M = F/2(140-100/4) = 6.32 kNm, b 120 -> 126 MPa. Knock-out rods d36 L390: 55 kN each, 54 MPa, Euler K=2 Pcr 281 kN.", "Ejector Y envelope: barrels 5..120, A42 |Y|<=120 -> split knee pins (|Y|>=127.5) 7.5 mm, big links (|Y|>=130) 10 mm, A36/A31 tongue at |Z|>=140 above bridge |Z|<=100. Rear cap at s=1 X=1445 vs hub 1458 (13 mm) unchanged.", "Die ejector box (A82 rear part): clamping plate 40 + rails 120 (|Y| 200..270) + cavity plate 70; A83 (back 30 + retainer 25, 370x520) at X 305..360; 24 x A84 d10 (6x4 grid Y+-25/75/125, Z -17.5..177.5) tip at X=185 (cavity floor); 4 x A85 d25 at (+-160,+-230) tip at parting X=170. Die ejection stroke 65 -> machine ejector stroke setting 65 for this die (machine max 145). A42 rods lengthened 345 -> 390 to touch A83.", "A21 FIXED to frame (formula): clamp 4000 kN is an internal loop (die force = sum of 4 tie-bar forces) -> net 0 on supports. Supports carry weight ~24 kN (A21 15.3 + A81 4.2 + half tie bars 4.6) and accidental horizontal H = 0.1*F_clamp = 400 kN (ASSUMPTION, not a standard) at Z=0.", "A13 x2 (Y=+-150): platen moment about its bottom M = 400*0.49 = 196 kNm. -X case: column compression C = M/(2/3*230) = 1278 kN (639/pedestal, bearing 17.4 MPa); gusset strut 33.3 deg 765 kN on 2x25x100 -> 153 MPa (S355 SF 2.3). +X case: 4 upper M36 10.9 at Z=-305 (arm 185): 265 kN/bolt < preload 538 kN. Base to frame: M = 639*(0.153+0.04) = 124 kNm over 0.8*620 -> 249 kN on 2 rear M30 10.9 (125 kN/bolt < preload 369); slip 12 x M30 mu 0.2 = 886 kN > 400.", "A13 clearances: column top Z=-260 vs A51 flange bottom -245 (15), A58 bottom -172.5 (87.5); |Y|<=230 vs A25 nuts |Y|>=255 (25), rails |Y|>=300 (70); X<=0 vs top_opening X>=20 (20); injection console A57 X<=-1210 far."],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
   "rotation_convention": "R = Rz*Ry*Rx, then translate by pos"
@@ -74,26 +50,11 @@
    "aC_moving_lug_offset": 140.0,
    "aA_rear_lug_offset": 230.0,
    "pin_d": 90.0,
-   "A_xz": [
-    1395.0,
-    400.0
-   ],
-   "B_xz": [
-    1060.0,
-    400.0
-   ],
-   "C_xz": [
-    740.0,
-    400.0
-   ],
-   "E_xz": [
-    1245.0,
-    400.0
-   ],
-   "D_xz": [
-    1290.0,
-    200.0
-   ],
+   "A_xz": [1395.0, 400.0],
+   "B_xz": [1060.0, 400.0],
+   "C_xz": [740.0, 400.0],
+   "E_xz": [1245.0, 400.0],
+   "D_xz": [1290.0, 200.0],
    "E_from_A": 150.0,
    "crosshead_link": 205.0,
    "crosshead_travel": 237.978,
@@ -103,70 +64,18 @@
    "mirrored_about": "Z=0 (top and bottom halves)",
    "crosshead_link_angle_locked_deg": 77.3196,
    "y_layers": {
-    "A31_tongue": [
-     -20,
-     20
-    ],
-    "A36_links": [
-     [
-      25,
-      55
-     ],
-     [
-      -55,
-      -25
-     ]
-    ],
-    "A23_inner_lugs": [
-     [
-      60,
-      125
-     ],
-     [
-      -125,
-      -60
-     ]
-    ],
-    "A32_big_links": [
-     [
-      130,
-      200
-     ],
-     [
-      -200,
-      -130
-     ]
-    ],
-    "A33_front_links": [
-     [
-      205,
-      275
-     ],
-     [
-      -275,
-      -205
-     ]
-    ],
-    "A34_B_split_pins": [
-     [
-      127.5,
-      277.5
-     ],
-     [
-      -277.5,
-      -127.5
-     ]
-    ],
+    "A31_tongue": [-20, 20],
+    "A36_links": [[25, 55], [-55, -25]],
+    "A23_inner_lugs": [[60, 125], [-125, -60]],
+    "A32_big_links": [[130, 200], [-200, -130]],
+    "A33_front_links": [[205, 275], [-275, -205]],
+    "A34_B_split_pins": [[127.5, 277.5], [-277.5, -127.5]],
     "ejector_envelope_max_abs_y": 120,
     "note": "everything on the moving platen axis (A41/A42) stays within |Y|<=120 so the folded knees (|Y|>=127.5) pass beside it"
    }
   },
   "plunger_d": 80.0,
-  "plunger_d_options": [
-   70,
-   80,
-   90
-  ],
+  "plunger_d_options": [70, 80, 90],
   "plunger_stroke": 500.0,
   "plunger_stroke_reference_H400D": 400,
   "injection_force_kN": 430,
@@ -193,17 +102,11 @@
    "z_central": 210,
    "z_nut": 48,
    "z_pinion": 20,
-   "gear_plane_x": [
-    1865.0,
-    1915.0
-   ],
+   "gear_plane_x": [1865.0, 1915.0],
    "central_pitch_d": 840,
    "nut_pitch_d": 192,
    "pinion_pitch_d": 80,
-   "pinion_center_yz": [
-    0,
-    460
-   ],
+   "pinion_center_yz": [0, 460],
    "center_dist_central_nut": 516.6,
    "center_dist_central_pinion": 460,
    "thread_pitch_mm": 6.0,
@@ -232,15 +135,7 @@
     "side_wall_thk": 25,
     "end_plate_thk": 25,
     "construction": "hollow welded shell, open bottom, interior empty",
-    "cross_ribs_x": [
-     -2000,
-     -1300,
-     -600,
-     -235,
-     700,
-     1400,
-     2000
-    ],
+    "cross_ribs_x": [-2000, -1300, -600, -235, 700, 1400, 2000],
     "cross_rib_thk": 20,
     "top_opening_biscuit_drop": {
      "x_min": 20,
@@ -251,11 +146,7 @@
     },
     "foot_pads": {
      "count": 8,
-     "size": [
-      200,
-      150,
-      20
-     ],
+     "size": [200, 150, 20],
      "optional": true,
      "note": "cosmetic; must stay inside outer box footprint, z 0..20 replaced material"
     },
@@ -265,24 +156,9 @@
    "instances": [
     {
      "name": "A11_1",
-     "pos": [
-      0,
-      0,
-      -1150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -2700.0,
-      -500,
-      -1150.0,
-      2400.0,
-      500,
-      -530.0
-     ]
+     "pos": [0, 0, -1150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2700.0, -500, -1150.0, 2400.0, 500, -530.0]
     }
    ]
   },
@@ -303,45 +179,15 @@
    "instances": [
     {
      "name": "A12_1",
-     "pos": [
-      -220.0,
-      350.0,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -220.0,
-      300.0,
-      -530.0,
-      2155.0,
-      400.0,
-      -490.0
-     ]
+     "pos": [-220.0, 350.0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-220.0, 300.0, -530.0, 2155.0, 400.0, -490.0]
     },
     {
      "name": "A12_2",
-     "pos": [
-      -220.0,
-      -350.0,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -220.0,
-      -400.0,
-      -530.0,
-      2155.0,
-      -300.0,
-      -490.0
-     ]
+     "pos": [-220.0, -350.0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-220.0, -400.0, -530.0, 2155.0, -300.0, -490.0]
     }
    ]
   },
@@ -353,147 +199,48 @@
     "thickness": 220.0,
     "tie_bar_holes": {
      "d": 120.0,
-     "centers_yz": [
-      [
-       350.0,
-       380.0
-      ],
-      [
-       350.0,
-       -380.0
-      ],
-      [
-       -350.0,
-       380.0
-      ],
-      [
-       -350.0,
-       -380.0
-      ]
-     ],
+     "centers_yz": [[350.0, 380.0], [350.0, -380.0], [-350.0, 380.0], [-350.0, -380.0]],
      "fit": "nominal fit on tie bar shank (allowed contact)"
     },
     "shot_hole": {
      "d": 140.0,
-     "center_yz": [
-      0,
-      -150.0
-     ],
+     "center_yz": [0, -150.0],
      "through": true,
      "fit": "sleeve OD nominal fit"
-    },
-    "ejector_return_holes": {
-     "d": 32.0,
-     "centers_yz": [
-      [
-       90,
-       140
-      ],
-      [
-       90,
-       46
-      ],
-      [
-       90,
-       -46
-      ],
-      [
-       90,
-       -140
-      ],
-      [
-       30,
-       140
-      ],
-      [
-       30,
-       46
-      ],
-      [
-       30,
-       -46
-      ],
-      [
-       30,
-       -140
-      ],
-      [
-       -30,
-       140
-      ],
-      [
-       -30,
-       46
-      ],
-      [
-       -30,
-       -46
-      ],
-      [
-       -30,
-       -140
-      ],
-      [
-       -90,
-       140
-      ],
-      [
-       -90,
-       46
-      ],
-      [
-       -90,
-       -46
-      ],
-      [
-       -90,
-       -140
-      ]
-     ],
-     "note": "16 ejector return / push-back pin clearance holes on fixed platen"
     },
     "edge_chamfer": 5,
     "t_slots": {
      "optional": true,
      "count": 4,
      "direction": "along Y",
-     "z_positions": [
-      -240,
-      240,
-      -330,
-      330
-     ],
+     "z_positions": [-240, 240, -330, 330],
      "width": 28,
      "depth": 20,
-     "y_range": [
-      -460,
-      -300
-     ],
+     "y_range": [-460, -300],
      "note": "cosmetic; if drawn keep only outside die footprint or omit"
+    },
+    "support_mount": {
+     "optional": true,
+     "note": "cosmetic tapped holes for A13 support pedestals (A21 is FIXED to frame A11 via 2 x A13; it does not slide).",
+     "bottom_tapped_M36": {
+      "centers_local_xy": [[-110, 122.5], [-110, 177.5], [-110, -122.5], [-110, -177.5]],
+      "depth": 70,
+      "face": "bottom (Z=-490)"
+     },
+     "rear_tapped_M36": {
+      "centers_yz": [[122.5, -305], [177.5, -305], [122.5, -445], [177.5, -445], [-122.5, -305], [-177.5, -305], [-122.5, -445], [-177.5, -445]],
+      "depth": 70,
+      "face": "rear (local x=-220)"
+     }
     }
    },
    "local_origin": "Center of the die mounting face (= global origin). Plate thickness along -X (body x -220..0), width along Y, height along Z.",
    "instances": [
     {
      "name": "A21_1",
-     "pos": [
-      0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -220.0,
-      -460.0,
-      -490.0,
-      0,
-      460.0,
-      490.0
-     ]
+     "pos": [0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [-220.0, -460.0, -490.0, 0, 460.0, 490.0]
     }
    ]
   },
@@ -505,104 +252,48 @@
     "thickness": 200.0,
     "tie_bar_holes": {
      "d": 150,
-     "centers_yz": [
-      [
-       350.0,
-       380.0
-      ],
-      [
-       350.0,
-       -380.0
-      ],
-      [
-       -350.0,
-       380.0
-      ],
-      [
-       -350.0,
-       -380.0
-      ]
-     ],
+     "centers_yz": [[350.0, 380.0], [350.0, -380.0], [-350.0, 380.0], [-350.0, -380.0]],
      "note": "bore for bushing A28 (press fit)"
     },
     "central_hole": {
      "d": 80,
-     "center_yz": [
-      0,
-      0
-     ],
+     "center_yz": [0, 0],
      "through": true
     },
     "ejector_rod_holes": {
-     "d": 36.0,
-     "centers_yz": [
-      [
-       60,
-       60
-      ],
-      [
-       60,
-       -60
-      ],
-      [
-       -60,
-       60
-      ],
-      [
-       -60,
-       -60
-      ]
-     ],
+     "d": 46,
+     "centers_yz": [[90, 140], [90, -140], [-90, 140], [-90, -140]],
      "through": true
     },
     "toggle_lugs": {
      "count": 2,
      "description": "one wide lug top, one bottom, on the back (+X) face, integral with platen",
-     "pin_center_local_xz": [
-      [
-       340.0,
-       400.0
-      ],
-      [
-       340.0,
-       -400.0
-      ]
-     ],
+     "pin_center_local_xz": [[340.0, 400.0], [340.0, -400.0]],
      "y_min": -200,
      "y_max": 200,
      "height_z": 180.0,
-     "x_extent_local": [
-      200.0,
-      430.0
-     ],
+     "x_extent_local": [200.0, 430.0],
      "end_radius": 90.0,
      "pin_hole_d": 90.0,
      "pin_axis": "Y"
     },
-    "edge_chamfer": 5
+    "edge_chamfer": 5,
+    "ejector_unit_mount": {
+     "optional": true,
+     "thread": "M30",
+     "depth": 60,
+     "face": "back face (local x=200)",
+     "centers_yz": [[62.5, 70], [62.5, -70], [-62.5, 70], [-62.5, -70]],
+     "note": "A41 tie-post studs; post shoulder d36 bears on back face. Hole pattern (centre d80 + 4 x d46 at (+-90,+-140)) UNCHANGED (karar 2026-11-17)."
+    }
    },
    "local_origin": "Center of the die mounting (front, -X) face. Plate thickness along +X (body x 0..200), lugs beyond x=200. Width along Y, height along Z.",
    "instances": [
     {
      "name": "A22_1",
-     "pos": [
-      400.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      400.0,
-      -460.0,
-      -490.0,
-      830.0,
-      460.0,
-      490.0
-     ]
+     "pos": [400.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [400.0, -460.0, -490.0, 830.0, 460.0, 490.0]
     }
    ]
   },
@@ -614,71 +305,22 @@
     "thickness": 180.0,
     "tie_bar_holes": {
      "d": 120.0,
-     "centers_yz": [
-      [
-       350.0,
-       380.0
-      ],
-      [
-       350.0,
-       -380.0
-      ],
-      [
-       -350.0,
-       380.0
-      ],
-      [
-       -350.0,
-       -380.0
-      ]
-     ],
+     "centers_yz": [[350.0, 380.0], [350.0, -380.0], [-350.0, 380.0], [-350.0, -380.0]],
      "note": "slides over tie-bar thread; nominal fit (allowed contact)"
     },
     "central_hole": {
      "d": 110,
-     "center_yz": [
-      0,
-      0
-     ],
+     "center_yz": [0, 0],
      "through": true,
      "note": "piston rod A37 d90 passes with 10 radial clearance"
     },
     "toggle_lugs": {
      "count": 8,
      "description": "4 lug plates top + 4 bottom on the front (-X) face, extending toward -X; big link A32 sits between an inner and an outer lug (double shear)",
-     "pin_center_local_xz": [
-      [
-       -230.0,
-       400.0
-      ],
-      [
-       -230.0,
-       -400.0
-      ]
-     ],
-     "y_ranges": [
-      [
-       60,
-       125
-      ],
-      [
-       205,
-       275
-      ],
-      [
-       -125,
-       -60
-      ],
-      [
-       -275,
-       -205
-      ]
-     ],
+     "pin_center_local_xz": [[-230.0, 400.0], [-230.0, -400.0]],
+     "y_ranges": [[60, 125], [205, 275], [-125, -60], [-275, -205]],
      "height_z": 180.0,
-     "x_extent_local": [
-      -320.0,
-      0
-     ],
+     "x_extent_local": [-320.0, 0],
      "end_radius": 90.0,
      "pin_hole_d": 90.0,
      "pin_axis": "Y",
@@ -690,24 +332,9 @@
    "instances": [
     {
      "name": "A23_1",
-     "pos": [
-      1625.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1305.0,
-      -460.0,
-      -490.0,
-      1805.0,
-      460.0,
-      490.0
-     ]
+     "pos": [1625.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1305.0, -460.0, -490.0, 1805.0, 460.0, 490.0]
     }
    ]
   },
@@ -730,87 +357,27 @@
    "instances": [
     {
      "name": "A24_1",
-     "pos": [
-      -350.0,
-      350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -350.0,
-      290.0,
-      320.0,
-      2305.0,
-      410.0,
-      440.0
-     ]
+     "pos": [-350.0, 350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-350.0, 290.0, 320.0, 2305.0, 410.0, 440.0]
     },
     {
      "name": "A24_2",
-     "pos": [
-      -350.0,
-      350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -350.0,
-      290.0,
-      -440.0,
-      2305.0,
-      410.0,
-      -320.0
-     ]
+     "pos": [-350.0, 350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-350.0, 290.0, -440.0, 2305.0, 410.0, -320.0]
     },
     {
      "name": "A24_3",
-     "pos": [
-      -350.0,
-      -350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -350.0,
-      -410.0,
-      320.0,
-      2305.0,
-      -290.0,
-      440.0
-     ]
+     "pos": [-350.0, -350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-350.0, -410.0, 320.0, 2305.0, -290.0, 440.0]
     },
     {
      "name": "A24_4",
-     "pos": [
-      -350.0,
-      -350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -350.0,
-      -410.0,
-      -440.0,
-      2305.0,
-      -290.0,
-      -320.0
-     ]
+     "pos": [-350.0, -350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-350.0, -410.0, -440.0, 2305.0, -290.0, -320.0]
     }
    ]
   },
@@ -833,87 +400,27 @@
    "instances": [
     {
      "name": "A25_1",
-     "pos": [
-      -220.0,
-      350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -330.0,
-      255.0,
-      285.0,
-      -220.0,
-      445.0,
-      475.0
-     ]
+     "pos": [-220.0, 350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-330.0, 255.0, 285.0, -220.0, 445.0, 475.0]
     },
     {
      "name": "A25_2",
-     "pos": [
-      -220.0,
-      350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -330.0,
-      255.0,
-      -475.0,
-      -220.0,
-      445.0,
-      -285.0
-     ]
+     "pos": [-220.0, 350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-330.0, 255.0, -475.0, -220.0, 445.0, -285.0]
     },
     {
      "name": "A25_3",
-     "pos": [
-      -220.0,
-      -350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -330.0,
-      -445.0,
-      285.0,
-      -220.0,
-      -255.0,
-      475.0
-     ]
+     "pos": [-220.0, -350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-330.0, -445.0, 285.0, -220.0, -255.0, 475.0]
     },
     {
      "name": "A25_4",
-     "pos": [
-      -220.0,
-      -350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -330.0,
-      -445.0,
-      -475.0,
-      -220.0,
-      -255.0,
-      -285.0
-     ]
+     "pos": [-220.0, -350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [-330.0, -445.0, -475.0, -220.0, -255.0, -285.0]
     }
    ]
   },
@@ -927,10 +434,7 @@
     "gear_ring": {
      "od": 200,
      "width": 50,
-     "local_x_range": [
-      60,
-      110
-     ],
+     "local_x_range": [60, 110],
      "module": 4,
      "teeth": 48,
      "note": "Disler g.gear_x ile cizilir; faz instance 'gear_phase_deg' alanindan gelir (merkez disliyle carpismasiz kavrama icin hesaplandi). OD 200.",
@@ -943,90 +447,30 @@
    "instances": [
     {
      "name": "A26_1",
-     "pos": [
-      1805.0,
-      350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      250.0,
-      280.0,
-      1925.0,
-      450.0,
-      480.0
-     ],
+     "pos": [1805.0, 350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, 250.0, 280.0, 1925.0, 450.0, 480.0],
      "gear_phase_deg": 3.274
     },
     {
      "name": "A26_2",
-     "pos": [
-      1805.0,
-      350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      250.0,
-      -480.0,
-      1925.0,
-      450.0,
-      -280.0
-     ],
+     "pos": [1805.0, 350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, 250.0, -480.0, 1925.0, 450.0, -280.0],
      "gear_phase_deg": 4.226
     },
     {
      "name": "A26_3",
-     "pos": [
-      1805.0,
-      -350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      -450.0,
-      280.0,
-      1925.0,
-      -250.0,
-      480.0
-     ],
+     "pos": [1805.0, -350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, -450.0, 280.0, 1925.0, -250.0, 480.0],
      "gear_phase_deg": 4.226
     },
     {
      "name": "A26_4",
-     "pos": [
-      1805.0,
-      -350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      -450.0,
-      -480.0,
-      1925.0,
-      -250.0,
-      -280.0
-     ],
+     "pos": [1805.0, -350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, -450.0, -480.0, 1925.0, -250.0, -280.0],
      "gear_phase_deg": 3.274
     }
    ]
@@ -1047,87 +491,27 @@
    "instances": [
     {
      "name": "A28_1",
-     "pos": [
-      400.0,
-      350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      400.0,
-      275.0,
-      305.0,
-      600.0,
-      425.0,
-      455.0
-     ]
+     "pos": [400.0, 350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [400.0, 275.0, 305.0, 600.0, 425.0, 455.0]
     },
     {
      "name": "A28_2",
-     "pos": [
-      400.0,
-      350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      400.0,
-      275.0,
-      -455.0,
-      600.0,
-      425.0,
-      -305.0
-     ]
+     "pos": [400.0, 350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [400.0, 275.0, -455.0, 600.0, 425.0, -305.0]
     },
     {
      "name": "A28_3",
-     "pos": [
-      400.0,
-      -350.0,
-      380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      400.0,
-      -425.0,
-      305.0,
-      600.0,
-      -275.0,
-      455.0
-     ]
+     "pos": [400.0, -350.0, 380.0],
+     "rot": [0, 0, 0],
+     "bbox": [400.0, -425.0, 305.0, 600.0, -275.0, 455.0]
     },
     {
      "name": "A28_4",
-     "pos": [
-      400.0,
-      -350.0,
-      -380.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      400.0,
-      -425.0,
-      -455.0,
-      600.0,
-      -275.0,
-      -305.0
-     ]
+     "pos": [400.0, -350.0, -380.0],
+     "rot": [0, 0, 0],
+     "bbox": [400.0, -425.0, -455.0, 600.0, -275.0, -305.0]
     }
    ]
   },
@@ -1148,16 +532,7 @@
     },
     "pin_D_holes": {
      "d": 90.0,
-     "centers_local_xz": [
-      [
-       0,
-       200.0
-      ],
-      [
-       0,
-       -200.0
-      ]
-     ],
+     "centers_local_xz": [[0, 200.0], [0, -200.0]],
      "axis": "Y",
      "note": "through the tongue only"
     },
@@ -1172,24 +547,9 @@
    "instances": [
     {
      "name": "A31_1",
-     "pos": [
-      1290.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1220.0,
-      -100,
-      -270.0,
-      1360.0,
-      100,
-      270.0
-     ]
+     "pos": [1290.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1220.0, -100, -270.0, 1360.0, 100, 270.0]
     }
    ]
   },
@@ -1210,87 +570,27 @@
    "instances": [
     {
      "name": "A32_1",
-     "pos": [
-      1395.0,
-      165,
-      400.0
-     ],
-     "rot": [
-      0,
-      180,
-      0
-     ],
-     "bbox": [
-      970.0,
-      130,
-      310.0,
-      1485.0,
-      200,
-      490.0
-     ]
+     "pos": [1395.0, 165, 400.0],
+     "rot": [0, 180, 0],
+     "bbox": [970.0, 130, 310.0, 1485.0, 200, 490.0]
     },
     {
      "name": "A32_2",
-     "pos": [
-      1395.0,
-      -165,
-      400.0
-     ],
-     "rot": [
-      0,
-      180,
-      0
-     ],
-     "bbox": [
-      970.0,
-      -200,
-      310.0,
-      1485.0,
-      -130,
-      490.0
-     ]
+     "pos": [1395.0, -165, 400.0],
+     "rot": [0, 180, 0],
+     "bbox": [970.0, -200, 310.0, 1485.0, -130, 490.0]
     },
     {
      "name": "A32_3",
-     "pos": [
-      1395.0,
-      165,
-      -400.0
-     ],
-     "rot": [
-      0,
-      180,
-      0
-     ],
-     "bbox": [
-      970.0,
-      130,
-      -490.0,
-      1485.0,
-      200,
-      -310.0
-     ]
+     "pos": [1395.0, 165, -400.0],
+     "rot": [0, 180, 0],
+     "bbox": [970.0, 130, -490.0, 1485.0, 200, -310.0]
     },
     {
      "name": "A32_4",
-     "pos": [
-      1395.0,
-      -165,
-      -400.0
-     ],
-     "rot": [
-      0,
-      180,
-      0
-     ],
-     "bbox": [
-      970.0,
-      -200,
-      -490.0,
-      1485.0,
-      -130,
-      -310.0
-     ]
+     "pos": [1395.0, -165, -400.0],
+     "rot": [0, 180, 0],
+     "bbox": [970.0, -200, -490.0, 1485.0, -130, -310.0]
     }
    ]
   },
@@ -1309,87 +609,27 @@
    "instances": [
     {
      "name": "A33_1",
-     "pos": [
-      740.0,
-      240,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      650.0,
-      205,
-      310.0,
-      1150.0,
-      275,
-      490.0
-     ]
+     "pos": [740.0, 240, 400.0],
+     "rot": [0, 0, 0],
+     "bbox": [650.0, 205, 310.0, 1150.0, 275, 490.0]
     },
     {
      "name": "A33_2",
-     "pos": [
-      740.0,
-      -240,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      650.0,
-      -275,
-      310.0,
-      1150.0,
-      -205,
-      490.0
-     ]
+     "pos": [740.0, -240, 400.0],
+     "rot": [0, 0, 0],
+     "bbox": [650.0, -275, 310.0, 1150.0, -205, 490.0]
     },
     {
      "name": "A33_3",
-     "pos": [
-      740.0,
-      240,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      650.0,
-      205,
-      -490.0,
-      1150.0,
-      275,
-      -310.0
-     ]
+     "pos": [740.0, 240, -400.0],
+     "rot": [0, 0, 0],
+     "bbox": [650.0, 205, -490.0, 1150.0, 275, -310.0]
     },
     {
      "name": "A33_4",
-     "pos": [
-      740.0,
-      -240,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      650.0,
-      -275,
-      -490.0,
-      1150.0,
-      -205,
-      -310.0
-     ]
+     "pos": [740.0, -240, -400.0],
+     "rot": [0, 0, 0],
+     "bbox": [650.0, -275, -490.0, 1150.0, -205, -310.0]
     }
    ]
   },
@@ -1411,291 +651,111 @@
    "instances": [
     {
      "name": "A34_AT",
-     "pos": [
-      1395.0,
-      0,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1395.0, 0, 400.0],
+     "rot": [0, 0, 0],
      "length": 560,
      "joint": "A",
      "role": "rear platen lugs + big links",
-     "bbox": [
-      1350.0,
-      -280.0,
-      355.0,
-      1440.0,
-      280.0,
-      445.0
-     ]
+     "bbox": [1350.0, -280.0, 355.0, 1440.0, 280.0, 445.0]
     },
     {
      "name": "A34_BT1",
-     "pos": [
-      1060.0,
-      202.5,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1060.0, 202.5, 400.0],
+     "rot": [0, 0, 0],
      "length": 150,
      "joint": "B",
      "role": "knee: big link + front link, one side",
-     "bbox": [
-      1015.0,
-      127.5,
-      355.0,
-      1105.0,
-      277.5,
-      445.0
-     ]
+     "bbox": [1015.0, 127.5, 355.0, 1105.0, 277.5, 445.0]
     },
     {
      "name": "A34_BT2",
-     "pos": [
-      1060.0,
-      -202.5,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1060.0, -202.5, 400.0],
+     "rot": [0, 0, 0],
      "length": 150,
      "joint": "B",
      "role": "knee: big link + front link, one side",
-     "bbox": [
-      1015.0,
-      -277.5,
-      355.0,
-      1105.0,
-      -127.5,
-      445.0
-     ]
+     "bbox": [1015.0, -277.5, 355.0, 1105.0, -127.5, 445.0]
     },
     {
      "name": "A34_CT",
-     "pos": [
-      740.0,
-      0,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [740.0, 0, 400.0],
+     "rot": [0, 0, 0],
      "length": 560,
      "joint": "C",
      "role": "moving platen lug + front links",
-     "bbox": [
-      695.0,
-      -280.0,
-      355.0,
-      785.0,
-      280.0,
-      445.0
-     ]
+     "bbox": [695.0, -280.0, 355.0, 785.0, 280.0, 445.0]
     },
     {
      "name": "A34_ET",
-     "pos": [
-      1245.0,
-      0,
-      400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1245.0, 0, 400.0],
+     "rot": [0, 0, 0],
      "length": 400,
      "joint": "E",
      "role": "big links + 2 crosshead links A36",
-     "bbox": [
-      1200.0,
-      -200.0,
-      355.0,
-      1290.0,
-      200.0,
-      445.0
-     ]
+     "bbox": [1200.0, -200.0, 355.0, 1290.0, 200.0, 445.0]
     },
     {
      "name": "A34_DT",
-     "pos": [
-      1290.0,
-      0,
-      200.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1290.0, 0, 200.0],
+     "rot": [0, 0, 0],
      "length": 120,
      "joint": "D",
      "role": "crosshead tongue + 2 crosshead links A36",
-     "bbox": [
-      1245.0,
-      -60.0,
-      155.0,
-      1335.0,
-      60.0,
-      245.0
-     ]
+     "bbox": [1245.0, -60.0, 155.0, 1335.0, 60.0, 245.0]
     },
     {
      "name": "A34_AB",
-     "pos": [
-      1395.0,
-      0,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1395.0, 0, -400.0],
+     "rot": [0, 0, 0],
      "length": 560,
      "joint": "A",
      "role": "rear platen lugs + big links",
-     "bbox": [
-      1350.0,
-      -280.0,
-      -445.0,
-      1440.0,
-      280.0,
-      -355.0
-     ]
+     "bbox": [1350.0, -280.0, -445.0, 1440.0, 280.0, -355.0]
     },
     {
      "name": "A34_BB1",
-     "pos": [
-      1060.0,
-      202.5,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1060.0, 202.5, -400.0],
+     "rot": [0, 0, 0],
      "length": 150,
      "joint": "B",
      "role": "knee: big link + front link, one side",
-     "bbox": [
-      1015.0,
-      127.5,
-      -445.0,
-      1105.0,
-      277.5,
-      -355.0
-     ]
+     "bbox": [1015.0, 127.5, -445.0, 1105.0, 277.5, -355.0]
     },
     {
      "name": "A34_BB2",
-     "pos": [
-      1060.0,
-      -202.5,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1060.0, -202.5, -400.0],
+     "rot": [0, 0, 0],
      "length": 150,
      "joint": "B",
      "role": "knee: big link + front link, one side",
-     "bbox": [
-      1015.0,
-      -277.5,
-      -445.0,
-      1105.0,
-      -127.5,
-      -355.0
-     ]
+     "bbox": [1015.0, -277.5, -445.0, 1105.0, -127.5, -355.0]
     },
     {
      "name": "A34_CB",
-     "pos": [
-      740.0,
-      0,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [740.0, 0, -400.0],
+     "rot": [0, 0, 0],
      "length": 560,
      "joint": "C",
      "role": "moving platen lug + front links",
-     "bbox": [
-      695.0,
-      -280.0,
-      -445.0,
-      785.0,
-      280.0,
-      -355.0
-     ]
+     "bbox": [695.0, -280.0, -445.0, 785.0, 280.0, -355.0]
     },
     {
      "name": "A34_EB",
-     "pos": [
-      1245.0,
-      0,
-      -400.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1245.0, 0, -400.0],
+     "rot": [0, 0, 0],
      "length": 400,
      "joint": "E",
      "role": "big links + 2 crosshead links A36",
-     "bbox": [
-      1200.0,
-      -200.0,
-      -445.0,
-      1290.0,
-      200.0,
-      -355.0
-     ]
+     "bbox": [1200.0, -200.0, -445.0, 1290.0, 200.0, -355.0]
     },
     {
      "name": "A34_DB",
-     "pos": [
-      1290.0,
-      0,
-      -200.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
+     "pos": [1290.0, 0, -200.0],
+     "rot": [0, 0, 0],
      "length": 120,
      "joint": "D",
      "role": "crosshead tongue + 2 crosshead links A36",
-     "bbox": [
-      1245.0,
-      -60.0,
-      -245.0,
-      1335.0,
-      60.0,
-      -155.0
-     ]
+     "bbox": [1245.0, -60.0, -245.0, 1335.0, 60.0, -155.0]
     }
    ]
   },
@@ -1703,10 +763,7 @@
    "name": "Kapama silindiri",
    "dims": {
     "flange": {
-     "size_yz": [
-      300,
-      300
-     ],
+     "size_yz": [300, 300],
      "thickness": 40,
      "rod_hole_d": 100,
      "bolt_holes": {
@@ -1721,19 +778,13 @@
      "od": 200,
      "bore": 160,
      "length": 400.0,
-     "local_x_range": [
-      40,
-      440.0
-     ],
+     "local_x_range": [40, 440.0],
      "note": "hollow tube, bore must be EMPTY (piston belongs to A37)"
     },
     "rear_cap": {
      "od": 200,
      "thickness": 40,
-     "local_x_range": [
-      440.0,
-      480.0
-     ]
+     "local_x_range": [440.0, 480.0]
     },
     "total_body_length": 480.0,
     "stroke": 260.0,
@@ -1748,117 +799,78 @@
    "instances": [
     {
      "name": "A35_1",
-     "pos": [
-      1805.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      -150,
-      -150,
-      2285.0,
-      150,
-      150
-     ]
+     "pos": [1805.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, -150, -150, 2285.0, 150, 150]
     }
    ]
   },
   "A41": {
-   "name": "Hidrolik itici silindiri",
+   "name": "Hidrolik itici silindiri (cift silindirli grup)",
    "dims": {
+    "layout": "2 cylinders, horizontal symmetric (+-Y), common bridge carried by 4 tie posts on A22 back face; centre |Y|<5 free (no central cylinder)",
+    "cylinders": {
+     "count": 2,
+     "centers_yz": [[62.5, 0], [-62.5, 0]],
+     "note": "barrel, rear cap, piston and rod below are drawn once at EACH centre"
+    },
     "standoff_posts": {
      "count": 4,
      "d": 36,
-     "centers_yz": [
-      [
-       110,
-       110
-      ],
-      [
-       110,
-       -110
-      ],
-      [
-       -110,
-       110
-      ],
-      [
-       -110,
-       -110
-      ]
-     ],
-     "local_x_range": [
-      0,
-      205
-     ],
-     "note": "bolted to A22 back face; also guide A42"
+     "centers_yz": [[62.5, 70], [62.5, -70], [-62.5, 70], [-62.5, -70]],
+     "local_x_range": [0, 205],
+     "note": "tension tie posts (bridge -> A22) and A42 guides; M30 stud ends (not modelled) into A22 ejector_unit_mount; shoulder d36 bears on A22 back face"
     },
     "flange": {
-     "size_yz": [
-      230,
-      230
-     ],
-     "thickness": 25,
-     "local_x_range": [
-      205,
-      230
-     ]
+     "size_yz": [240, 200],
+     "thickness": 35,
+     "local_x_range": [205, 240],
+     "material": "42CrMo4+QT",
+     "rod_gland_holes": {
+      "d": 58,
+      "centers_yz": [[62.5, 0], [-62.5, 0]],
+      "optional": true,
+      "note": "rod passes through; may be drawn filled by rod"
+     },
+     "note": "common BRIDGE = front head of both cylinders"
     },
     "barrel": {
-     "od": 170,
-     "bore": 140,
-     "local_x_range": [
-      230,
-      405
-     ]
+     "od": 115,
+     "bore": 100,
+     "local_x_range": [240, 405],
+     "note": "one per cylinder centre; chamber 165 = stroke 145 + piston 20"
     },
     "rear_cap": {
-     "od": 170,
-     "local_x_range": [
-      405,
-      425
-     ]
+     "od": 115,
+     "local_x_range": [405, 425]
+    },
+    "piston": {
+     "d": 98,
+     "thickness": 20,
+     "local_x_range": [385, 405],
+     "note": "shown retracted (against rear cap); d = bore-2 so it does not touch the tube in the solid model"
     },
     "rod": {
-     "d": 70,
-     "local_x_range": [
-      200,
-      205
-     ],
-     "note": "retracted; rod end face contacts A42 rear face"
+     "d": 56,
+     "local_x_range": [200, 385],
+     "end_thread": "M42x2 into A42 rod_attach (coupled ejector, pulls A42 back)",
+     "note": "retracted; rod end face contacts A42 rear face (local x=200 = global 800)"
     },
     "stroke": 145.0,
-    "force_kN_at_140bar": 215.513,
-    "envelope_note": "overall length 425 (was 510): at full opening rear cap is at X=1445, crosshead hub front at 1458. Whole unit within |Y|<=115."
+    "pressure_bar": 140,
+    "force_push_kN_per_cyl": 109.956,
+    "force_push_kN_total": 219.911,
+    "force_return_kN_total": 150.9,
+    "sizing_source": "formul: F_req/cyl = 215.5/2 = 107.8 kN; d = sqrt(4F/(pi p)) = sqrt(4*107756/(pi*14)) = 99.0 -> ISO 3320 bore 100, rod 56 (ISO 3320 pair).",
+    "envelope_note": "overall length 425 unchanged (rear cap X=1445 at full opening vs crosshead hub 1458). Whole unit |Y|<=120 (barrels 5..120), |Z|<=100 (bridge). Knee pins |Y|>=127.5 -> 7.5 mm, big links |Y|>=130 -> 10 mm."
    },
-   "local_origin": "Center of the standoff-post foot plane on the moving platen back face (machine axis). Everything extends along +X (posts 0..205, flange 205..230, barrel 230..405, cap to 425).",
+   "local_origin": "Machine axis on the A22 back face (post foot plane). Everything extends along +X (posts 0..205, bridge 205..240, barrels 240..405, caps 405..425). Cylinders at (Y,Z)=(+-62.5,0).",
    "instances": [
     {
      "name": "A41_1",
-     "pos": [
-      600.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      600.0,
-      -128,
-      -128,
-      1025.0,
-      128,
-      128
-     ]
+     "pos": [600.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [600.0, -120, -100, 1025.0, 120, 100]
     }
    ]
   },
@@ -1866,84 +878,49 @@
    "name": "Itici plakasi",
    "dims": {
     "plate": {
-     "size_yz": [
-      240,
-      340
-     ],
+     "size_yz": [240, 340],
      "thickness": 50.0
     },
     "guide_holes": {
      "d": 36,
-     "centers_yz": [
-      [
-       110,
-       110
-      ],
-      [
-       110,
-       -110
-      ],
-      [
-       -110,
-       110
-      ],
-      [
-       -110,
-       -110
-      ]
-     ],
-     "note": "slide on A41 posts (allowed contact)"
+     "centers_yz": [[62.5, 70], [62.5, -70], [-62.5, 70], [-62.5, -70]],
+     "note": "slide on A41 tie posts (allowed contact)"
     },
     "ejector_rods": {
      "count": 4,
      "d": 36,
-     "centers_yz": [
-      [
-       60,
-       60
-      ],
-      [
-       60,
-       -60
-      ],
-      [
-       -60,
-       60
-      ],
-      [
-       -60,
-       -60
-      ]
-     ],
-     "length": 345.0,
-     "note": "fused to plate front face, run along -X through A22 d36 holes, end 5 mm short of platen die face (retracted)"
+     "centers_yz": [[90, 140], [90, -140], [-90, 140], [-90, -140]],
+     "length": 390.0,
+     "note": "4 corner knock-out rods fused to plate front face, run along -X through A22 d46 holes and A82 clamping-plate d46 holes; tip contacts die ejector plate A83 rear face at global X=360 (retracted)."
     },
     "stroke": 145.0,
     "edge_chamfer": 3,
-    "envelope_note": "plate narrowed to 240 in Y (|Y|<=120) so the folded big links (|Y|>=130) and split knee pins pass beside it; plate sweeps local x 5..200 over the 145 stroke (ejects toward -X)."
+    "envelope_note": "plate 240(Y)x340(Z) unchanged (|Y|<=120; knee pin 7.5 mm, big link 10 mm). Plate sweeps local x 5..200 over the 145 machine stroke; for die A82 the ejector stroke setting is 65 (die box limit).",
+    "rod_attach": {
+     "centers_yz": [[62.5, 0], [-62.5, 0]],
+     "thread": "M42x2",
+     "tapped_d": 40,
+     "depth": 40,
+     "face": "rear (local x=50)",
+     "optional": true,
+     "note": "connection points of the two A41 rods (M42x2 thread)"
+    },
+    "center_rod": {
+     "optional": true,
+     "d": 36,
+     "center_yz": [0, 0],
+     "length": 390.0,
+     "note": "optional central knock-out rod through A22 d80 and A82 d80 holes"
+    },
+    "material": "42CrMo4+QT (bending 126 MPa)"
    },
-   "local_origin": "Center of the plate front (-X) face. Plate thickness along +X (x 0..50); ejector rods along -X (x -345..0). Shown retracted.",
+   "local_origin": "Center of the plate front (-X) face. Plate thickness along +X (x 0..50); knock-out rods along -X (x -390..0). Shown retracted.",
    "instances": [
     {
      "name": "A42_1",
-     "pos": [
-      750.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      405.0,
-      -120,
-      -170,
-      800.0,
-      120,
-      170
-     ]
+     "pos": [750.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [360.0, -120, -170, 800.0, 120, 170]
     }
    ]
   },
@@ -1956,10 +933,7 @@
     "flange": {
      "od": 190,
      "thickness": 25,
-     "local_x_range": [
-      -245.0,
-      -220.0
-     ],
+     "local_x_range": [-245.0, -220.0],
      "note": "locating collar bearing on fixed platen rear face"
     },
     "pour_hole": {
@@ -1977,24 +951,9 @@
    "instances": [
     {
      "name": "A51_1",
-     "pos": [
-      0,
-      0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -470.0,
-      -95,
-      -245.0,
-      0,
-      95,
-      -55.0
-     ]
+     "pos": [0, 0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-470.0, -95, -245.0, 0, 95, -55.0]
     }
    ]
   },
@@ -2016,34 +975,15 @@
     },
     "total_length": 820.0,
     "stroke": 500.0,
-    "alt_tip_diameters": [
-     70,
-     80,
-     90
-    ]
+    "alt_tip_diameters": [70, 80, 90]
    },
    "local_origin": "Center of the plunger tip front face. Axis along -X: tip x -100..0, rod x -720..-100, coupling x -820..-720. Shown retracted (tip face 10 mm behind pour hole).",
    "instances": [
     {
      "name": "A52_1",
-     "pos": [
-      -360.0,
-      0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -1180.0,
-      -55,
-      -205.0,
-      -360.0,
-      55,
-      -95.0
-     ]
+     "pos": [-360.0, 0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-1180.0, -55, -205.0, -360.0, 55, -95.0]
     }
    ]
   },
@@ -2051,35 +991,20 @@
    "name": "Enjeksiyon silindiri",
    "dims": {
     "front_head": {
-     "size_yz": [
-      300.0,
-      300.0
-     ],
+     "size_yz": [300.0, 300.0],
      "thickness": 80.0,
-     "local_x_range": [
-      -80.0,
-      0
-     ]
+     "local_x_range": [-80.0, 0]
     },
     "barrel": {
      "od": 180,
      "bore": 140.0,
      "length": 660.0,
-     "local_x_range": [
-      -740.0,
-      -80.0
-     ]
+     "local_x_range": [-740.0, -80.0]
     },
     "rear_head": {
-     "size_yz": [
-      300.0,
-      300.0
-     ],
+     "size_yz": [300.0, 300.0],
      "thickness": 80.0,
-     "local_x_range": [
-      -820.0,
-      -740.0
-     ]
+     "local_x_range": [-820.0, -740.0]
     },
     "rod": {
      "d": 90,
@@ -2099,24 +1024,9 @@
    "instances": [
     {
      "name": "A54_1",
-     "pos": [
-      -1260.0,
-      0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -2080.0,
-      -150,
-      -300.0,
-      -1180.0,
-      150,
-      0.0
-     ]
+     "pos": [-1260.0, 0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2080.0, -150, -300.0, -1180.0, 150, 0.0]
     }
    ]
   },
@@ -2126,18 +1036,12 @@
     "flange": {
      "od": 280,
      "thickness": 40,
-     "local_x_range": [
-      -40,
-      0
-     ]
+     "local_x_range": [-40, 0]
     },
     "body": {
      "od": 260,
      "length": 410.0,
-     "local_x_range": [
-      -450.0,
-      -40
-     ]
+     "local_x_range": [-450.0, -40]
     },
     "total_length": 450.0,
     "internal": {
@@ -2152,24 +1056,9 @@
    "instances": [
     {
      "name": "A55_1",
-     "pos": [
-      -2080.0,
-      0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -2530.0,
-      -140,
-      -290.0,
-      -2080.0,
-      140,
-      -10.0
-     ]
+     "pos": [-2080.0, 0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2530.0, -140, -290.0, -2080.0, 140, -10.0]
     }
    ]
   },
@@ -2193,45 +1082,15 @@
    "instances": [
     {
      "name": "A56_1",
-     "pos": [
-      -1450,
-      -330,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -1560,
-      -440,
-      -530.0,
-      -1340,
-      -220,
-      770.0
-     ]
+     "pos": [-1450, -330, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-1560, -440, -530.0, -1340, -220, 770.0]
     },
     {
      "name": "A56_2",
-     "pos": [
-      -1800,
-      -330,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -1910,
-      -440,
-      -530.0,
-      -1690,
-      -220,
-      770.0
-     ]
+     "pos": [-1800, -330, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-1910, -440, -530.0, -1690, -220, 770.0]
     }
    ]
   },
@@ -2247,14 +1106,8 @@
      "count": 2,
      "len_x": 80.0,
      "width_y": 300,
-     "local_z_range": [
-      30,
-      230.0
-     ],
-     "center_local_x": [
-      370.0,
-      -370.0
-     ],
+     "local_z_range": [30, 230.0],
+     "center_local_x": [370.0, -370.0],
      "note": "flat tops under A54 square heads"
     },
     "gussets": {
@@ -2267,24 +1120,9 @@
    "instances": [
     {
      "name": "A57_1",
-     "pos": [
-      -1670.0,
-      0,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -2130.0,
-      -200,
-      -530.0,
-      -1210.0,
-      200,
-      -300.0
-     ]
+     "pos": [-1670.0, 0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2130.0, -200, -530.0, -1210.0, 200, -300.0]
     }
    ]
   },
@@ -2298,45 +1136,15 @@
    "instances": [
     {
      "name": "A58_1",
-     "pos": [
-      -1670.0,
-      175.0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -1670.0,
-      152.5,
-      -172.5,
-      -220.0,
-      197.5,
-      -127.5
-     ]
+     "pos": [-1670.0, 175.0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-1670.0, 152.5, -172.5, -220.0, 197.5, -127.5]
     },
     {
      "name": "A58_2",
-     "pos": [
-      -1670.0,
-      -175.0,
-      -150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -1670.0,
-      -197.5,
-      -172.5,
-      -220.0,
-      -152.5,
-      -127.5
-     ]
+     "pos": [-1670.0, -175.0, -150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-1670.0, -197.5, -172.5, -220.0, -152.5, -127.5]
     }
    ]
   },
@@ -2351,10 +1159,7 @@
     "filler_cap": {
      "d": 100,
      "height": 40,
-     "local_xy": [
-      -650,
-      0
-     ],
+     "local_xy": [-650, 0],
      "optional": true
     },
     "level_gauge": {
@@ -2366,24 +1171,9 @@
    "instances": [
     {
      "name": "A61_1",
-     "pos": [
-      1100,
-      -900,
-      -1150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      300,
-      -1250,
-      -1150.0,
-      1900,
-      -550,
-      -450.0
-     ]
+     "pos": [1100, -900, -1150.0],
+     "rot": [0, 0, 0],
+     "bbox": [300, -1250, -1150.0, 1900, -550, -450.0]
     }
    ]
   },
@@ -2398,35 +1188,22 @@
     "shaft_axis_height_above_origin": 250,
     "motor": {
      "d": 400,
-     "local_x_range": [
-      -570,
-      130
-     ],
+     "local_x_range": [-570, 130],
      "power_kW": 30,
      "fins_optional": true,
      "terminal_box": {
-      "size": [
-       200,
-       150,
-       100
-      ],
+      "size": [200, 150, 100],
       "on": "+Z",
       "optional": true
      }
     },
     "bell_housing": {
      "d": 300,
-     "local_x_range": [
-      130,
-      290
-     ]
+     "local_x_range": [130, 290]
     },
     "pump": {
      "d": 220,
-     "local_x_range": [
-      290,
-      570
-     ]
+     "local_x_range": [290, 570]
     },
     "motor_feet": {
      "note": "block 500x360 from z=30 to z=80 under motor",
@@ -2437,24 +1214,9 @@
    "instances": [
     {
      "name": "A62_1",
-     "pos": [
-      1100,
-      -900,
-      -450.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      450,
-      -1150,
-      -450.0,
-      1750,
-      -650,
-      0.0
-     ]
+     "pos": [1100, -900, -450.0],
+     "rot": [0, 0, 0],
+     "bbox": [450, -1150, -450.0, 1750, -650, 0.0]
     }
    ]
   },
@@ -2468,30 +1230,15 @@
      "frame_profile": 40
     },
     "window": {
-     "local_x_range": [
-      250,
-      1250
-     ],
-     "local_z_range": [
-      500,
-      1200
-     ],
+     "local_x_range": [250, 1250],
+     "local_z_range": [500, 1200],
      "glazing_thk": 8,
      "optional": true
     },
     "bottom_track": {
-     "local_x_range": [
-      0,
-      2400
-     ],
-     "local_y_range": [
-      -60,
-      20
-     ],
-     "local_z_range": [
-      -40,
-      0
-     ],
+     "local_x_range": [0, 2400],
+     "local_y_range": [-60, 20],
+     "local_z_range": [-40, 0],
      "note": "bolted to frame operator-side wall (Y=+500); door panel slides on it toward +X to open"
     },
     "handle": {
@@ -2503,24 +1250,9 @@
    "instances": [
     {
      "name": "A71_1",
-     "pos": [
-      -100,
-      560,
-      -530.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -100,
-      500,
-      -570.0,
-      2300,
-      580,
-      870.0
-     ]
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-100, 500, -570.0, 2300, 580, 870.0]
     }
    ]
   },
@@ -2542,24 +1274,9 @@
    "instances": [
     {
      "name": "A72_1",
-     "pos": [
-      -1400,
-      -900,
-      -1150.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      -2000,
-      -1150,
-      -1150.0,
-      -800,
-      -650,
-      850.0
-     ]
+     "pos": [-1400, -900, -1150.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2000, -1150, -1150.0, -800, -650, 850.0]
     }
    ]
   },
@@ -2571,10 +1288,7 @@
     "thickness": 170.0,
     "sleeve_bore": {
      "d": 80.0,
-     "center_yz": [
-      0,
-      -150.0
-     ],
+     "center_yz": [0, -150.0],
      "through": true,
      "note": "continuation of shot sleeve bore to parting line (biscuit 30 mm)"
     },
@@ -2590,24 +1304,9 @@
    "instances": [
     {
      "name": "A81_1",
-     "pos": [
-      0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      0,
-      -270.0,
-      -300.0,
-      170.0,
-      270.0,
-      300.0
-     ]
+     "pos": [0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [0, -270.0, -300.0, 170.0, 270.0, 300.0]
     }
    ]
   },
@@ -2619,156 +1318,94 @@
     "thickness": 230.0,
     "cavity_pocket": {
      "on": "parting face (local x=-230)",
-     "size_yz": [
-      300,
-      260
-     ],
-     "center_yz": [
-      0,
-      80
-     ],
+     "size_yz": [300, 260],
+     "center_yz": [0, 80],
      "depth": 15,
      "optional": true
     },
     "runner_groove": {
-     "from_yz": [
-      0,
-      -150.0
-     ],
-     "to_yz": [
-      0,
-      -50
-     ],
+     "from_yz": [0, -150.0],
+     "to_yz": [0, -50],
      "width": 30,
      "depth": 10,
      "optional": true
     },
     "ejector_pin_holes": {
-     "d": 36,
-     "centers_yz": [
-      [
-       90,
-       140
-      ],
-      [
-       90,
-       93
-      ],
-      [
-       90,
-       46
-      ],
-      [
-       90,
-       0
-      ],
-      [
-       90,
-       -46
-      ],
-      [
-       90,
-       -93
-      ],
-      [
-       90,
-       -140
-      ],
-      [
-       30,
-       140
-      ],
-      [
-       30,
-       93
-      ],
-      [
-       30,
-       46
-      ],
-      [
-       30,
-       0
-      ],
-      [
-       30,
-       -46
-      ],
-      [
-       30,
-       -93
-      ],
-      [
-       30,
-       -140
-      ],
-      [
-       -30,
-       140
-      ],
-      [
-       -30,
-       93
-      ],
-      [
-       -30,
-       46
-      ],
-      [
-       -30,
-       0
-      ],
-      [
-       -30,
-       -46
-      ],
-      [
-       -30,
-       -93
-      ],
-      [
-       -30,
-       -140
-      ],
-      [
-       -90,
-       140
-      ],
-      [
-       -90,
-       0
-      ],
-      [
-       -90,
-       -140
-      ]
-     ],
-     "note": "clearance / pin guides matching A42 ejector rods"
+     "d": 46,
+     "centers_yz": [[90, 140], [90, -140], [-90, 140], [-90, -140]],
+     "local_x_range": [-40, 0],
+     "note": "machine knock-out rod holes (A42 d36, 5 mm radial clearance) through CLAMPING PLATE only (x -40..0)"
     },
-    "edge_chamfer": 5
+    "edge_chamfer": 5,
+    "ejector_box": {
+     "clamping_plate": {
+      "local_x_range": [-40, 0],
+      "size_yz": [540, 600],
+      "center_hole_d": 80
+     },
+     "rails": {
+      "y_ranges": [[200, 270], [-270, -200]],
+      "local_x_range": [-160, -40],
+      "z_range": [-300, 300],
+      "note": "parallels; box open toward +-Z"
+     },
+     "box_void": {
+      "y_range": [-200, 200],
+      "local_x_range": [-160, -40],
+      "z_range": [-300, 300]
+     },
+     "cavity_plate": {
+      "local_x_range": [-230, -160],
+      "size_yz": [540, 600]
+     },
+     "ejector_pin_bores": {
+      "d": 10,
+      "centers_yz": [
+       [-125, -17.5],
+       [-75, -17.5],
+       [-25, -17.5],
+       [25, -17.5],
+       [75, -17.5],
+       [125, -17.5],
+       [-125, 47.5],
+       [-75, 47.5],
+       [-25, 47.5],
+       [25, 47.5],
+       [75, 47.5],
+       [125, 47.5],
+       [-125, 112.5],
+       [-75, 112.5],
+       [-25, 112.5],
+       [25, 112.5],
+       [75, 112.5],
+       [125, 112.5],
+       [-125, 177.5],
+       [-75, 177.5],
+       [-25, 177.5],
+       [25, 177.5],
+       [75, 177.5],
+       [125, 177.5]
+      ],
+      "local_x_range": [-230, -160],
+      "note": "24 pins, nominal fit"
+     },
+     "return_pin_bores": {
+      "d": 25,
+      "centers_yz": [[160, 230], [160, -230], [-160, 230], [-160, -230]],
+      "local_x_range": [-230, -160],
+      "note": "4 return (push-back) pins, nominal fit"
+     },
+     "die_ejection_stroke": 65,
+     "note": "ejector box = rear part of the 230 mm moving die half (die height unchanged). A83 stroke 65 = A83 front (x -95) to cavity plate back (x -160)."
+    }
    },
    "local_origin": "Center of the back face (contact with moving platen die face). Thickness along -X (x -230..0); parting face at local x=-230 = global X=170.",
    "instances": [
     {
      "name": "A82_1",
-     "pos": [
-      400.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      170.0,
-      -270.0,
-      -300.0,
-      400.0,
-      270.0,
-      300.0
-     ]
+     "pos": [400.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [170.0, -270.0, -300.0, 400.0, 270.0, 300.0]
     }
    ]
   },
@@ -2788,87 +1425,27 @@
    "instances": [
     {
      "name": "A36_1",
-     "pos": [
-      1245.0,
-      40,
-      400.0
-     ],
-     "rot": [
-      0,
-      77.3196,
-      0
-     ],
-     "bbox": [
-      1185.0,
-      25,
-      140.0,
-      1350.0,
-      55,
-      460.0
-     ]
+     "pos": [1245.0, 40, 400.0],
+     "rot": [0, 77.3196, 0],
+     "bbox": [1185.0, 25, 140.0, 1350.0, 55, 460.0]
     },
     {
      "name": "A36_2",
-     "pos": [
-      1245.0,
-      -40,
-      400.0
-     ],
-     "rot": [
-      0,
-      77.3196,
-      0
-     ],
-     "bbox": [
-      1185.0,
-      -55,
-      140.0,
-      1350.0,
-      -25,
-      460.0
-     ]
+     "pos": [1245.0, -40, 400.0],
+     "rot": [0, 77.3196, 0],
+     "bbox": [1185.0, -55, 140.0, 1350.0, -25, 460.0]
     },
     {
      "name": "A36_3",
-     "pos": [
-      1245.0,
-      40,
-      -400.0
-     ],
-     "rot": [
-      0,
-      -77.3196,
-      0
-     ],
-     "bbox": [
-      1185.0,
-      25,
-      -460.0,
-      1350.0,
-      55,
-      -140.0
-     ]
+     "pos": [1245.0, 40, -400.0],
+     "rot": [0, -77.3196, 0],
+     "bbox": [1185.0, 25, -460.0, 1350.0, 55, -140.0]
     },
     {
      "name": "A36_4",
-     "pos": [
-      1245.0,
-      -40,
-      -400.0
-     ],
-     "rot": [
-      0,
-      -77.3196,
-      0
-     ],
-     "bbox": [
-      1185.0,
-      -55,
-      -460.0,
-      1350.0,
-      -25,
-      -140.0
-     ]
+     "pos": [1245.0, -40, -400.0],
+     "rot": [0, -77.3196, 0],
+     "bbox": [1185.0, -55, -460.0, 1350.0, -25, -140.0]
     }
    ]
   },
@@ -2877,58 +1454,28 @@
    "dims": {
     "rod": {
      "d": 90.0,
-     "local_x_range": [
-      0,
-      495.0
-     ]
+     "local_x_range": [0, 495.0]
     },
     "piston": {
      "d": 160.0,
-     "local_x_range": [
-      495.0,
-      555.0
-     ],
+     "local_x_range": [495.0, 555.0],
      "note": "nominal sliding fit in A35 bore d160 (allowed contact)"
     },
     "total_length": 555.0,
     "end_chamfer": 3,
     "travel": {
-     "s0_piston_global_x": [
-      1855.0,
-      1915.0
-     ],
-     "s1_piston_global_x": [
-      2093.0,
-      2153.0
-     ],
-     "bore_global_x": [
-      1845.0,
-      2245.0
-     ]
+     "s0_piston_global_x": [1855.0, 1915.0],
+     "s1_piston_global_x": [2093.0, 2153.0],
+     "bore_global_x": [1845.0, 2245.0]
     }
    },
    "local_origin": "Center of the rod front end face (butts crosshead hub +X face). Rod along local +X (x 0..495), piston x 495..555, axis = machine axis.",
    "instances": [
     {
      "name": "A37_1",
-     "pos": [
-      1360.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1360.0,
-      -80,
-      -80,
-      1915.0,
-      80,
-      80
-     ]
+     "pos": [1360.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1360.0, -80, -80, 1915.0, 80, 80]
     }
    ]
   },
@@ -2951,24 +1498,9 @@
    "instances": [
     {
      "name": "A91_1",
-     "pos": [
-      1865.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1865.0,
-      -424,
-      -424,
-      1915.0,
-      424,
-      424
-     ]
+     "pos": [1865.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1865.0, -424, -424, 1915.0, 424, 424]
     }
    ]
   },
@@ -2979,38 +1511,17 @@
     "tube_id": 460,
     "length": 125,
     "lip_od": 680,
-    "lip1_local_x": [
-     45,
-     60
-    ],
-    "lip2_local_x": [
-     110,
-     125
-    ],
+    "lip1_local_x": [45, 60],
+    "lip2_local_x": [110, 125],
     "note": "Tup x 0..125 (arka plaka arka yuzunden). Merkez disli lip1 ile lip2 arasinda (x 60..110) doner. ID 460: A35 flans koseleri r212."
    },
    "local_origin": "Makine ekseni, arka plaka arka yuzu (temas yuzeyi). Tup ekseni +X.",
    "instances": [
     {
      "name": "A92_1",
-     "pos": [
-      1805.0,
-      0,
-      0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      -340,
-      -340,
-      1930.0,
-      340,
-      340
-     ]
+     "pos": [1805.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, -340, -340, 1930.0, 340, 340]
     }
    ]
   },
@@ -3022,34 +1533,16 @@
     "width": 50,
     "phase_deg": 0.0,
     "shaft_d": 40,
-    "shaft_local_x": [
-     50,
-     135
-    ],
+    "shaft_local_x": [50, 135],
     "note": "Mil redüktör cikis deligine girer (A94 x 0..40 icine 40 mm)."
    },
    "local_origin": "Pinyon ekseni, pinyon -X yuzu. Pinyon x 0..50, mil x 50..135. Disler g.gear_x(20,4,0,50,0,phase_deg) (merkez 0,0 lokal).",
    "instances": [
     {
      "name": "A93_1",
-     "pos": [
-      1865.0,
-      0,
-      460.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1865.0,
-      -44,
-      416,
-      2000.0,
-      44,
-      504
-     ]
+     "pos": [1865.0, 0, 460.0],
+     "rot": [0, 0, 0],
+     "bbox": [1865.0, -44, 416, 2000.0, 44, 504]
     }
    ]
   },
@@ -3063,34 +1556,16 @@
     "output_hole_depth": 40,
     "flange_d": 250,
     "flange_thk": 15,
-    "flange_local_x": [
-     205,
-     220
-    ],
+    "flange_local_x": [205, 220],
     "fillet_hint": 10
    },
    "local_origin": "Cikis mili ekseni, govdenin -X yuzu. Govde x 0..220, y +-90, z +-100 (eksen merkezde). Motor tarafi flans x 205..220 (d250).",
    "instances": [
     {
      "name": "A94_1",
-     "pos": [
-      1960.0,
-      0,
-      460.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1960.0,
-      -125,
-      335,
-      2180.0,
-      125,
-      585
-     ]
+     "pos": [1960.0, 0, 460.0],
+     "rot": [0, 0, 0],
+     "bbox": [1960.0, -125, 335, 2180.0, 125, 585]
     }
    ]
   },
@@ -3100,21 +1575,11 @@
     "flange_d": 200,
     "flange_thk": 12,
     "body_d": 180,
-    "body_local_x": [
-     12,
-     290
-    ],
+    "body_local_x": [12, 290],
     "fan_cover_d": 170,
-    "fan_cover_local_x": [
-     290,
-     320
-    ],
+    "fan_cover_local_x": [290, 320],
     "terminal_box": {
-     "size_xyz": [
-      90,
-      90,
-      60
-     ],
+     "size_xyz": [90, 90, 60],
      "local_center_x": 150,
      "on_top": true
     },
@@ -3126,24 +1591,9 @@
    "instances": [
     {
      "name": "A95_1",
-     "pos": [
-      2180.0,
-      0,
-      460.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      2180.0,
-      -100,
-      360,
-      2500.0,
-      100,
-      610
-     ]
+     "pos": [2180.0, 0, 460.0],
+     "rot": [0, 0, 0],
+     "bbox": [2180.0, -100, 360, 2500.0, 100, 610]
     }
    ]
   },
@@ -3151,32 +1601,14 @@
    "name": "Motor-redüktör braketi",
    "dims": {
     "plate": {
-     "local_x": [
-      0,
-      20
-     ],
-     "y": [
-      -120,
-      120
-     ],
-     "local_z": [
-      0,
-      110
-     ]
+     "local_x": [0, 20],
+     "y": [-120, 120],
+     "local_z": [0, 110]
     },
     "arm": {
-     "local_x": [
-      0,
-      155
-     ],
-     "y": [
-      -120,
-      120
-     ],
-     "local_z": [
-      80,
-      110
-     ]
+     "local_x": [0, 155],
+     "y": [-120, 120],
+     "local_z": [80, 110]
     },
     "gusset": {
      "optional": true
@@ -3186,24 +1618,9 @@
    "instances": [
     {
      "name": "A96_1",
-     "pos": [
-      1805.0,
-      0,
-      430.0
-     ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      1805.0,
-      -120,
-      430,
-      1960.0,
-      120,
-      540
-     ]
+     "pos": [1805.0, 0, 430.0],
+     "rot": [0, 0, 0],
+     "bbox": [1805.0, -120, 430, 1960.0, 120, 540]
     }
    ]
   },
@@ -3222,24 +1639,333 @@
    "instances": [
     {
      "name": "A97_1",
-     "pos": [
-      2500.0,
-      0,
-      460.0
+     "pos": [2500.0, 0, 460.0],
+     "rot": [0, 0, 0],
+     "bbox": [2500.0, -35, 425, 2550.0, 35, 495]
+    }
+   ]
+  },
+  "A83": {
+   "name": "Kalip itici plakasi (itici + tutucu plaka)",
+   "dims": {
+    "back_plate": {
+     "size_yz": [370, 520],
+     "thickness": 30,
+     "local_x_range": [-30, 0]
+    },
+    "retainer_plate": {
+     "size_yz": [370, 520],
+     "thickness": 25,
+     "local_x_range": [-55, -30]
+    },
+    "pin_holes": {
+     "d": 10,
+     "cb_d": 16,
+     "cb_depth": 5,
+     "centers_yz": [
+      [-125, -17.5],
+      [-75, -17.5],
+      [-25, -17.5],
+      [25, -17.5],
+      [75, -17.5],
+      [125, -17.5],
+      [-125, 47.5],
+      [-75, 47.5],
+      [-25, 47.5],
+      [25, 47.5],
+      [75, 47.5],
+      [125, 47.5],
+      [-125, 112.5],
+      [-75, 112.5],
+      [-25, 112.5],
+      [25, 112.5],
+      [75, 112.5],
+      [125, 112.5],
+      [-125, 177.5],
+      [-75, 177.5],
+      [-25, 177.5],
+      [25, 177.5],
+      [75, 177.5],
+      [125, 177.5]
      ],
-     "rot": [
-      0,
-      0,
-      0
-     ],
-     "bbox": [
-      2500.0,
-      -35,
-      425,
-      2550.0,
-      35,
-      495
-     ]
+     "note": "through retainer only; head counterbore at retainer rear (x -35..-30)"
+    },
+    "return_pin_holes": {
+     "d": 25,
+     "cb_d": 35,
+     "cb_depth": 6,
+     "centers_yz": [[160, 230], [160, -230], [-160, 230], [-160, -230]],
+     "note": "through retainer only; head counterbore x -36..-30"
+    },
+    "stroke": 65,
+    "note": "both plates fused (bolted in reality). Pushed by A42 rods at (+-90,+-140); returned by A85 when die closes."
+   },
+   "local_origin": "Center of the back-plate rear face (contact with A82 clamping plate front face, global X=360). Body along -X (x -55..0).",
+   "instances": [
+    {
+     "name": "A83_1",
+     "pos": [360.0, 0, 0],
+     "rot": [0, 0, 0],
+     "bbox": [305.0, -185, -260, 360.0, 185, 260]
+    }
+   ]
+  },
+  "A84": {
+   "name": "Itici pimi",
+   "dims": {
+    "d": 10,
+    "length": 145,
+    "head": {
+     "d": 16,
+     "thickness": 5
+    },
+    "note": "DIN/ISO 8694 style; tip flush with cavity floor (global X=185 = parting 170 + pocket 15)"
+   },
+   "local_origin": "Center of the head rear face (on A83 back plate). Shank along -X (head x -5..0, tip at x -145).",
+   "instances": [
+    {
+     "name": "A84_1",
+     "pos": [330.0, -125, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -133, -25.5, 330.0, -117, -9.5]
+    },
+    {
+     "name": "A84_2",
+     "pos": [330.0, -75, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -83, -25.5, 330.0, -67, -9.5]
+    },
+    {
+     "name": "A84_3",
+     "pos": [330.0, -25, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -33, -25.5, 330.0, -17, -9.5]
+    },
+    {
+     "name": "A84_4",
+     "pos": [330.0, 25, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 17, -25.5, 330.0, 33, -9.5]
+    },
+    {
+     "name": "A84_5",
+     "pos": [330.0, 75, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 67, -25.5, 330.0, 83, -9.5]
+    },
+    {
+     "name": "A84_6",
+     "pos": [330.0, 125, -17.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 117, -25.5, 330.0, 133, -9.5]
+    },
+    {
+     "name": "A84_7",
+     "pos": [330.0, -125, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -133, 39.5, 330.0, -117, 55.5]
+    },
+    {
+     "name": "A84_8",
+     "pos": [330.0, -75, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -83, 39.5, 330.0, -67, 55.5]
+    },
+    {
+     "name": "A84_9",
+     "pos": [330.0, -25, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -33, 39.5, 330.0, -17, 55.5]
+    },
+    {
+     "name": "A84_10",
+     "pos": [330.0, 25, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 17, 39.5, 330.0, 33, 55.5]
+    },
+    {
+     "name": "A84_11",
+     "pos": [330.0, 75, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 67, 39.5, 330.0, 83, 55.5]
+    },
+    {
+     "name": "A84_12",
+     "pos": [330.0, 125, 47.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 117, 39.5, 330.0, 133, 55.5]
+    },
+    {
+     "name": "A84_13",
+     "pos": [330.0, -125, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -133, 104.5, 330.0, -117, 120.5]
+    },
+    {
+     "name": "A84_14",
+     "pos": [330.0, -75, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -83, 104.5, 330.0, -67, 120.5]
+    },
+    {
+     "name": "A84_15",
+     "pos": [330.0, -25, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -33, 104.5, 330.0, -17, 120.5]
+    },
+    {
+     "name": "A84_16",
+     "pos": [330.0, 25, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 17, 104.5, 330.0, 33, 120.5]
+    },
+    {
+     "name": "A84_17",
+     "pos": [330.0, 75, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 67, 104.5, 330.0, 83, 120.5]
+    },
+    {
+     "name": "A84_18",
+     "pos": [330.0, 125, 112.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 117, 104.5, 330.0, 133, 120.5]
+    },
+    {
+     "name": "A84_19",
+     "pos": [330.0, -125, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -133, 169.5, 330.0, -117, 185.5]
+    },
+    {
+     "name": "A84_20",
+     "pos": [330.0, -75, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -83, 169.5, 330.0, -67, 185.5]
+    },
+    {
+     "name": "A84_21",
+     "pos": [330.0, -25, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, -33, 169.5, 330.0, -17, 185.5]
+    },
+    {
+     "name": "A84_22",
+     "pos": [330.0, 25, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 17, 169.5, 330.0, 33, 185.5]
+    },
+    {
+     "name": "A84_23",
+     "pos": [330.0, 75, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 67, 169.5, 330.0, 83, 185.5]
+    },
+    {
+     "name": "A84_24",
+     "pos": [330.0, 125, 177.5],
+     "rot": [0, 0, 0],
+     "bbox": [185.0, 117, 169.5, 330.0, 133, 185.5]
+    }
+   ]
+  },
+  "A85": {
+   "name": "Geri donus pimi",
+   "dims": {
+    "d": 25,
+    "length": 160,
+    "head": {
+     "d": 35,
+     "thickness": 6
+    },
+    "note": "tip flush with parting face (global X=170); touches A81 when die closes and pushes A83 back"
+   },
+   "local_origin": "Center of the head rear face (on A83 back plate). Shank along -X (head x -6..0, tip at x -160).",
+   "instances": [
+    {
+     "name": "A85_1",
+     "pos": [330.0, 160, 230],
+     "rot": [0, 0, 0],
+     "bbox": [170.0, 142.5, 212.5, 330.0, 177.5, 247.5]
+    },
+    {
+     "name": "A85_2",
+     "pos": [330.0, 160, -230],
+     "rot": [0, 0, 0],
+     "bbox": [170.0, 142.5, -247.5, 330.0, 177.5, -212.5]
+    },
+    {
+     "name": "A85_3",
+     "pos": [330.0, -160, 230],
+     "rot": [0, 0, 0],
+     "bbox": [170.0, -177.5, 212.5, 330.0, -142.5, 247.5]
+    },
+    {
+     "name": "A85_4",
+     "pos": [330.0, -160, -230],
+     "rot": [0, 0, 0],
+     "bbox": [170.0, -177.5, -247.5, 330.0, -142.5, -212.5]
+    }
+   ]
+  },
+  "A13": {
+   "name": "Sabit plaka destek diregi (kaynakli ayak)",
+   "dims": {
+    "base_plate": {
+     "local_x_range": [-620, 0],
+     "y_range": [-80, 80],
+     "z_range": [0, 40],
+     "note": "x -220..0 lies between frame top (Z=-530) and A21 bottom (Z=-490); x -620..-220 on frame top behind A21, over A11 cross ribs X=-600 and -235"
+    },
+    "column_plate": {
+     "local_x_range": [-270, -220],
+     "y_range": [-80, 80],
+     "z_range": [40, 270],
+     "note": "front face (local x=-220) bolted to A21 rear face; top Z=-260 (15 below A51 flange, 87.5 below A58)"
+    },
+    "gussets": {
+     "count": 2,
+     "thickness": 25,
+     "y_ranges": [[55, 80], [-80, -55]],
+     "profile_xz": [[-270, 40], [-270, 270], [-620, 40]],
+     "note": "triangular webs welded to base and column rear face; 33.3 deg strut"
+    },
+    "bolts": {
+     "optional": true,
+     "column_to_A21": {
+      "size": "M36 10.9",
+      "count": 4,
+      "centers_local_yz": [[27.5, 225], [-27.5, 225], [27.5, 85], [-27.5, 85]]
+     },
+     "base_to_A21_bottom": {
+      "size": "M36 10.9",
+      "count": 2,
+      "centers_local_xy": [[-110, 27.5], [-110, -27.5]],
+      "note": "from below through frame top plate"
+     },
+     "base_to_A11": {
+      "size": "M30 10.9",
+      "count": 6,
+      "centers_local_xy": [[-590, 27.5], [-590, -27.5], [-470, 27.5], [-470, -27.5], [-350, 27.5], [-350, -27.5]]
+     }
+    },
+    "material": "S355J2 welded",
+    "shear_key": "not required (slip resistance 886 kN > 400 kN); optional 40x20 transverse key under A21",
+    "note": "2 pedestals make A21 FIXED to A11 (bolted). Clamp force is an internal loop (tie bars); pedestals carry weight 24 kN + accidental horizontal H=400 kN (assumption 0.1*F_clamp)."
+   },
+   "local_origin": "Point on the frame top (Z=-530) at the fixed platen die-face plane (X=0), on the pedestal centre line (Y=+-150). Local axes parallel to global; base x -620..0, y -80..80, z 0..40; column x -270..-220, z 40..270.",
+   "instances": [
+    {
+     "name": "A13_1",
+     "pos": [0, 150.0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-620.0, 70.0, -530.0, 0, 230.0, -260.0]
+    },
+    {
+     "name": "A13_2",
+     "pos": [0, -150.0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-620.0, -230.0, -530.0, 0, -70.0, -260.0]
     }
    ]
   }
@@ -3257,7 +1983,8 @@
    "face": "top",
    "b": "A12",
    "type": "contact",
-   "gap": 0
+   "gap": 0,
+   "note": "A21 is FIXED (bolted to A11 via A13); rails A12 under A21 are seating only, slideways for A22/A23"
   },
   {
    "a": "A22",
@@ -3457,14 +2184,14 @@
   },
   {
    "a": "A41",
-   "face": "back face",
+   "face": "4 tie-post shoulders d36 at (+-62.5,+-70) (M30 studs into A22 ejector_unit_mount)",
    "b": "A22",
    "type": "contact",
    "gap": 0
   },
   {
    "a": "A41",
-   "face": "plate rear face",
+   "face": "2 rod end faces at (+-62.5,0), M42x2 threaded into A42 rod_attach",
    "b": "A42",
    "type": "contact",
    "gap": 0
@@ -3580,206 +2307,171 @@
    "b": "A31",
    "type": "clearance",
    "gap": 13
+  },
+  {
+   "a": "A13",
+   "face": "base bottom (Z=-530)",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0,
+   "note": "6 x M30 per pedestal"
+  },
+  {
+   "a": "A13",
+   "face": "base top under platen (Z=-490)",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A13",
+   "face": "column front face (X=-220)",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0,
+   "note": "4 x M36 per pedestal into A21 rear face"
+  },
+  {
+   "a": "A13",
+   "face": "column top (Z=-260)",
+   "b": "A51",
+   "type": "clearance",
+   "gap": 15
+  },
+  {
+   "a": "A13",
+   "face": "side (|Y|=230)",
+   "b": "A25",
+   "type": "clearance",
+   "gap": 25
+  },
+  {
+   "a": "A13",
+   "face": "front end (X=0)",
+   "b": "A11",
+   "type": "clearance",
+   "gap": 20,
+   "note": "top_opening_biscuit_drop starts at X=20"
+  },
+  {
+   "a": "A42",
+   "face": "knock-out rod tips (X=360)",
+   "b": "A83",
+   "type": "contact",
+   "gap": 0
+  },
+  {
+   "a": "A83",
+   "face": "back plate rear face (X=360)",
+   "b": "A82",
+   "type": "contact",
+   "gap": 0,
+   "note": "clamping plate front face"
+  },
+  {
+   "a": "A84",
+   "face": "shank / pin bores",
+   "b": "A82",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A84",
+   "face": "head / retainer counterbore",
+   "b": "A83",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A85",
+   "face": "shank / return pin bores",
+   "b": "A82",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A85",
+   "face": "head / retainer counterbore",
+   "b": "A83",
+   "type": "coaxial",
+   "gap": 0
+  },
+  {
+   "a": "A85",
+   "face": "tip (X=170)",
+   "b": "A81",
+   "type": "contact",
+   "gap": 0,
+   "note": "die closed"
+  },
+  {
+   "a": "A41",
+   "face": "barrels (|Y|<=120)",
+   "b": "A34",
+   "type": "clearance",
+   "gap": 7.5,
+   "note": "split knee pins |Y|>=127.5"
   }
  ],
  "clearances": {
   "min_gap_default": 2.0,
   "allowed_contacts": [
-   [
-    "A11",
-    "A12"
-   ],
-   [
-    "A11",
-    "A56"
-   ],
-   [
-    "A11",
-    "A57"
-   ],
-   [
-    "A11",
-    "A71"
-   ],
-   [
-    "A12",
-    "A21"
-   ],
-   [
-    "A12",
-    "A22"
-   ],
-   [
-    "A12",
-    "A23"
-   ],
-   [
-    "A21",
-    "A24"
-   ],
-   [
-    "A21",
-    "A25"
-   ],
-   [
-    "A24",
-    "A25"
-   ],
-   [
-    "A21",
-    "A51"
-   ],
-   [
-    "A21",
-    "A81"
-   ],
-   [
-    "A22",
-    "A28"
-   ],
-   [
-    "A24",
-    "A28"
-   ],
-   [
-    "A22",
-    "A82"
-   ],
-   [
-    "A81",
-    "A82"
-   ],
-   [
-    "A22",
-    "A34"
-   ],
-   [
-    "A22",
-    "A41"
-   ],
-   [
-    "A23",
-    "A24"
-   ],
-   [
-    "A23",
-    "A26"
-   ],
-   [
-    "A24",
-    "A26"
-   ],
-   [
-    "A23",
-    "A34"
-   ],
-   [
-    "A23",
-    "A35"
-   ],
-   [
-    "A31",
-    "A34"
-   ],
-   [
-    "A32",
-    "A34"
-   ],
-   [
-    "A33",
-    "A34"
-   ],
-   [
-    "A41",
-    "A42"
-   ],
-   [
-    "A51",
-    "A52"
-   ],
-   [
-    "A51",
-    "A81"
-   ],
-   [
-    "A52",
-    "A54"
-   ],
-   [
-    "A54",
-    "A55"
-   ],
-   [
-    "A54",
-    "A57"
-   ],
-   [
-    "A61",
-    "A62"
-   ],
-   [
-    "A34",
-    "A36"
-   ],
-   [
-    "A31",
-    "A37"
-   ],
-   [
-    "A35",
-    "A37"
-   ],
-   [
-    "A91",
-    "A92"
-   ],
-   [
-    "A91",
-    "A26"
-   ],
-   [
-    "A91",
-    "A93"
-   ],
-   [
-    "A92",
-    "A23"
-   ],
-   [
-    "A93",
-    "A94"
-   ],
-   [
-    "A94",
-    "A95"
-   ],
-   [
-    "A95",
-    "A97"
-   ],
-   [
-    "A96",
-    "A23"
-   ],
-   [
-    "A96",
-    "A94"
-   ],
-   [
-    "A22",
-    "A42"
-   ]
+   ["A11", "A12"],
+   ["A11", "A56"],
+   ["A11", "A57"],
+   ["A11", "A71"],
+   ["A12", "A21"],
+   ["A12", "A22"],
+   ["A12", "A23"],
+   ["A21", "A24"],
+   ["A21", "A25"],
+   ["A24", "A25"],
+   ["A21", "A51"],
+   ["A21", "A81"],
+   ["A22", "A28"],
+   ["A24", "A28"],
+   ["A22", "A82"],
+   ["A81", "A82"],
+   ["A22", "A34"],
+   ["A22", "A41"],
+   ["A23", "A24"],
+   ["A23", "A26"],
+   ["A24", "A26"],
+   ["A23", "A34"],
+   ["A23", "A35"],
+   ["A31", "A34"],
+   ["A32", "A34"],
+   ["A33", "A34"],
+   ["A41", "A42"],
+   ["A51", "A52"],
+   ["A51", "A81"],
+   ["A52", "A54"],
+   ["A54", "A55"],
+   ["A54", "A57"],
+   ["A61", "A62"],
+   ["A34", "A36"],
+   ["A31", "A37"],
+   ["A35", "A37"],
+   ["A91", "A92"],
+   ["A91", "A26"],
+   ["A91", "A93"],
+   ["A92", "A23"],
+   ["A93", "A94"],
+   ["A94", "A95"],
+   ["A95", "A97"],
+   ["A96", "A23"],
+   ["A96", "A94"],
+   ["A11", "A13"],
+   ["A13", "A21"],
+   ["A42", "A83"],
+   ["A82", "A83"],
+   ["A82", "A84"],
+   ["A82", "A85"],
+   ["A83", "A84"],
+   ["A83", "A85"],
+   ["A81", "A85"]
   ],
-  "mesh_pairs": [
-   [
-    "A91",
-    "A26"
-   ],
-   [
-    "A91",
-    "A93"
-   ]
-  ],
+  "mesh_pairs": [["A91", "A26"], ["A91", "A93"]],
   "mesh_note": "Disli kavramalari: izinli temas ama girisim hacmi <50 mm3 olmali (faz hatasi ~5 cm3 verir)."
  }
 }

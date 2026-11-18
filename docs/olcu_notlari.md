@@ -42,6 +42,16 @@ Tasarım esası: 400 t horizontal cold-chamber HPDC machine, 5-point double togg
 | 2026-11-15 | A42 | plaka 340x340 -> 240(Y)x340(Z); kılavuz delikleri ±85; itici milleri (±140,±140) -> (±90,±140) | katlanan büyük kollar (|Y|>=130) ve diz pimleri yanından geçsin |
 | 2026-11-15 | A22 | itici mil delikleri (±140,±140) d42 -> (±90,±140) d46 | A42 mil düzeni; 5 mm boşluk |
 | 2026-11-15 | clearances | (A31,A35) çıkarıldı; (A34,A36), (A31,A37), (A35,A37) eklendi | yeni temaslar |
+| 2026-11-18 | A21 | ejector_return_holes 16 x d32 -> kaldırıldı; support_mount (opsiyonel M36 delikler) eklendi | Karar 2026-11-17: sabit tarafta itici deliği yok; A21 A13 ile şaseye sabit |
+| 2026-11-18 | A22 | delik deseni değişmedi (merkez d80 + 4 x d46 (±90,±140)); ejector_unit_mount 4 x M30 (±62.5,±70) opsiyonel eklendi | A41 gergi direkleri yeni konumda |
+| 2026-11-18 | A41 | tek silindir d140/d70 merkezde -> 2 silindir d100/d56, (Y,Z)=(±62.5,0); gövde OD 170 -> 115; flanş 230x230x25 -> köprü 240x200x35 (42CrMo4+QT), x 205..240; gövde 230..405 -> 240..405; piston 20 eklendi; direkler (±85,±85) -> (±62.5,±70); bbox Y ±115 -> ±120, Z ±115 -> ±100; boy 425 aynı | Karar 2026-11-17 (çift, yatay simetrik). d = sqrt(4F/(πp)) = 99,0 -> 100; itme 2 x 110,0 = 219,9 kN (22,4 t). Köprü eğilmesi 195 MPa (direk aralığı 170 -> 140, kalınlık 25 -> 35). Diz pimi 7,5 mm, büyük kol 10 mm |
+| 2026-11-18 | A42 | kılavuz delikleri (±85,±85) -> (±62.5,±70); köşe çubuk boyu 345 -> 390 (uç X=360, A83'e temas); rod_attach M42x2 (±62.5,0) ve opsiyonel merkez çubuk eklendi; bbox xmin 405 -> 360 | Çift silindir bağlantısı; kalıp itici plakasını itmesi |
+| 2026-11-18 | A82 | 4 x d36 tam boy pim deliği -> bağlama plakasında 4 x d46 + d80 merkez; itici kutusu eklendi (bağlama plakası 40 + raylar 120 (|Y| 200..270) + kalıp plakası 70); 24 x d10 + 4 x d25 pim yuvası | Karar 2026-11-17: "24" kalıbın pimleri; kalıp yüksekliği 230 değişmedi |
+| 2026-11-18 | A83 (yeni) | kalıp itici plakası 370x520, arka 30 + tutucu 25, X 305..360; kurs 65 | itici kutusu |
+| 2026-11-18 | A84 (yeni) | 24 itici pimi d10 x 145, baş d16x5; 6x4 ızgara Y ±25/75/125, Z -17.5/47.5/112.5/177.5; uç X=185 | gözde, kalıp boşluğu tabanında |
+| 2026-11-18 | A85 (yeni) | 4 geri dönüş pimi d25 x 160, baş d35x6, (±160,±230); uç X=170 (ayrım yüzü) | kalıp kapanırken A83'ü geri iter |
+| 2026-11-18 | A13 (yeni) | 2 destek direği Y=±150: taban 620x160x40 (X -620..0), kolon 50x160x230 (Z -490..-260), 2 x 25 kalın üçgen takviye; A21'e 4+2 x M36, A11'e 6 x M30 (10.9) | A21 yalnız raylara oturuyordu. Kapama kuvveti iç döngü (net 0); kazara yatay yük H = 0,1·F = 400 kN (VARSAYIM) -> 196 kNm; takviye 153 MPa, cıvata 265 kN < ön gerilme 538 kN |
+| 2026-11-18 | mates/clearances | A21 SABİT notu; A13, A42-A83, A83-A82, A84, A85 mate'leri; 9 izinli temas çifti eklendi | yeni parçalar |
 
 ## Hareket (kapama) doğrulaması – 2026-11-15
 Açılma kursu 420 mm KORUNDU. Çözüm: itici ünitesi |Y|<=120, |Z|<=170, boy 425 zarfına alındı; diz pimleri bölündü; çapraz kafa göbek+dil oldu.
@@ -69,3 +79,9 @@ Sonuç: en küçük boşluk 5.00 mm, çakışma yok; izinli temaslarda en büyü
 | A31–A32 | 84.4 | 1.00 | |
 
 Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.py: KeyError) – yeniden çizilecek; A36/A37 scriptleri yok. İtici ileri konumu (plaka -145) modellenmedi; zarf lokal x 5..200 içinde kalır, A82'de mil deliği yok (temsili kalıp).
+
+## İtici grubu ve sabit plaka desteği – 2026-11-18
+- Hesap dökümü: out/olcu_2026-11-18_itici_destek.txt (kaynak: formül; H = 0,1·F_kapama varsayımdır, standart değildir).
+- Vekil katı doğrulaması (params ölçüleri, s=0..1, 21 adım): statik çakışma yok; hareket boyunca en küçük boşluklar A41–A34(B) 7,5 mm, A41–A32 10,0 mm, A41–A31 13,0 mm (değişmedi).
+- Açık: lib/kinematics.py'de MOVING_PLATEN_GROUP'a A83/A84/A85, DIE_HEIGHT_GROUP_FIXED'e A13 (ve zaten eksik olan A58) eklenmeli; motion_check --kalip-yuksekligi A81/A82 ile birlikte A83/A84/A85'i de dışarıda bırakmalı.
+- İtici kursu: makine 145 (H-400D); bu kalıp için ayar 65 (kutu sınırı).
