@@ -3,10 +3,17 @@ def build(d, G, g):
     s = g.move(g.box(t, W, Hz), -t / 2, 0, 0)
     tb = d["tie_bar_holes"]
     cuts = [g.move(g.cyl(tb["d"] / 2, t + 2, "x"), -t / 2, y, z) for y, z in tb["centers_yz"]]
+
     sh = d["shot_hole"]
-    cuts.append(g.move(g.cyl(sh["d"] / 2, t + 2, "x"), -t / 2, sh["center_yz"][0], sh["center_yz"][1]))
+    d_sh = sh["d"]
+
+    # 3 vuruş ekseninin (alt, orta, ust) TAMAMI sabit plaka üzerinde delik/yatak olarak açılır.
+    for z_pos in [-150.0, -75.0, 0.0]:
+        cuts.append(g.move(g.cyl(d_sh / 2, t + 2, "x"), -t / 2, 0, z_pos))
+
     if "ejector_return_holes" in d:
         erh = d["ejector_return_holes"]
         for y, z in erh["centers_yz"]:
             cuts.append(g.move(g.cyl(erh["d"] / 2, t + 2, "x"), -t / 2, y, z))
+
     return g.cut(s, *cuts)
