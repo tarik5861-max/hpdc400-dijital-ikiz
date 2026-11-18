@@ -59,6 +59,13 @@ Tasarım esası: 400 t horizontal cold-chamber HPDC machine, 5-point double togg
 | 2026-11-18 (rev2) | A21 | support_mount: bottom_tapped_M36 + rear_tapped_M36 (8) kaldırıldı -> rear_tapped_M24 18 adet (3 flanş × 6, PCD 160/160/180), opsiyonel | yeni kolon flanşları |
 | 2026-11-18 (rev2) | mates/clearances | eski 6 A13 mate'i ve A58 mate'leri silindi; A13-A21 (cıvatalı), A13-A14 (kaynaklı), A14-A11 (kaynaklı) + 4 boşluk mate'i; izinli temas: (A11,A13) çıkarıldı, (A13,A14), (A11,A14) eklendi | yeni bağlantılar |
 | 2026-11-18 (rev2) | bom | A13 qty 2 -> 3, ad "Sabit plaka destek kolonu (uzun, 2 alt + 1 üst)"; A14 eklendi (faz 1, parts/A14_kolon_arka_dikme.py); A58 çıkarıldı (faz 3) | yukarıdaki değişiklikler |
+| 2026-11-18 (shot) | global | yok -> `shot_position: "alt"`, `shot_positions_z: {alt -150, orta -75, ust 0}`, `shot_follow` (türetme kuralı); `shot_offset_z` -150 aynı, artık TÜRETİLMİŞ | Kullanıcı isteği: ayarlanabilir 3 konumlu vuruş ekseni (ZHENLI/Idra tipi); mevcut -150 = alt. Üst = makine merkezi |
+| 2026-11-18 (shot) | A21 | shot_hole d140 center [0,-150] değişmedi; `center_z_from`, `positions_z_ref`, `drawn`, `physical_note`, `edge_margins_mm` eklendi | Yalnız seçili delik çizilir, diğerleri tıkalı. Adım 75 < 140 → gerçekte dikey pencere 140×290 (Z -220..+70) + 2 dolgu takozu (modellenmez) |
+| 2026-11-18 (shot) | A81 | sleeve_bore center [0,-150] değişmedi; `center_z_from` eklendi | seçiciyi izler |
+| 2026-11-18 (shot) | A51, A52, A54, A55 | pos Z -150 değişmedi; instance `note` (türetilmiş) eklendi | pos[2] = z_sel, bbox Z += dz |
+| 2026-11-18 (shot) | A57 | saddles local_z_range [30,230] değişmedi (alt), not: üst = 230+dz (230/305/380); `height_adjust` eklendi (kaide + 0/1/2×75 ara takoz, 2×Ø25 pim, 1×M24 kriko, 4×M24 10.9 saplama / semer, her ara yüzde 300×40 kama, A11'e kaynaklı 80×400×60 dayama takozu, 8×M30 taban); gusset notu | vuruş yüksekliği ayar mekanizması ve 430 kN yük yolu (sürtünme 2150 kN sıkma isterdi → kama) |
+| 2026-11-18 (shot) | A13 | design_loads.injection_reaction metni konum bazlı oldu (215/184/153 kN alt kolon, 0/62/124 kN üst kolon) | vuruş ekseni kayınca tepki kolonlar arasında yeniden dağılır |
+| 2026-11-18 (shot) | meta.notes | 1 not güncellendi (Shot position ... = 'alt'), 3 not eklendi (konumlar/boşluklar, sınırlar, tepki) | izlenebilirlik |
 
 ## Hareket (kapama) doğrulaması – 2026-11-15
 Açılma kursu 420 mm KORUNDU. Çözüm: itici ünitesi |Y|<=120, |Z|<=170, boy 425 zarfına alındı; diz pimleri bölündü; çapraz kafa göbek+dil oldu.
@@ -115,3 +122,28 @@ Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.p
 - Enjeksiyon tepkisi 430 kN (0,107·F) A58 kalktığı için her atışta A57-A11-A14-A13 yolundan geçer: alt kolon başına 215 kN çekme, 27 MPa (yorulma uygun). Seçenek: A54 ön kafasını alt kolonlara bağlamak (faz 3, karar gerekli).
 - Isıl: kolon-şase sıcaklık farkı 20 K → 0,58 mm; uçlar rijit kalırsa büyük zorlama doğar → ön flanşta şim/oval delik önerildi (açık risk).
 - Boşluklar (min 10 hedefi sağlandı): A13–A56 10,0 (A56 Y -390'a taşındı); A13–A54 başlıkları 20; A13–A51 flanşı 25; A13–A55 30; A14–A55 40; A14–A11 X=-2000 kaburgası 40 (toe kaburga üstünde, temas üst plaka üzerinden); A13–A21 shot hole kenarı 50; A13–A25 69; A13–A52 (ileri, +500) 95; A13–A57 115,5; A13–A54 kol süpürmesi 125; A13–biscuit açıklığı 369; A13–A11 üst plakası 280. Üst kolon altında döküm ağzı üstü serbest yükseklik 390 mm (Z -80..310), kepçe yandan girer.
+
+## Ayarlanabilir 3 konumlu vuruş ekseni – 2026-11-18
+- Kaynak: formül + params ölçüleriyle tam montaj taraması (mevcut parça scriptleri, BRepExtrema). Döküm: out/olcu_2026-11-18_shot_3konum.txt.
+- Tek doğruluk kaynağı: `global.shot_position` (alt|orta|ust, varsayılan alt) + `global.shot_positions_z`. Diğer Z alanları türetilmiş, şu an 'alt' değerinde; resolver (assemble) yazılana kadar seçici yalnız 'alt'ta tutarlıdır.
+
+| Konum | Z | A57 semer üstü (lokal) | Ara takoz | A21 et: kolon deliği / alt A13 flanşı / üst A13 flanşı / plaka altı | Kepçe serbest yük. (çubuk / flanş altı) |
+|---|---|---|---|---|---|
+| alt | -150 | 230 | 0 | 289 / 50 / 340 / 270 | 390 / 340 |
+| orta | -75 | 305 | 1 × 75 | 334 / 62 / 265 / 345 | 315 / 265 |
+| ust | 0 | 380 | 2 × 75 | 387 / 96 / 190 / 420 | 240 / 190 |
+
+| Çift (min boşluk mm) | alt | orta | ust | Not |
+|---|---|---|---|---|
+| A55–A57 arka semer | 10 | 10 | 10 | düşey, semer kafayla birlikte yükselir |
+| A54–A13 alt kolonlar | 20 | 20 | 20 | Y (kafa ±150 / çubuk 170) |
+| A57 semer–A13 alt kolonlar | 115,5 | 52,6 | 20 | üstte semer çubuk kotuna çıkar; Y 20 |
+| A51 flanş–A13 alt flanş | 25 | 37 | 71 | |
+| A55–A14 (X) | 40 | 40 | 40 | alt nervür X; üst nervür Z220 ile üstte 80 |
+| A54 / A55 / A51–A13_3 üst kolon | >200 | >200 | 160 / 153 / 165 | |
+| A57–A56, A54–A56 | 80, 154 | 80, 154 | 80, 154 | değişmez |
+| A52 ileri–A21 | 45 | 45 | 45 | |
+Üç konumda da çakışma 0, BBOX sapması 0. A12 raylar (X≥-220, |Y|≥300), A25 somunları (|Y|≥255, X≥-330) ve A11 biscuit açıklığı (X 20..580) vuruş Z'sinden bağımsız; uzak.
+- Sınırlar: üst konum Z ≤ +70 (A55–A14 üst nervür), Z ≤ +150 (A54–A13_3). Üst kolonu kaydırmak gerekmedi; 3 kolon kararı korundu. 3 ayrı Ø140 delik mümkün değil (aralık -150..+70) → pencere + dolgu takozu.
+- Yük yolu (430 kN, konservatif bileşke Z_s'de): A52 → A54 gövdesi (-X) → kafa/takoz kamaları → A57 kaide → dayama takozu → A11 üst plakası (A57→A14 arası basma) → A14 → A13 (çekme) → A21 ← kolon somunları A25 ← A24 ← A23 ← mafsal ← A22 ← kalıp. Alt kolon 215/184/153 kN, üst kolon 0/62/124 kN; devrilme 163/196/228 kNm. Statik uygun; A14 kaynak yorulması (her atış) doğrulanmadı.
+- Eksen hizası hedefi Y/Z ±0,10 mm (taşlanmış takoz + pim); ince X-Y-Z ayarı kapsam dışı.

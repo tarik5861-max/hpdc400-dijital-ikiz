@@ -8,7 +8,7 @@ Kontroller:
   4. Kritik mate kontrolleri (kolon eksenleri, kalıp yüksekliği, döküm burcu ekseni)
 Çıktı: out/check_report.json + konsol özeti. Çıkış kodu: hata varsa 1.
 
-Kullanım: python3 checks/check.py [--phase N]
+Kullanım: python3 checks/check.py [--phase N] [--vurus-tarama]
 """
 import json, os, sys, itertools
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,9 +26,8 @@ def bbox_overlap(a, b, pad=0.5):
     return all(a[i] - pad <= b[i + 3] and b[i] - pad <= a[i + 3] for i in range(3))
 
 
-def main():
-    phase = int(sys.argv[sys.argv.index("--phase") + 1]) if "--phase" in sys.argv else None
-    placed, report, P, B = assemble(phase)
+def run(phase=None, shot=None, write=True, verbose=True):
+    placed, report, P, B = assemble(phase, shot=shot)
     errors, warns = [], []
     for pid, st, msg in report:
         if st != "OK":
@@ -65,6 +64,8 @@ def main():
                            "msg": f"{v/1000:.1f} cm3"})
 
     errors += kural_kontrol(P)
+    if not write:
+        return errors, warns, len(names)
 
     res = {"phase": phase, "parts_placed": len(names), "errors": errors, "warnings": warns,
            "bboxes": {n: [round(x, 1) for x in boxes[n]] for n in names}}
@@ -76,6 +77,21 @@ def main():
         print("  HATA ", e["type"], e["part"], e["msg"][:200])
     for w in warns[:60]:
         print("  uyari", w["type"], w["part"])
+    return errors, warns, len(names)
+
+
+def main():
+    phase = int(sys.argv[sys.argv.index("--phase") + 1]) if "--phase" in sys.argv else None
+    if "--vurus-tarama" in sys.argv:
+        toplam = 0
+        for shot in ("alt", "orta", "ust"):
+            e, w, n = run(phase, shot, write=False)
+            toplam += len(e)
+            print(f"vurus={shot:5s} instance={n} HATA={len(e)} UYARI={len(w)}")
+            for x in e[:20]:
+                print("  HATA ", x["type"], x["part"], x["msg"][:160])
+        sys.exit(1 if toplam else 0)
+    errors, warns, _ = run(phase)
     sys.exit(1 if errors else 0)
 
 

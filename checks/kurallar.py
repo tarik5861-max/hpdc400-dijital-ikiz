@@ -68,5 +68,45 @@ def kural_kontrol(P, kararlar_text=None):
     ]
     for metin, deger, beklenen in iddialar:
         if satir and metin in satir and deger != beklenen:
-            err("KURAL_IDDIA", "KARARLAR", f"iddia '{metin}' ({beklenen}) ama params={deger}")
+            err("KURAL_IDDIA, KURAL_SHOT", "KARARLAR", f"iddia '{metin}' ({beklenen}) ama params={deger}")
+    E += kural_shot(P)
+    return E
+
+
+def kural_shot(P):
+    """KURAL_SHOT: shot_follow turetilmis alanlarin secili konumla tutarliligi."""
+    E = []
+    def err(part, msg): E.append({"part": part, "type": "KURAL_SHOT", "msg": msg})
+    G, pr = P["global"], P["parts"]
+    zs = G.get("shot_positions_z", {})
+    pos = G.get("shot_position")
+    if pos not in zs:
+        err("global", f"shot_position {pos!r} gecerli anahtar degil {list(zs)}")
+        return E
+    if zs.get("alt") != -150.0:
+        err("global", f"shot_positions_z.alt={zs.get('alt')} != -150")
+    z = zs[pos]; dz = z - zs["alt"]
+    if G.get("shot_offset_z") != z:
+        err("global", f"shot_offset_z {G.get('shot_offset_z')} != z_sel {z}")
+    for pid, k1, k2 in (("A21", "shot_hole", "center_yz"), ("A81", "sleeve_bore", "center_yz")):
+        c = pr[pid]["dims"].get(k1, {}).get(k2)
+        if not c or c[1] != z:
+            err(pid, f"{k1}.{k2}={c} Z != z_sel {z}")
+    for pid in ("A51", "A52", "A54", "A55"):
+        for i in _inst(P, pid):
+            if i["pos"][2] != z:
+                err(i["name"], f"pos[2]={i['pos'][2]} != z_sel {z}")
+    a57 = pr["A57"]["dims"]
+    top = a57["saddles"]["local_z_range"][1]
+    exp = a57["height_adjust"]["saddle_top_local_z_alt"] + dz
+    if top != exp:
+        err("A57", f"semer ustu {top} != {exp}")
+    if exp != 230 + dz:
+        err("A57", f"saddle_top_local_z_alt {a57['height_adjust']['saddle_top_local_z_alt']} != 230")
+    for i in _inst(P, "A57"):
+        if "bbox" in i and i["bbox"][5] != -300 + dz:
+            err(i["name"], f"bbox[5]={i['bbox'][5]} != {-300 + dz}")
+    sh = [k for k in pr["A21"]["dims"] if re.search(r"shot_hole", k)]
+    if sh != ["shot_hole"]:
+        err("A21", f"tek shot hole olmali, bulunan anahtarlar: {sh}")
     return E

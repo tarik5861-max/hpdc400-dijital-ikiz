@@ -9,3 +9,4 @@ Beyin fırtınasında çıkan, henüz kademeye girmemiş fikirler. Tek satır: t
 - 2026-11-17 — Makinenin kontrol yazılımını (PLC/sıralama) kendimiz yazmak — K4
 
 - 2026-11-18: Sabit plaka penceresi (gerçek makinede geniş dikdörtgen açıklık) modele eklensin mi; A21–şase enine kama (Y yük); A54 ön kafasını alt kolonlara bağlama (faz 3).
+- 2026-11-18: Enjeksiyon ünitesi X-Y-Z ince ayar mekanizması (kovan hizalama); kepçe/robot erişimi üst konumda.

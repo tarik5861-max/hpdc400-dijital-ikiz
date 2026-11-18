@@ -22,10 +22,25 @@ def apply(shp, M):
 
 
 def main():
+    if "--vurus-tarama" in sys.argv:
+        args = [a for a in sys.argv[1:] if not a.startswith("--")]
+        n = int(args[0]) if args else 8
+        tot = 0
+        for shot in ("alt", "orta", "ust"):
+            worst = run(n, False, shot, quiet=True)
+            tot += len(worst)
+            print(f"vurus={shot:5s} hareket CARPISMA cifti: {len(worst)}")
+            for (a, b), (s, v) in sorted(worst.items(), key=lambda x: -x[1][1])[:10]:
+                print(f"  {a} x {b} s={s:.2f} {v/1000:.1f} cm3")
+        sys.exit(1 if tot else 0)
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     n = int(args[0]) if args else 8
-    die_sweep = "--kalip-yuksekligi" in sys.argv
-    placed, _, P, _ = assemble()
+    worst = run(n, "--kalip-yuksekligi" in sys.argv, None)
+    sys.exit(1 if worst else 0)
+
+
+def run(n, die_sweep, shot, quiet=False):
+    placed, _, P, _ = assemble(shot=shot)
     G = P["global"]
     if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir; A83/84/85 (itici seti) kaydirma disinda
         placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82", "A83", "A84", "A85")}
@@ -52,11 +67,12 @@ def main():
                 key = (a, b)
                 if key not in worst or v > worst[key][1]:
                     worst[key] = (s if not die_sweep else info['die_height'], v)
-        print(f"s={s:.3f} kalip_yuk={info['die_height']:6.1f} plaka dx={info['dx_platen']:6.1f} kafa dx={info['dx_crosshead']:6.1f} somun={info['nut_deg']:8.0f} deg")
-    print(f"\nCARPISMA cifti: {len(worst)}")
-    for (a, b), (s, v) in sorted(worst.items(), key=lambda x: -x[1][1]):
-        print(f"  {a:8s} x {b:8s}  en kotu s={s:.2f}  {v/1000:8.1f} cm3")
-    sys.exit(1 if worst else 0)
+        if not quiet: print(f"s={s:.3f} kalip_yuk={info['die_height']:6.1f} plaka dx={info['dx_platen']:6.1f} kafa dx={info['dx_crosshead']:6.1f} somun={info['nut_deg']:8.0f} deg")
+    if not quiet:
+        print(f"\nCARPISMA cifti: {len(worst)}")
+        for (a, b), (s, v) in sorted(worst.items(), key=lambda x: -x[1][1]):
+            print(f"  {a:8s} x {b:8s}  en kotu s={s:.2f}  {v/1000:8.1f} cm3")
+    return worst
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ Kullanım:
 FreeCAD içinde çalışırsa her instance ayrı Part::Feature olarak ürün ağacı gruplarıyla dokümana eklenir
 ve out/hpdc400.FCStd olarak kaydedilir.
 """
-import json, os, sys, importlib.util, traceback
+import json, os, re, sys, importlib.util, traceback
 
 # MCP execute_code ile exec() edilirken __file__ olmayabilir -> HPDC_ROOT ortam degiskeni veya global
 try:
@@ -19,11 +19,43 @@ sys.path.insert(0, os.path.join(ROOT, "lib"))
 import geo  # noqa: E402
 
 
-def load_params():
+def resolve_shot(P, shot=None):
+    """global.shot_follow kuralini uygular (bellekte; dosya degismez). shot = alt|orta|ust (None: params'taki)."""
+    G = P["global"]
+    zs = G["shot_positions_z"]
+    if shot is not None:
+        G["shot_position"] = shot
+    if G["shot_position"] not in zs:
+        raise KeyError(f"shot_position gecersiz: {G['shot_position']!r} (gecerli: {list(zs)})")
+    z_sel = zs[G["shot_position"]]
+    dz = z_sel - zs["alt"]
+    G["shot_offset_z"] = z_sel
+    sf = G["shot_follow"]
+    for pid in sf["instances_pos_z_eq_shot"]:
+        for i in P["parts"][pid]["instances"]:
+            i["pos"][2] = z_sel
+            if "bbox" in i:   # params 'alt' degerini tasir; taze yuklenmis P uzerinde bir kez uygulanir
+                i["bbox"][2] += dz
+                i["bbox"][5] += dz
+    for path in sf["dims_eq_shot"]:       # "A21.dims.shot_hole.center_yz[1]"
+        m = re.fullmatch(r"(\w+)\.dims\.(\w+)\.(\w+)\[(\d+)\]", path)
+        pid, k1, k2, idx = m.group(1), m.group(2), m.group(3), int(m.group(4))
+        P["parts"][pid]["dims"][k1][k2][idx] = z_sel
+    a57 = P["parts"]["A57"]
+    ha = a57["dims"]["height_adjust"]["saddle_top_local_z_alt"]
+    a57["dims"]["saddles"]["local_z_range"][1] = ha + dz
+    for i in a57["instances"]:
+        if "bbox" in i:
+            i["bbox"][5] = -300 + dz   # params kurali: A57_1.bbox[5] = -300 + dz
+    return P
+
+
+def load_params(shot=None):
     with open(os.path.join(ROOT, "params", "params.json"), encoding="utf-8") as f:
         P = json.load(f)
     with open(os.path.join(ROOT, "params", "bom.json"), encoding="utf-8") as f:
         B = json.load(f)
+    resolve_shot(P, shot)
     return P, B
 
 
@@ -47,8 +79,8 @@ def build_part(pid, script, P, overrides=None):
     return mod.build(d, P["global"], geo)
 
 
-def assemble(phase=None, only=None):
-    P, B = load_params()
+def assemble(phase=None, only=None, shot=None):
+    P, B = load_params(shot)
     allowed = None
     if phase:
         allowed = set()
