@@ -52,6 +52,13 @@ Tasarım esası: 400 t horizontal cold-chamber HPDC machine, 5-point double togg
 | 2026-11-18 | A85 (yeni) | 4 geri dönüş pimi d25 x 160, baş d35x6, (±160,±230); uç X=170 (ayrım yüzü) | kalıp kapanırken A83'ü geri iter |
 | 2026-11-18 | A13 (yeni) | 2 destek direği Y=±150: taban 620x160x40 (X -620..0), kolon 50x160x230 (Z -490..-260), 2 x 25 kalın üçgen takviye; A21'e 4+2 x M36, A11'e 6 x M30 (10.9) | A21 yalnız raylara oturuyordu. Kapama kuvveti iç döngü (net 0); kazara yatay yük H = 0,1·F = 400 kN (VARSAYIM) -> 196 kNm; takviye 153 MPa, cıvata 265 kN < ön gerilme 538 kN |
 | 2026-11-18 | mates/clearances | A21 SABİT notu; A13, A42-A83, A83-A82, A84, A85 mate'leri; 9 izinli temas çifti eklendi | yeni parçalar |
+| 2026-11-18 (rev2) | A13 | 2 kısa pedestal (Y=±150, taban 620x160x40 + kolon 50x160x230 + gusset, M36/M30 cıvata) -> 3 UZUN yuvarlak kolon: alt 2 × Ø100 (Y=±220, Z=-150), üst 1 × Ø120 (Y=0, Z=370); flanştan flanşa 2430 (X -220..-2650); ön flanş OD200/220 × 40, A21 arka yüzüne 6×M24 10.9 (PCD 160/180) + 0-3 mm şim; arka flanş aynı ölçü, A14'e KAYNAKLI (a=12 çevre); üst kolon ölçüleri instance override | Kullanıcı fotoğrafı (ZLC300 tipi): kolonlar plakanın arkasından şase arka ucuna uzanır. Pedestallerin işini kolonlar + A14 üstlendi, taban plakası/gusset/M30 gereksiz → kaldırıldı. A21 döküm olduğu için ön uç cıvatalı |
+| 2026-11-18 (rev2) | A14 (yeni) | şase arka ucunda dikme: levha 50 × 800 × 1050 (X -2700..-2650, Z -530..520), 2 gusset t40 (|Y| 340..380, taban X -2000'e kadar), 2 üst nervür 30×200 (Z 220..250, 490..520), 2 alt nervür t20 (|Y| 90..110); A11'e a=20 kaynak | Kolon arka uçları şase üst kotundan 380-900 mm yukarıda; dikme olmadan şaseye kaynak edilemez. Gusset ucu A11 kaburgası X=-2000 üstünde |
+| 2026-11-18 (rev2) | A58 | 2 × Ø45 (Y=±175, Z=-150, X -1670..-220) -> KALDIRILDI (BOM'dan çıktı, params'ta status + instances_removed) | Alt kolonlar aynı kotta ve A58 ile çakışıyordu (A58 |Y| 152,5..197,5). A58 görevini alt kolonlar alır; ancak enjeksiyon tepkisi artık A57-A11-A14-A13 yolundan geçer (KARAR gerekli, bkz. açık riskler) |
+| 2026-11-18 (rev2) | A56 | instance Y -330 -> -390; bbox Y -440..-220 -> -500..-280 | A13_2 alt kolon (Y -270..-170) ile 10 mm boşluk; ayak halkası şase kenarına (Y=-500) dayanır |
+| 2026-11-18 (rev2) | A21 | support_mount: bottom_tapped_M36 + rear_tapped_M36 (8) kaldırıldı -> rear_tapped_M24 18 adet (3 flanş × 6, PCD 160/160/180), opsiyonel | yeni kolon flanşları |
+| 2026-11-18 (rev2) | mates/clearances | eski 6 A13 mate'i ve A58 mate'leri silindi; A13-A21 (cıvatalı), A13-A14 (kaynaklı), A14-A11 (kaynaklı) + 4 boşluk mate'i; izinli temas: (A11,A13) çıkarıldı, (A13,A14), (A11,A14) eklendi | yeni bağlantılar |
+| 2026-11-18 (rev2) | bom | A13 qty 2 -> 3, ad "Sabit plaka destek kolonu (uzun, 2 alt + 1 üst)"; A14 eklendi (faz 1, parts/A14_kolon_arka_dikme.py); A58 çıkarıldı (faz 3) | yukarıdaki değişiklikler |
 
 ## Hareket (kapama) doğrulaması – 2026-11-15
 Açılma kursu 420 mm KORUNDU. Çözüm: itici ünitesi |Y|<=120, |Z|<=170, boy 425 zarfına alındı; diz pimleri bölündü; çapraz kafa göbek+dil oldu.
@@ -85,3 +92,26 @@ Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.p
 - Vekil katı doğrulaması (params ölçüleri, s=0..1, 21 adım): statik çakışma yok; hareket boyunca en küçük boşluklar A41–A34(B) 7,5 mm, A41–A32 10,0 mm, A41–A31 13,0 mm (değişmedi).
 - Açık: lib/kinematics.py'de MOVING_PLATEN_GROUP'a A83/A84/A85, DIE_HEIGHT_GROUP_FIXED'e A13 (ve zaten eksik olan A58) eklenmeli; motion_check --kalip-yuksekligi A81/A82 ile birlikte A83/A84/A85'i de dışarıda bırakmalı.
 - İtici kursu: makine 145 (H-400D); bu kalıp için ayar 65 (kutu sınırı).
+
+## Sabit plaka destek kolonları – 2026-11-18 rev2 (3 uzun kolon + A14)
+- Kaynak: kullanıcı fotoğrafı (ZHENLI ZLC300 tipi) + formül. Hesap dökümü: out/olcu_2026-11-18_A13_3kolon.txt; boşluklar: out/olcu_2026-11-18_A13_bosluk.txt (params ölçülerinden vekil katı, BRepExtrema).
+- Yük yolu: kapama 4000 kN A24 çevriminde kendi kendini dengeler (kolonlara gelmez). Ağırlık (~24 kN) A21 → A12 raylarına oturur. Kolonlar X yönündeki kazara yatay yükü H taşır; iki kol kotu (alt Z=-150, üst Z=+370), H etki kotu Z -320..+320 zarfı.
+- **H = c·F_kapama VARSAYIMDIR, kullanıcı onayında değil.** Ölçüler c=0,1 ve c=0,2 için sağlanıyor:
+
+| Kontrol | c = 0,1 (H = 400 kN) | c = 0,2 (H = 800 kN) | Sınır |
+|---|---|---|---|
+| Alt kolon Ø100, |N|max | 265 kN, 34 MPa | 531 kN, 68 MPa | S355 |
+| Alt kolon burkulma (K=1, L=2430) | Euler SF 6,5; EC3 kullanım 0,20 | SF 3,2; kullanım 0,39 | < 1 |
+| Üst kolon Ø120, |N|max | 362 kN, 32 MPa | 723 kN, 64 MPa | S355 |
+| Üst kolon burkulma | SF 9,9; kullanım 0,14 | SF 4,9; kullanım 0,29 | < 1 |
+| Ön flanş cıvatası 6×M24 10.9 | 60 / 44 kN | 121 / 88 kN | ön gerilme 232 kN |
+| Arka flanş kaynağı a=12 | 44 / 35 MPa | 87 / 70 MPa | ~241 MPa |
+| A14 gusset dikmesi (200×40) | 33 MPa | 66 MPa | 345 MPa |
+| A14 taban kaynağı a=20 | 16 MPa | 32 MPa | ~241 MPa |
+| A14 üst kiriş (üst kolon yükü) | 76 MPa | 152 MPa | 345 MPa |
+| A14 alt levha yerel eğilme | 46 MPa | 92 MPa | 345 MPa |
+
+- Yanal (Y) yük: uzun kolonlar taşımaz (yanal rijitlik ~216 N/mm). A21'in Y'de tutulması için A21–A12/A11 enine kama gerekir (modellenmedi, açık karar).
+- Enjeksiyon tepkisi 430 kN (0,107·F) A58 kalktığı için her atışta A57-A11-A14-A13 yolundan geçer: alt kolon başına 215 kN çekme, 27 MPa (yorulma uygun). Seçenek: A54 ön kafasını alt kolonlara bağlamak (faz 3, karar gerekli).
+- Isıl: kolon-şase sıcaklık farkı 20 K → 0,58 mm; uçlar rijit kalırsa büyük zorlama doğar → ön flanşta şim/oval delik önerildi (açık risk).
+- Boşluklar (min 10 hedefi sağlandı): A13–A56 10,0 (A56 Y -390'a taşındı); A13–A54 başlıkları 20; A13–A51 flanşı 25; A13–A55 30; A14–A55 40; A14–A11 X=-2000 kaburgası 40 (toe kaburga üstünde, temas üst plaka üzerinden); A13–A21 shot hole kenarı 50; A13–A25 69; A13–A52 (ileri, +500) 95; A13–A57 115,5; A13–A54 kol süpürmesi 125; A13–biscuit açıklığı 369; A13–A11 üst plakası 280. Üst kolon altında döküm ağzı üstü serbest yükseklik 390 mm (Z -80..310), kepçe yandan girer.

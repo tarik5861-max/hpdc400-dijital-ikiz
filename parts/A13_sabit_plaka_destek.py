@@ -1,13 +1,22 @@
+import math
+
+
 def build(d, G, g):
-    # taban + kolon plakasi + 2 ucgen gusset (profile_xz, Y kalinligi)
-    b = d["base_plate"]; c = d["column_plate"]; gu = d["gussets"]
-    def rbox(r):
-        (x0, x1), (y0, y1), (z0, z1) = r["local_x_range"], r["y_range"], r["z_range"]
-        return g.move(g.box(x1 - x0, y1 - y0, z1 - z0), (x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2)
-    s = g.fuse(rbox(b), rbox(c))
-    for y0, y1 in gu["y_ranges"]:
-        # prizma: Y=profil x, Z=profil z, X=kalinlik; Z ekseni -90 deg: (x,y)->(y,-x)
-        pr = g.polyprism([(x, z) for x, z in gu["profile_xz"]], 0, y1 - y0)
-        pr = g.rot(pr, "z", -90)          # kalinlik y: 0..-(y1-y0)
-        s = g.fuse(s, g.move(pr, 0, y1, 0))
+    # uzun kolon: on flans + cubuk + arka flans (koaksiyel X silindirleri); yerel orijin = on flans yuzu, govde -X
+    parts = []
+    for key, od in (("front_flange", "od"), ("rod", "d"), ("rear_flange", "od")):
+        r = d[key]
+        x0, x1 = r["local_x_range"]
+        parts.append(g.move(g.cyl(r[od] / 2, x1 - x0, "x"), (x0 + x1) / 2, 0, 0))
+    s = g.fuse(*parts)
+    ff = d["front_flange"]
+    b = ff.get("bolts")
+    if b:
+        x0, x1 = ff["local_x_range"]
+        holes = []
+        for i in range(int(b["count"])):
+            a = math.radians(b["start_angle_deg"] + i * 360.0 / b["count"])
+            holes.append(g.move(g.cyl(b["hole_d"] / 2, x1 - x0 + 2, "x"),
+                                (x0 + x1) / 2, b["pcd"] / 2 * math.cos(a), b["pcd"] / 2 * math.sin(a)))
+        s = g.cut(s, *holes)
     return s

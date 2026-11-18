@@ -10,6 +10,7 @@
         "A11",
         "A12",
         "A13",
+        "A14",
         "A21",
         "A22",
         "A23",
@@ -43,8 +44,7 @@
         "A54",
         "A55",
         "A56",
-        "A57",
-        "A58"
+        "A57"
       ]
     },
     {
@@ -95,9 +95,15 @@
         },
         {
           "id": "A13",
-          "name": "Sabit plaka destek diregi",
-          "qty": 2,
+          "name": "Sabit plaka destek kolonu (uzun, 2 alt + 1 ust)",
+          "qty": 3,
           "script": "parts/A13_sabit_plaka_destek.py"
+        },
+        {
+          "id": "A14",
+          "name": "Kolon arka dikmesi (sase arka ucu, kaynakli)",
+          "qty": 1,
+          "script": "parts/A14_kolon_arka_dikme.py"
         }
       ]
     },
@@ -254,12 +260,6 @@
           "name": "Enjeksiyon tasiyici konsol",
           "qty": 1,
           "script": "parts/A57_enj_konsol.py"
-        },
-        {
-          "id": "A58",
-          "name": "Enjeksiyon sabit plaka baglanti cubugu",
-          "qty": 2,
-          "script": "parts/A58_enj_baglanti_cubugu.py"
         }
       ]
     },

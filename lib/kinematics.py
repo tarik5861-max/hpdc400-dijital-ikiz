@@ -84,7 +84,7 @@ if __name__ == "__main__":
 # M = (R, t): R 3x3 satır listesi, t = (tx, ty, tz).  p' = R p + t
 I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar, sabit plaka, şase: hareket etmez
-                          "A13", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72")
+                          "A13", "A14", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72")
 
 
 def _mat_ry(deg):

@@ -1,7 +1,7 @@
 {
  "meta": {
   "design_basis": "400 t horizontal cold-chamber HPDC machine, 5-point double toggle; Buhler H-400D as primary baseline (platens, tie bars, die height, ejector, injection force), Idra OLCS 400 / HPM II-400 for platen thicknesses, mass and motor. Simplified-but-realistic digital twin geometry.",
-  "notes": ["Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.", "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).", "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.", "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.", "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.", "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).", "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.", "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.", "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.", "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.", "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.", "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).", "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.", "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center.", "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.", "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.", "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.", "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.", "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.", "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.", "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.", "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.", "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance.", "EJECTOR 2026-11-18 (karar 2026-11-17): fixed platen has NO ejector holes. A22 pattern kept (centre d80 + 4 x d46 at (+-90,+-140)) = A42 4 corner rods (+ optional centre rod).", "A41 twin cylinders (formula): F_req = 215.5 kN (old single d140 @140 bar) -> 107.8 kN/cyl; d = sqrt(4F/(pi p)) = 99.0 -> bore 100 / rod 56 (ISO 3320). Push 110.0 kN/cyl, 219.9 kN total (22.4 t, H-400D 22 t); return (annulus) 75.5 kN/cyl, 150.9 kN total.", "A41 strength (formula): tube 100x115 Lame hoop 100.8 MPa (test 1.5x 151); rear cap 20 flat clamped 0.75pa^2/t^2 = 65.6 MPa; rod d56 44.6 MPa, Euler K=2 L=370 Pcr 1827 kN (SF 17); M42x2 rod thread on return 60 MPa; tie posts M30 (As 561) 98 MPa.", "A41 bridge 240x200x35 42CrMo4+QT: load 110 kN/cyl spread over d115 between posts Z+-70 (span 140): M = F/2(L/2-c/4) = 2.27 kNm; b_eff 57 (rod hole d58) -> W 11638 mm3 -> 195 MPa, Re>=650 -> SF 3.3. Length budget 425 = 205 (5 gap+145 stroke+50 plate+5) + 35 bridge + 165 chamber (145+20 piston) + 20 cap.", "A42 plate 50 thick 42CrMo4+QT: rod at (62.5,0) to knock-out rods (90,+-140): M = F/2(140-100/4) = 6.32 kNm, b 120 -> 126 MPa. Knock-out rods d36 L390: 55 kN each, 54 MPa, Euler K=2 Pcr 281 kN.", "Ejector Y envelope: barrels 5..120, A42 |Y|<=120 -> split knee pins (|Y|>=127.5) 7.5 mm, big links (|Y|>=130) 10 mm, A36/A31 tongue at |Z|>=140 above bridge |Z|<=100. Rear cap at s=1 X=1445 vs hub 1458 (13 mm) unchanged.", "Die ejector box (A82 rear part): clamping plate 40 + rails 120 (|Y| 200..270) + cavity plate 70; A83 (back 30 + retainer 25, 370x520) at X 305..360; 24 x A84 d10 (6x4 grid Y+-25/75/125, Z -17.5..177.5) tip at X=185 (cavity floor); 4 x A85 d25 at (+-160,+-230) tip at parting X=170. Die ejection stroke 65 -> machine ejector stroke setting 65 for this die (machine max 145). A42 rods lengthened 345 -> 390 to touch A83.", "A21 FIXED to frame (formula): clamp 4000 kN is an internal loop (die force = sum of 4 tie-bar forces) -> net 0 on supports. Supports carry weight ~24 kN (A21 15.3 + A81 4.2 + half tie bars 4.6) and accidental horizontal H = 0.1*F_clamp = 400 kN (ASSUMPTION, not a standard) at Z=0.", "A13 x2 (Y=+-150): platen moment about its bottom M = 400*0.49 = 196 kNm. -X case: column compression C = M/(2/3*230) = 1278 kN (639/pedestal, bearing 17.4 MPa); gusset strut 33.3 deg 765 kN on 2x25x100 -> 153 MPa (S355 SF 2.3). +X case: 4 upper M36 10.9 at Z=-305 (arm 185): 265 kN/bolt < preload 538 kN. Base to frame: M = 639*(0.153+0.04) = 124 kNm over 0.8*620 -> 249 kN on 2 rear M30 10.9 (125 kN/bolt < preload 369); slip 12 x M30 mu 0.2 = 886 kN > 400.", "A13 clearances: column top Z=-260 vs A51 flange bottom -245 (15), A58 bottom -172.5 (87.5); |Y|<=230 vs A25 nuts |Y|>=255 (25), rails |Y|>=300 (70); X<=0 vs top_opening X>=20 (20); injection console A57 X<=-1210 far."],
+  "notes": ["Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.", "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).", "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.", "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.", "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.", "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).", "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.", "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.", "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.", "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.", "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.", "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).", "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.", "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center.", "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.", "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.", "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.", "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.", "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.", "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.", "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.", "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.", "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance.", "EJECTOR 2026-11-18 (karar 2026-11-17): fixed platen has NO ejector holes. A22 pattern kept (centre d80 + 4 x d46 at (+-90,+-140)) = A42 4 corner rods (+ optional centre rod).", "A41 twin cylinders (formula): F_req = 215.5 kN (old single d140 @140 bar) -> 107.8 kN/cyl; d = sqrt(4F/(pi p)) = 99.0 -> bore 100 / rod 56 (ISO 3320). Push 110.0 kN/cyl, 219.9 kN total (22.4 t, H-400D 22 t); return (annulus) 75.5 kN/cyl, 150.9 kN total.", "A41 strength (formula): tube 100x115 Lame hoop 100.8 MPa (test 1.5x 151); rear cap 20 flat clamped 0.75pa^2/t^2 = 65.6 MPa; rod d56 44.6 MPa, Euler K=2 L=370 Pcr 1827 kN (SF 17); M42x2 rod thread on return 60 MPa; tie posts M30 (As 561) 98 MPa.", "A41 bridge 240x200x35 42CrMo4+QT: load 110 kN/cyl spread over d115 between posts Z+-70 (span 140): M = F/2(L/2-c/4) = 2.27 kNm; b_eff 57 (rod hole d58) -> W 11638 mm3 -> 195 MPa, Re>=650 -> SF 3.3. Length budget 425 = 205 (5 gap+145 stroke+50 plate+5) + 35 bridge + 165 chamber (145+20 piston) + 20 cap.", "A42 plate 50 thick 42CrMo4+QT: rod at (62.5,0) to knock-out rods (90,+-140): M = F/2(140-100/4) = 6.32 kNm, b 120 -> 126 MPa. Knock-out rods d36 L390: 55 kN each, 54 MPa, Euler K=2 Pcr 281 kN.", "Ejector Y envelope: barrels 5..120, A42 |Y|<=120 -> split knee pins (|Y|>=127.5) 7.5 mm, big links (|Y|>=130) 10 mm, A36/A31 tongue at |Z|>=140 above bridge |Z|<=100. Rear cap at s=1 X=1445 vs hub 1458 (13 mm) unchanged.", "Die ejector box (A82 rear part): clamping plate 40 + rails 120 (|Y| 200..270) + cavity plate 70; A83 (back 30 + retainer 25, 370x520) at X 305..360; 24 x A84 d10 (6x4 grid Y+-25/75/125, Z -17.5..177.5) tip at X=185 (cavity floor); 4 x A85 d25 at (+-160,+-230) tip at parting X=170. Die ejection stroke 65 -> machine ejector stroke setting 65 for this die (machine max 145). A42 rods lengthened 345 -> 390 to touch A83.", "A21 FIXED to frame (formula, rev 2026-11-18: 3 long columns A13 + rear stand A14): clamp 4000 kN is an internal loop (die force = sum of 4 tie-bar forces) -> net 0 on supports. Supports carry weight ~24 kN (A21 15.3 + A81 4.2 + half tie bars 4.6) and accidental horizontal H = 0.1*F_clamp = 400 kN (ASSUMPTION, not a standard) at Z=0.", "A13 x3 long columns (2026-11-18, user photo ZLC300 type): lower 2 x d100 at (Y,Z)=(+-220,-150), upper 1 x d120 at (0,370); flange-to-flange 2430 (X -220..-2650); front flange OD200/220 x40 bolted 6xM24 to A21 rear face, rear flange welded to A14 stand (frame rear end X -2700..-2650, gussets to X -2000). Lower pair replaces A58 (removed).", "A13 loads (formula; H = c*F_clamp ASSUMPTION, not user-approved): two lever levels z=-150/+370, H at zH -320..+320. c=0.1: lower |N|<=265 kN (34 MPa, Euler K=1 SF 6.5), upper 362 kN (32 MPa, SF 9.9). c=0.2: lower 531 kN (68 MPa, SF 3.2, EC3 curve a utilisation 0.39), upper 723 kN (64 MPa, SF 4.9). Flange bolts 6xM24 10.9 <=121 kN < preload 232. A14: gusset 66 MPa, base weld 32 MPa, upper girder 152 MPa at c=0.2.", "A13 limits: long columns carry NO lateral (Y) load (216 N/mm) -> A21 needs a transverse key to A12/A11 (open). Injection reaction 430 kN now runs A57-A11-A14-A13 each shot (215 kN/lower column, 27 MPa). Thermal dT 20 K -> 0.58 mm over 2430 mm (open risk: shim/slotted front flange). Shot line clearances in out/olcu_2026-11-18_A13_bosluk.txt."],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
   "rotation_convention": "R = Rz*Ry*Rx, then translate by pos"
@@ -221,16 +221,15 @@
     },
     "support_mount": {
      "optional": true,
-     "note": "cosmetic tapped holes for A13 support pedestals (A21 is FIXED to frame A11 via 2 x A13; it does not slide).",
-     "bottom_tapped_M36": {
-      "centers_local_xy": [[-110, 122.5], [-110, 177.5], [-110, -122.5], [-110, -177.5]],
-      "depth": 70,
-      "face": "bottom (Z=-490)"
-     },
-     "rear_tapped_M36": {
-      "centers_yz": [[122.5, -305], [177.5, -305], [122.5, -445], [177.5, -445], [-122.5, -305], [-177.5, -305], [-122.5, -445], [-177.5, -445]],
-      "depth": 70,
-      "face": "rear (local x=-220)"
+     "note": "cosmetic tapped holes for 3 x A13 column front flanges (A21 is FIXED to frame A11 via A13 + A14; it does not slide). Old pedestal pattern (M36) removed 2026-11-18.",
+     "rear_tapped_M24": {
+      "face": "rear (local x=-220)",
+      "depth": 45,
+      "count": 18,
+      "flange_centers_yz": [[220.0, -150.0], [-220.0, -150.0], [0.0, 370.0]],
+      "pcd": [160.0, 160.0, 180.0],
+      "per_flange": 6,
+      "start_angle_deg": 30
      }
     }
    },
@@ -1082,17 +1081,18 @@
    "instances": [
     {
      "name": "A56_1",
-     "pos": [-1450, -330, -530.0],
+     "pos": [-1450, -390.0, -530.0],
      "rot": [0, 0, 0],
-     "bbox": [-1560, -440, -530.0, -1340, -220, 770.0]
+     "bbox": [-1560, -500.0, -530.0, -1340, -280.0, 770.0]
     },
     {
      "name": "A56_2",
-     "pos": [-1800, -330, -530.0],
+     "pos": [-1800, -390.0, -530.0],
      "rot": [0, 0, 0],
-     "bbox": [-1910, -440, -530.0, -1690, -220, 770.0]
+     "bbox": [-1910, -500.0, -530.0, -1690, -280.0, 770.0]
     }
-   ]
+   ],
+   "placement_note": "Y -330 -> -390 (2026-11-18): A13_2 alt kolon (|Y| 120..320 flans, cubuk 170..270) ile 10 mm bosluk; ayak halkasi sase kenarinda (Y=-500)"
   },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",
@@ -1133,7 +1133,9 @@
     "length": 1450.0
    },
    "local_origin": "Center of -X end face at injection console front (X=-1670). Axis along +X (x 0..1450).",
-   "instances": [
+   "instances": [],
+   "status": "KALDIRILDI 2026-11-18: gorevi alt A13 kolonlari (A13_1/A13_2, d100, Y=+-220, Z=-150) aldi; BOM'dan cikarildi. Eski olculer kayit icin.",
+   "instances_removed": [
     {
      "name": "A58_1",
      "pos": [-1670.0, 175.0, -150.0],
@@ -1909,63 +1911,158 @@
    ]
   },
   "A13": {
-   "name": "Sabit plaka destek diregi (kaynakli ayak)",
+   "name": "Sabit plaka destek kolonu (uzun yuvarlak kolon, 3 adet: 2 alt + 1 ust)",
    "dims": {
-    "base_plate": {
-     "local_x_range": [-620, 0],
-     "y_range": [-80, 80],
-     "z_range": [0, 40],
-     "note": "x -220..0 lies between frame top (Z=-530) and A21 bottom (Z=-490); x -620..-220 on frame top behind A21, over A11 cross ribs X=-600 and -235"
-    },
-    "column_plate": {
-     "local_x_range": [-270, -220],
-     "y_range": [-80, 80],
-     "z_range": [40, 270],
-     "note": "front face (local x=-220) bolted to A21 rear face; top Z=-260 (15 below A51 flange, 87.5 below A58)"
-    },
-    "gussets": {
-     "count": 2,
-     "thickness": 25,
-     "y_ranges": [[55, 80], [-80, -55]],
-     "profile_xz": [[-270, 40], [-270, 270], [-620, 40]],
-     "note": "triangular webs welded to base and column rear face; 33.3 deg strut"
-    },
-    "bolts": {
-     "optional": true,
-     "column_to_A21": {
-      "size": "M36 10.9",
-      "count": 4,
-      "centers_local_yz": [[27.5, 225], [-27.5, 225], [27.5, 85], [-27.5, 85]]
-     },
-     "base_to_A21_bottom": {
-      "size": "M36 10.9",
-      "count": 2,
-      "centers_local_xy": [[-110, 27.5], [-110, -27.5]],
-      "note": "from below through frame top plate"
-     },
-     "base_to_A11": {
-      "size": "M30 10.9",
+    "concept": "Kullanici fotografi (ZHENLI ZLC300 tipi): 3 uzun kolon A21 arka yuzunden (X=-220) -X yonunde sase arka ucundaki A14 dikmesine (X=-2650) uzanir. On uc: yuvarlak flans A21 arka yuzune civatali (A21 dokme plaka, kaynak yok). Arka uc: yuvarlak flans A14 on yuzune KAYNAKLI; A14 A11'e kaynakli. Alt iki kolon eski A58 enjeksiyon baglanti cubuklarinin yerini alir (A58 kaldirildi).",
+    "d": 100.0,
+    "length": 2430.0,
+    "front_flange": {
+     "od": 200.0,
+     "thickness": 40.0,
+     "local_x_range": [-40.0, 0.0],
+     "contact_face": "local x=0 -> A21 arka yuzu (X=-220)",
+     "bolts": {
+      "optional": true,
+      "size": "M24 10.9",
       "count": 6,
-      "centers_local_xy": [[-590, 27.5], [-590, -27.5], [-470, 27.5], [-470, -27.5], [-350, 27.5], [-350, -27.5]]
+      "pcd": 160.0,
+      "hole_d": 26.0,
+      "start_angle_deg": 30,
+      "note": "A21 arka yuzune disli delik (derinlik 45); montajda 0-3 mm ayar simi (sim modellenmez)"
      }
     },
-    "material": "S355J2 welded",
-    "shear_key": "not required (slip resistance 886 kN > 400 kN); optional 40x20 transverse key under A21",
-    "note": "2 pedestals make A21 FIXED to A11 (bolted). Clamp force is an internal loop (tie bars); pedestals carry weight 24 kN + accidental horizontal H=400 kN (assumption 0.1*F_clamp)."
+    "rod": {
+     "d": 100.0,
+     "local_x_range": [-2390.0, -40.0],
+     "note": "dolu yuvarlak S355J2 (C45 de olur); flanslara tam nufuziyetli + a10 kose kaynak"
+    },
+    "rear_flange": {
+     "od": 200.0,
+     "thickness": 40.0,
+     "local_x_range": [-2430.0, -2390.0],
+     "contact_face": "local x=-2430 -> A14 on yuzu (X=-2650)",
+     "joint": "welded",
+     "weld": "cevre kose kaynagi a=12 (A14 levhasina), tam cevre"
+    },
+    "end_chamfer": 3,
+    "material": "S355J2",
+    "design_loads": {
+     "status": "H = c*F_kapama KULLANICI ONAYINDA DEGIL (degisken). c=0.1 ve c=0.2 icin saglandi; hesap out/olcu_2026-11-18_A13_3kolon.txt",
+     "H_factor_checked": [0.1, 0.2],
+     "lever_z": {
+      "lower": -150.0,
+      "upper": 370.0,
+      "H_z_envelope": [-320, 320]
+     },
+     "results_c0.1": "alt |N|<=265 kN 34 MPa Euler SF 6.5 EC3 kullanim 0.20; ust |N|<=362 kN 32 MPa SF 9.9 / 0.14",
+     "results_c0.2": "alt |N|<=531 kN 68 MPa Euler SF 3.2 EC3 kullanim 0.39; ust |N|<=723 kN 64 MPa SF 4.9 / 0.29",
+     "lateral_Y": "uzun kolon yanal yuk TASIMAZ (216 N/mm); A21 Y tutulmasi ayri kama ister (acik karar)",
+     "injection_reaction": "430 kN/atis A57-A11-A14-A13 yolundan; alt kolon basina 215 kN cekme 27 MPa (yorulma uygun)"
+    },
+    "note": "Kapama kuvveti 4000 kN plaka-kolon (A24) cevriminde dengelenir, bu kolonlara gelmez. Agirlik A21 A12 raylarina oturur."
    },
-   "local_origin": "Point on the frame top (Z=-530) at the fixed platen die-face plane (X=0), on the pedestal centre line (Y=+-150). Local axes parallel to global; base x -620..0, y -80..80, z 0..40; column x -270..-220, z 40..270.",
+   "local_origin": "Center of the front flange face (bearing on A21 rear face, X=-220) on the column axis. Column along -X: front flange x -40..0, rod x -2390..-40, rear flange x -2430..-2390 (rear face X=-2650 on A14). Local axes parallel to global.",
    "instances": [
     {
      "name": "A13_1",
-     "pos": [0, 150.0, -530.0],
+     "role": "alt +Y",
+     "pos": [-220.0, 220.0, -150.0],
      "rot": [0, 0, 0],
-     "bbox": [-620.0, 70.0, -530.0, 0, 230.0, -260.0]
+     "bbox": [-2650.0, 120.0, -250.0, -220.0, 320.0, -50.0]
     },
     {
      "name": "A13_2",
-     "pos": [0, -150.0, -530.0],
+     "role": "alt -Y",
+     "pos": [-220.0, -220.0, -150.0],
      "rot": [0, 0, 0],
-     "bbox": [-620.0, -230.0, -530.0, 0, -70.0, -260.0]
+     "bbox": [-2650.0, -320.0, -250.0, -220.0, -120.0, -50.0]
+    },
+    {
+     "name": "A13_3",
+     "role": "ust",
+     "pos": [-220.0, 0.0, 370.0],
+     "rot": [0, 0, 0],
+     "d": 120.0,
+     "front_flange": {
+      "od": 220.0,
+      "thickness": 40.0,
+      "local_x_range": [-40.0, 0.0],
+      "contact_face": "local x=0 -> A21 arka yuzu (X=-220)",
+      "bolts": {
+       "optional": true,
+       "size": "M24 10.9",
+       "count": 6,
+       "pcd": 180.0,
+       "hole_d": 26.0,
+       "start_angle_deg": 30,
+       "note": "A21 arka yuzune disli delik (derinlik 45); 0-3 mm ayar simi"
+      }
+     },
+     "rod": {
+      "d": 120.0,
+      "local_x_range": [-2390.0, -40.0],
+      "note": "dolu yuvarlak S355J2"
+     },
+     "rear_flange": {
+      "od": 220.0,
+      "thickness": 40.0,
+      "local_x_range": [-2430.0, -2390.0],
+      "contact_face": "local x=-2430 -> A14 on yuzu (X=-2650)",
+      "joint": "welded",
+      "weld": "cevre kose kaynagi a=12"
+     },
+     "bbox": [-2650.0, -110.0, 260.0, -220.0, 110.0, 480.0]
+    }
+   ]
+  },
+  "A14": {
+   "name": "Kolon arka dikmesi (sase arka ucu, A11'e kaynakli)",
+   "dims": {
+    "plate": {
+     "local_x_range": [0, 50],
+     "y_range": [-400, 400],
+     "z_range": [0, 1050],
+     "note": "X -2700..-2650, Z -530..520; A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
+    },
+    "gussets": {
+     "count": 2,
+     "thickness": 40,
+     "y_ranges": [[340, 380], [-380, -340]],
+     "profile_xz": [[50, 0], [50, 1050], [250, 1050], [700, 0]],
+     "note": "on tarafta (+X), taban X -2650..-2000 (ucu A11 enine kaburgasi X=-2000 ustunde); A55/A57'den |Y| ile uzak"
+    },
+    "upper_ribs": {
+     "count": 2,
+     "thickness_z": 30,
+     "local_x_range": [50, 250],
+     "y_range": [-340, 340],
+     "z_ranges": [[750, 780], [1020, 1050]],
+     "note": "Z 220..250 ve 490..520: ust kolon flansinin (Z 260..480) 10 mm alti/ustu; levha ile yatay kiris"
+    },
+    "lower_ribs": {
+     "count": 2,
+     "thickness": 20,
+     "y_ranges": [[90, 110], [-110, -90]],
+     "local_x_range": [50, 130],
+     "z_range": [0, 500],
+     "note": "dikdortgen dikey nervur X -2650..-2570, Z -530..-30; alt flanslarin (|Y|>=120) 10 mm icinde, A55 arka ucuna (X=-2530) 40 mm"
+    },
+    "welds": {
+     "joint": "welded",
+     "to_A11_top": "levha tabani on+arka kose a=20 (2 x 800), gusset tabanlari cift taraf a=20 (2 x 650)",
+     "to_A11_end_plate": "levha arka yuzu A11 uc plakasina (X=-2700) kose a=12",
+     "ribs": "a=8 cift taraf"
+    },
+    "material": "S355J2",
+    "design": "H=0.1F/0.2F (VARSAYIM): gusset 33/66 MPa, taban kaynagi 16/32 MPa, ust kiris 76/152 MPa, alt levha 46/92 MPa (out/olcu_2026-11-18_A13_3kolon.txt)"
+   },
+   "local_origin": "Point on the frame top (Z=-530) at the frame rear end X=-2700, Y=0. Local axes parallel to global: plate x 0..50, y -400..400, z 0..1050.",
+   "instances": [
+    {
+     "name": "A14_1",
+     "pos": [-2700.0, 0, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-2700.0, -400.0, -530.0, -2000.0, 400.0, 520.0]
     }
    ]
   }
@@ -1984,7 +2081,7 @@
    "b": "A12",
    "type": "contact",
    "gap": 0,
-   "note": "A21 is FIXED (bolted to A11 via A13); rails A12 under A21 are seating only, slideways for A22/A23"
+   "note": "A21 is FIXED (3 x A13 columns to A14 stand welded on A11); rails A12 under A21 are seating only (weight), slideways for A22/A23"
   },
   {
    "a": "A22",
@@ -2309,51 +2406,6 @@
    "gap": 13
   },
   {
-   "a": "A13",
-   "face": "base bottom (Z=-530)",
-   "b": "A11",
-   "type": "contact",
-   "gap": 0,
-   "note": "6 x M30 per pedestal"
-  },
-  {
-   "a": "A13",
-   "face": "base top under platen (Z=-490)",
-   "b": "A21",
-   "type": "contact",
-   "gap": 0
-  },
-  {
-   "a": "A13",
-   "face": "column front face (X=-220)",
-   "b": "A21",
-   "type": "contact",
-   "gap": 0,
-   "note": "4 x M36 per pedestal into A21 rear face"
-  },
-  {
-   "a": "A13",
-   "face": "column top (Z=-260)",
-   "b": "A51",
-   "type": "clearance",
-   "gap": 15
-  },
-  {
-   "a": "A13",
-   "face": "side (|Y|=230)",
-   "b": "A25",
-   "type": "clearance",
-   "gap": 25
-  },
-  {
-   "a": "A13",
-   "face": "front end (X=0)",
-   "b": "A11",
-   "type": "clearance",
-   "gap": 20,
-   "note": "top_opening_biscuit_drop starts at X=20"
-  },
-  {
    "a": "A42",
    "face": "knock-out rod tips (X=360)",
    "b": "A83",
@@ -2411,6 +2463,65 @@
    "type": "clearance",
    "gap": 7.5,
    "note": "split knee pins |Y|>=127.5"
+  },
+  {
+   "a": "A13",
+   "face": "front flange face (X=-220)",
+   "b": "A21",
+   "type": "contact",
+   "gap": 0,
+   "joint": "bolted",
+   "note": "6 x M24 10.9 per flange into A21 rear face; 0-3 mm shim; A21 is cast -> not welded"
+  },
+  {
+   "a": "A13",
+   "face": "rear flange face (X=-2650)",
+   "b": "A14",
+   "type": "contact",
+   "gap": 0,
+   "joint": "welded",
+   "note": "fillet a=12 all round"
+  },
+  {
+   "a": "A14",
+   "face": "plate + gusset bases (Z=-530), rear face (X=-2700)",
+   "b": "A11",
+   "type": "contact",
+   "gap": 0,
+   "joint": "welded",
+   "note": "a=20 on top plate, a=12 to end plate; gusset toes over cross rib X=-2000"
+  },
+  {
+   "a": "A13",
+   "face": "lower rods |Y|>=170",
+   "b": "A54",
+   "type": "clearance",
+   "gap": 20,
+   "note": "A54 square heads |Y|<=150"
+  },
+  {
+   "a": "A13",
+   "face": "lower rods |Y|<=270",
+   "b": "A56",
+   "type": "clearance",
+   "gap": 10,
+   "note": "A56 moved to Y=-390"
+  },
+  {
+   "a": "A13",
+   "face": "lower front flanges",
+   "b": "A51",
+   "type": "clearance",
+   "gap": 25,
+   "note": "A51 flange r95 vs flange inner edge |Y|=120"
+  },
+  {
+   "a": "A13",
+   "face": "upper rod Z>=310",
+   "b": "A54",
+   "type": "clearance",
+   "gap": 310,
+   "note": "pour hole side access: 390 mm clear height above sleeve top Z=-80"
   }
  ],
  "clearances": {
@@ -2461,7 +2572,6 @@
    ["A95", "A97"],
    ["A96", "A23"],
    ["A96", "A94"],
-   ["A11", "A13"],
    ["A13", "A21"],
    ["A42", "A83"],
    ["A82", "A83"],
@@ -2469,7 +2579,9 @@
    ["A82", "A85"],
    ["A83", "A84"],
    ["A83", "A85"],
-   ["A81", "A85"]
+   ["A81", "A85"],
+   ["A13", "A14"],
+   ["A11", "A14"]
   ],
   "mesh_pairs": [["A91", "A26"], ["A91", "A93"]],
   "mesh_note": "Disli kavramalari: izinli temas ama girisim hacmi <50 mm3 olmali (faz hatasi ~5 cm3 verir)."
