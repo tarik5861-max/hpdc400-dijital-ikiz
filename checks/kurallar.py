@@ -1,5 +1,6 @@
 """kurallar.py - params tutarlilik kurallari (check.py'den cagrilir). Geometri gerektirmez.
-Hata turleri: KURAL_ITICI, KURAL_DELIK_CUBUK, KURAL_KALIP_PIM, KURAL_PIM_SAYI, KURAL_IDDIA
+Hata turleri: KURAL_ITICI, KURAL_DELIK_CUBUK, KURAL_KALIP_PIM, KURAL_PIM_SAYI, KURAL_IDDIA, KURAL_SHOT
+Elektrik (elektrik.json yoksa atlanir): KURAL_ELEK_KANAL_ID, _REF, _BAGLI, _KAPSAM, _GUVENLIK, _LOTO, _KOKEN, _DURUM, _HESAP
 """
 import os, re
 
@@ -70,6 +71,7 @@ def kural_kontrol(P, kararlar_text=None):
         if satir and metin in satir and deger != beklenen:
             err("KURAL_IDDIA, KURAL_SHOT", "KARARLAR", f"iddia '{metin}' ({beklenen}) ama params={deger}")
     E += kural_shot(P)
+    E += kural_elektrik()
     return E
 
 
@@ -109,4 +111,132 @@ def kural_shot(P):
     sh = [k for k in pr["A21"]["dims"] if re.search(r"shot_hole", k)]
     if sh != ["shot_hole"]:
         err("A21", f"tek shot hole olmali, bulunan anahtarlar: {sh}")
+    return E
+
+
+_ELEK_REF = re.compile(r"^(?:DI|DO|AI|AO)\d+\.\d+$|^DB68\.[A-Za-z0-9_]+$")
+
+
+def _elek_yaprak(x):
+    """ifade agacindaki tum string yapraklari."""
+    if isinstance(x, str):
+        yield x
+    elif isinstance(x, (list, tuple)):
+        for y in x:
+            yield from _elek_yaprak(y)
+
+
+def _elek_dictler(x):
+    if isinstance(x, dict):
+        yield x
+        for v in x.values():
+            yield from _elek_dictler(v)
+    elif isinstance(x, list):
+        for v in x:
+            yield from _elek_dictler(v)
+
+
+def _bom_idler(n):
+    out = set()
+    if isinstance(n, dict):
+        if "id" in n:
+            out.add(n["id"])
+        for v in n.values():
+            out |= _bom_idler(v)
+    elif isinstance(n, list):
+        for v in n:
+            out |= _bom_idler(v)
+    return out
+
+
+def kural_elektrik(el=None, bom=None):
+    """KURAL_ELEK_*: params/elektrik.json tutarlilik kurallari. el/bom verilmezse dosyadan okunur;
+    elektrik.json yoksa atlanir (hata degil)."""
+    import json
+    E = []
+    def err(t, part, msg): E.append({"part": part, "type": t, "msg": msg})
+    if el is None:
+        yol = os.path.join(ROOT, "params", "elektrik.json")
+        if not os.path.exists(yol):
+            return E
+        with open(yol, encoding="utf-8") as f:
+            el = json.load(f)
+    if bom is None:
+        with open(os.path.join(ROOT, "params", "bom.json"), encoding="utf-8") as f:
+            bom = json.load(f)
+    bom_ids = _bom_idler(bom.get("tree", bom))
+    meta = el.get("meta", {})
+    kanallar = el.get("kanallar", [])
+
+    # 1. kanal id benzersiz
+    gor = {}
+    for k in kanallar:
+        i = k.get("id")
+        if i in gor:
+            err("KURAL_ELEK_KANAL_ID", str(i), "tekrar eden kanal id")
+        gor[i] = k
+    # 2. mantik referanslari kanal listesinde + 4. aktif kural kapsam_disi/ayrilmis kanala dayanmaz
+    mantik = el.get("mantik", {})
+    for sec, alanlar in (("donanim", ("id", "ifade")), ("plc", ("id", "ifade")), ("alarmlar", ("kosul",))):
+        for x in mantik.get(sec, []):
+            kid = x.get("id", x.get("kosul", "?"))
+            if x.get("durum") in ("kapsam_disi", "ayrilmis", "istege_bagli"):
+                continue  # pasif kural
+            for a in alanlar:
+                for t in _elek_yaprak(x.get(a)):
+                    if not _ELEK_REF.match(t):
+                        continue
+                    if t not in gor:
+                        err("KURAL_ELEK_REF", f"{sec}:{kid}", f"{t} kanal listesinde yok")
+                    elif gor[t].get("durum") in ("kapsam_disi", "ayrilmis"):
+                        err("KURAL_ELEK_KAPSAM", f"{sec}:{kid}", f"aktif kural {gor[t]['durum']} kanala dayaniyor: {t}")
+    # 3. bagli_id bom'da
+    for d in _elek_dictler(el):
+        for b in d.get("bagli_id", []) or []:
+            if b not in bom_ids:
+                err("KURAL_ELEK_BAGLI", str(d.get("id", d.get("tag", d.get("hidrolik", "?")))), f"bagli_id {b} bom.json'da yok")
+    for t in el.get("teshis_tohumu", []):
+        for kn in t.get("kontrol", []):
+            for b in (kn[2] if len(kn) > 2 else []):
+                if b not in bom_ids:
+                    err("KURAL_ELEK_BAGLI", "teshis:" + str(t.get("belirti")), f"bagli_id {b} bom.json'da yok")
+    # 5. teshis guvenlik
+    for t in el.get("teshis_tohumu", []):
+        g = t.get("guvenlik")
+        if not (isinstance(g, str) and g.strip()):
+            err("KURAL_ELEK_GUVENLIK", str(t.get("belirti")), "guvenlik alani bos/yok")
+    # 6. LOTO
+    adimlar = el.get("loto", {}).get("adimlar", [])
+    if not adimlar:
+        err("KURAL_ELEK_LOTO", "loto", "adim yok")
+    nolar = [a.get("no") for a in adimlar]
+    if nolar != list(range(1, len(adimlar) + 1)):
+        err("KURAL_ELEK_LOTO", "loto", f"adim numaralari 1..n sirali degil: {nolar}")
+    for a in adimlar:
+        if not str(a.get("eylem", "")).strip():
+            err("KURAL_ELEK_LOTO", f"loto:{a.get('no')}", "eylem bos")
+    # 7. koken / durum
+    koken_ok = {"dcc630_sablon", "400t_hesap", "yeni"} | set(meta.get("koken_degerleri", {}))
+    durum_ok = set(meta.get("durum_degerleri", {})) or {"aktif", "istege_bagli", "ayrilmis", "kapsam_disi"}
+    for d in _elek_dictler(el):
+        if "koken" in d and d["koken"] not in koken_ok:
+            err("KURAL_ELEK_KOKEN", str(d.get("id", d.get("tag", d.get("slot", "?")))), f"koken {d['koken']!r} izinli degil")
+    # durum: kanal/modul kayitlari (oneri kayitlarindaki serbest 'durum' alani kapsam disi)
+    for d in list(kanallar) + list(el.get("moduller", [])) + [el.get("dcc630_kapsam_disi_modul", {})]:
+        if "durum" in d and d["durum"] not in durum_ok:
+            err("KURAL_ELEK_DURUM", str(d.get("id", d.get("slot", "?"))), f"durum {d['durum']!r} izinli degil")
+    # 8. hesap sonucu
+    hs = el.get("hesap_sonuclari", {})
+    fr = hs.get("FR1", {})
+    try:
+        lo, hi = fr["aralik_A"]
+        if not lo <= fr["ayar_A"] <= hi:
+            err("KURAL_ELEK_HESAP", "FR1", f"ayar {fr['ayar_A']} A aralik {lo}-{hi} disinda")
+    except (KeyError, TypeError, ValueError):
+        err("KURAL_ELEK_HESAP", "FR1", "FR1 ayar_A/aralik_A eksik")
+    hw = {x.get("id"): x.get("ifade") for x in mantik.get("donanim", [])}
+    def nc(a, b):
+        return ["not", b] in (hw.get(a) or [])
+    if not (nc("HW.KM2", "HW.KM3") and nc("HW.KM3", "HW.KM2")):
+        err("KURAL_ELEK_HESAP", "KM2/KM3", "KM2 ile KM3 karsilikli NC kilitli degil")
     return E

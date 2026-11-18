@@ -66,6 +66,12 @@ Tasarım esası: 400 t horizontal cold-chamber HPDC machine, 5-point double togg
 | 2026-11-18 (shot) | A57 | saddles local_z_range [30,230] değişmedi (alt), not: üst = 230+dz (230/305/380); `height_adjust` eklendi (kaide + 0/1/2×75 ara takoz, 2×Ø25 pim, 1×M24 kriko, 4×M24 10.9 saplama / semer, her ara yüzde 300×40 kama, A11'e kaynaklı 80×400×60 dayama takozu, 8×M30 taban); gusset notu | vuruş yüksekliği ayar mekanizması ve 430 kN yük yolu (sürtünme 2150 kN sıkma isterdi → kama) |
 | 2026-11-18 (shot) | A13 | design_loads.injection_reaction metni konum bazlı oldu (215/184/153 kN alt kolon, 0/62/124 kN üst kolon) | vuruş ekseni kayınca tepki kolonlar arasında yeniden dağılır |
 | 2026-11-18 (shot) | meta.notes | 1 not güncellendi (Shot position ... = 'alt'), 3 not eklendi (konumlar/boşluklar, sınırlar, tepki) | izlenebilirlik |
+| 2026-11-18 (karar) | A13 / KARAR | kazara yatay yük H = c·F_kapama, c = 0,1 (varsayım) -> **c = 0,2 esas** (H = 800 kN); ölçü DEĞİŞMEDİ | Kullanıcı kararları devretti; konservatif taraf. A13 c=0,2'de sağlanıyor (alt kolon 531 kN / 67,6 MPa, burkulma kullanım 0,39; üst 723 kN / 63,9 MPa, 0,29; flanş cıvatası 121 kN < 232 kN ön gerilme; tüm A14 gerilmeleri ≤ 152 MPa < 345 MPa). Claude kararı, saha doğrulaması gerekir. KARARLAR.md satırı orkestratörce yazılmalı |
+| 2026-11-18 (karar) | A58 | "kaldırıldı — KULLANICI ONAYI BEKLİYOR" -> **kaldırıldı, kesin** (params/bom değişmedi) | Kullanıcı gerçek makine fotoğrafından 3 kolonu onayladı; enjeksiyon tepkisi A57-A11-A14-A13 yolu açık risk olarak kalır |
+| 2026-11-18 (karar) | elektrik.json DO7.15 S121 | polarite "DOĞRULANMADI, kullanıcı kararı" -> K-EL-01 enerjisiz = boşalt (P.S121_ENERJILI_DESARJ 0 -> 0, değer aynı) + KA_ES "oneri_KULLANICI_ONAYI" -> claude_karari | fail-safe: E-stop/şebeke kesintisinde akümülatör boşalır; E-stop'ta kontrolsüz silindir hareketi sahada doğrulanmalı |
+| 2026-11-18 (karar) | elektrik.json TC1/U1 | oneri "A (KULLANICI_ONAYI)" -> "A" (K-EL-03); U1 açıklaması "TC1 sekonderinden" -> "ayrı L-N + 6 A MCB" | TC1 yükü 388 VA ≤ 630 VA; pensle ölçülecek |
+| 2026-11-18 (karar) | elektrik.json S.AKU_BOS | `le` -> `lt` (PT2 < 2 bar, 10 s) | görev metni katı "<" |
+| 2026-11-18 (karar) | elektrik.json mantik | yok -> `hw_girisler[]` (tip/saglam_deger, 12), `kanallar[].saglam_deger` (7 DI), `donanim[].izleme` (+5) ve `HW.L15.izleme_ters` (DI5.11), `reset` (3 mühür), plc `S.KILITLI_KUVVET_ALTINDA` (FKAP eşik 50 kN, P.KAPAMA_KUVVET_SENSORU_VAR 0), `siralayici` (P.PISTON_GERI_SURE_ms 2500, P.MAFSAL_YAGLAMA_SURE_ms 5000), plc `S.LOTO_A1/2/3/4/5/9_OK` + esikler (AI10.1 > 20 mm, PT1/PCARP < 2 bar), `kararlar[]`; tüm "KULLANICI_ONAYI" -> "CLAUDE_KARARI_SAHA_DOGRULAMASI" | lib/elektrik_mantik.py geçici sabitleri JSON'dan okusun. FKAP: 5 kN/somun -> 2,64 Nm; 7,24 Nm nominal -> 54,8 kN toplam; eşik 50 kN (%91). Üretim: out/elektrik_karar_2026-11-18.py, döküm out/elektrik_karar_2026-11-18.txt |
 
 ## Hareket (kapama) doğrulaması – 2026-11-15
 Açılma kursu 420 mm KORUNDU. Çözüm: itici ünitesi |Y|<=120, |Z|<=170, boy 425 zarfına alındı; diz pimleri bölündü; çapraz kafa göbek+dil oldu.
@@ -103,7 +109,7 @@ Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.p
 ## Sabit plaka destek kolonları – 2026-11-18 rev2 (3 uzun kolon + A14)
 - Kaynak: kullanıcı fotoğrafı (ZHENLI ZLC300 tipi) + formül. Hesap dökümü: out/olcu_2026-11-18_A13_3kolon.txt; boşluklar: out/olcu_2026-11-18_A13_bosluk.txt (params ölçülerinden vekil katı, BRepExtrema).
 - Yük yolu: kapama 4000 kN A24 çevriminde kendi kendini dengeler (kolonlara gelmez). Ağırlık (~24 kN) A21 → A12 raylarına oturur. Kolonlar X yönündeki kazara yatay yükü H taşır; iki kol kotu (alt Z=-150, üst Z=+370), H etki kotu Z -320..+320 zarfı.
-- **H = c·F_kapama VARSAYIMDIR, kullanıcı onayında değil.** Ölçüler c=0,1 ve c=0,2 için sağlanıyor:
+- **H = c·F_kapama VARSAYIMDIR.** 2026-11-18 karar: **c = 0,2 esas** (Claude kararı, kullanıcı devretti; saha doğrulaması gerekir). Ölçüler c=0,1 ve c=0,2 için sağlanıyor:
 
 | Kontrol | c = 0,1 (H = 400 kN) | c = 0,2 (H = 800 kN) | Sınır |
 |---|---|---|---|
