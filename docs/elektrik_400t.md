@@ -144,7 +144,7 @@ Lib davranışından bilinçli farklar (lib güncellenince testler gözden geçi
 
 Açık riskler:
 1. **E-stop'ta kontrolsüz silindir hareketi** (K-EL-01): servo valf enerjisiz konumu ve deşarj yolu doğrulanmadan fail-safe varsayımı tam değildir.
-2. **A97 darbe kaçırma:** 1450/60 × 2 = 48,3 Hz, darbe genişliği ~10,3 ms; S7-300 standart DI (giriş gecikmesi 3 ms) + tarama 10–30 ms ile kenar kaçabilir → hızlı sayıcı girişi veya enkoderi redüktör çıkışına almak (41,4 d/dk, 2,50 mm/devir; 25 ppr → 0,1 mm, 17 Hz). Mekanik/BOM kararı, açık.
+2. **A97 darbe kaçırma (KARAR K-EL-07, 2026-11-19: redüktör çıkışı, 25 ppr; A97 konum/ppr için olcu-mimari'ye OLCU_TALEBI):** 1450/60 × 2 = 48,3 Hz, darbe genişliği ~10,3 ms; S7-300 standart DI (giriş gecikmesi 3 ms) + tarama 10–30 ms ile kenar kaçabilir → hızlı sayıcı girişi veya enkoderi redüktör çıkışına almak (41,4 d/dk, 2,50 mm/devir; 25 ppr → 0,1 mm, 17 Hz). Mekanik/BOM kararı, açık.
 3. Otomatik çevrim başlatmada aktif alarm (ör. AL_YAGLAMA "N çevrim sonra yasak") kontrol edilmiyor; sayaçlı yasak tanımı yok.
 4. params die_height_drive notu: kalıp yüksekliği ayarı kalıp SÖKÜLÜ iken (dh < 400'de kalıplar çarpışır) — elektrik izni bunu bilmiyor (kalıp takılı bilgisi yok).
 5. DI5.08'in anlamı (mafsal kilitli mi, kalıp teması mı) doğrulanmadı; K-EL-06d buna dayanıyor.

@@ -5056,6 +5056,21 @@
    "tarih": "2026-11-18",
    "koken": "400t_hesap",
    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+  },
+  {
+   "id": "K-EL-07",
+   "konu": "A97 enkoder darbe kacirma",
+   "karar": "enkoder redüktör çıkışına (A94 çıkış mili) alınır, 25 ppr A/B; standart DI yeter, hızlı sayıcı kartı gerekmez",
+   "gerekce": "motor milinde 2 ppr = 48,3 Hz / 10,3 ms darbe, S7-300 DI gecikmesi 3 ms + tarama 10-30 ms ile kenar kaçar; redüktör çıkışında 41,4 d/dk = 2,50 mm/devir, 25 ppr = 0,1 mm/darbe, 17 Hz (darbe ~30 ms)",
+   "saha_dogrulamasi": "mevcut enkoderin ppr ve montaj yeri; PLC tarama süresi (OB1) ölçümü; OLCU_TALEBI: A97 konumu/ppr olcu-mimari'ye",
+   "yol": [
+    "mantik.siralayici.a97_sayac",
+    "kanallar[A97_A]",
+    "kanallar[A97_B]"
+   ],
+   "tarih": "2026-11-19",
+   "koken": "400t_hesap",
+   "durum": "claude_karari_saha_dogrulamasi_gerekir"
   }
  ]
 }
