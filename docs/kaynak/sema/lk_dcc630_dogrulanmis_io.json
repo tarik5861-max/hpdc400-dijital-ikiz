@@ -1,0 +1,412 @@
+{
+ "kaynak": "LK Machinery DCC630, çizim no 6217710010142301, sayfalar 9-1…9-9 (taranmış PDF, docs/kaynak/sema/). Okuma tarama kalitesi nedeniyle yer yer bulanık; güven alanı verilmiştir.",
+ "adres_notu": "Şemadaki klemens notasyonu I<kelime><bit 0-15> biçimindedir (ör. I10…I115, I20…I215). Siemens bayt/bit adresi (I0.0…) ile eşlemesi donanım konfigürasyonundan (HW Config) doğrulanmalı; bu dosyada şema notasyonu aynen tutuldu.",
+ "moduller": [
+  {
+   "slot": 4,
+   "tip": "SM323 DI16/DO16",
+   "sayfa": "9-4",
+   "not": "DI16 (1B* butonları) + DO16 (robot/kapı sinyalleri, L10 röle kartı)"
+  },
+  {
+   "slot": 5,
+   "tip": "SM321 DI32",
+   "sayfa": "9-5",
+   "not": "dosya 1'de Slot 6 yazılmış, şemada Slot5"
+  },
+  {
+   "slot": 7,
+   "tip": "SM322 DO32",
+   "sayfa": "9-5"
+  },
+  {
+   "slot": 9,
+   "tip": "SM323 DI16 (tie bar / somun limitleri)",
+   "sayfa": "9-7"
+  },
+  {
+   "slot": 10,
+   "tip": "SM335 AI4/AO4",
+   "sayfa": "9-7",
+   "not": "AO'lar U12 (LKPP-03) basınç/akış oransal kartına; AI: VR1 kalıp pozisyon cetveli"
+  },
+  {
+   "slot": 11,
+   "tip": "6ES7 332-5HD01-0AB0 (AO4)",
+   "sayfa": "9-7",
+   "not": "AOV1→U17 çoğaltıcı oransal, AOV2→U18 2. faz hız oransal"
+  }
+ ],
+ "slot4_DI16": [
+  {
+   "kanal": 1,
+   "klemens": "I10",
+   "tag": "1B0",
+   "aciklama": "die close button 1",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 2,
+   "klemens": "I11",
+   "tag": "1B1",
+   "aciklama": "die open button",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 3,
+   "klemens": "I12",
+   "tag": "1B2",
+   "aciklama": "injection button",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 4,
+   "klemens": "I13",
+   "tag": "1B3-1",
+   "aciklama": "plunger FWD knob",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 5,
+   "klemens": "I14",
+   "tag": "1B3-2",
+   "aciklama": "plunger BWD knob",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 6,
+   "klemens": "I15",
+   "tag": "1B4-1",
+   "aciklama": "ejector FWD knob",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 7,
+   "klemens": "I16",
+   "tag": "1B4-2",
+   "aciklama": "ejector BWD knob",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 8,
+   "klemens": "I17",
+   "tag": "1B7-1",
+   "aciklama": "manual switch",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 9,
+   "klemens": "I18",
+   "tag": "1B7-2",
+   "aciklama": "auto switch",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 10,
+   "klemens": "I19",
+   "tag": "1B9",
+   "aciklama": "plunger lub. knob",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 11,
+   "klemens": "I110",
+   "tag": "1B10",
+   "aciklama": "displacement lock switch",
+   "guven": "orta"
+  },
+  {
+   "kanal": 12,
+   "klemens": "I111",
+   "tag": "1B11A-2",
+   "aciklama": "motor start button",
+   "guven": "orta"
+  },
+  {
+   "kanal": 13,
+   "klemens": "I112",
+   "tag": "1B12A-2",
+   "aciklama": "motor stop button",
+   "guven": "orta"
+  },
+  {
+   "kanal": 14,
+   "klemens": "I113",
+   "tag": "1B13",
+   "aciklama": "die adjust button",
+   "guven": "orta"
+  },
+  {
+   "kanal": 15,
+   "klemens": "I114",
+   "tag": "1B7-4",
+   "aciklama": "semi-auto knob",
+   "guven": "orta"
+  },
+  {
+   "kanal": 16,
+   "klemens": "I115",
+   "tag": "1B15",
+   "aciklama": "die close button 2",
+   "guven": "orta"
+  }
+ ],
+ "slot4_DO16_robot_ve_kapi": [
+  "die opening",
+  "die opened",
+  "DCM door open limit",
+  "DCM auto mode",
+  "ejector forward limit",
+  "die closed limit",
+  "die closed signal",
+  "spraying permit",
+  "die close fast speed",
+  "die open slow speed",
+  "die close safety control (*)",
+  "plunger blowing (*)",
+  "front door open control",
+  "front door close control",
+  "alarm lamp (red)",
+  "front door closed signal (*)"
+ ],
+ "slot7_DO32_ilk16": [
+  {
+   "kanal": 1,
+   "tag": "S113",
+   "aciklama": "fast discharge",
+   "not": "çıkış U16 sürücüsüne gidiyor",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 2,
+   "tag": "S120",
+   "aciklama": "confluence valve",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 3,
+   "tag": "S180",
+   "aciklama": "stop valve",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 4,
+   "tag": "S211",
+   "aciklama": "die open control",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 5,
+   "tag": "S210A",
+   "aciklama": "die close",
+   "not": "KA9 kontağı üzerinden",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 6,
+   "tag": "S605",
+   "aciklama": "plunger lub.",
+   "guven": "orta"
+  },
+  {
+   "kanal": 7,
+   "tag": "S208",
+   "aciklama": "safety lock loose (*)",
+   "guven": "orta"
+  },
+  {
+   "kanal": 8,
+   "tag": "HL1",
+   "aciklama": "E-stop indicator",
+   "guven": "orta"
+  },
+  {
+   "kanal": 9,
+   "tag": "S601",
+   "aciklama": "displacement flat",
+   "guven": "orta"
+  },
+  {
+   "kanal": 10,
+   "tag": "S116",
+   "aciklama": "3rd injection",
+   "guven": "orta"
+  },
+  {
+   "kanal": 11,
+   "tag": "S119",
+   "aciklama": "2nd injection",
+   "guven": "orta"
+  },
+  {
+   "kanal": 12,
+   "tag": "S126",
+   "aciklama": "intensifier control",
+   "not": "çıkış U17'ye gidiyor",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 13,
+   "tag": "S301",
+   "aciklama": "ejector FWD",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 14,
+   "tag": "S302",
+   "aciklama": "ejector BWD",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 15,
+   "tag": "S121",
+   "aciklama": "accumulator oil discharge",
+   "guven": "yuksek"
+  },
+  {
+   "kanal": 16,
+   "tag": "S118",
+   "aciklama": "intensifier oil discharge",
+   "guven": "orta"
+  }
+ ],
+ "slot7_DO32_son16": [
+  {
+   "kanal": 17,
+   "aciklama": "core1 in",
+   "tag": null
+  },
+  {
+   "kanal": 18,
+   "aciklama": "core1 out",
+   "tag": null
+  },
+  {
+   "kanal": 19,
+   "aciklama": "core2 in",
+   "tag": null
+  },
+  {
+   "kanal": 20,
+   "aciklama": "core2 out",
+   "tag": null
+  },
+  {
+   "kanal": 21,
+   "aciklama": "core3 in",
+   "tag": null
+  },
+  {
+   "kanal": 22,
+   "aciklama": "core3 out",
+   "tag": null
+  },
+  {
+   "kanal": 23,
+   "aciklama": "(el yazısı: Start1; basılı etiket çizilmiş, muhtemelen core4 in)",
+   "tag": null
+  },
+  {
+   "kanal": 24,
+   "aciklama": "(el yazısı: Start2; basılı etiket çizilmiş, muhtemelen core4 out)",
+   "tag": null
+  },
+  {
+   "kanal": 25,
+   "aciklama": "slow injection",
+   "tag": null
+  },
+  {
+   "kanal": 26,
+   "aciklama": "plunger backward",
+   "tag": null
+  },
+  {
+   "kanal": 27,
+   "aciklama": "shot ready lamp",
+   "tag": "HL3",
+   "guven": "orta"
+  },
+  {
+   "kanal": 28,
+   "aciklama": "alarm buzzer",
+   "tag": "NL",
+   "guven": "orta"
+  },
+  {
+   "kanal": 29,
+   "aciklama": "die height thin",
+   "tag": "S203",
+   "guven": "dusuk"
+  },
+  {
+   "kanal": 30,
+   "aciklama": "die height thick",
+   "tag": "S202",
+   "guven": "dusuk"
+  },
+  {
+   "kanal": 31,
+   "aciklama": "pump motor control",
+   "tag": "KA2",
+   "guven": "orta",
+   "not": "9-2'de motor start devresindeki KA2 ile tutarlı"
+  },
+  {
+   "kanal": 32,
+   "aciklama": "lubrication pump control",
+   "tag": "KA1",
+   "guven": "orta"
+  }
+ ],
+ "slot5_DI32_okunabilen": [
+  "front door close limit 2",
+  "front door close limit 1",
+  "back door close limit 2",
+  "back door close limit 1",
+  "die thin limit",
+  "die thick limit",
+  "lub. level alarm",
+  "die closed confirm LS",
+  "motor start confirm",
+  "lube pressure alarm",
+  "motor overload",
+  "E-stop switch",
+  "oil tank liquid level switch (okunamadı: bulanık)",
+  "core 1 in/out selector",
+  "core 2 in/out selector",
+  "core 3 in/out selector",
+  "core 4 in/out selector",
+  "door open button",
+  "door close button",
+  "die close speed adjust selector",
+  "oil suction filter switch",
+  "front door open limit",
+  "front door safety protection"
+ ],
+ "slot9_DI16": [
+  "6B0 nut loosen select",
+  "6B1 tie bar in",
+  "6B2 tie bar out",
+  "6LS3 tie bar out limit",
+  "6LS4 tie bar in limit",
+  "6LS5-6LS7 fixed platen nut limitleri",
+  "6LS8-6LS12 rear/fixed platen nut loosen/tighten limitleri",
+  "6B13-1 tie bar select switch (U20'ye)"
+ ],
+ "analog": {
+  "slot10_AO": "AOV1/AOV2 → U12 (LKPP-03) basınç ve akış oransal amplifikatörü → S103 (basınç valfi), S102 (akış valfi)",
+  "slot10_AI": "VR1 kalıp açma/kapama pozisyon cetveli (AI1+)",
+  "slot11_AO": "AOV1 → U17 (çoğaltıcı oransal), AOV2 → U18 (2. faz hız oransal)",
+  "U16": "enjeksiyon servo valf sürücüsü (TDP050EH, S424): analog sinyal DB68 kartından (A09+/A09-), enable = slot 7 kanal 1 (S113)",
+  "DB68_sensorler": "akümülatör basıncı, çoğaltıcı basıncı, enjeksiyon giriş/çıkış basıncı, kalıp kapama kuvveti (U19 KH1000 + SML-RS), enjeksiyon enkoderi (sayfa 9-8)"
+ },
+ "guc_ve_kontrol_9_1_9_3": {
+  "ana_salter": "100 A, 3N/PE AC380V 50Hz, 3x25 mm2 + N 25 mm2",
+  "M1": "ana yağ pompası motoru, yıldız-üçgen KM1/KM2/KM3, termik FR1",
+  "trafo": "TC1 630 VA 380→220V, sigorta FU11 AG10-6A",
+  "U1": "S-500-24, FU10 (AS10-1A hızlı) → +24V, FU12 (AS10-16A hızlı) → 024V/S24V",
+  "KA9": "die close safety control rölesi; ön ve arka kapı limit 2 kontakları",
+  "M10": "yağlama pompası 75 W, FAN1 17 W, M11 gres pompası (KA41)"
+ }
+}
