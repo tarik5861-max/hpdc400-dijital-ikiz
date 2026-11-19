@@ -53,6 +53,7 @@
       "items": [
         "A59",
         "A63",
+        "A64",
         "A61",
         "A62",
         "A71",
@@ -283,7 +284,7 @@
         },
         {
           "id": "A59",
-          "name": "Akumulator valf blogu (manifold)",
+          "name": "Akumulator sepeti + valf blogu",
           "qty": 1,
           "script": "parts/A59_valf_blogu.py"
         },
@@ -292,6 +293,12 @@
           "name": "Akumulator kelepce bantlari",
           "qty": 2,
           "script": "parts/A63_kelepce.py"
+        },
+        {
+          "id": "A64",
+          "name": "Akumulator toplayici borusu",
+          "qty": 1,
+          "script": "parts/A64_toplayici_boru.py"
         }
       ]
     },

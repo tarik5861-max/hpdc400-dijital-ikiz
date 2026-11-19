@@ -1107,42 +1107,40 @@
    },
    "local_origin": "Center of the bottom face. Bottle axis vertical along +Z (z 0..1300); stands on A59 valve block top bosses.",
    "instances": [
-    {"name": "A56_1", "pos": [-3020, -345.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -455.0, -180.0, -2910, -235.0, 1120.0]},
-    {"name": "A56_2", "pos": [-3020, -115.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -225.0, -180.0, -2910, -5.0, 1120.0]},
-    {"name": "A56_3", "pos": [-3020, 115.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 5.0, -180.0, -2910, 225.0, 1120.0]},
-    {"name": "A56_4", "pos": [-3020, 345.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 235.0, -180.0, -2910, 455.0, 1120.0]}
+    {"name": "A56_1", "pos": [-3020, -410, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -520, -180.0, -2910, -300, 1120.0]},
+    {"name": "A56_2", "pos": [-3020, -180, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -290, -180.0, -2910, -70, 1120.0]},
+    {"name": "A56_3", "pos": [-3020, 180, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 70, -180.0, -2910, 290, 1120.0]},
+    {"name": "A56_4", "pos": [-3020, 410, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 300, -180.0, -2910, 520, 1120.0]}
    ],
    "placement_note": "2026-11-19: 4 tup A59 valf blogunun ustunde, A14 arka yuzunun (X=-2900) arkasinda (X=-3020, Y +-115/+-345), referans: Yizumi arka dikme + akumulator grubu"
   },
   "A59": {
-   "name": "Akumulator valf blogu (manifold)",
-   "dims": {
-    "body": {"depth_x": 240, "width_y": 980, "height_z": 320},
-    "seat_bosses": {"d": 200, "height": 20, "centers_y": [-345, -115, 115, 345], "x_local": -120},
-    "cartridges": {"size_xyz": [60, 140, 200], "centers_y": [-345, -115, 115, 345], "z_center": 160},
-    "legs": {"size_xy": [100, 100], "height": 630, "centers_y": [-400, 400], "x_local": -120}
-   },
-   "local_origin": "Center of the +X face (face bolted to A14 rear face X=-2900), z=0 at block bottom. Body x -240..0, y +-490, z 0..320; seat bosses z 320..340; cartridges on the -X (rear) face x -300..-240; 2 legs z -630..0 down to the floor (Z=-1150).",
+   "name": "Akumulator sepeti + valf blogu",
+   "dims": {"tray": {"depth_x": 270, "width_y": 1120, "thickness": 40, "rim_height": 60, "rim_wall": 20}, "valve_block": {"depth_x": 170, "width_y": 120, "z_top_local": 820, "cartridges": {"count": 3, "size_xyz": [40, 100, 120], "z_centers": [250, 450, 650]}}, "legs": {"size_xy": [100, 100], "height": 930, "centers_y": [-480, 480], "x_local": -135}},
+   "local_origin": "Center of the +X face (face against A14 rear face X=-2900), z=0 at tray bottom. Tray x -270..0, y +-560, z 0..40 + rim to 100; valve block x -170..0, y +-60, z 40..820 between the middle tubes; 3 cartridge boxes on its rear face; 2 legs to the floor (Z=-1150).",
    "instances": [
-    {"name": "A59_1", "pos": [-2900.0, 0, -520.0], "rot": [0, 0, 0], "bbox": [-3200.0, -490.0, -1150.0, -2900.0, 490.0, -180.0]}
+    {"name": "A59_1", "pos": [-2900.0, 0, -220.0], "rot": [0, 0, 0], "bbox": [-3170.0, -560.0, -1150.0, -2900.0, 560.0, 600.0]}
    ],
-   "note": "Temsili manifold: 4 akumulator tupu tabani + kartus valf yuvalari; ic kanal/port yok. Hidrolik sema gelince portlar eklenecek (hidrolik-muhendisi)."
+   "note": "Referans: Yizumi arka dikme. Tuplerin tabani sepette (tepsi+cevre duvari), valf blogu tuplerin arasinda dikmeye dayali. Ic kanal/port yok."
   },
   "A63": {
    "name": "Akumulator kelepce bantlari",
-   "dims": {
-    "tube_od": 220,
-    "centers_y": [-345, -115, 115, 345],
-    "band_height": 60,
-    "band_thickness": 6,
-    "rear_bar": {"x_local_range": [110, 120], "half_width_y": 400}
-   },
-   "local_origin": "Tup sirasinin ekseni (X=-3020, Y=0), bandin alt yuzu (z=0). Halkalar tup govdesini sarar, arka duz bar A14 arka yuzune (X=-2700) dayanir.",
+   "dims": {"tube_od": 220, "centers_y": [-410, -180, 180, 410], "band_height": 60, "band_thickness": 6, "rear_bars": {"x_local_range": [110, 120], "y_ranges": [[-470, -70], [70, 470]]}},
+   "local_origin": "Tup sirasinin ekseni (X=-3020, Y=0), bandin alt yuzu (z=0). Halkalar tup govdesini sarar; arka barlar A14 arka yuzune (X=-2900) dayanir, valf blogunu (|Y|<60) atlar.",
    "instances": [
-    {"name": "A63_1", "pos": [-3020.0, 0, 70.0], "rot": [0, 0, 0], "bbox": [-3136.0, -461.0, 70.0, -2900.0, 461.0, 130.0]},
-    {"name": "A63_2", "pos": [-3020.0, 0, 700.0], "rot": [0, 0, 0], "bbox": [-3136.0, -461.0, 700.0, -2900.0, 461.0, 760.0]}
+    {"name": "A63_1", "pos": [-3020.0, 0, 70.0], "rot": [0, 0, 0], "bbox": [-3136.0, -526.0, 70.0, -2900.0, 526.0, 130.0]},
+    {"name": "A63_2", "pos": [-3020.0, 0, 700.0], "rot": [0, 0, 0], "bbox": [-3136.0, -526.0, 700.0, -2900.0, 526.0, 760.0]}
    ],
-   "note": "Temsili kelepce: 4 halka + arka bar; civata/gerdirme yok. Hizalama referansi Yizumi arka tup grubu."
+   "note": "Temsili kelepce: 4 halka + 2 arka bar; civata/gerdirme yok."
+  },
+  "A64": {
+   "name": "Akumulator toplayici borusu (tek enjeksiyon silindirine)",
+   "dims": {"riser_d": 50, "header_d": 70, "main_d": 60, "risers_y": [-410, -180, 180, 410], "z_riser_start": 1120, "z_header": 1250, "main_run": {"x_end_local": 980, "y": -130, "z_end": 0}},
+   "local_origin": "Tup sirasi ekseni X=-3020, Y=0, Z=0; eksenler global ile paralel.",
+   "instances": [
+    {"name": "A64_1", "pos": [-3020.0, 0, 0.0], "rot": [0, 0, 0], "bbox": [-3055.0, -445.0, 0.0, -2010.0, 445.0, 1285.0]}
+   ],
+   "note": "4 tupun ust valfinden dikey boru -> Z=1250 toplayici (Y boyunca) -> +X yatay hat (Y=-130, A13 ust kolonunu ve flansini atlar) -> X=-2040'ta A54 arka kafasi ustune (Z=0) iner. Hepsi tek enjeksiyon silindirine baglidir. Sert boru temsili; hortum egrisi/rakor yok."
   },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",
@@ -2086,7 +2084,7 @@
    "dims": {
     "body": {
      "profile_xz": [[50, 0], [-200, 0], [-200, 1350], [-100, 1530], [50, 1530]],
-     "y_range": [-400, 400],
+     "y_range": [-500, 500],
      "top_corner_chamfer": 150,
      "note": "2026-11-19 tek parca kalin govde (Yizumi referansi): on yuz X=-2650 (3 x A13 arka flansi), arka yuz X=-2900 (A59 valf blogu + tup kelepceleri), tepe Z=1000, arka ust egim Z 820..1000, ust yan koseler pahli. Eski levha+gusset+kiris duzeni kaldirildi."
     },
@@ -2099,7 +2097,7 @@
      "name": "A14_1",
      "pos": [-2700.0, 0, -530.0],
      "rot": [0, 0, 0],
-     "bbox": [-2900.0, -400.0, -530.0, -2650.0, 400.0, 1000.0]
+     "bbox": [-2900.0, -500.0, -530.0, -2650.0, 500.0, 1000.0]
     }
    ]
   }
