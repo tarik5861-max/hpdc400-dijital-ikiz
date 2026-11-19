@@ -368,7 +368,7 @@
     "rear_thread_len": 720.0,
     "rear_thread_start_local_x": 1935.0,
     "end_chamfer": 4,
-    "thread_modelling": "draw as plain d120 cylinder (optionally cosmetic grooves <=1 deep)"
+    "thread_modelling": "cosmetic ring grooves (not helical) in thread zones, floor d=thread_minor; nuts: matching grooves cut outward from the bore"
    },
    "local_origin": "Center of the -X (injection side) end face. Bar axis along +X, length 0..L.",
    "instances": [
@@ -405,6 +405,9 @@
     "thickness": 110.0,
     "bore_d": 120.0,
     "thread": "M120x6",
+    "thread_major": 120.0,
+    "thread_minor": 112.639,
+    "thread_pitch": 6.0,
     "chamfer": 5,
     "spanner_slots": {
      "count": 4,
@@ -448,6 +451,9 @@
     "thickness": 120.0,
     "bore_d": 120.0,
     "thread": "M120x6",
+    "thread_major": 120.0,
+    "thread_minor": 112.639,
+    "thread_pitch": 6.0,
     "gear_ring": {
      "od": 200,
      "width": 50,
