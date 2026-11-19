@@ -220,7 +220,8 @@
    "sicaklik_C": 45
   },
   "hat": {
-   "kaynak": "params.json A64 dims; capi IC cap kabul (VARSAYIM)",
+   "kaynak": "params.json A64 dims; capler DIS cap (ikiz_tasarim varsayimi), ic cap = dis - 2*boru_et_mm",
+   "boru_et_mm": 5.0,
    "bend_rc_D": 1.5,
    "K_tee_branch": 1.0,
    "K_giris": 0.5,
@@ -282,36 +283,36 @@
     "parcalar": [
      {
       "ad": "riser Q/4",
-      "D_mm": 50,
+      "D_mm": 40,
       "L_m": 0.13,
-      "v_m_s": 5.77,
-      "dp_bar": 0.13
+      "v_m_s": 9.01,
+      "dp_bar": 0.33
      },
      {
       "ad": "toplayici Q/4",
-      "D_mm": 70,
+      "D_mm": 90,
       "L_m": 0.23,
-      "v_m_s": 2.94,
+      "v_m_s": 1.78,
       "dp_bar": 0.0
      },
      {
       "ad": "toplayici Q/2 + T",
-      "D_mm": 70,
+      "D_mm": 90,
       "L_m": 0.31,
-      "v_m_s": 5.89,
-      "dp_bar": 0.17
+      "v_m_s": 3.56,
+      "dp_bar": 0.06
      },
      {
       "ad": "ana hat + 2 dirsek + cikis",
-      "D_mm": 60,
+      "D_mm": 80,
       "L_m": 2.07,
-      "v_m_s": 16.02,
-      "dp_bar": 2.66
+      "v_m_s": 9.01,
+      "dp_bar": 0.79
      }
     ],
-    "dp_sabit_bar": 2.96,
-    "dp_ivme_bar": 21.12,
-    "ana_hat_hiz_m_s": 16.02
+    "dp_sabit_bar": 1.18,
+    "dp_ivme_bar": 12.38,
+    "ana_hat_hiz_m_s": 9.01
    },
    "basinc_dusumu_yuzde": 3.3
   },

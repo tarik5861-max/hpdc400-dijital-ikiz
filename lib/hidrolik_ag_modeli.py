@@ -131,6 +131,8 @@ def hat_kaybi_A64(Q_acc_lpm, prm, tas):
     d = prm["parts"]["A64"]["dims"]
     yag, hat = tas["yag"], tas["hat"]
     rho, nu, ru = yag["rho_kg_m3"], yag["nu_cSt"], hat["puruzluluk_mm"]
+    et = float(hat["boru_et_mm"])                # params A64 capları DIS cap; hidrolik IC cap = dis - 2*et
+    d = dict(d, riser_d=d["riser_d"] - 2 * et, header_d=d["header_d"] - 2 * et, main_d=d["main_d"] - 2 * et)
     ys = sorted(float(y) for y in d["risers_y"])
     y_main = float(d["main_run"]["y"])
     L_riser = (float(d["z_header"]) - float(d["z_riser_start"])) / 1000.0

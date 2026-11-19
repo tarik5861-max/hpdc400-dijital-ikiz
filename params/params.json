@@ -1136,12 +1136,12 @@
   },
   "A64": {
    "name": "Akumulator toplayici borusu (tek enjeksiyon silindirine)",
-   "dims": {"riser_d": 50, "header_d": 70, "main_d": 60, "risers_y": [-410, -180, 180, 410], "z_riser_start": 1120, "z_header": 1250, "main_run": {"x_end_local": 980, "y": -130, "block_top_rel": 310}},
+   "dims": {"riser_d": 50, "header_d": 100, "main_d": 90, "risers_y": [-410, -180, 180, 410], "z_riser_start": 1120, "z_header": 1250, "main_run": {"x_end_local": 980, "y": -130, "block_top_rel": 310}},
    "local_origin": "Tup sirasi ekseni X=-3020, Y=0, Z=0; eksenler global ile paralel.",
    "instances": [
-    {"name": "A64_1", "pos": [-3020.0, 0, 0.0], "rot": [0, 0, 0], "bbox": [-3055.0, -445.0, 160.0, -2010.0, 445.0, 1285.0]}
+    {"name": "A64_1", "pos": [-3020.0, 0, 0.0], "rot": [0, 0, 0], "bbox": [-3070.0, -460.0, 160.0, -1995.0, 460.0, 1300.0]}
    ],
-   "note": "4 tupun ust valfinden dikey boru -> Z=1250 toplayici (Y boyunca) -> +X yatay hat (Y=-130) -> X=-2040'ta A65 valf blogu ustune iner (uc Z = shot z_sel + 310; global.shot_follow.bbox_zmin_follow). Sert boru temsili."
+   "note": "4 tupun ust valfinden dikey boru -> Z=1250 toplayici (Y boyunca) -> +X yatay hat (Y=-130) -> X=-2040'ta A65 valf blogu ustune iner (uc Z = shot z_sel + 310; global.shot_follow.bbox_zmin_follow). Sert boru temsili. ikiz_tasarim varsayimi (2026-11-19): main_d/header_d/riser_d DIS cap; et kalinligi 5 mm -> main ic cap 80 (hidrolik analiz: faz 2 hiz 16 -> ~9 m/s), header 100 dis / ic 90 (>= main), riser 50 dis / ic 40 (4 x 1257 mm2 = 5027 mm2 = main ic kesit). Eski: main 60, header 70."
   },
   "A65": {
    "name": "Enjeksiyon valf blogu (Y1 manifold + S424 servo valf)",

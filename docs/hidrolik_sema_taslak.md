@@ -67,5 +67,5 @@ Notlar:
 ## Açık noktalar
 - Pilot makine (LK) ISO 1219 hidrolik şeması gelince bu taslak onunla karşılaştırılacak.
 - KAPANDI (2026-11-19): pompa tipi/debisi (4520VQ, P1 191,2 L/dk) ve hızlı vuruş: hedef 3,0 m/s (ikiz_tasarim varsayimi, params/hidrolik.json hizli_vurus_tasarim) → Q = A54 × v = 2771 L/dk; hızlı strok 180 mm (P.FAZ2_SURE 60 ms); ACC1 deşarjı 3,03 L (faz 2 %5 kayıplı 2,91 + A55 faz 3 0,31 − P1 0,19); ön dolum 113,4 bar. Sonuç params/hidrolik.json hizli_vurus_sonuc, döküm out/hidrolik_2026-11-19_hizli_vurus.txt.
-- A64 ana hat Ø60 (iç çap VARSAYIM) faz 2'de 16 m/s: sabit kayıp 3,0 bar ama 15 ms rampada yağ sütunu ivme Δp ~21 bar. Öneri Ø80 (≈9 m/s); ölçü değişikliği, uygulanmadı.
+- A64 ana hat dış Ø90 / iç Ø80 (et 5 mm, ikiz_tasarim varsayımı) uygulandı: faz 2 9,0 m/s, sabit kayıp 1,2 bar, 15 ms rampada ivme Δp 12,4 bar (eski Ø60: 16 m/s, 21 bar).
 - Hortum/döner bağlantı payı: vuruş ekseni 3 konumlu (Z değişimi 150 mm) olduğundan A54/A55/A56 arası hatlar bunu karşılamalı.
