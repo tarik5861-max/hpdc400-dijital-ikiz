@@ -13,8 +13,8 @@
  },
  "elemanlar": {
   "pompalar": [
-   {"id": "P1", "tip": "Ana Sabit/Değişken Debili Pompa", "motor": "M1", "nominal_debi_lpm": 120.0, "nominal_basinç_bar": 140.0},
-   {"id": "P2", "tip": "Pilot / Yardımcı Pompa", "motor": "M2", "nominal_debi_lpm": 25.0, "nominal_basinç_bar": 140.0}
+   {"id": "P1", "tip": "Ana Sabit/Değişken Debili Pompa", "motor": "M1", "nominal_debi_lpm": 120.0, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ on kisim 45VQ (sabit deplasmanli kanatli kartus)", "bagli_id": ["A62", "A98", "A99", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A114"], "varsayim": "ikiz_tasarim varsayimi: en kucuk 45VQ42 ~136 cm3/dev (42 USgpm @1200 d/dk) -> 1460 d/dk'da ~195 L/dk; 140 bar'da ~45 kW > 30 kW motor; 120 L/dk ile uyusmaz (acik nokta)"},
+   {"id": "P2", "tip": "Pilot / Yardımcı Pompa", "motor": "M1", "nominal_debi_lpm": 25.0, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ arka kisim 20VQ5 (16,4 cm3/dev -> ~24 L/dk @1460 d/dk), emniyet valfi 2000 psi", "bagli_id": ["A62", "A99", "A100", "A101", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A117", "A118", "A119"], "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 milinden (eski 'M2' elektrik.json'da yok)"}
   ],
   "akumulatorler": [
    {"id": "ACC1", "tip": "Enjeksiyon Hızlı Vuruş Akümülatörü", "hacim_lt": 2.6, "basinc_bar": 140.0, "baglanti": "Enjeksiyon manifold bloğu"},

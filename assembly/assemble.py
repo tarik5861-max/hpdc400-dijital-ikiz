@@ -64,9 +64,14 @@ def load_params(shot=None):
 
 
 def leaves(B):
+    """Ust grup + her seviyedeki script'li dugum (or. A62 altindaki pompa agaci A98..A119)."""
+    def rec(grp, nodes):
+        for c in nodes:
+            if "script" in c:
+                yield grp, c
+            yield from rec(grp, c.get("children", []))
     for grp in B["tree"]:
-        for c in grp["children"]:
-            yield grp, c
+        yield from rec(grp, grp["children"])
 
 
 META_KEYS = {"name", "pos", "rot", "bbox", "joint", "role", "note"}

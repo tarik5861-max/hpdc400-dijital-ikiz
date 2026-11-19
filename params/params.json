@@ -1279,42 +1279,249 @@
      "width_y": 500,
      "thickness": 30
     },
-    "shaft_axis_height_above_origin": 280,
+    "shaft_axis_height_above_origin": 250,
     "motor": {
-     "d": 460,
-     "local_x_range": [-650, 150],
-     "power_kW": 55,
-     "type": "IEC 225M flanşlı 4 kutuplu",
+     "d": 400,
+     "local_x_range": [-570, 130],
+     "power_kW": 30,
      "fins_optional": true,
      "terminal_box": {
-      "size": [240, 180, 120],
+      "size": [200, 150, 100],
       "on": "+Z",
       "optional": true
      }
     },
     "bell_housing": {
-     "d": 350,
-     "local_x_range": [150, 330],
-     "type": "Döküm kampana (CETOP / SAE standardı)"
+     "d": 300,
+     "wall": 15,
+     "local_x_range": [130, 290],
+     "varsayim": "ikiz_tasarim varsayimi: kampana ici bos (et 15), pompa mili + kaplin icinde"
     },
-    "pump": {
-     "d": 240,
-     "local_x_range": [330, 720],
-     "type": "Çiftli (tandem) sabit deplasmanlı paletli pompa grubu (Vickers / Denison tandem vane pump)"
+    "pump_mount": {
+     "face_local_x": 290,
+     "pump_origin_global": [1390.0, -900.0, -200.0],
+     "pump": "Vickers/Eaton 4520VQ tandem kanatli pompa; ayri parcalar A98..A119 (bom: A62 children)",
+     "note": "eski duz silindir pompa (d220, x 290..570) kaldirildi 2026-11-19"
     },
     "motor_feet": {
      "note": "block 500x360 from z=30 to z=80 under motor",
      "optional": true
     }
    },
-   "local_origin": "Center of the base plate bottom face (on tank top). Shaft axis along local X at z=250; motor at -X end, pump at +X end.",
+   "local_origin": "Center of the base plate bottom face (on tank top). Shaft axis along local X at z=250; motor at -X end, pump mounting face at local x=290 (pump parts A98..A119 placed separately).",
    "instances": [
     {
      "name": "A62_1",
      "pos": [1100, -900, -450.0],
      "rot": [0, 0, 0],
-     "bbox": [-142, -1150, -450.0, 1820, -650, 146.0]
+     "bbox": [450, -1150, -450.0, 1750, -650, 0.0]
     }
+   ]
+  },
+  "A98": {
+   "name": "Pompa on govde 45VQ (montaj flansi, P1 cikis)",
+   "dims": {"model": "Vickers/Eaton 4520VQ42A5-**20 (on kisim 45VQ42, arka kisim 20VQ5)", "pilot": {"d": 127, "local_x_range": [-6, 0]}, "flange": {"size_yz": [300, 150], "local_x_range": [0, 18], "bolt_holes": {"d": 17.5, "centers_yz": [[130, 0], [-130, 0]]}}, "body": {"size_yz": [215, 230], "local_x_range": [18, 175]}, "cartridge_bore": {"d": 150, "local_x_range": [60, 175]}, "shaft_bore": {"d": 44, "local_x_range": [-6, 60]}, "outlet_port": {"boss_local_x_range": [80, 150], "boss_y_min": -130, "boss_size_z": 80, "d": 38, "hidrolik": "P1 basinc cikisi"}, "tie_bolt_holes": {"d": 16, "depth": 30, "centers_yz": [[85, 90], [85, -90], [-85, 90], [-85, -90]]}, "varsayim": "ikiz_tasarim varsayimi: 4520VQ katalog dis olculerinden tahmin (govde 215x230, pilot d127 SAE C); flans 300x150, 2 delik +-130 kampana d300'e uyum icin (SAE C 181 aralik yerine)"},
+   "local_origin": "Montaj flansi on yuzu merkezi (kampana A62 bitis yuzu, A62 lokal x=290), mil ekseni uzerinde; mil ekseni +X.",
+   "instances": [
+    {"name": "A98_1", "pos": [1390.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1384.0, -1050.0, -315.0, 1565.0, -750.0, -85.0]}
+   ]
+  },
+  "A99": {
+   "name": "Giris govdesi 252283 (ortak emis, 4-civatali flans)",
+   "dims": {"body": {"size_yz": [215, 230], "local_x_range": [0, 120]}, "front_recess": {"d": 150, "local_x_range": [0, 14]}, "rear_recess": {"d": 105, "local_x_range": [106, 120]}, "suction_chamber": {"d": 120, "local_x_range": [20, 100]}, "shaft_bore": {"d": 40}, "inlet_flange": {"local_x_range": [10, 110], "width_y": 110, "local_z_range": [115, 140], "port_d": 64, "bolt_holes": {"d": 12, "depth": 20, "centers_xy": [[25, 40], [25, -40], [95, 40], [95, -40]]}, "hidrolik": "P1+P2 ortak emis (tank A61)"}, "tie_bolt_holes": {"d": 17, "centers_yz": [[85, 90], [85, -90], [-85, 90], [-85, -90]]}, "cover_bolt_holes": {"d": 12, "depth": 20, "centers_yz": [[55, 55], [55, -55], [-55, 55], [-55, -55]]}, "esdeger": "45VQ tek pompada 229633 cover (inlet) bu govdenin karsiligidir", "varsayim": "ikiz_tasarim varsayimi: emis flansi 2.5 in (d64), govde boyu 120"},
+   "local_origin": "On yuz (A98 arka yuzu ile temas) merkezi, mil ekseni uzerinde; mil ekseni +X.",
+   "instances": [
+    {"name": "A99_1", "pos": [1565.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1565.0, -1007.5, -315.0, 1685.0, -792.5, -60.0]}
+   ]
+  },
+  "A100": {
+   "name": "Arka kapak 20VQ (4-civatali kapak 250824, P2 cikis, emniyet valfi yuvasi)",
+   "dims": {"cover_type": "4-BOLT 250824 (4520VQ**A**); alternatif straight thread 252504 / flow control 2575xx", "body": {"size_yz": [150, 150], "local_x_range": [0, 110]}, "cartridge_bore": {"d": 105, "local_x_range": [0, 78]}, "outlet_port": {"boss_local_x_range": [20, 60], "boss_width_y": 50, "boss_local_z_range": [75, 90], "d": 22, "hidrolik": "P2 cikisi"}, "valve_bore": {"d": 20, "center_xz": [94, 35], "axis": "Y", "relief_setting_psi": 2000, "relief_setting_bar": 138}, "bolt_holes": {"d": 13, "centers_yz": [[55, 55], [55, -55], [-55, 55], [-55, -55]]}, "varsayim": "ikiz_tasarim varsayimi: kapak 150x150x110; valf yuvasi d20 Y ekseninde; emniyet ayari 2000 psi (232799, 'H') ~ P2 140 bar"},
+   "local_origin": "On yuz (A99 arka yuzu ile temas) merkezi, mil ekseni uzerinde; mil ekseni +X.",
+   "instances": [
+    {"name": "A100_1", "pos": [1685.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1685.0, -975.0, -275.0, 1795.0, -825.0, -110.0]}
+   ]
+  },
+  "A101": {
+   "name": "Pompa mili (kamali uc + 45VQ/20VQ spline)",
+   "dims": {"segments": [{"d": 44, "local_x_range": [0, 130]}, {"d": 38, "local_x_range": [130, 310]}, {"d": 30, "local_x_range": [310, 428]}], "keyway": {"width": 11, "depth": 5, "local_x_range": [8, 68]}, "splines": [{"d": 38, "local_x_range": [170, 224], "teeth": 8, "groove_w": 4, "groove_depth": 2}, {"d": 30, "local_x_range": [378, 412], "teeth": 6, "groove_w": 3, "groove_depth": 1.5}], "varsayim": "ikiz_tasarim varsayimi: on uc d44 (1.75 in) kamali, 70 mm kampana icine uzanir (kaplin modellenmedi); spline yuzeysel kanal ile basitlestirildi"},
+   "local_origin": "Mil on ucu (motor tarafi) merkezi; eksen +X. Mil ucu pompa montaj yuzunden 70 mm onde (A62 lokal x=220).",
+   "instances": [
+    {"name": "A101_1", "pos": [1320.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1320.0, -922.0, -222.0, 1748.0, -878.0, -178.0]}
+   ]
+  },
+  "A102": {
+   "name": "45VQ halka (cam ring 297510)",
+   "dims": {"od": 150, "width": 48, "cam": {"r_major": 56, "r_minor": 52.5, "n_pts": 72}, "pin_holes": {"d": 8, "centers_yz": [[0, 69], [0, -69]]}, "varsayim": "ikiz_tasarim varsayimi: cift loblu kam r(t)=ortalama+genlik*cos2t"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
+   "instances": [
+    {"name": "A102_1", "pos": [1493.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1493.0, -975.0, -275.0, 1541.0, -825.0, -125.0]}
+   ]
+  },
+  "A103": {
+   "name": "45VQ rotor (283871)",
+   "dims": {"od": 102, "bore": 38, "width": 48, "slots": {"n": 10, "width": 4, "bottom_r": 31, "phase_deg": 18}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
+   "instances": [
+    {"name": "A103_1", "pos": [1493.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1493.0, -951.0, -251.0, 1541.0, -849.0, -149.0]}
+   ]
+  },
+  "A104": {
+   "name": "45VQ kanat (922701, 10 kanat + 10 insert)",
+   "dims": {"width": 48, "height": 20, "thk": 4, "tip_r": 55.7, "varsayim": "ikiz_tasarim varsayimi: tip_r instance bazli = kam(aci) - 0.3 (kanat ucu halkaya yaslanir)"},
+   "local_origin": "Rotor on yuzu merkezi (eksen uzerinde); kanat +Y radyal, x 0..width; instance rot [aci,0,0] = rotor yuva acisi.",
+   "instances": [
+    {"name": "A104_1", "pos": [1493.0, -900.0, -200.0], "rot": [18, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -867.0, -191.0, 1541.0, -846.7, -181.0]},
+    {"name": "A104_2", "pos": [1493.0, -900.0, -200.0], "rot": [54, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -882.0, -174.1, 1541.0, -867.0, -155.6]},
+    {"name": "A104_3", "pos": [1493.0, -900.0, -200.0], "rot": [90, 0, 0], "tip_r": 52.2, "bbox": [1493.0, -902.0, -167.8, 1541.0, -898.0, -147.8]},
+    {"name": "A104_4", "pos": [1493.0, -900.0, -200.0], "rot": [126, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -933.0, -174.1, 1541.0, -918.0, -155.6]},
+    {"name": "A104_5", "pos": [1493.0, -900.0, -200.0], "rot": [162, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -953.3, -191.0, 1541.0, -933.0, -181.0]},
+    {"name": "A104_6", "pos": [1493.0, -900.0, -200.0], "rot": [198, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -953.3, -219.0, 1541.0, -933.0, -209.0]},
+    {"name": "A104_7", "pos": [1493.0, -900.0, -200.0], "rot": [234, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -933.0, -244.4, 1541.0, -918.0, -225.9]},
+    {"name": "A104_8", "pos": [1493.0, -900.0, -200.0], "rot": [270, 0, 0], "tip_r": 52.2, "bbox": [1493.0, -902.0, -252.2, 1541.0, -898.0, -232.2]},
+    {"name": "A104_9", "pos": [1493.0, -900.0, -200.0], "rot": [306, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -882.0, -244.4, 1541.0, -867.0, -225.9]},
+    {"name": "A104_10", "pos": [1493.0, -900.0, -200.0], "rot": [342, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -867.0, -219.0, 1541.0, -846.7, -209.0]}
+   ]
+  },
+  "A105": {
+   "name": "45VQ flex-side plaka (923954, bronz yuz rotora)",
+   "dims": {"od": 128, "bore": 40, "thk_steel": 6.5, "bronze": {"d": 116, "thk": 1.5}, "notches": {"n": 6, "width": 14, "depth": 6, "phase_deg": 0}, "kural": "BRONZE FACES MUST BE INSTALLED TOWARD THE ROTOR (Eaton notu): _1 rot 0, _2 rot [0,0,180]", "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "Celik on yuz merkezi, x 0..thk_steel+bronze.thk, bronz yuz +X.",
+   "instances": [
+    {"name": "A105_1", "pos": [1485.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1485.0, -963.6, -264.0, 1493.0, -836.4, -136.0]},
+    {"name": "A105_2", "pos": [1549.0, -900.0, -200.0], "rot": [0, 0, 180], "bbox": [1541.0, -963.6, -264.0, 1549.0, -836.4, -136.0]}
+   ]
+  },
+  "A106": {
+   "name": "45VQ giris destek plakasi (430807 (burclu))",
+   "dims": {"od": 150, "thk": 30, "bore": 38, "pin_holes": {"d": 8, "depth": 10, "face": "-x", "centers_yz": [[0, 69], [0, -69]]}, "kidney_ports": {"d": 16, "centers_yz": [[40, 0], [-40, 0]]}, "varsayim": "ikiz_tasarim varsayimi: burclu (delik = mil capi)"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
+   "instances": [
+    {"name": "A106_1", "pos": [1549.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1549.0, -975.0, -275.0, 1579.0, -825.0, -125.0]}
+   ]
+  },
+  "A107": {
+   "name": "45VQ cikis destek plakasi (415382)",
+   "dims": {"od": 150, "thk": 35, "bore": 40, "pin_holes": {"d": 8, "depth": 10, "face": "+x", "centers_yz": [[0, 69], [0, -69]]}, "kidney_ports": {"d": 16, "centers_yz": [[40, 0], [-40, 0]]}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
+   "instances": [
+    {"name": "A107_1", "pos": [1450.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1450.0, -975.0, -275.0, 1485.0, -825.0, -125.0]}
+   ]
+  },
+  "A108": {
+   "name": "20VQ halka (cam ring 333624)",
+   "dims": {"od": 105, "width": 30, "cam": {"r_major": 37, "r_minor": 34, "n_pts": 72}, "pin_holes": {"d": 6, "centers_yz": [[0, 47], [0, -47]]}, "varsayim": "ikiz_tasarim varsayimi: cift loblu kam r(t)=ortalama+genlik*cos2t"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
+   "instances": [
+    {"name": "A108_1", "pos": [1700.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1700.0, -952.5, -252.5, 1730.0, -847.5, -147.5]}
+   ]
+  },
+  "A109": {
+   "name": "20VQ rotor (402690)",
+   "dims": {"od": 66, "bore": 30, "width": 30, "slots": {"n": 10, "width": 3, "bottom_r": 20, "phase_deg": 18}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
+   "instances": [
+    {"name": "A109_1", "pos": [1700.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1700.0, -933.0, -233.0, 1730.0, -867.0, -167.0]}
+   ]
+  },
+  "A110": {
+   "name": "20VQ kanat (922741, 10 kanat + 10 insert)",
+   "dims": {"width": 30, "height": 13, "thk": 3, "tip_r": 36.7, "varsayim": "ikiz_tasarim varsayimi: tip_r instance bazli = kam(aci) - 0.3 (kanat ucu halkaya yaslanir)"},
+   "local_origin": "Rotor on yuzu merkezi (eksen uzerinde); kanat +Y radyal, x 0..width; instance rot [aci,0,0] = rotor yuva acisi.",
+   "instances": [
+    {"name": "A110_1", "pos": [1700.0, -900.0, -200.0], "rot": [18, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -878.2, -194.2, 1730.0, -864.9, -187.3]},
+    {"name": "A110_2", "pos": [1700.0, -900.0, -200.0], "rot": [54, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -888.4, -183.3, 1730.0, -878.4, -171.0]},
+    {"name": "A110_3", "pos": [1700.0, -900.0, -200.0], "rot": [90, 0, 0], "tip_r": 33.7, "bbox": [1700.0, -901.5, -179.3, 1730.0, -898.5, -166.3]},
+    {"name": "A110_4", "pos": [1700.0, -900.0, -200.0], "rot": [126, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -921.6, -183.3, 1730.0, -911.6, -171.0]},
+    {"name": "A110_5", "pos": [1700.0, -900.0, -200.0], "rot": [162, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -935.1, -194.2, 1730.0, -921.8, -187.3]},
+    {"name": "A110_6", "pos": [1700.0, -900.0, -200.0], "rot": [198, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -935.1, -212.7, 1730.0, -921.8, -205.8]},
+    {"name": "A110_7", "pos": [1700.0, -900.0, -200.0], "rot": [234, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -921.6, -229.0, 1730.0, -911.6, -216.7]},
+    {"name": "A110_8", "pos": [1700.0, -900.0, -200.0], "rot": [270, 0, 0], "tip_r": 33.7, "bbox": [1700.0, -901.5, -233.7, 1730.0, -898.5, -220.7]},
+    {"name": "A110_9", "pos": [1700.0, -900.0, -200.0], "rot": [306, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -888.4, -229.0, 1730.0, -878.4, -216.7]},
+    {"name": "A110_10", "pos": [1700.0, -900.0, -200.0], "rot": [342, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -878.2, -212.7, 1730.0, -864.9, -205.8]}
+   ]
+  },
+  "A111": {
+   "name": "20VQ flex-side plaka (923955, bronz yuz rotora)",
+   "dims": {"od": 86, "bore": 32, "thk_steel": 5.5, "bronze": {"d": 76, "thk": 1.5}, "notches": {"n": 6, "width": 10, "depth": 4, "phase_deg": 0}, "kural": "BRONZE FACES MUST BE INSTALLED TOWARD THE ROTOR (Eaton notu): _1 rot 0, _2 rot [0,0,180]", "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "Celik on yuz merkezi, x 0..thk_steel+bronze.thk, bronz yuz +X.",
+   "instances": [
+    {"name": "A111_1", "pos": [1693.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1693.0, -942.7, -243.0, 1700.0, -857.3, -157.0]},
+    {"name": "A111_2", "pos": [1737.0, -900.0, -200.0], "rot": [0, 0, 180], "bbox": [1730.0, -942.7, -243.0, 1737.0, -857.3, -157.0]}
+   ]
+  },
+  "A112": {
+   "name": "20VQ giris destek plakasi (419502)",
+   "dims": {"od": 105, "thk": 22, "bore": 32, "pin_holes": {"d": 6, "depth": 8, "face": "+x", "centers_yz": [[0, 47], [0, -47]]}, "kidney_ports": {"d": 10, "centers_yz": [[26, 0], [-26, 0]]}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
+   "instances": [
+    {"name": "A112_1", "pos": [1671.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1671.0, -952.5, -252.5, 1693.0, -847.5, -147.5]}
+   ]
+  },
+  "A113": {
+   "name": "20VQ cikis destek plakasi (419500 (burclu))",
+   "dims": {"od": 105, "thk": 26, "bore": 30, "pin_holes": {"d": 6, "depth": 8, "face": "-x", "centers_yz": [[0, 47], [0, -47]]}, "kidney_ports": {"d": 10, "centers_yz": [[26, 0], [-26, 0]]}, "varsayim": "ikiz_tasarim varsayimi: burclu (delik = mil capi)"},
+   "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
+   "instances": [
+    {"name": "A113_1", "pos": [1737.0, -900.0, -200.0], "rot": [0, 0, 0], "bbox": [1737.0, -952.5, -252.5, 1763.0, -847.5, -147.5]}
+   ]
+  },
+  "A114": {
+   "name": "Kartus konum pimi 422206 (2x45VQ + 2x20VQ)",
+   "dims": {"d": 8, "length": 84, "varsayim": "ikiz_tasarim varsayimi: 45VQ d8x84, 20VQ d6x60 (instance override)"},
+   "local_origin": "Pim on ucu merkezi, eksen +X.",
+   "instances": [
+    {"name": "A114_1", "pos": [1475.0, -900.0, -131.0], "rot": [0, 0, 0], "bbox": [1475.0, -904.0, -135.0, 1559.0, -896.0, -127.0]},
+    {"name": "A114_2", "pos": [1475.0, -900.0, -269.0], "rot": [0, 0, 0], "bbox": [1475.0, -904.0, -273.0, 1559.0, -896.0, -265.0]},
+    {"name": "A114_3", "pos": [1685.0, -900.0, -153.0], "rot": [0, 0, 0], "d": 6, "length": 60, "bbox": [1685.0, -903.0, -156.0, 1745.0, -897.0, -150.0]},
+    {"name": "A114_4", "pos": [1685.0, -900.0, -247.0], "rot": [0, 0, 0], "d": 6, "length": 60, "bbox": [1685.0, -903.0, -250.0, 1745.0, -897.0, -244.0]}
+   ]
+  },
+  "A115": {
+   "name": "Govde baglanti civatasi 87947 (4 adet, 255-275 lb.ft)",
+   "dims": {"d": 16, "length": 150, "head": {"s": 24, "h": 10}, "tork_Nm": [346, 373], "varsayim": "ikiz_tasarim varsayimi: 5/8 in ~ M16, boy 150 (A99 gecis + A98 30 mm dis)"},
+   "local_origin": "Bas alt yuzu merkezi; govde +X, bas -X. Instance rot [0,0,180]: arka yuzden one dogru.",
+   "instances": [
+    {"name": "A115_1", "pos": [1685.0, -815.0, -110.0], "rot": [0, 0, 180], "bbox": [1535.0, -827.0, -123.9, 1695.0, -803.0, -96.1]},
+    {"name": "A115_2", "pos": [1685.0, -815.0, -290.0], "rot": [0, 0, 180], "bbox": [1535.0, -827.0, -303.9, 1695.0, -803.0, -276.1]},
+    {"name": "A115_3", "pos": [1685.0, -985.0, -110.0], "rot": [0, 0, 180], "bbox": [1535.0, -997.0, -123.9, 1695.0, -973.0, -96.1]},
+    {"name": "A115_4", "pos": [1685.0, -985.0, -290.0], "rot": [0, 0, 180], "bbox": [1535.0, -997.0, -303.9, 1695.0, -973.0, -276.1]}
+   ]
+  },
+  "A116": {
+   "name": "Arka kapak civatasi 1296 (4 adet, 40-50 lb.ft)",
+   "dims": {"d": 12, "length": 130, "head": {"s": 19, "h": 8}, "tork_Nm": [54, 68], "varsayim": "ikiz_tasarim varsayimi: 1/2 in ~ M12, boy 130 (A100 gecis + A99 20 mm dis)"},
+   "local_origin": "Bas alt yuzu merkezi; govde +X, bas -X. Instance rot [0,0,180].",
+   "instances": [
+    {"name": "A116_1", "pos": [1795.0, -845.0, -145.0], "rot": [0, 0, 180], "bbox": [1665.0, -854.5, -156.0, 1803.0, -835.5, -134.0]},
+    {"name": "A116_2", "pos": [1795.0, -845.0, -255.0], "rot": [0, 0, 180], "bbox": [1665.0, -854.5, -266.0, 1803.0, -835.5, -244.0]},
+    {"name": "A116_3", "pos": [1795.0, -955.0, -145.0], "rot": [0, 0, 180], "bbox": [1665.0, -964.5, -156.0, 1803.0, -945.5, -134.0]},
+    {"name": "A116_4", "pos": [1795.0, -955.0, -255.0], "rot": [0, 0, 180], "bbox": [1665.0, -964.5, -266.0, 1803.0, -945.5, -244.0]}
+   ]
+  },
+  "A117": {
+   "name": "Emniyet valfi kartusu (2327xx S/A, 20VQ)",
+   "dims": {"d": 20, "length": 55, "neck": {"d": 14, "local_x_range": [20, 40]}, "ayar_psi": 2000, "seri": "232794..233020 (750..2500 psi)", "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "Tapa tarafi uc yuzu merkezi; eksen +X (yaya dogru). Instance rot [0,0,90] -> +Y.",
+   "instances": [
+    {"name": "A117_1", "pos": [1779.0, -963.0, -165.0], "rot": [0, 0, 90], "bbox": [1769.0, -963.0, -175.0, 1789.0, -908.0, -155.0]}
+   ]
+  },
+  "A118": {
+   "name": "Emniyet valfi yayi 239766",
+   "dims": {"od": 16, "id": 10, "length": 71, "coils": {"n": 9, "groove_w": 3, "groove_depth": 2}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "Valf tarafi uc merkezi; eksen +X. Instance rot [0,0,90] -> +Y.",
+   "instances": [
+    {"name": "A118_1", "pos": [1779.0, -908.0, -165.0], "rot": [0, 0, 90], "bbox": [1771.0, -908.0, -173.0, 1787.0, -837.0, -157.0]}
+   ]
+  },
+  "A119": {
+   "name": "Tapa 7077 (valf yuvasi, 2 adet)",
+   "dims": {"d": 20, "length": 12, "socket": {"s": 10, "depth": 6}, "varsayim": "ikiz_tasarim varsayimi"},
+   "local_origin": "Dis yuz merkezi; eksen +X yuvaya dogru.",
+   "instances": [
+    {"name": "A119_1", "pos": [1779.0, -975.0, -165.0], "rot": [0, 0, 90], "bbox": [1769.0, -975.0, -175.0, 1789.0, -963.0, -155.0]},
+    {"name": "A119_2", "pos": [1779.0, -825.0, -165.0], "rot": [0, 0, -90], "bbox": [1769.0, -837.0, -175.0, 1789.0, -825.0, -155.0]}
    ]
   },
   "A71": {

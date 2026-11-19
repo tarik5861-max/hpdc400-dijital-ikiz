@@ -94,13 +94,20 @@ def _main_call(expr):
 
 
 # ---------------------------------------------------------------- proje bilgisi
+def _dugumler(nodes):
+    """BOM dugumleri, alt agaclar dahil (or. A62 -> pompa parcalari)."""
+    for c in nodes:
+        yield c
+        yield from _dugumler(c.get("children", []))
+
+
 @mcp.tool()
 def proje_durumu() -> str:
     """Projenin ozeti: urun agaci gruplari, faz listesi, parca ve instance sayilari, son git kayitlari."""
     B, P = _load("bom.json"), _load("params.json")
     lines = [B["machine"], f"Koordinat sistemi: {B['coordinate_system']}", ""]
     for g in B["tree"]:
-        lines.append(f"{g['id']} {g['name']}: " + ", ".join(f"{c['id']} x{c['qty']}" for c in g["children"]))
+        lines.append(f"{g['id']} {g['name']}: " + ", ".join(f"{c['id']} x{c['qty']}" for c in _dugumler(g["children"])))
     lines.append("")
     for ph in B["phases"]:
         lines.append(f"Faz {ph['phase']}: {ph['name']} ({len(ph['items'])} parca)")
@@ -119,7 +126,7 @@ def parca_bilgisi(parca_id: str) -> str:
     """Bir parcanin (or. 'A24', 'A91') urun agaci kaydi, olculeri, lokal orijini, montaj konumlari ve script dosyasi."""
     B, P = _load("bom.json"), _load("params.json")
     pid = parca_id.strip().upper()
-    bom = next((c for g in B["tree"] for c in g["children"] if c["id"] == pid), None)
+    bom = next((c for g in B["tree"] for c in _dugumler(g["children"]) if c["id"] == pid), None)
     if pid not in P["parts"] or bom is None:
         return f"{pid} bulunamadi. Gecerli kimlikler: " + ", ".join(sorted(P["parts"]))
     return json.dumps({"bom": bom, "params": P["parts"][pid]}, ensure_ascii=False, indent=1)
