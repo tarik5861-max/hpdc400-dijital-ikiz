@@ -8,4 +8,9 @@ def build(d, G, g):
     cx, cy, cz = ct["size_xyz"]
     for y in ct["centers_y"]:
         parts.append(g.move(g.box(cx, cy, cz), -X - cx / 2, y, ct["z_center"]))
+    lg = d.get("legs")
+    if lg:
+        lx, ly = lg["size_xy"]
+        for y in lg["centers_y"]:
+            parts.append(g.move(g.box(lx, ly, lg["height"]), lg["x_local"], y, -lg["height"] / 2))
     return g.fuse(*parts)

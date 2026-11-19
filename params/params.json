@@ -1107,23 +1107,24 @@
    },
    "local_origin": "Center of the bottom face. Bottle axis vertical along +Z (z 0..1300); stands on A59 valve block top bosses.",
    "instances": [
-    {"name": "A56_1", "pos": [-2820, -345.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, -455.0, -180.0, -2710, -235.0, 1120.0]},
-    {"name": "A56_2", "pos": [-2820, -115.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, -225.0, -180.0, -2710, -5.0, 1120.0]},
-    {"name": "A56_3", "pos": [-2820, 115.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, 5.0, -180.0, -2710, 225.0, 1120.0]},
-    {"name": "A56_4", "pos": [-2820, 345.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, 235.0, -180.0, -2710, 455.0, 1120.0]}
+    {"name": "A56_1", "pos": [-3020, -345.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -455.0, -180.0, -2910, -235.0, 1120.0]},
+    {"name": "A56_2", "pos": [-3020, -115.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, -225.0, -180.0, -2910, -5.0, 1120.0]},
+    {"name": "A56_3", "pos": [-3020, 115.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 5.0, -180.0, -2910, 225.0, 1120.0]},
+    {"name": "A56_4", "pos": [-3020, 345.0, -180.0], "rot": [0, 0, 0], "bbox": [-3130, 235.0, -180.0, -2910, 455.0, 1120.0]}
    ],
-   "placement_note": "2026-11-19: 4 tup A59 valf blogunun ustunde, A14 arka yuzunun arkasinda (X=-2820, Y +-115/+-345), referans: Yizumi arka dikme + akumulator grubu"
+   "placement_note": "2026-11-19: 4 tup A59 valf blogunun ustunde, A14 arka yuzunun (X=-2900) arkasinda (X=-3020, Y +-115/+-345), referans: Yizumi arka dikme + akumulator grubu"
   },
   "A59": {
    "name": "Akumulator valf blogu (manifold)",
    "dims": {
     "body": {"depth_x": 240, "width_y": 980, "height_z": 320},
     "seat_bosses": {"d": 200, "height": 20, "centers_y": [-345, -115, 115, 345], "x_local": -120},
-    "cartridges": {"size_xyz": [60, 140, 200], "centers_y": [-345, -115, 115, 345], "z_center": 160}
+    "cartridges": {"size_xyz": [60, 140, 200], "centers_y": [-345, -115, 115, 345], "z_center": 160},
+    "legs": {"size_xy": [100, 100], "height": 630, "centers_y": [-400, 400], "x_local": -120}
    },
-   "local_origin": "Center of the +X face (face bolted to A14 rear face), z=0 at block bottom. Body x -240..0, y +-490, z 0..320; seat bosses z 320..340; cartridges on the -X (rear) face x -300..-240.",
+   "local_origin": "Center of the +X face (face bolted to A14 rear face X=-2900), z=0 at block bottom. Body x -240..0, y +-490, z 0..320; seat bosses z 320..340; cartridges on the -X (rear) face x -300..-240; 2 legs z -630..0 down to the floor (Z=-1150).",
    "instances": [
-    {"name": "A59_1", "pos": [-2700.0, 0, -520.0], "rot": [0, 0, 0], "bbox": [-3000.0, -490.0, -520.0, -2700.0, 490.0, -180.0]}
+    {"name": "A59_1", "pos": [-2900.0, 0, -520.0], "rot": [0, 0, 0], "bbox": [-3200.0, -490.0, -1150.0, -2900.0, 490.0, -180.0]}
    ],
    "note": "Temsili manifold: 4 akumulator tupu tabani + kartus valf yuvalari; ic kanal/port yok. Hidrolik sema gelince portlar eklenecek (hidrolik-muhendisi)."
   },
@@ -1136,10 +1137,10 @@
     "band_thickness": 6,
     "rear_bar": {"x_local_range": [110, 120], "half_width_y": 400}
    },
-   "local_origin": "Tup sirasinin ekseni (X=-2820, Y=0), bandin alt yuzu (z=0). Halkalar tup govdesini sarar, arka duz bar A14 arka yuzune (X=-2700) dayanir.",
+   "local_origin": "Tup sirasinin ekseni (X=-3020, Y=0), bandin alt yuzu (z=0). Halkalar tup govdesini sarar, arka duz bar A14 arka yuzune (X=-2700) dayanir.",
    "instances": [
-    {"name": "A63_1", "pos": [-2820.0, 0, 70.0], "rot": [0, 0, 0], "bbox": [-2936.0, -461.0, 70.0, -2700.0, 461.0, 130.0]},
-    {"name": "A63_2", "pos": [-2820.0, 0, 700.0], "rot": [0, 0, 0], "bbox": [-2936.0, -461.0, 700.0, -2700.0, 461.0, 760.0]}
+    {"name": "A63_1", "pos": [-3020.0, 0, 70.0], "rot": [0, 0, 0], "bbox": [-3136.0, -461.0, 70.0, -2900.0, 461.0, 130.0]},
+    {"name": "A63_2", "pos": [-3020.0, 0, 700.0], "rot": [0, 0, 0], "bbox": [-3136.0, -461.0, 700.0, -2900.0, 461.0, 760.0]}
    ],
    "note": "Temsili kelepce: 4 halka + arka bar; civata/gerdirme yok. Hizalama referansi Yizumi arka tup grubu."
   },
@@ -2083,52 +2084,22 @@
   "A14": {
    "name": "Kolon arka dikmesi (sase arka ucu, A11'e kaynakli)",
    "dims": {
-    "plate": {
-     "local_x_range": [0, 50],
+    "body": {
+     "profile_xz": [[50, 0], [-200, 0], [-200, 1350], [-100, 1530], [50, 1530]],
      "y_range": [-400, 400],
-     "z_range": [0, 1530],
-     "top_corner_chamfer": 100,
-     "note": "X -2700..-2650, Z -530..1000 (2026-11-19: 520 -> 1000, tup grubuna hizali), ust kose pah 100; A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
-    },
-    "gussets": {
-     "count": 2,
-     "thickness": 40,
-     "y_ranges": [[340, 380], [-380, -340]],
-     "profile_xz": [[50, 0], [50, 1440], [250, 1440], [700, 0]],
-     "note": "on tarafta (+X), taban X -2650..-2000 (ucu A11 enine kaburgasi X=-2000 ustunde); A55/A57'den |Y| ile uzak"
-    },
-    "upper_ribs": {
-     "count": 2,
-     "thickness_z": 30,
-     "local_x_range": [50, 250],
-     "y_ranges": [[-340, 340], [-300, 300]],
-     "z_ranges": [[750, 780], [1020, 1050]],
-     "note": "Z 220..250 ve 490..520: ust kolon flansinin (Z 260..480) 10 mm alti/ustu; levha ile yatay kiris"
-    },
-    "lower_ribs": {
-     "count": 2,
-     "thickness": 20,
-     "y_ranges": [[90, 110], [-110, -90]],
-     "local_x_range": [50, 130],
-     "z_range": [0, 500],
-     "note": "dikdortgen dikey nervur X -2650..-2570, Z -530..-30; alt flanslarin (|Y|>=120) 10 mm icinde, A55 arka ucuna (X=-2530) 40 mm"
-    },
-    "welds": {
-     "joint": "welded",
-     "to_A11_top": "levha tabani on+arka kose a=20 (2 x 800), gusset tabanlari cift taraf a=20 (2 x 650)",
-     "to_A11_end_plate": "levha arka yuzu A11 uc plakasina (X=-2700) kose a=12",
-     "ribs": "a=8 cift taraf"
+     "top_corner_chamfer": 150,
+     "note": "2026-11-19 tek parca kalin govde (Yizumi referansi): on yuz X=-2650 (3 x A13 arka flansi), arka yuz X=-2900 (A59 valf blogu + tup kelepceleri), tepe Z=1000, arka ust egim Z 820..1000, ust yan koseler pahli. Eski levha+gusset+kiris duzeni kaldirildi."
     },
     "material": "S355J2",
-    "design": "H=0.1F/0.2F (VARSAYIM): gusset 33/66 MPa, taban kaynagi 16/32 MPa, ust kiris 76/152 MPa, alt levha 46/92 MPa (out/olcu_2026-11-18_A13_3kolon.txt)"
+    "design": "GECERSIZ: eski gusset/kiris gerilme hesaplari (out/olcu_2026-11-18_A13_3kolon.txt) bu govdeye uygulanmaz; H=0.1F/0.2F yuku icin yeniden dogrulanacak (acik)."
    },
-   "local_origin": "Point on the frame top (Z=-530) at the frame rear end X=-2700, Y=0. Local axes parallel to global: plate x 0..50, y -400..400, z 0..1050.",
+   "local_origin": "Point on the frame top (Z=-530) at the frame rear end X=-2700, Y=0. Local axes parallel to global; body x -200..50 (rear face -2900, front face -2650), z 0..1530.",
    "instances": [
     {
      "name": "A14_1",
      "pos": [-2700.0, 0, -530.0],
      "rot": [0, 0, 0],
-     "bbox": [-2700.0, -400.0, -530.0, -2000.0, 400.0, 1000.0]
+     "bbox": [-2900.0, -400.0, -530.0, -2650.0, 400.0, 1000.0]
     }
    ]
   }
