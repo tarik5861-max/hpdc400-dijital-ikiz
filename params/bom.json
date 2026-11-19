@@ -44,7 +44,10 @@
         "A54",
         "A55",
         "A56",
-        "A57"
+        "A57",
+        "A65",
+        "A66",
+        "A67"
       ]
     },
     {
@@ -263,7 +266,10 @@
           "name": "Enjeksiyon tasiyici konsol",
           "qty": 1,
           "script": "parts/A57_enj_konsol.py"
-        }
+        },
+        {"id": "A65", "name": "Enjeksiyon valf blogu (Y1 manifold + S424)", "qty": 1, "script": "parts/A65_enj_valf_blogu.py"},
+        {"id": "A66", "name": "Enjeksiyon konum sensoru + LS2", "qty": 1, "script": "parts/A66_enj_konum_sensoru.py"},
+        {"id": "A67", "name": "Enjeksiyon basinc vericisi", "qty": 2, "script": "parts/A67_basinc_vericisi.py"}
       ]
     },
     {

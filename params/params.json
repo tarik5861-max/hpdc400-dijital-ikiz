@@ -34,7 +34,8 @@
   "shot_follow": {
    "rule": "TEK KAYNAK = shot_position + shot_positions_z. z_sel = shot_positions_z[shot_position]; dz = z_sel - shot_positions_z['alt']. Asagidaki tum alanlar TURETILMISTIR ve su an 'alt' degerini tasir; resolver (assemble.load_params) bunlari z_sel'e gore yeniden yazar. Elle degistirmeyin.",
    "derived_scalar": "global.shot_offset_z = z_sel",
-   "instances_pos_z_eq_shot": ["A51", "A52", "A54", "A55"],
+   "instances_pos_z_eq_shot": ["A51", "A52", "A54", "A55", "A65", "A66", "A67"],
+   "bbox_zmin_follow": ["A64"],
    "instances_rule": "bu parcalarin tum instance'larinda pos[2] = z_sel (lokal orijin vurus ekseni uzerinde); bbox[2] ve bbox[5] += dz",
    "dims_eq_shot": ["A21.dims.shot_hole.center_yz[1]", "A81.dims.sleeve_bore.center_yz[1]"],
    "A57_saddle": "A57.dims.saddles.local_z_range[1] = A57.dims.height_adjust.saddle_top_local_z_alt + dz; A57_1.bbox[5] = -300 + dz",
@@ -1135,12 +1136,40 @@
   },
   "A64": {
    "name": "Akumulator toplayici borusu (tek enjeksiyon silindirine)",
-   "dims": {"riser_d": 50, "header_d": 70, "main_d": 60, "risers_y": [-410, -180, 180, 410], "z_riser_start": 1120, "z_header": 1250, "main_run": {"x_end_local": 980, "y": -130, "z_end": 0}},
+   "dims": {"riser_d": 50, "header_d": 70, "main_d": 60, "risers_y": [-410, -180, 180, 410], "z_riser_start": 1120, "z_header": 1250, "main_run": {"x_end_local": 980, "y": -130, "block_top_rel": 310}},
    "local_origin": "Tup sirasi ekseni X=-3020, Y=0, Z=0; eksenler global ile paralel.",
    "instances": [
-    {"name": "A64_1", "pos": [-3020.0, 0, 0.0], "rot": [0, 0, 0], "bbox": [-3055.0, -445.0, 0.0, -2010.0, 445.0, 1285.0]}
+    {"name": "A64_1", "pos": [-3020.0, 0, 0.0], "rot": [0, 0, 0], "bbox": [-3055.0, -445.0, 160.0, -2010.0, 445.0, 1285.0]}
    ],
-   "note": "4 tupun ust valfinden dikey boru -> Z=1250 toplayici (Y boyunca) -> +X yatay hat (Y=-130, A13 ust kolonunu ve flansini atlar) -> X=-2040'ta A54 arka kafasi ustune (Z=0) iner. Hepsi tek enjeksiyon silindirine baglidir. Sert boru temsili; hortum egrisi/rakor yok."
+   "note": "4 tupun ust valfinden dikey boru -> Z=1250 toplayici (Y boyunca) -> +X yatay hat (Y=-130) -> X=-2040'ta A65 valf blogu ustune iner (uc Z = shot z_sel + 310; global.shot_follow.bbox_zmin_follow). Sert boru temsili."
+  },
+  "A65": {
+   "name": "Enjeksiyon valf blogu (Y1 manifold + S424 servo valf)",
+   "dims": {"block": {"len_x": 160, "width_y": 300, "z_range": [150, 310]}, "servo_valve": {"flange_xz": [140, 140], "flange_t": 20, "body_d": 90, "body_len": 180, "z_center": 230}},
+   "local_origin": "Vurus ekseni yuksekligi (pos Z = shot z_sel), blok merkezi x/y. Blok A54 arka kafasi ustunde (kafa ust yuzu +150 lokal), servo valf (S424, U16 TDP050EH) +Y yan yuzunde. A64 toplayici boru blok ustune iner.",
+   "instances": [
+    {"name": "A65_1", "pos": [-2010.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-2090.0, -150.0, 0.0, -1930.0, 350.0, 160.0]}
+   ],
+   "note": "Temsili: ic kanal/port yok. elektrik.json: Y1, S424/U16 (bagli_id A54, A56)."
+  },
+  "A66": {
+   "name": "Enjeksiyon konum sensoru (lineer) + ileri limit LS2",
+   "dims": {"bracket": {"x": [0, 20], "half_y": 30, "half_z": 30}, "tube": {"d": 30, "x_range": [20, 720]}, "float": {"od": 56, "len": 30, "x_center": 130, "arm_y_to_coupling": 65, "arm_w": 30}, "ls2": {"size": 40, "x_range": [640, 680]}},
+   "local_origin": "A54 on kafa on yuzu (X), sensor ekseni Y=+120 (pos), vurus ekseni yuksekligi Z (pos Z = shot z_sel). Tup +X yonunde 700 mm; mikne kol A52 kaplinine uzanir (geri cekik pozisyon).",
+   "instances": [
+    {"name": "A66_1", "pos": [-1260.0, 120.0, -150.0], "rot": [0, 0, 0], "bbox": [-1260.0, 55.0, -180.0, -540.0, 150.0, -120.0]}
+   ],
+   "note": "DB68.ENC (enjeksiyon konum enkoderi) ve LS2 (ileri sinir, DI1.02) geometrisi. Mikne kolu A52 ile birlikte hareket edecek (animasyonda); simdi geri cekik pozisyonda sabit. elektrik.json DB68.ENC durumu 'ayrilmis' (degistirilmedi)."
+  },
+  "A67": {
+   "name": "Enjeksiyon basinc vericisi",
+   "dims": {"d": 30, "h": 60, "hex_d": 40, "hex_h": 15, "z_off": 150},
+   "local_origin": "Vurus ekseni yuksekligi (pos Z = shot z_sel); verici ekseni x/y; taban z_off (instance bazli).",
+   "instances": [
+    {"name": "A67_1", "pos": [-1970.0, -100.0, -150.0], "rot": [0, 0, 0], "z_off": 310, "bbox": [-1990.0, -120.0, 160.0, -1950.0, -80.0, 220.0]},
+    {"name": "A67_2", "pos": [-1300.0, 0, -150.0], "rot": [0, 0, 0], "z_off": 150, "bbox": [-1320.0, -20.0, 0.0, -1280.0, 20.0, 60.0]}
+   ],
+   "note": "A67_1 = DB68.PENJ_G (silindir giris/kafa basinci, A65 blogu ustunde); A67_2 = DB68.PENJ_C (cikis/rot basinci, on kafa ustunde). Temsili."
   },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",

@@ -37,6 +37,10 @@ def resolve_shot(P, shot=None):
             if "bbox" in i:   # params 'alt' degerini tasir; taze yuklenmis P uzerinde bir kez uygulanir
                 i["bbox"][2] += dz
                 i["bbox"][5] += dz
+    for pid in sf.get("bbox_zmin_follow", []):   # sadece alt z siniri vurus konumuyla kayar (ust sabit)
+        for i in P["parts"][pid]["instances"]:
+            if "bbox" in i:
+                i["bbox"][2] += dz
     for path in sf["dims_eq_shot"]:       # "A21.dims.shot_hole.center_yz[1]"
         m = re.fullmatch(r"(\w+)\.dims\.(\w+)\.(\w+)\[(\d+)\]", path)
         pid, k1, k2, idx = m.group(1), m.group(2), m.group(3), int(m.group(4))

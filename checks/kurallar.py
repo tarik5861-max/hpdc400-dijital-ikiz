@@ -94,7 +94,7 @@ def kural_shot(P):
         c = pr[pid]["dims"].get(k1, {}).get(k2)
         if not c or c[1] != z:
             err(pid, f"{k1}.{k2}={c} Z != z_sel {z}")
-    for pid in ("A51", "A52", "A54", "A55"):
+    for pid in G["shot_follow"]["instances_pos_z_eq_shot"]:
         for i in _inst(P, pid):
             if i["pos"][2] != z:
                 err(i["name"], f"pos[2]={i['pos'][2]} != z_sel {z}")

@@ -7,6 +7,7 @@ def build(d, G, g):
     y0, y1 = min(ys), max(ys)
     parts.append(g.move(g.cyl(rh, y1 - y0 + 2 * rh, "y", center=False), 0, y0 - rh, zh))
     m = d["main_run"]
+    ze = m["block_top_rel"] + G["shot_offset_z"]   # A65 blok ustu (vurus konumuna bagli)
     parts.append(g.move(g.cyl(rm, m["x_end_local"] + rm, "x", center=False), 0, m["y"], zh))
-    parts.append(g.move(g.cyl(rm, zh - m["z_end"] + rm, "z", center=False), m["x_end_local"], m["y"], m["z_end"]))
+    parts.append(g.move(g.cyl(rm, zh - ze + rm, "z", center=False), m["x_end_local"], m["y"], ze))
     return g.fuse(*parts)
