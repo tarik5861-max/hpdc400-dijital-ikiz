@@ -30,8 +30,8 @@
   "sensorler": [
    {"id": "PT1", "tip": "Sistem Basınç Sensörü", "kanal": "AI1.01", "aralik_bar": "0-250"},
    {"id": "PT2", "tip": "Akümülatör Basınç Sensörü", "kanal": "AI1.02", "aralik_bar": "0-250", "guvenlik_ esigi_bar": 2.0},
-   {"id": "LS1", "tip": "Mengene Kapalı Sınır Şalteri", "kanal": "DI1.01"},
-   {"id": "LS2", "tip": "Enjeksiyon İleri Sınır Şalteri", "kanal": "DI1.02"}
+   {"id": "LS1", "tip": "Mengene Kapalı Sınır Şalteri", "kanal": "AI10.1", "not": "DCC630 semasinda ayri kalip kapali limiti yok; VR1 kalip pozisyon cetveli esigi"},
+   {"id": "LS2", "tip": "Enjeksiyon İleri Sınır Şalteri", "kanal": "DI9.16"}
   ]
  }
 }

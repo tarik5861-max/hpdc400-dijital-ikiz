@@ -14,7 +14,9 @@
   "koken_degerleri": {
    "dcc630_sablon": "DCC630 semasindan aynen/islevce",
    "400t_hesap": "400 t icin hesapla boyutlandirildi/degistirildi",
-   "yeni": "DCC630'da yok, 400 t ikiz icin eklendi"
+   "yeni": "DCC630'da yok, 400 t ikiz icin eklendi",
+   "ikiz_tasarim": "Sema/saha verisi yok; ikiz icin tasarim varsayimi (sahada degisebilir)",
+   "dcc630_sema_9-8": "DCC630 sema sayfa 9-8 (enkoder/DB68) okumasindan"
   },
   "durum_degerleri": {
    "aktif": "ikizde modellenir",
@@ -2278,13 +2280,14 @@
    "slot": 9,
    "kanal": 16,
    "klemens": null,
-   "tag": null,
-   "aciklama": "yedek",
-   "durum": "ayrilmis",
-   "bagli_id": [],
+   "tag": "LS2",
+   "aciklama": "enjeksiyon ileri sinir (strok sonu) salteri LS2",
+   "durum": "aktif",
+   "bagli_id": ["A66", "A52"],
    "hidrolik": null,
-   "koken": "yeni",
-   "guven": "-"
+   "koken": "ikiz_tasarim",
+   "guven": "orta",
+   "gerekce": "DCC630 semasinda enjeksiyon ileri limiti yok (konum DB68 enkoderinden). Ikiz icin A66 uzerine LS2 eklendi; slot 9 yedek kanali DI9.16 verildi (kanal ataması tasarim karari, sahada degistirilebilir)."
   },
   {
    "id": "AI10.1",
@@ -2603,9 +2606,11 @@
     "A66"
    ],
    "hidrolik": null,
-   "koken": "dcc630_sablon",
-   "guven": "yuksek",
-   "gerekce": "A66 (lineer enjeksiyon konum sensoru, 700 mm tup + mikne A52 kaplini, strok sonu LS2) geometrik olarak modellendi. Faz gecisleri ikizde hala sure tabanli; ENC ile birlikte kullanilabilir. Gercek makine dogrulamasi gerekir. VERI_BEKLIYOR: sensor tipi, cozunurluk, sinyal tipi, HW Config adresi"
+   "koken": "dcc630_sema_9-8",
+   "guven": "orta",
+   "gerekce": "Sema 9-8 (DCC630): 'injection encoder' -> INCODER modulu (V+/V-/A/B/Z, +5 V) -> enkoder karti; PLC standart DI degil. Olcum: artimli kuadratur A/B/Z. A66 = bu enkoderin geometrisi (lineer sensor kolu A52 kaplinine bagli). Cozunurluk IKIZ TASARIM KARARI: 0,05 mm/sayim (x4 sonrasi); hizli vurus 5 m/s -> 100 kHz sayim hizi -> standart DI (<~100 Hz) YETMEZ, hizli sayici/enkoder karti zorunlu (semayla uyumlu). Faz gecisleri ikizde hala sure tabanli; ENC ile birlikte kullanilir.",
+   "sinyal": {"tip": "artimli kuadratur A/B/Z", "besleme": "+5 V", "cozunurluk_mm_sayim": 0.05, "max_sayim_hizi_kHz": 100, "alici": "enkoder karti (DB77/PCL), standart DI degil"},
+   "kaynak_sema": "9-8"
   }
  ],
  "donanim": [
