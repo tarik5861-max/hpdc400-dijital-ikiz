@@ -4,6 +4,7 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 
 | Tarih | Karar | Neden |
 |---|---|---|
+| 2026-11-19 | A14 tek gövdeye 2 üçgen kaburga eklendi (t60, \|Y\| 340..400, ön yüz yüksekliği 500, uç X=-2000 A11 kaburgası üstünde; tabana çift köşe a30, gövdeye a15). Min SF 1,11 (taban kaynağı yorulması, her atış), statik taban kaynağı 3,4, gövde ≥5,7 | Gövde şaseye yalnız 50 mm oturuyordu: kaburgasız taban kaynağı SF 0,16. Hesap `out/olcu_2026-11-19_A14_mukavemet.txt` (c=0,2 + enjeksiyon, ikiz_tasarim varsayimi) |
 | 2026-11-19 | A14 arka dikme geometrisi modern endüstriyel tasarıma (estetik hafifletme cepleri, akıcı açılı gussetler ve optimize edilmiş form) kavuşturuldu (`parts/A14_kolon_arka_dikme.py`) ve montaj güncellendi | Kullanıcı isteği: "bu a14_1 geometresi hoşuma gitmiyor daha modern daha kulanışlı bir geometri istiyorum" |
 | 2026-11-19 | Her geometri veya model değişikliğinden sonra FreeCAD ekranı / montajı otomatik olarak güncellenecek (ek komut beklenmeyecek) | Kullanıcı isteği: "freecad ekranını her değişlikten sonra güncelle bunuda kararlara ekle ben komut vermiyim" |
 | 2026-11-19 | A13 sabit plaka destek kolonlarının A21 sabit plakasına bağlantısı cıvatalı flanşlı yapıya (M24 cıvata delikleri ve PCD) tam olarak uyarlandı (`parts/A13_sabit_plaka_destek.py`) | Kullanıcı isteği: "a13_1 a13_2 a13_3 bunlar a14 kaynaklı tasarlamıştık bunu somunlu civatalıya çevirelim" (ön flanş cıvatalı, arka flanş A14'e kaynaklı) |

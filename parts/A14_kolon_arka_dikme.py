@@ -13,4 +13,15 @@ def build(d, G, g):
     c = b["top_corner_chamfer"]
     pts = [(y0, 0), (y1, 0), (y1, zt - c), (y1 - c, zt), (y0 + c, zt), (y0, zt - c)]
     sil = g.polyprism(pts, min(xs) - 1, max(xs) + 1)
-    return g.common(side, sil)
+    body = g.common(side, sil)
+    # on yuzden sase ustune ucgen kaburgalar (taban baglantisi; d["ribs"])
+    r = d.get("ribs")
+    if not r:
+        return body
+    x0, x1 = r["x_local_range"]   # on yuz (lokal 50) .. uc (lokal 700 = X -2000)
+    tri = [(x0, 0), (x1, 0), (x0, r["height"])]
+    for ya, yb in r["y_ranges"]:
+        lo, hi = min(ya, yb), max(ya, yb)
+        rib = g.polyprism([(-x, z) for x, z in tri], 0, hi - lo)
+        body = g.fuse(body, g.move(g.rot(rib, "z", 90), 0, lo, 0))
+    return body
