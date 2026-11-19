@@ -52,6 +52,7 @@
       "name": "Hidrolik, kalip, guvenlik",
       "items": [
         "A59",
+        "A63",
         "A61",
         "A62",
         "A71",
@@ -285,6 +286,12 @@
           "name": "Akumulator valf blogu (manifold)",
           "qty": 1,
           "script": "parts/A59_valf_blogu.py"
+        },
+        {
+          "id": "A63",
+          "name": "Akumulator kelepce bantlari",
+          "qty": 2,
+          "script": "parts/A63_kelepce.py"
         }
       ]
     },

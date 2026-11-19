@@ -1127,6 +1127,22 @@
    ],
    "note": "Temsili manifold: 4 akumulator tupu tabani + kartus valf yuvalari; ic kanal/port yok. Hidrolik sema gelince portlar eklenecek (hidrolik-muhendisi)."
   },
+  "A63": {
+   "name": "Akumulator kelepce bantlari",
+   "dims": {
+    "tube_od": 220,
+    "centers_y": [-345, -115, 115, 345],
+    "band_height": 60,
+    "band_thickness": 6,
+    "rear_bar": {"x_local_range": [110, 120], "half_width_y": 400}
+   },
+   "local_origin": "Tup sirasinin ekseni (X=-2820, Y=0), bandin alt yuzu (z=0). Halkalar tup govdesini sarar, arka duz bar A14 arka yuzune (X=-2700) dayanir.",
+   "instances": [
+    {"name": "A63_1", "pos": [-2820.0, 0, 70.0], "rot": [0, 0, 0], "bbox": [-2936.0, -461.0, 70.0, -2700.0, 461.0, 130.0]},
+    {"name": "A63_2", "pos": [-2820.0, 0, 700.0], "rot": [0, 0, 0], "bbox": [-2936.0, -461.0, 700.0, -2700.0, 461.0, 760.0]}
+   ],
+   "note": "Temsili kelepce: 4 halka + arka bar; civata/gerdirme yok. Hizalama referansi Yizumi arka tup grubu."
+  },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",
    "dims": {
@@ -2070,15 +2086,15 @@
     "plate": {
      "local_x_range": [0, 50],
      "y_range": [-400, 400],
-     "z_range": [0, 1050],
+     "z_range": [0, 1530],
      "top_corner_chamfer": 100,
-     "note": "X -2700..-2650, Z -530..520, ust kose pah 100 (2026-11-19, modern govde); A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
+     "note": "X -2700..-2650, Z -530..1000 (2026-11-19: 520 -> 1000, tup grubuna hizali), ust kose pah 100; A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
     },
     "gussets": {
      "count": 2,
      "thickness": 40,
      "y_ranges": [[340, 380], [-380, -340]],
-     "profile_xz": [[50, 0], [50, 960], [250, 960], [700, 0]],
+     "profile_xz": [[50, 0], [50, 1440], [250, 1440], [700, 0]],
      "note": "on tarafta (+X), taban X -2650..-2000 (ucu A11 enine kaburgasi X=-2000 ustunde); A55/A57'den |Y| ile uzak"
     },
     "upper_ribs": {
@@ -2112,7 +2128,7 @@
      "name": "A14_1",
      "pos": [-2700.0, 0, -530.0],
      "rot": [0, 0, 0],
-     "bbox": [-2700.0, -400.0, -530.0, -2000.0, 400.0, 520.0]
+     "bbox": [-2700.0, -400.0, -530.0, -2000.0, 400.0, 1000.0]
     }
    ]
   }
