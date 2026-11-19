@@ -2498,7 +2498,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A54",
-    "A56"
+    "A56",
+    "A65"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -2546,7 +2547,8 @@
    "aciklama": "enjeksiyon silindiri giris (kafa) basinci",
    "durum": "aktif",
    "bagli_id": [
-    "A54"
+    "A54",
+    "A67"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -2562,7 +2564,8 @@
    "aciklama": "enjeksiyon silindiri cikis (rot) basinci",
    "durum": "aktif",
    "bagli_id": [
-    "A54"
+    "A54",
+    "A67"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -2593,15 +2596,16 @@
    "klemens": null,
    "tag": null,
    "aciklama": "enjeksiyon konum enkoderi",
-   "durum": "ayrilmis",
+   "durum": "aktif",
    "bagli_id": [
     "A54",
-    "A52"
+    "A52",
+    "A66"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "yuksek",
-   "gerekce": "ikizde enjeksiyon konum sensoru modellenmiyor; faz gecisleri parametre/zamanla simule edilir. GERCEK makinede faz gecisi icin ZORUNLU"
+   "gerekce": "A66 (lineer enjeksiyon konum sensoru, 700 mm tup + mikne A52 kaplini, strok sonu LS2) geometrik olarak modellendi. Faz gecisleri ikizde hala sure tabanli; ENC ile birlikte kullanilabilir. Gercek makine dogrulamasi gerekir. VERI_BEKLIYOR: sensor tipi, cozunurluk, sinyal tipi, HW Config adresi"
   }
  ],
  "donanim": [
@@ -2915,7 +2919,8 @@
    "aciklama": "enjeksiyon servo valf surucusu TDP050EH (S424)",
    "bagli_id": [
     "A54",
-    "A56"
+    "A56",
+    "A65"
    ],
    "koken": "dcc630_sablon",
    "guven": "yuksek"
@@ -2996,7 +3001,8 @@
     "A54",
     "A55",
     "A56",
-    "A52"
+    "A52",
+    "A65"
    ],
    "guven": "orta-yuksek"
   },

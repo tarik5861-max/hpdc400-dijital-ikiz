@@ -1159,7 +1159,7 @@
    "instances": [
     {"name": "A66_1", "pos": [-1260.0, 120.0, -150.0], "rot": [0, 0, 0], "bbox": [-1260.0, 55.0, -180.0, -540.0, 150.0, -120.0]}
    ],
-   "note": "DB68.ENC (enjeksiyon konum enkoderi) ve LS2 (ileri sinir, DI1.02) geometrisi. Mikne kolu A52 ile birlikte hareket edecek (animasyonda); simdi geri cekik pozisyonda sabit. elektrik.json DB68.ENC durumu 'ayrilmis' (degistirilmedi)."
+   "note": "DB68.ENC (enjeksiyon konum enkoderi) ve LS2 (ileri sinir, DI1.02) geometrisi. Mikne kolu A52 ile birlikte hareket edecek (animasyonda); simdi geri cekik pozisyonda sabit. elektrik.json DB68.ENC durumu 'aktif' (2026-11-19, bagli_id A66)."
   },
   "A67": {
    "name": "Enjeksiyon basinc vericisi",

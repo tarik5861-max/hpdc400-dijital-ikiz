@@ -148,3 +148,8 @@ Açık riskler:
 3. Otomatik çevrim başlatmada aktif alarm (ör. AL_YAGLAMA "N çevrim sonra yasak") kontrol edilmiyor; sayaçlı yasak tanımı yok.
 4. params die_height_drive notu: kalıp yüksekliği ayarı kalıp SÖKÜLÜ iken (dh < 400'de kalıplar çarpışır) — elektrik izni bunu bilmiyor (kalıp takılı bilgisi yok).
 5. DI5.08'in anlamı (mafsal kilitli mi, kalıp teması mı) doğrulanmadı; K-EL-06d buna dayanıyor.
+
+## Enjeksiyon konum sensoru (A66) - guncelleme
+- DB68.ENC artik `aktif`, bagli_id A54/A52/A66. Faz gecisleri ikizde hala sure tabanli; gercek makine dogrulamasi gerekir.
+- DB68.PENJ_G / PENJ_C -> A67; DB68.A09, U16, hidrolik_esleme Y1 -> A65 eklendi.
+- VERI_BEKLIYOR: A66 sensor tipi/cozunurluk/sinyal tipi; LS2 (DI1.02) elektrik.json'da kanal kaydi yok (yalniz hidrolik.json'da); S424 icin ayri kayit yok.
