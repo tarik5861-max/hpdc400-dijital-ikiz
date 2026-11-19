@@ -1279,25 +1279,28 @@
      "width_y": 500,
      "thickness": 30
     },
-    "shaft_axis_height_above_origin": 250,
+    "shaft_axis_height_above_origin": 280,
     "motor": {
-     "d": 400,
-     "local_x_range": [-570, 130],
-     "power_kW": 30,
+     "d": 460,
+     "local_x_range": [-650, 150],
+     "power_kW": 55,
+     "type": "IEC 225M flanşlı 4 kutuplu",
      "fins_optional": true,
      "terminal_box": {
-      "size": [200, 150, 100],
+      "size": [240, 180, 120],
       "on": "+Z",
       "optional": true
      }
     },
     "bell_housing": {
-     "d": 300,
-     "local_x_range": [130, 290]
+     "d": 350,
+     "local_x_range": [150, 330],
+     "type": "Döküm kampana (CETOP / SAE standardı)"
     },
     "pump": {
-     "d": 220,
-     "local_x_range": [290, 570]
+     "d": 260,
+     "local_x_range": [330, 650],
+     "type": "Eksenel pistonlu ana pompa + pilot dişli pompa (Rexroth A10VSO / Parker PV series)"
     },
     "motor_feet": {
      "note": "block 500x360 from z=30 to z=80 under motor",
@@ -1310,7 +1313,7 @@
      "name": "A62_1",
      "pos": [1100, -900, -450.0],
      "rot": [0, 0, 0],
-     "bbox": [450, -1150, -450.0, 1750, -650, 0.0]
+     "bbox": [80, -1150, -450.0, 1887, -650, 460.0]
     }
    ]
   },
