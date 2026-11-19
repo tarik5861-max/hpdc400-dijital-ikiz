@@ -24,8 +24,13 @@ def build(d, G, g):
         ys = -1 if ta["side"] == "-Y" else 1
         yc = ys * (W / 2 - sw / 2)
         shell = g.cut(shell, g.move(g.box(x1 - x0, sw + 2, z1 - z0), (x0 + x1) / 2, yc, (z0 + z1) / 2))
-    # boru gecis delikleri (X ekseninde: uc plakasi / enine kaburga)
+    # boru gecis delikleri: axis "x" (uc plakasi / enine kaburga, x_range + y) ya da "y" (yan duvar, y_range + x)
     for p in d.get("pipe_passages", []):
-        x0, x1 = p["x_range"]
-        shell = g.cut(shell, g.move(g.cyl(p["d"] / 2, x1 - x0, "x", center=False), x0, p["y"], p["local_z"]))
+        if p.get("axis", "x") == "y":
+            y0, y1 = p["y_range"]
+            hole = g.move(g.cyl(p["d"] / 2, y1 - y0, "y", center=False), p["x"], y0, p["local_z"])
+        else:
+            x0, x1 = p["x_range"]
+            hole = g.move(g.cyl(p["d"] / 2, x1 - x0, "x", center=False), x0, p["y"], p["local_z"])
+        shell = g.cut(shell, hole)
     return shell

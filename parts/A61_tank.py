@@ -1,5 +1,5 @@
 """
-A61_tank.py - Hidrolik tank (sase A11 icinde, 2026-11-19). Govde kutu + -Y yuzunde erisim elemanlari:
+A61_tank.py - Hidrolik tank (sase A11 icinde, 2026-11-19). Govde kutu + erisim yuzunde (side_face_y, su an +Y) erisim elemanlari:
 (yon side_face_y isaretinden) gozlem cami, civatali yan kapak, dolum/hava filtresi, donus filtresi kapagi. Tum olculer params A61.dims.
 Lokal orijin: alt yuz merkezi; z 0..height; erisim yuzu y = side_face_y (+Y ya da -Y).
 """
