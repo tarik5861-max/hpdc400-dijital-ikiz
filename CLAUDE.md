@@ -24,6 +24,8 @@ Sen (ana oturum) ORKESTRATÖRSÜN. Kendin parça çizmez, ölçü değiştirmezs
 | parca-cizer | sonnet | parça scripti yazma/düzeltme (paralel çağrılabilir, her çağrıda en fazla 4 parça) |
 | test-kosucu | haiku | her turdan sonra kontrol + yönlendirme (çok ucuz, her zaman) |
 | freecad-operator | haiku | faz YESIL olunca canlı FreeCAD'e basma + görsel kontrol |
+| elektrik-mantik | sonnet | Kademe 2: elektrik.json, mantık simülasyonu, KURAL_ELEK_* hataları |
+| hidrolik-muhendisi | opus | Kademe 3: hidrolik ağ modeli, basınç/debi hesapları, KURAL_HIDR_* hataları |
 
 ## Otomatik döngü (faz bazlı, params/bom.json → phases)
 ```
