@@ -13,25 +13,155 @@
  },
  "elemanlar": {
   "pompalar": [
-   {"id": "P1", "tip": "Ana Sabit Deplasmanli Kanatli Pompa (45VQ42)", "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)", "nominal_debi_lpm": 191.2, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ on kisim 45VQ (sabit deplasmanli kanatli kartus)", "bagli_id": ["A62", "A120", "A98", "A99", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A114"], "varsayim": "ikiz_tasarim karari: 45VQ42 136 cm3/dev x 1480 d/dk x eta_v 0.95 = 191.2 L/dk (eski 120 L/dk ve 30 kW uyumsuzlugu kapandi, motor A120 55 kW). VARSAYIM: eta_v 0.95, eta_hm 0.92 (kanatli pompa 140 bar tipik, katalog egrisi degil). Sema P1'i degisken debili sayiyor; 4520VQ sabit deplasmanli -> debi/basinc ayari U12 oransal basinc+debi valfi (LKPP-03, S102/S103) ile yapilir, pompa kompanzatoru yok.", "deplasman_cm3_dev": 136.0, "devir_dpm": 1480, "eta_v": 0.95, "eta_hm": 0.92},
-   {"id": "P2", "tip": "Pilot / Yardimci Sabit Deplasmanli Kanatli Pompa (20VQ5)", "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)", "nominal_debi_lpm": 23.1, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ arka kisim 20VQ5 (16,4 cm3/dev -> ~24 L/dk @1460 d/dk), emniyet valfi 2000 psi", "bagli_id": ["A62", "A120", "A99", "A100", "A101", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A117", "A118", "A119"], "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 (A120) milinden (eski 'M2' elektrik.json'da yok). 16.4 cm3/dev x 1480 x 0.95 = 23.1 L/dk. VARSAYIM: eta_v 0.95, eta_hm 0.92.", "deplasman_cm3_dev": 16.4, "devir_dpm": 1480, "eta_v": 0.95, "eta_hm": 0.92}
+   {
+    "id": "P1",
+    "tip": "Ana Sabit Deplasmanli Kanatli Pompa (45VQ42)",
+    "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)",
+    "nominal_debi_lpm": 191.2,
+    "nominal_basinç_bar": 140.0,
+    "pompa_modeli": "Vickers/Eaton 4520VQ on kisim 45VQ (sabit deplasmanli kanatli kartus)",
+    "bagli_id": [
+     "A62",
+     "A120",
+     "A98",
+     "A99",
+     "A101",
+     "A102",
+     "A103",
+     "A104",
+     "A105",
+     "A106",
+     "A107",
+     "A114"
+    ],
+    "varsayim": "ikiz_tasarim karari: 45VQ42 136 cm3/dev x 1480 d/dk x eta_v 0.95 = 191.2 L/dk (eski 120 L/dk ve 30 kW uyumsuzlugu kapandi, motor A120 55 kW). VARSAYIM: eta_v 0.95, eta_hm 0.92 (kanatli pompa 140 bar tipik, katalog egrisi degil). Sema P1'i degisken debili sayiyor; 4520VQ sabit deplasmanli -> debi/basinc ayari U12 oransal basinc+debi valfi (LKPP-03, S102/S103) ile yapilir, pompa kompanzatoru yok.",
+    "deplasman_cm3_dev": 136.0,
+    "devir_dpm": 1480,
+    "eta_v": 0.95,
+    "eta_hm": 0.92
+   },
+   {
+    "id": "P2",
+    "tip": "Pilot / Yardimci Sabit Deplasmanli Kanatli Pompa (20VQ5)",
+    "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)",
+    "nominal_debi_lpm": 23.1,
+    "nominal_basinç_bar": 140.0,
+    "pompa_modeli": "Vickers/Eaton 4520VQ arka kisim 20VQ5 (16,4 cm3/dev -> ~24 L/dk @1460 d/dk), emniyet valfi 2000 psi",
+    "bagli_id": [
+     "A62",
+     "A120",
+     "A99",
+     "A100",
+     "A101",
+     "A108",
+     "A109",
+     "A110",
+     "A111",
+     "A112",
+     "A113",
+     "A114",
+     "A117",
+     "A118",
+     "A119"
+    ],
+    "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 (A120) milinden (eski 'M2' elektrik.json'da yok). 16.4 cm3/dev x 1480 x 0.95 = 23.1 L/dk. VARSAYIM: eta_v 0.95, eta_hm 0.92.",
+    "deplasman_cm3_dev": 16.4,
+    "devir_dpm": 1480,
+    "eta_v": 0.95,
+    "eta_hm": 0.92
+   }
   ],
   "akumulatorler": [
-   {"id": "ACC1", "tip": "Enjeksiyon Hızlı Vuruş Akümülatörü", "hacim_lt": 2.6, "basinc_bar": 140.0, "baglanti": "Enjeksiyon manifold bloğu"},
-   {"id": "ACC2", "tip": "Pilot / Kontrol Akümülatörü", "hacim_lt": 1.0, "basinc_bar": 40.0, "baglanti": "Pilot hat"}
+   {
+    "id": "ACC1",
+    "tip": "Enjeksiyon Hızlı Vuruş Akümülatör Grubu (A56 x4, gaz yasasi hesabi)",
+    "bagli_id": [
+     "A56",
+     "A59",
+     "A63",
+     "A64",
+     "A65"
+    ],
+    "tup_adet_kaynak": "params.json A56 instances (4)",
+    "baglanti": "A64 toplayici -> A65 enjeksiyon valf blogu (Y1/S424)",
+    "guvenlik": "Her tupte kapama vanasi (A59 kartus), RV2 emniyet, DV1/S121 kilitlenebilir desarj -> TK1, PT2 basinc; ust valf tapasi on dolum (N2) olcum portu. Onarim/teshis oncesi: LOTO + S121 desarj + PT2<2 bar dogrula (CLAUDE.md kural 10).",
+    "hesap": "lib/hidrolik_ag_modeli.py hizli_vurus_hesabi(); sonuc hizli_vurus_sonuc altinda (turetilmis, elle degistirme)",
+    "eski_deger_not": "eski hacim_lt 2.6 (2 x 1.3 L) hataliydi: 1300 mm tup boyu litre sanilmisti",
+    "tup_adet": 4,
+    "tup_gaz_hacmi_l": 32.32,
+    "hacim_lt": 129.3,
+    "on_dolum_bar": 113.4,
+    "basinc_bar": 140.0,
+    "min_calisma_bar": 126.0,
+    "gaz": "N2",
+    "varsayim": "ikiz_tasarim varsayimi: tup ic cap 190 (et 15 mm), tum ic hacim gaz V0; p0 = 0.9 x p2_min; n = 1.4 (hizli desarj adyabatik)"
+   },
+   {
+    "id": "ACC2",
+    "tip": "Pilot / Kontrol Akümülatörü",
+    "hacim_lt": 1.0,
+    "basinc_bar": 40.0,
+    "baglanti": "Pilot hat"
+   }
   ],
   "valfler": [
-   {"id": "Y1", "tip": "Enjeksiyon Hızlı Vuruş Valfi (Oransal/Kartuş)", "bobin": "Y1", "fonksiyon": "Hızlı vuruş akümülatör deşarjı"},
-   {"id": "Y2", "tip": "Mengene Kapama Yön Valfi", "bobin": "Y2", "fonksiyon": "A22 hareketli plaka ileri/geri"},
-   {"id": "Y3", "tip": "İtici Yön Valfi", "bobin": "Y3", "fonksiyon": "A41 itici silindirleri ileri/geri"},
-   {"id": "DV1", "tip": "Güvenlik Acil Deşarj Valfi", "bobin": "KA_ES", "fonksiyon": "E-stop / enerji kesilmesinde akü deşarjı (S121 bağ)", "durum": "Enerjisiz = Açık (Boşalt)"},
-   {"id": "A55", "tip": "Basınç Artırma (Multiplikatör) Valfi", "bobin": "A55", "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)"}
+   {
+    "id": "Y1",
+    "tip": "Enjeksiyon Hızlı Vuruş Valfi (Oransal/Kartuş)",
+    "bobin": "Y1",
+    "fonksiyon": "Hızlı vuruş akümülatör deşarjı"
+   },
+   {
+    "id": "Y2",
+    "tip": "Mengene Kapama Yön Valfi",
+    "bobin": "Y2",
+    "fonksiyon": "A22 hareketli plaka ileri/geri"
+   },
+   {
+    "id": "Y3",
+    "tip": "İtici Yön Valfi",
+    "bobin": "Y3",
+    "fonksiyon": "A41 itici silindirleri ileri/geri"
+   },
+   {
+    "id": "DV1",
+    "tip": "Güvenlik Acil Deşarj Valfi",
+    "bobin": "KA_ES",
+    "fonksiyon": "E-stop / enerji kesilmesinde akü deşarjı (S121 bağ)",
+    "durum": "Enerjisiz = Açık (Boşalt)"
+   },
+   {
+    "id": "A55",
+    "tip": "Basınç Artırma (Multiplikatör) Valfi",
+    "bobin": "A55",
+    "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)"
+   }
   ],
   "sensorler": [
-   {"id": "PT1", "tip": "Sistem Basınç Sensörü", "kanal": "AI1.01", "aralik_bar": "0-250"},
-   {"id": "PT2", "tip": "Akümülatör Basınç Sensörü", "kanal": "AI1.02", "aralik_bar": "0-250", "guvenlik_ esigi_bar": 2.0},
-   {"id": "LS1", "tip": "Mengene Kapalı Sınır Şalteri", "kanal": "AI10.1", "not": "DCC630 semasinda ayri kalip kapali limiti yok; VR1 kalip pozisyon cetveli esigi"},
-   {"id": "LS2", "tip": "Enjeksiyon İleri Sınır Şalteri", "kanal": "DI9.16"}
+   {
+    "id": "PT1",
+    "tip": "Sistem Basınç Sensörü",
+    "kanal": "AI1.01",
+    "aralik_bar": "0-250"
+   },
+   {
+    "id": "PT2",
+    "tip": "Akümülatör Basınç Sensörü",
+    "kanal": "AI1.02",
+    "aralik_bar": "0-250",
+    "guvenlik_ esigi_bar": 2.0
+   },
+   {
+    "id": "LS1",
+    "tip": "Mengene Kapalı Sınır Şalteri",
+    "kanal": "AI10.1",
+    "not": "DCC630 semasinda ayri kalip kapali limiti yok; VR1 kalip pozisyon cetveli esigi"
+   },
+   {
+    "id": "LS2",
+    "tip": "Enjeksiyon İleri Sınır Şalteri",
+    "kanal": "DI9.16"
+   }
   ]
  },
  "pompa_guc_kontrolu": {
@@ -56,6 +186,156 @@
   "durum": "SINIRDA",
   "eta_hm_095_ile_mil_kW": 55.4,
   "hesap": "lib/hidrolik_ag_modeli.py pompa_guc_kontrolu(); Q=V*n*eta_v/1000, P_hid=p*Q/600, P_mil=p*V*n/(600000*eta_hm)",
-  "degerlendirme": "Hidrolik cikis 50.0 kW <= 55 kW karsilanir. Mil gucu (eta_hm 0.92) 57.2 kW = %104 -> SINIRDA: yalniz P1+P2 ikisi birden 140 bar tam debide (akumulator sarji + pilot) surekli calisirsa motor ~%4 asiri yuklenir. Hafifletenler: P2 pilot hatti cogunlukla dusuk debide/emniyetten doner, U12 oransal basinc ile cevrim disi P1 bosaltma (unloading); sarj kisa sureli (S1 yerine S6 yuk). Surekli 140 bar tam debi gerekiyorsa 75 kW veya P2 icin bosaltma valfi."
+  "degerlendirme": "Hidrolik cikis 50.0 kW <= 55 kW karsilanir. Mil gucu (eta_hm 0.92) 57.2 kW = %104 -> SINIRDA: yalniz P1+P2 ikisi birden 140 bar tam debide (akumulator sarji + pilot) surekli calisirsa motor ~%4 asiri yuklenir. Hafifletenler: P2 pilot hatti cogunlukla dusuk debide/emniyetten doner, U12 oransal basinc ile cevrim disi P1 bosaltma (unloading); sarj kisa sureli (S1 yerine S6 yuk). Surekli 140 bar tam debi gerekiyorsa 75 kW veya P2 icin bosaltma valfi.",
+  "sarj_kontrolu": {
+   "t_sarj_s": 0.95,
+   "tepe_yuk_orani": 1.023,
+   "tepe_durum": "SINIRDA",
+   "rms_yuk_orani": 0.241,
+   "rms_durum": "OK",
+   "not": "Hizli vurus ani yuku (2771 L/dk x 140 bar = 646 kW hidrolik) tamamen ACC1'den; motor yalniz sarji gorur: 3.03 L / P1 191.2 L/dk = 0.95 s (faz 3 icinde biter). Sarjda P1 ort. 137 bar -> 50.1 kW + P2 tam 6.16 kW = %102 SINIRDA (kisa sure, S6). 60 s cevrimde RMS %24 OK (VARSAYIM: P1 bosaltmada %10)."
+  }
+ },
+ "hizli_vurus_tasarim": {
+  "etiket": "ikiz_tasarim varsayimi (tum degerler; saha verisi istenmedi)",
+  "hedef_piston_hizi_m_s": 3.0,
+  "hedef_not": "A54 pistonu = A52 plunger hizi (rijit kaplin). 400 t soguk kamara tipik 2-5 m/s; 3.0 secildi.",
+  "faz2_sure_kaynak": "params/elektrik.json mantik parametreleri P.FAZ2_SURE_ms (salt okunur)",
+  "kayip_orani": 0.05,
+  "kayip_not": "kacak + yag sikistirilabilirligi + valf acilma rampasi; hizli faz hacmine eklenir",
+  "faz3_strok_mm": 10.0,
+  "faz3_not": "carpan fazinda plunger ilerlemesi (metal cekme beslemesi); A55 buyuk piston hacmi ACC1'den",
+  "p_min_oran": 0.9,
+  "p_min_not": "vurus sonu min akumulator basinci p2_min = 0.9 x p1 (hiz kararliligi, servo valf dP payi)",
+  "p0_oran": 0.9,
+  "p0_not": "on dolum p0 = 0.9 x p2_min (aralik 0.6-0.9; yuksek p0 hizli desarjda faydali hacmi artirir)",
+  "n_politropik": 1.4,
+  "n_izotermal_sarj": 1.0,
+  "tup_et_kalinligi_mm": 15.0,
+  "tup_et_not": "A56 OD220 -> ID190; EN13445 e=P*Do/(2f+P), P=170 bar, f=230 MPa -> e_min 7.8 mm; 15 mm secildi",
+  "yag": {
+   "tip": "HLP46 mineral (VARSAYIM)",
+   "rho_kg_m3": 870.0,
+   "nu_cSt": 32.0,
+   "sicaklik_C": 45
+  },
+  "hat": {
+   "kaynak": "params.json A64 dims; capi IC cap kabul (VARSAYIM)",
+   "bend_rc_D": 1.5,
+   "K_tee_branch": 1.0,
+   "K_giris": 0.5,
+   "K_cikis": 1.0,
+   "puruzluluk_mm": 0.015,
+   "ivme_rampa_ms": 15.0
+  },
+  "cevrim_suresi_s": 60.0,
+  "cevrim_not": "400 t tipik 45-90 s; motor RMS yuk tahmini icin"
+ },
+ "hizli_vurus_sonuc": {
+  "etiket": "ikiz_tasarim varsayimi (tum degerler; saha verisi istenmedi)",
+  "hedef": {
+   "v_m_s": 3.0,
+   "A54_bore_mm": 140.0,
+   "A54_alan_cm2": 153.94,
+   "Q_hedef_lpm": 2770.9,
+   "plunger_d_mm": 80.0,
+   "metal_debi_L_s": 15.08,
+   "faz2_sure_ms": 60.0,
+   "hizli_strok_mm": 180.0,
+   "faz1_strok_mm_sure_tabanli": 165.6,
+   "toplam_strok_mm": 500.0,
+   "pompa_dogrudan_gerekli_kW": 646.5
+  },
+  "hacim": {
+   "V_faz2_kayipli_l": 2.909,
+   "V_faz3_carpan_l": 0.314,
+   "V_pompa_faz2_l": 0.191,
+   "dV_acc_l": 3.032
+  },
+  "akumulator": {
+   "p1_bar": 140.0,
+   "p2_min_bar": 126.0,
+   "p0_bar": 113.4,
+   "n": 1.4,
+   "V0_gerekli_l": 45.4,
+   "tup_ic_cap_mm": 190.0,
+   "tup_ic_boy_mm": 1170.0,
+   "tup_gaz_hacmi_l": 32.32,
+   "tup_adet": 4,
+   "tup_min_adet": 2,
+   "V0_mevcut_l": 129.3,
+   "kapasite_p2min_l": 8.64,
+   "kapasite_orani": 2.85,
+   "p2_gercek_bar": 135.3,
+   "p_faz3_baslangic_bar": 134.8,
+   "p0_p1_oran": 0.81,
+   "p1_p0_oran": 1.235,
+   "durum": "OK"
+  },
+  "faz2": {
+   "Q_acc_ort_lpm": 2718.2,
+   "Q_P1_lpm": 191.2,
+   "Q_piston_lpm": 2770.9,
+   "v_piston_m_s": 3.0,
+   "hedefe_ulasti": true,
+   "hat_A64": {
+    "parcalar": [
+     {
+      "ad": "riser Q/4",
+      "D_mm": 50,
+      "L_m": 0.13,
+      "v_m_s": 5.77,
+      "dp_bar": 0.13
+     },
+     {
+      "ad": "toplayici Q/4",
+      "D_mm": 70,
+      "L_m": 0.23,
+      "v_m_s": 2.94,
+      "dp_bar": 0.0
+     },
+     {
+      "ad": "toplayici Q/2 + T",
+      "D_mm": 70,
+      "L_m": 0.31,
+      "v_m_s": 5.89,
+      "dp_bar": 0.17
+     },
+     {
+      "ad": "ana hat + 2 dirsek + cikis",
+      "D_mm": 60,
+      "L_m": 2.07,
+      "v_m_s": 16.02,
+      "dp_bar": 2.66
+     }
+    ],
+    "dp_sabit_bar": 2.96,
+    "dp_ivme_bar": 21.12,
+    "ana_hat_hiz_m_s": 16.02
+   },
+   "basinc_dusumu_yuzde": 3.3
+  },
+  "faz3": {
+   "carpan_orani": 2.0408,
+   "p_carpan_bar": 285.71,
+   "F_kN": 439.8,
+   "p_metal_MPa": 87.5,
+   "params_injection_force_kN": 430
+  },
+  "sarj": {
+   "V_sarj_l": 3.032,
+   "t_sarj_s": 0.95,
+   "faz3_sure_s": 3.0,
+   "faz3_icinde_biter": true,
+   "P1_sarj_mil_kW": 50.1,
+   "P2_mil_kW": 6.16,
+   "tepe_yuk_orani": 1.023,
+   "tepe_durum": "SINIRDA",
+   "cevrim_s": 60.0,
+   "rms_yuk_orani": 0.241,
+   "rms_durum": "OK"
+  },
+  "hesap": "lib/hidrolik_ag_modeli.py hizli_vurus_hesabi() (turetilmis; elle degistirme, yeniden hesapla)",
+  "tarih": "2026-11-19"
  }
 }

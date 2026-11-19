@@ -8,7 +8,7 @@ Güvenlik: akümülatör deşarjı ve basınç boşaltma her onarım adımının
 |---|---|---|
 | TK1 yağ tankı | A61 | 784 L |
 | M1 + P1/P2 motor-pompa | A62 (pompa A98..A119) + A120 (motor) | motor 55 kW 4p 1480 d/dk; 4520VQ tandem sabit deplasman: P1 45VQ42 191,2 L/dk, P2 20VQ5 23,1 L/dk (eta_v 0,95 VARSAYIM); 140 bar mil gücü 57,2 kW = %104 SINIRDA (params/hidrolik.json pompa_guc_kontrolu) |
-| ACC1 akümülatör | A56 (2 adet) | tüp OD220 × 1300 |
+| ACC1 akümülatör | A56 (4 adet) + A59/A63/A64 | tüp OD220 × 1300, iç Ø190 (et 15, VARSAYIM) → 32,3 L/tüp, V0 129 L; N2 p0 113,4 bar, p1 140, vuruş sonu 135,3 bar (n 1,4); 3,0 m/s için en az 2 tüp (V0 ≥ 45,4 L) |
 | Çarpan (basınç artırıcı) | A55 | Ø200/Ø140, oran 2,04 |
 | CYL1 enjeksiyon silindiri | A54 | Ø140 sondaj |
 | Kapama silindiri | A35 | Ø160 sondaj |
@@ -50,7 +50,7 @@ Eleman adları (TK1, P1, RV1, ACV1, ACC1, Y1, CYL1) kullanıcıdan; "öneri" iş
    │       ACV1 şarj bloğu              Y1 enjeksiyon valf bloğu     Yardımcı dağıtım manifoldu
    │              │                     (pompa + ACC1 beslemeli)      │      │        │
    │              ▼                           │                      Y2     Y3       Y4  (öneri)
-   │   ACC1 (A56 ×2)                          ▼                       │      │        │
+   │   ACC1 (A56 ×4)                          ▼                       │      │        │
    │   her biri: kapama vanası,         A55 çarpan (3. faz)      A35 kapama  A41 itici  maça
    │   RV2 emniyet, DV1 deşarj→TK1,           │                  silindiri  2 silindir silindiri
    │   [PT2], azot ön dolum                   ▼                  (ileri/geri) (paralel,  (model
@@ -66,5 +66,6 @@ Notlar:
 
 ## Açık noktalar
 - Pilot makine (LK) ISO 1219 hidrolik şeması gelince bu taslak onunla karşılaştırılacak.
-- Pompa tipi/debisi ve akümülatör ön dolum basıncı (params'ta yok), enjeksiyon hızı gereksinimi hesaplanmadı.
+- KAPANDI (2026-11-19): pompa tipi/debisi (4520VQ, P1 191,2 L/dk) ve hızlı vuruş: hedef 3,0 m/s (ikiz_tasarim varsayimi, params/hidrolik.json hizli_vurus_tasarim) → Q = A54 × v = 2771 L/dk; hızlı strok 180 mm (P.FAZ2_SURE 60 ms); ACC1 deşarjı 3,03 L (faz 2 %5 kayıplı 2,91 + A55 faz 3 0,31 − P1 0,19); ön dolum 113,4 bar. Sonuç params/hidrolik.json hizli_vurus_sonuc, döküm out/hidrolik_2026-11-19_hizli_vurus.txt.
+- A64 ana hat Ø60 (iç çap VARSAYIM) faz 2'de 16 m/s: sabit kayıp 3,0 bar ama 15 ms rampada yağ sütunu ivme Δp ~21 bar. Öneri Ø80 (≈9 m/s); ölçü değişikliği, uygulanmadı.
 - Hortum/döner bağlantı payı: vuruş ekseni 3 konumlu (Z değişimi 150 mm) olduğundan A54/A55/A56 arası hatlar bunu karşılamalı.

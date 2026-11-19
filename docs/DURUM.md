@@ -15,6 +15,7 @@ _Son güncelleme: 2026-11-19. Her `/kapanis`'te yeniden yazılır (en fazla ~60 
 - Statik kontrol YEŞİL: 166 instance, 0 hata, 0 uyarı.
 
 ## Açık noktalar
+- KAPANDI (2026-11-19): Hızlı vuruş hızı/akümülatör. Faz 2 hedef 3,0 m/s (ikiz_tasarim) → 2771 L/dk (ACC1 2718 + P1 191); A56 ×4 V0 129 L yeterli (min 2 tüp), p0 113,4 bar, vuruş sonu 135,3 bar; şarj 0,95 s faz 3 içinde; şarj anı P1+P2 %102 SINIRDA, 60 s çevrim RMS %24 OK. A64 ana hat Ø60'ta 16 m/s, ivme Δp ~21 bar (öneri Ø80, uygulanmadı).
 - KAPANDI (2026-11-19): P1 debi/motor uyuşmazlığı. P1 191,2 L/dk, P2 23,1 L/dk (A120 55 kW, 1480 d/dk); 140 bar mil gücü 57,2 kW = %104 SINIRDA (yalnız P1+P2 eşzamanlı tam yükte). Sabit deplasman + U12 oransal valf ikiz_tasarim kararı.
 
 ## Sıradaki adım
