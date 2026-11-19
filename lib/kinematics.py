@@ -85,7 +85,8 @@ if __name__ == "__main__":
 I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar, sabit plaka, şase: hareket etmez
                           "A13", "A14", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72",
-                          "A98", "A99", "A100", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119", "A120")   # A98..A119: A62 pompa agaci, A120: M1 motor (sabit)
+                          "A98", "A99", "A100", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119", "A120",
+                          "A121", "A122", "A123")   # A98..A119: A62 pompa agaci, A120: M1 motor, A121..A123 emis/basinc borulari + tespit (2026-11-19 makine arkasi, sabit); A61 tank sase icinde (sabit)
 
 
 def _mat_ry(deg):

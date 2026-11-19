@@ -1,7 +1,7 @@
 {
  "meta": {
   "design_basis": "400 t horizontal cold-chamber HPDC machine, 5-point double toggle; Buhler H-400D as primary baseline (platens, tie bars, die height, ejector, injection force), Idra OLCS 400 / HPM II-400 for platen thicknesses, mass and motor. Simplified-but-realistic digital twin geometry.",
-  "notes": ["Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.", "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).", "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.", "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.", "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.", "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).", "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.", "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.", "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.", "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.", "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.", "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).", "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.", "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center (= 'alt'; adjustable 3-position shot axis, see global.shot_follow).", "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.", "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.", "Tank + motor-pump and electrical cabinet stand on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side.", "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.", "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.", "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.", "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.", "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.", "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance.", "EJECTOR 2026-11-18 (karar 2026-11-17): fixed platen has NO ejector holes. A22 pattern kept (centre d80 + 4 x d46 at (+-90,+-140)) = A42 4 corner rods (+ optional centre rod).", "A41 twin cylinders (formula): F_req = 215.5 kN (old single d140 @140 bar) -> 107.8 kN/cyl; d = sqrt(4F/(pi p)) = 99.0 -> bore 100 / rod 56 (ISO 3320). Push 110.0 kN/cyl, 219.9 kN total (22.4 t, H-400D 22 t); return (annulus) 75.5 kN/cyl, 150.9 kN total.", "A41 strength (formula): tube 100x115 Lame hoop 100.8 MPa (test 1.5x 151); rear cap 20 flat clamped 0.75pa^2/t^2 = 65.6 MPa; rod d56 44.6 MPa, Euler K=2 L=370 Pcr 1827 kN (SF 17); M42x2 rod thread on return 60 MPa; tie posts M30 (As 561) 98 MPa.", "A41 bridge 240x200x35 42CrMo4+QT: load 110 kN/cyl spread over d115 between posts Z+-70 (span 140): M = F/2(L/2-c/4) = 2.27 kNm; b_eff 57 (rod hole d58) -> W 11638 mm3 -> 195 MPa, Re>=650 -> SF 3.3. Length budget 425 = 205 (5 gap+145 stroke+50 plate+5) + 35 bridge + 165 chamber (145+20 piston) + 20 cap.", "A42 plate 50 thick 42CrMo4+QT: rod at (62.5,0) to knock-out rods (90,+-140): M = F/2(140-100/4) = 6.32 kNm, b 120 -> 126 MPa. Knock-out rods d36 L390: 55 kN each, 54 MPa, Euler K=2 Pcr 281 kN.", "Ejector Y envelope: barrels 5..120, A42 |Y|<=120 -> split knee pins (|Y|>=127.5) 7.5 mm, big links (|Y|>=130) 10 mm, A36/A31 tongue at |Z|>=140 above bridge |Z|<=100. Rear cap at s=1 X=1445 vs hub 1458 (13 mm) unchanged.", "Die ejector box (A82 rear part): clamping plate 40 + rails 120 (|Y| 200..270) + cavity plate 70; A83 (back 30 + retainer 25, 370x520) at X 305..360; 24 x A84 d10 (6x4 grid Y+-25/75/125, Z -17.5..177.5) tip at X=185 (cavity floor); 4 x A85 d25 at (+-160,+-230) tip at parting X=170. Die ejection stroke 65 -> machine ejector stroke setting 65 for this die (machine max 145). A42 rods lengthened 345 -> 390 to touch A83.", "A21 FIXED to frame (formula, rev 2026-11-18: 3 long columns A13 + rear stand A14): clamp 4000 kN is an internal loop (die force = sum of 4 tie-bar forces) -> net 0 on supports. Supports carry weight ~24 kN (A21 15.3 + A81 4.2 + half tie bars 4.6) and accidental horizontal H = 0.1*F_clamp = 400 kN (ASSUMPTION, not a standard) at Z=0.", "A13 x3 long columns (2026-11-18, user photo ZLC300 type): lower 2 x d100 at (Y,Z)=(+-220,-150), upper 1 x d120 at (0,370); flange-to-flange 2430 (X -220..-2650); front flange OD200/220 x40 bolted 6xM24 to A21 rear face, rear flange welded to A14 stand (frame rear end X -2700..-2650, gussets to X -2000). Lower pair replaces A58 (removed).", "A13 loads (formula; H = c*F_clamp ASSUMPTION, not user-approved): two lever levels z=-150/+370, H at zH -320..+320. c=0.1: lower |N|<=265 kN (34 MPa, Euler K=1 SF 6.5), upper 362 kN (32 MPa, SF 9.9). c=0.2: lower 531 kN (68 MPa, SF 3.2, EC3 curve a utilisation 0.39), upper 723 kN (64 MPa, SF 4.9). Flange bolts 6xM24 10.9 <=121 kN < preload 232. A14 (2026-11-19 tek govde + 2 kaburga t60): see parts.A14.dims.design.", "A13 limits: long columns carry NO lateral (Y) load (216 N/mm) -> A21 needs a transverse key to A12/A11 (open). Injection reaction 430 kN now runs A57-A11-A14-A13 each shot (215 kN/lower column, 27 MPa). Thermal dT 20 K -> 0.58 mm over 2430 mm (open risk: shim/slotted front flange). Shot line clearances in out/olcu_2026-11-18_A13_bosluk.txt.", "SHOT POSITIONS 2026-11-18 (formula + full-assembly BRepExtrema scan): global.shot_position alt|orta|ust -> Z -150/-75/0 (default alt). A51/A52/A54/A55 pos Z = z_sel; A21 shot hole + A81 sleeve bore follow; A57 saddle top local 230/305/380 (0/1/2 x 75 mm spacers). All three: 0 collisions; min gaps A55-A57 10 (vertical, constant), A54-A13 lower 20 (Y, constant), A57 saddle-A13 lower 115.5/52.6/20, A51-A13 lower flange 25/37/71, A55-A14 rib 40 (X), A54-A13_3 upper -/-/160, A55-A13_3 -/-/153, A51-A13_3 -/-/165.", "SHOT POSITION LIMITS: 3 separate d140 holes impossible (step 75 < 140; range -150..+70 max) -> physical A21 vertical window 140x290 (Z -220..+70) with 2 bolted 75 mm filler blocks; model draws only the selected hole. Upper limit Z<=+70 from A55 vs A14 upper rib (Z 220, 10 mm), Z<=+150 from A54 vs A13_3. Ladle free height above pour hole under A13_3 rod: 390/315/240 mm (under front flange 340/265/190). 'ust' = machine centre (Z=0).", "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust."],
+  "notes": ["Units mm/deg. Global CS per bom.json: origin = center of fixed platen die face, +X toward moving/rear platen, +Y operator side, +Z up, floor Z=-1150.", "Instance transform: p_global = Rz(rz)*Ry(ry)*Rx(rx)*p_local + pos (right-handed; Ry(t): x'=x cos t + z sin t, z'=-x sin t + z cos t). Only A32 uses a non-zero rotation ([0,180,0]).", "Each instance carries 'bbox' = global AABB [xmin,ymin,zmin,xmax,ymax,zmax] of the part as dimensioned (mandatory features only) for self-checking.", "Baseline Buhler H-400D: 4000 kN, platens 920x980, clear space between bars 580x640 -> centers 700x760 with d120 bars, die height 200-750, ejector 145 mm / 22 t, injection 43 t.", "Tie bar check: 4000 kN/4 = 1000 kN per bar; M120x6 minor d = 120-1.22687*6 = 112.64 mm, root area 9965 mm2 -> 100.4 MPa (shank 88.4 MPa) < 150 MPa OK.", "X stack (die closed, die height 400): A21 -220..0 | A81 0..170 | A82 170..400 | A22 400..600 | toggle 600..1625 | A23 1625..1805 | A26 to 1925 | tie bar -350..2305 (rear length covers die height 750).", "Toggle (locked, links collinear and parallel to X at Z=+-400): C.x = 600+aC(140) = 740; B.x = C.x+L2(320) = 1060; A.x = B.x+L1(335) = 1395; A23 front = A.x+aA(230) = 1625. Closure: 140+320+335+230 = 1025 = 1625-600.", "Crosshead (locked): E on big link 150 from A -> E=(1245, +-400); D at Z=+-200; arm DE=205 -> dx = sqrt(205^2-200^2) = 45.0 -> D.x = 1290.0; arm at 77.3 deg to the machine axis.", "Toggle open check (stroke 420): sqrt(335^2-h^2)+sqrt(320^2-h^2) = 655-420 -> knee drop h=305.1, knee Z=+-94.9, big link 65.6 deg, front link 72.4 deg; E=(1333.0,263.4), D.x=1528.0; crosshead travel 238.0 (cylinder stroke 260); crosshead rear face 1598.0 < A23 front 1625. Crosshead travel is monotonic over the stroke.", "DEVIATION: opening stroke is 420 mm, not the H-400D 600 mm. With inward-folding knees and pivots inside the 980 mm platen outline (Z=+-400) the knee reaches the machine axis at ~430 mm; 600 mm would need pivots at about Z=+-510.", "Pin d90 shear at 2000 kN per toggle half: joint C has 2 shear planes -> 157 MPa; joints A/B effectively 4 planes -> 79 MPa. Link section 70x180: 79 MPa.", "Injection: 430 kN on plunger d70/80/90 -> 111.7/85.5/67.6 MPa casting pressure; default d80. Cylinder bore 140 at 140 bar = 216 kN; intensifier 200/140 (ratio 2.04) -> 440 kN (~43-45 t).", "DEVIATION: plunger stroke 500 mm (H-400D: 400). Retracted tip face X=-360 (10 mm behind pour hole X -350..-250), end of shot X=+140 = 30 mm biscuit before the parting line of the 170 mm fixed die half. 400 mm cannot span a 220 mm platen plus pour hole plus die half.", "Shot sleeve A51 ends flush with the fixed platen die face (X=0); the d80 bore continues through fixed die A81. Shot position 150 mm below center (= 'alt'; adjustable 3-position shot axis, see global.shot_follow).", "Rails A12 run under all three platens from X=-220 to the rear platen back face at die height 750. Platen bottoms Z=-490, frame top Z=-530.", "Rear tie-bar thread covers nut travel for die height 200..750; rear platen/nuts move with die height, fixed platen end is fixed.", "Electrical cabinet stands on the floor on the non-operator (-Y) side; guard door on +Y side rides on a track bolted to the frame side. 2026-11-19: tank A61 INSIDE frame A11 (bay X -1990..-450, access opening +Y side wall); motor-pump group A62 (+A120, A98..A119) on the floor at the machine rear end behind the accumulator stand A59 (X -3970..-3330, shaft along Y at Z=-820); suction A121 / pressure stubs A122 / supports A123.", "Features flagged optional are cosmetic; if drawn they must not exceed the instance bbox.", "Crosshead links: A36 x4 (2 per half, |Y| 25..55) connect E (on big link, 150 from A) to D (crosshead tongue, |Y|<=20). Locked: link E->D = (45,-200), 77.32 deg to the machine axis, D behind (+X of) E. Clamp rod+piston = A37, translates with crosshead A31; A35 is the hollow body only.", "Toggle Y layers (each side of center): A31 tongue 0..20; A36 links 25..55; A23 inner lugs 60..125; big links A32 130..200; front links A33 205..275 and A23 outer lugs 205..275; split knee pins B 127.5..277.5; A22 lug -200..200; tie bar surface at |Y|=290. Side gaps 5 mm.", "MOTION (kinematics.pose, s=0 locked .. s=1 open, stroke 420 kept): ejector A41/A42 rides on the moving platen inside |Y|<=120, |Z|<=170, total length 425. At s=1 the knees fold to Z=+-94.9 at X=1256.6 beside it (links/pins at |Y|>=127.5); rear cap X=1445 vs crosshead hub front 1458 (13 mm). Gap platen-back to hub-front = 620+dx_crosshead-dx_platen, minimum 438 at s=1.", "Ejector rod pattern changed to (+-90,+-140) (was +-140,+-140) to fit the 240 mm wide ejector plate; ejector stroke 145 and force unchanged.", "E pins shortened 420 -> 400 (flush with big-link outer faces, |Y|<=200): at s=1 the 420 pin overlapped the front links (|Y|>=205) by 2.3 cm3, hidden by the A33-A34 allowed-contact tolerance.", "EJECTOR 2026-11-18 (karar 2026-11-17): fixed platen has NO ejector holes. A22 pattern kept (centre d80 + 4 x d46 at (+-90,+-140)) = A42 4 corner rods (+ optional centre rod).", "A41 twin cylinders (formula): F_req = 215.5 kN (old single d140 @140 bar) -> 107.8 kN/cyl; d = sqrt(4F/(pi p)) = 99.0 -> bore 100 / rod 56 (ISO 3320). Push 110.0 kN/cyl, 219.9 kN total (22.4 t, H-400D 22 t); return (annulus) 75.5 kN/cyl, 150.9 kN total.", "A41 strength (formula): tube 100x115 Lame hoop 100.8 MPa (test 1.5x 151); rear cap 20 flat clamped 0.75pa^2/t^2 = 65.6 MPa; rod d56 44.6 MPa, Euler K=2 L=370 Pcr 1827 kN (SF 17); M42x2 rod thread on return 60 MPa; tie posts M30 (As 561) 98 MPa.", "A41 bridge 240x200x35 42CrMo4+QT: load 110 kN/cyl spread over d115 between posts Z+-70 (span 140): M = F/2(L/2-c/4) = 2.27 kNm; b_eff 57 (rod hole d58) -> W 11638 mm3 -> 195 MPa, Re>=650 -> SF 3.3. Length budget 425 = 205 (5 gap+145 stroke+50 plate+5) + 35 bridge + 165 chamber (145+20 piston) + 20 cap.", "A42 plate 50 thick 42CrMo4+QT: rod at (62.5,0) to knock-out rods (90,+-140): M = F/2(140-100/4) = 6.32 kNm, b 120 -> 126 MPa. Knock-out rods d36 L390: 55 kN each, 54 MPa, Euler K=2 Pcr 281 kN.", "Ejector Y envelope: barrels 5..120, A42 |Y|<=120 -> split knee pins (|Y|>=127.5) 7.5 mm, big links (|Y|>=130) 10 mm, A36/A31 tongue at |Z|>=140 above bridge |Z|<=100. Rear cap at s=1 X=1445 vs hub 1458 (13 mm) unchanged.", "Die ejector box (A82 rear part): clamping plate 40 + rails 120 (|Y| 200..270) + cavity plate 70; A83 (back 30 + retainer 25, 370x520) at X 305..360; 24 x A84 d10 (6x4 grid Y+-25/75/125, Z -17.5..177.5) tip at X=185 (cavity floor); 4 x A85 d25 at (+-160,+-230) tip at parting X=170. Die ejection stroke 65 -> machine ejector stroke setting 65 for this die (machine max 145). A42 rods lengthened 345 -> 390 to touch A83.", "A21 FIXED to frame (formula, rev 2026-11-18: 3 long columns A13 + rear stand A14): clamp 4000 kN is an internal loop (die force = sum of 4 tie-bar forces) -> net 0 on supports. Supports carry weight ~24 kN (A21 15.3 + A81 4.2 + half tie bars 4.6) and accidental horizontal H = 0.1*F_clamp = 400 kN (ASSUMPTION, not a standard) at Z=0.", "A13 x3 long columns (2026-11-18, user photo ZLC300 type): lower 2 x d100 at (Y,Z)=(+-220,-150), upper 1 x d120 at (0,370); flange-to-flange 2430 (X -220..-2650); front flange OD200/220 x40 bolted 6xM24 to A21 rear face, rear flange welded to A14 stand (frame rear end X -2700..-2650, gussets to X -2000). Lower pair replaces A58 (removed).", "A13 loads (formula; H = c*F_clamp ASSUMPTION, not user-approved): two lever levels z=-150/+370, H at zH -320..+320. c=0.1: lower |N|<=265 kN (34 MPa, Euler K=1 SF 6.5), upper 362 kN (32 MPa, SF 9.9). c=0.2: lower 531 kN (68 MPa, SF 3.2, EC3 curve a utilisation 0.39), upper 723 kN (64 MPa, SF 4.9). Flange bolts 6xM24 10.9 <=121 kN < preload 232. A14 (2026-11-19 tek govde + 2 kaburga t60): see parts.A14.dims.design.", "A13 limits: long columns carry NO lateral (Y) load (216 N/mm) -> A21 needs a transverse key to A12/A11 (open). Injection reaction 430 kN now runs A57-A11-A14-A13 each shot (215 kN/lower column, 27 MPa). Thermal dT 20 K -> 0.58 mm over 2430 mm (open risk: shim/slotted front flange). Shot line clearances in out/olcu_2026-11-18_A13_bosluk.txt.", "SHOT POSITIONS 2026-11-18 (formula + full-assembly BRepExtrema scan): global.shot_position alt|orta|ust -> Z -150/-75/0 (default alt). A51/A52/A54/A55 pos Z = z_sel; A21 shot hole + A81 sleeve bore follow; A57 saddle top local 230/305/380 (0/1/2 x 75 mm spacers). All three: 0 collisions; min gaps A55-A57 10 (vertical, constant), A54-A13 lower 20 (Y, constant), A57 saddle-A13 lower 115.5/52.6/20, A51-A13 lower flange 25/37/71, A55-A14 rib 40 (X), A54-A13_3 upper -/-/160, A55-A13_3 -/-/153, A51-A13_3 -/-/165.", "SHOT POSITION LIMITS: 3 separate d140 holes impossible (step 75 < 140; range -150..+70 max) -> physical A21 vertical window 140x290 (Z -220..+70) with 2 bolted 75 mm filler blocks; model draws only the selected hole. Upper limit Z<=+70 from A55 vs A14 upper rib (Z 220, 10 mm), Z<=+150 from A54 vs A13_3. Ladle free height above pour hole under A13_3 rod: 390/315/240 mm (under front flange 340/265/190). 'ust' = machine centre (Z=0).", "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust."],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
   "rotation_convention": "R = Rz*Ry*Rx, then translate by pos"
@@ -105,7 +105,8 @@
   "ejector_force_kN": 220,
   "clamp_cylinder_stroke": 260.0,
   "pump_motor_kW": 55,
-  "overall_length": 5100.0,
+  "overall_length": 6520.0,
+  "overall_length_note": "2026-11-19: makine zarfi X -3970 (A62 plaka arka kenari) .. 2550 (A97 enkoder) = 6520 (eski 5100 = yalniz sase boyu; sase A11 hala 5100). Motor-pompa makine arkasina tasindi; ikiz_tasarim varsayimi",
   "overall_width_incl_accessories": 1830,
   "est_mass_t": 18,
   "ejector_overall_length": 425.0,
@@ -149,7 +150,13 @@
     "side_wall_thk": 25,
     "end_plate_thk": 25,
     "construction": "hollow welded shell, open bottom, interior empty",
-    "cross_ribs_x": [-2000, -1300, -600, -235, 700, 1400, 2000],
+    "cross_ribs_x": [-2000, -440, -235, 700, 1400, 2000],
+    "cross_ribs_note": "2026-11-19: tank (A61) sase icine alindi -> eski kaburga X=-1300 kaldirildi, X=-600 -> -440 tasindi (tank bolmesi ic X -1990..-450). ikiz_tasarim varsayimi: A57 altindaki yuku ust plaka 40 + yan duvarlar tasir; mukavemet sagmasi OLCU_TALEBI (olcu-mimari)",
+    "tank_access_opening": {"side": "+Y", "x_range": [-1850, -1100], "local_z_range": [140, 470], "note": "2026-11-19 +Y (operator) yan duvarda tank erisim acikligi (-Y onunde A72 pano) (gozlem cami, yan kapak, dolum, donus filtresi); civatali sac kapak + cevre takviye cercevesi cizilmez (ikiz_tasarim varsayimi)"},
+    "pipe_passages": [
+     {"name": "emis_uc_plaka", "x_range": [-2705, -2670], "y": 325, "local_z": 525, "d": 95, "note": "A121 emis hatti ust kosu, arka uc plakasi (X=-2700)"},
+     {"name": "emis_kaburga_2000", "x_range": [-2015, -1985], "y": 325, "local_z": 390, "d": 95, "note": "A121 emis hatti alt kosu, kaburga X=-2000"}
+    ],
     "cross_rib_thk": 20,
     "top_opening_biscuit_drop": {
      "x_min": 20,
@@ -172,7 +179,7 @@
      "name": "A11_1",
      "pos": [0, 0, -1150.0],
      "rot": [0, 0, 0],
-     "bbox": [-2700.0, -500, -1150.0, 2400.0, 500, -530.0]
+     "bbox": [-2700.0, -500.0, -1150.0, 2400.0, 500.0, -530.0]
     }
    ]
   },
@@ -1245,30 +1252,82 @@
   "A61": {
    "name": "Hidrolik tank",
    "dims": {
-    "len_x": 1600,
-    "width_y": 700,
-    "height": 700,
+    "len_x": 1530,
+    "width_y": 940,
+    "height": 545,
     "wall_thk": 6,
-    "volume_l": 784.0,
-    "filler_cap": {
-     "d": 100,
-     "height": 40,
-     "local_xy": [-650, 0],
-     "optional": true
-    },
-    "level_gauge": {
-     "optional": true
-    },
-    "model": "may be drawn as solid box"
+    "volume_l": 783.8,
+    "volume_calc": "1530 x 940 x 545 mm = 0.7838 m3 = 783.8 L (dis olcu, hedef ~784 L korundu)",
+    "side_face_y": 470,
+    "sight_glass": {"local_x_range": [-600, -560], "local_z_range": [180, 440], "protrude": 15, "note": "gozlem cami / seviye gostergesi (seviye switch'i elektrik.json, A61)"},
+    "side_cover": {"local_x_range": [-520, -60], "local_z_range": [170, 450], "thk": 8, "note": "civatali yan temizlik/muayene kapagi"},
+    "filler_breather": {"d": 90, "local_xz": [-400, 390], "length": 25, "note": "dolum agzi + hava filtresi, yan kapak uzerinde"},
+    "return_filter_cap": {"d": 140, "local_xz": [-170, 330], "length": 20, "note": "donus filtresi kapagi, yan kapak uzerinde"},
+    "suction_port_local": [-765, 325, 390],
+    "placement_note": "2026-11-19: tank sase (A11) ICINDE, enine kaburga X=-2000 ile X=-440 arasindaki bolmede, zemine oturur; 5 mm yan/uc boslugu, ust bosluk 35 (A11 ust plaka alti Z=-570). Erisim: +Y (operator) yan duvardaki A11.dims.tank_access_opening icinden (-Y tarafinda A72 pano duvara 150 mm, erisim yok) gozlem cami, yan kapak, dolum/hava filtresi, donus filtresi. Emis A121 uc duvardan (X=-1985, Y=325, Z=-760).",
+    "varsayim": "ikiz_tasarim varsayimi: sase ici tank 1530x940x545; ic bolme/perde, seviye switch ve sicaklik sensoru cizilmez; tank ici emis borusu dibe iner (cizilmez)",
+    "model": "solid box + -Y yuzunde erisim elemanlari"
    },
-   "local_origin": "Center of the bottom face (on floor). Local axes parallel to global; z 0..700.",
+   "local_origin": "Center of the bottom face (on floor). Local axes parallel to global; z 0..545. Erisim (+Y) yuzu y=+470.",
    "instances": [
     {
      "name": "A61_1",
-     "pos": [1100, -900, -1150.0],
+     "pos": [-1220.0, 0, -1150.0],
      "rot": [0, 0, 0],
-     "bbox": [300, -1250, -1150.0, 1900, -550, -450.0]
+     "bbox": [-1985.0, -470.0, -1150.0, -455.0, 495.0, -605.0]
     }
+   ]
+  },
+  "A121": {
+   "name": "Emis hatti (pompa giris govdesi A99 -> tank A61, sert boru)",
+   "dims": {
+    "od": 89,
+    "id": 80,
+    "path": [[0, 0, 0], [0, 0, 55], [1300, 0, 55], [1300, 0, -80], [1665, 0, -80]],
+    "start_flange": {"size": [110, 100], "thk": 15, "note": "A99 4-civatali emis flansi (d64, 2.5 in) ustune adaptor flans 2.5 -> 3 in"},
+    "hidrolik": "P1+P2 ortak emis: (191.2 + 23.1) L/dk / ic d80 -> 0.71 m/s (emis onerisi 0.5-1.2 m/s)",
+    "route": "A99 flans ustu (Z=-680) yukari Z=-625 -> +X ust kosu (A59 sepeti altindan, A11 arka uc plakasi deliginden X=-2700) -> sase ici X=-2350'de asagi Z=-760 -> +X kaburga X=-2000 deliginden tank uc duvarina (X=-1985)",
+    "varsayim": "ikiz_tasarim varsayimi: dis 89 / ic 80 (et 4.5) dikissiz boru, pompa girisi tank ustu seviyesinden ~75 mm yukarida (kanatli pompa emisi icin kabul), tank ici emis borusu + suzgec cizilmez"
+   },
+   "local_origin": "A99 emis flansi ust yuzu merkezi (global [-3650, 325, -680]); eksenler global ile paralel.",
+   "instances": [
+    {"name": "A121_1", "pos": [-3650.0, 325.0, -680.0], "rot": [0, 0, 0], "bbox": [-3705.0, 275.0, -804.5, -1985.0, 375.0, -580.5]}
+   ]
+  },
+  "A122": {
+   "name": "Basinc hatti stub'i (P1 A98 cikisi / P2 A100 cikisi, sert boru)",
+   "dims": {
+    "od": 48,
+    "id": 38,
+    "path": [[0, 0, 0], [300, 0, 0], [300, 0, 420]],
+    "start_flange": {"size": [70, 80], "thk": 12},
+    "end_flange": {"d": 90, "thk": 15},
+    "hidrolik": "P1 191.2 L/dk / ic d38 -> 2.81 m/s (basinc hatti onerisi 3-6 m/s altinda, kayip dusuk); 140 bar Barlow p*D/2t = 67 MPa. P2 (A122_2) 23.1 L/dk / ic d19 -> 1.36 m/s, 58 MPa",
+    "note": "A122_1 = P1 (varsayilan dims), A122_2 = P2 (instance ezmesi). Uclar kor flans: A59 valf blogu / U12 baglantisi cizilmez (stub).",
+    "varsayim": "ikiz_tasarim varsayimi: P1 dis 48 / ic 38, P2 dis 25 / ic 19; guzergah makul stub, gercek hat cizilmez"
+   },
+   "local_origin": "Pompa cikis agzi yuzu merkezi (path[0]); eksenler global ile paralel.",
+   "instances": [
+    {"name": "A122_1", "pos": [-3520.0, 205.0, -820.0], "rot": [0, 0, 0], "bbox": [-3520.0, 160.0, -860.0, -3175.0, 250.0, -400.0]},
+    {"name": "A122_2", "pos": [-3650.0, 425.0, -730.0], "rot": [0, 0, 0], "od": 25, "id": 19, "path": [[0, 0, 0], [0, 0, 170], [400, 0, 170]], "start_flange": {"size": [50, 40], "thk": 10}, "end_flange": {"d": 60, "thk": 12}, "bbox": [-3675.0, 395.0, -730.0, -3250.0, 455.0, -530.0]}
+   ]
+  },
+  "A123": {
+   "name": "Boru tespit konsolu (zemin taban saci + dikme + kelepce)",
+   "dims": {
+    "pipe_od": 48,
+    "clamp": {"t": 8, "h": 40, "axis": "z"},
+    "clamp_z": 550,
+    "post": {"size_xy": [60, 12]},
+    "post_offset": [0, -37],
+    "foot": {"size_xy": [100, 100], "thk": 10},
+    "note": "A123_1 = P1 dusey hat kelepcesi (varsayilan), A123_2 = P2 yatay hat altindan (instance ezmesi)",
+    "varsayim": "ikiz_tasarim varsayimi: lama dikme + yarim kelepce temsili, zemine 2 dubel (cizilmez)"
+   },
+   "local_origin": "Zemin (Z=-1150), boru ekseninin dusey izdusumu; eksenler global ile paralel.",
+   "instances": [
+    {"name": "A123_1", "pos": [-3220.0, 205.0, -1150.0], "rot": [0, 0, 0], "bbox": [-3270.0, 118.0, -1150.0, -3170.0, 237.0, -580.0]},
+    {"name": "A123_2", "pos": [-3285.0, 425.0, -1150.0], "rot": [0, 0, 0], "pipe_od": 25, "clamp": {"t": 6, "h": 30, "axis": "x"}, "clamp_z": 590, "post": {"size_xy": [12, 30]}, "post_offset": [0, 0], "foot": {"size_xy": [80, 80], "thk": 10}, "bbox": [-3325.0, 385.0, -1150.0, -3245.0, 465.0, -541.5]}
    ]
   },
   "A62": {
@@ -1301,9 +1360,9 @@
     },
     "pump_mount": {
      "face_local_x": 290,
-     "pump_origin_global": [1390.0, -900.0, -120.0],
+     "pump_origin_global": [-3650.0, 90.0, -820.0],
      "pump": "Vickers/Eaton 4520VQ tandem kanatli pompa; ayri parcalar A98..A119 (bom: A62 children)",
-     "note": "eski duz silindir pompa (d220, x 290..570) kaldirildi 2026-11-19; 2026-11-19 55 kW motorla mil ekseni z -200 -> -120 (A98..A119 tum instance z +80)"
+     "note": "eski duz silindir pompa (d220, x 290..570) kaldirildi 2026-11-19; 2026-11-19 55 kW motorla mil ekseni z -200 -> -120 (A98..A119 tum instance z +80); 2026-11-19 grup makine arkasina tasindi (A62 rz 90): mil ekseni global Y boyunca, z -820, X -3650 (pompa origin global [-3650, 90, -820]); A98..A120 pos = A62_1.pos + Rz(90)*lokal, rot rz +90"
     },
     "motor_feet": {
      "pad_size_xyz": [560, 130, 20],
@@ -1313,13 +1372,13 @@
      "varsayim": "ikiz_tasarim varsayimi: altlik merkezi x = motor on yuzu 70 + A120 ayak merkezi -399.5; y = +-A/2 (IEC 280 A=457)"
     }
    },
-   "local_origin": "Base plate bottom face (on tank top), x=0 at old plate center (plate spans local x -880..650, see base_plate.center_local_x). Shaft axis along local X at z=330; motor A120 front face at local x=70, pump mounting face at local x=290 (pump parts A98..A119 placed separately).",
+   "local_origin": "Base plate bottom face (ON FLOOR since 2026-11-19, makine arkasi; eskiden tank ustu), x=0 at old plate center (plate spans local x -880..650, see base_plate.center_local_x). Shaft axis along local X at z=330; motor A120 front face at local x=70, pump mounting face at local x=290 (pump parts A98..A119 placed separately).",
    "instances": [
     {
      "name": "A62_1",
-     "pos": [1100, -900, -450.0],
-     "rot": [0, 0, 0],
-     "bbox": [220, -1220, -450.0, 1750, -580, 30.0]
+     "pos": [-3650.0, -200.0, -1150.0],
+     "rot": [0, 0, 90],
+     "bbox": [-3970.0, -1080.0, -1150.0, -3330.0, 450.0, -670.0]
     }
    ]
   },
@@ -1343,9 +1402,9 @@
    "instances": [
     {
      "name": "A120_1",
-     "pos": [1170, -900, -120.0],
-     "rot": [0, 0, 0],
-     "bbox": [230, -1183.5, -400.0, 1310, -616.5, 280.0]
+     "pos": [-3650.0, -130.0, -820.0],
+     "rot": [0, 0, 90],
+     "bbox": [-3933.5, -1070.0, -1100.0, -3366.5, 10.0, -420.0]
     }
    ]
   },
@@ -1354,7 +1413,7 @@
    "dims": {"model": "Vickers/Eaton 4520VQ42A5-**20 (on kisim 45VQ42, arka kisim 20VQ5)", "pilot": {"d": 127, "local_x_range": [-6, 0]}, "flange": {"size_yz": [300, 150], "local_x_range": [0, 18], "bolt_holes": {"d": 17.5, "centers_yz": [[130, 0], [-130, 0]]}}, "body": {"size_yz": [215, 230], "local_x_range": [18, 175]}, "cartridge_bore": {"d": 150, "local_x_range": [60, 175]}, "shaft_bore": {"d": 44, "local_x_range": [-6, 60]}, "outlet_port": {"boss_local_x_range": [80, 150], "boss_y_min": -130, "boss_size_z": 80, "d": 38, "hidrolik": "P1 basinc cikisi"}, "tie_bolt_holes": {"d": 16, "depth": 30, "centers_yz": [[85, 90], [85, -90], [-85, 90], [-85, -90]]}, "varsayim": "ikiz_tasarim varsayimi: 4520VQ katalog dis olculerinden tahmin (govde 215x230, pilot d127 SAE C); flans 300x150, 2 delik +-130 kampana d300'e uyum icin (SAE C 181 aralik yerine)"},
    "local_origin": "Montaj flansi on yuzu merkezi (kampana A62 bitis yuzu, A62 lokal x=290), mil ekseni uzerinde; mil ekseni +X.",
    "instances": [
-    {"name": "A98_1", "pos": [1390.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1384.0, -1050.0, -235.0, 1565.0, -750.0, -5.0]}
+    {"name": "A98_1", "pos": [-3650.0, 90.0, -820.0], "rot": [0, 0, 90], "bbox": [-3800.0, 84.0, -935.0, -3500.0, 265.0, -705.0]}
    ]
   },
   "A99": {
@@ -1362,7 +1421,7 @@
    "dims": {"body": {"size_yz": [215, 230], "local_x_range": [0, 120]}, "front_recess": {"d": 150, "local_x_range": [0, 14]}, "rear_recess": {"d": 105, "local_x_range": [106, 120]}, "suction_chamber": {"d": 120, "local_x_range": [20, 100]}, "shaft_bore": {"d": 40}, "inlet_flange": {"local_x_range": [10, 110], "width_y": 110, "local_z_range": [115, 140], "port_d": 64, "bolt_holes": {"d": 12, "depth": 20, "centers_xy": [[25, 40], [25, -40], [95, 40], [95, -40]]}, "hidrolik": "P1+P2 ortak emis (tank A61)"}, "tie_bolt_holes": {"d": 17, "centers_yz": [[85, 90], [85, -90], [-85, 90], [-85, -90]]}, "cover_bolt_holes": {"d": 12, "depth": 20, "centers_yz": [[55, 55], [55, -55], [-55, 55], [-55, -55]]}, "esdeger": "45VQ tek pompada 229633 cover (inlet) bu govdenin karsiligidir", "varsayim": "ikiz_tasarim varsayimi: emis flansi 2.5 in (d64), govde boyu 120"},
    "local_origin": "On yuz (A98 arka yuzu ile temas) merkezi, mil ekseni uzerinde; mil ekseni +X.",
    "instances": [
-    {"name": "A99_1", "pos": [1565.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1565.0, -1007.5, -235.0, 1685.0, -792.5, 20.0]}
+    {"name": "A99_1", "pos": [-3650.0, 265.0, -820.0], "rot": [0, 0, 90], "bbox": [-3757.5, 265.0, -935.0, -3542.5, 385.0, -680.0]}
    ]
   },
   "A100": {
@@ -1370,7 +1429,7 @@
    "dims": {"cover_type": "4-BOLT 250824 (4520VQ**A**); alternatif straight thread 252504 / flow control 2575xx", "body": {"size_yz": [150, 150], "local_x_range": [0, 110]}, "cartridge_bore": {"d": 105, "local_x_range": [0, 78]}, "outlet_port": {"boss_local_x_range": [20, 60], "boss_width_y": 50, "boss_local_z_range": [75, 90], "d": 22, "hidrolik": "P2 cikisi"}, "valve_bore": {"d": 20, "center_xz": [94, 35], "axis": "Y", "relief_setting_psi": 2000, "relief_setting_bar": 138}, "bolt_holes": {"d": 13, "centers_yz": [[55, 55], [55, -55], [-55, 55], [-55, -55]]}, "varsayim": "ikiz_tasarim varsayimi: kapak 150x150x110; valf yuvasi d20 Y ekseninde; emniyet ayari 2000 psi (232799, 'H') ~ P2 140 bar"},
    "local_origin": "On yuz (A99 arka yuzu ile temas) merkezi, mil ekseni uzerinde; mil ekseni +X.",
    "instances": [
-    {"name": "A100_1", "pos": [1685.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1685.0, -975.0, -195.0, 1795.0, -825.0, -30.0]}
+    {"name": "A100_1", "pos": [-3650.0, 385.0, -820.0], "rot": [0, 0, 90], "bbox": [-3725.0, 385.0, -895.0, -3575.0, 495.0, -730.0]}
    ]
   },
   "A101": {
@@ -1378,7 +1437,7 @@
    "dims": {"segments": [{"d": 44, "local_x_range": [0, 130]}, {"d": 38, "local_x_range": [130, 310]}, {"d": 30, "local_x_range": [310, 428]}], "keyway": {"width": 11, "depth": 5, "local_x_range": [8, 68]}, "splines": [{"d": 38, "local_x_range": [170, 224], "teeth": 8, "groove_w": 4, "groove_depth": 2}, {"d": 30, "local_x_range": [378, 412], "teeth": 6, "groove_w": 3, "groove_depth": 1.5}], "varsayim": "ikiz_tasarim varsayimi: on uc d44 (1.75 in) kamali, 70 mm kampana icine uzanir (kaplin modellenmedi); spline yuzeysel kanal ile basitlestirildi"},
    "local_origin": "Mil on ucu (motor tarafi) merkezi; eksen +X. Mil ucu pompa montaj yuzunden 70 mm onde (A62 lokal x=220).",
    "instances": [
-    {"name": "A101_1", "pos": [1320.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1320.0, -922.0, -142.0, 1748.0, -878.0, -98.0]}
+    {"name": "A101_1", "pos": [-3650.0, 20.0, -820.0], "rot": [0, 0, 90], "bbox": [-3672.0, 20.0, -842.0, -3628.0, 448.0, -798.0]}
    ]
   },
   "A102": {
@@ -1386,7 +1445,7 @@
    "dims": {"od": 150, "width": 48, "cam": {"r_major": 56, "r_minor": 52.5, "n_pts": 72}, "pin_holes": {"d": 8, "centers_yz": [[0, 69], [0, -69]]}, "varsayim": "ikiz_tasarim varsayimi: cift loblu kam r(t)=ortalama+genlik*cos2t"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
    "instances": [
-    {"name": "A102_1", "pos": [1493.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1493.0, -975.0, -195.0, 1541.0, -825.0, -45.0]}
+    {"name": "A102_1", "pos": [-3650.0, 193.0, -820.0], "rot": [0, 0, 90], "bbox": [-3725.0, 193.0, -895.0, -3575.0, 241.0, -745.0]}
    ]
   },
   "A103": {
@@ -1394,7 +1453,7 @@
    "dims": {"od": 102, "bore": 38, "width": 48, "slots": {"n": 10, "width": 4, "bottom_r": 31, "phase_deg": 18}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
    "instances": [
-    {"name": "A103_1", "pos": [1493.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1493.0, -951.0, -171.0, 1541.0, -849.0, -69.0]}
+    {"name": "A103_1", "pos": [-3650.0, 193.0, -820.0], "rot": [0, 0, 90], "bbox": [-3701.0, 193.0, -871.0, -3599.0, 241.0, -769.0]}
    ]
   },
   "A104": {
@@ -1402,16 +1461,16 @@
    "dims": {"width": 48, "height": 20, "thk": 4, "tip_r": 55.7, "varsayim": "ikiz_tasarim varsayimi: tip_r instance bazli = kam(aci) - 0.3 (kanat ucu halkaya yaslanir)"},
    "local_origin": "Rotor on yuzu merkezi (eksen uzerinde); kanat +Y radyal, x 0..width; instance rot [aci,0,0] = rotor yuva acisi.",
    "instances": [
-    {"name": "A104_1", "pos": [1493.0, -900.0, -120.0], "rot": [18, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -867.0, -111.0, 1541.0, -846.7, -101.0]},
-    {"name": "A104_2", "pos": [1493.0, -900.0, -120.0], "rot": [54, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -882.0, -94.1, 1541.0, -867.0, -75.6]},
-    {"name": "A104_3", "pos": [1493.0, -900.0, -120.0], "rot": [90, 0, 0], "tip_r": 52.2, "bbox": [1493.0, -902.0, -87.8, 1541.0, -898.0, -67.8]},
-    {"name": "A104_4", "pos": [1493.0, -900.0, -120.0], "rot": [126, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -933.0, -94.1, 1541.0, -918.0, -75.6]},
-    {"name": "A104_5", "pos": [1493.0, -900.0, -120.0], "rot": [162, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -953.3, -111.0, 1541.0, -933.0, -101.0]},
-    {"name": "A104_6", "pos": [1493.0, -900.0, -120.0], "rot": [198, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -953.3, -139.0, 1541.0, -933.0, -129.0]},
-    {"name": "A104_7", "pos": [1493.0, -900.0, -120.0], "rot": [234, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -933.0, -164.4, 1541.0, -918.0, -145.9]},
-    {"name": "A104_8", "pos": [1493.0, -900.0, -120.0], "rot": [270, 0, 0], "tip_r": 52.2, "bbox": [1493.0, -902.0, -172.2, 1541.0, -898.0, -152.2]},
-    {"name": "A104_9", "pos": [1493.0, -900.0, -120.0], "rot": [306, 0, 0], "tip_r": 53.409, "bbox": [1493.0, -882.0, -164.4, 1541.0, -867.0, -145.9]},
-    {"name": "A104_10", "pos": [1493.0, -900.0, -120.0], "rot": [342, 0, 0], "tip_r": 55.366, "bbox": [1493.0, -867.0, -139.0, 1541.0, -846.7, -129.0]}
+    {"name": "A104_1", "pos": [-3650.0, 193.0, -820.0], "rot": [18, 0, 90], "tip_r": 55.366, "bbox": [-3703.3, 193.0, -811.0, -3683.0, 241.0, -801.0]},
+    {"name": "A104_2", "pos": [-3650.0, 193.0, -820.0], "rot": [54, 0, 90], "tip_r": 53.409, "bbox": [-3683.0, 193.0, -794.1, -3668.0, 241.0, -775.6]},
+    {"name": "A104_3", "pos": [-3650.0, 193.0, -820.0], "rot": [90, 0, 90], "tip_r": 52.2, "bbox": [-3652.0, 193.0, -787.8, -3648.0, 241.0, -767.8]},
+    {"name": "A104_4", "pos": [-3650.0, 193.0, -820.0], "rot": [126, 0, 90], "tip_r": 53.409, "bbox": [-3632.0, 193.0, -794.1, -3617.0, 241.0, -775.6]},
+    {"name": "A104_5", "pos": [-3650.0, 193.0, -820.0], "rot": [162, 0, 90], "tip_r": 55.366, "bbox": [-3617.0, 193.0, -811.0, -3596.7, 241.0, -801.0]},
+    {"name": "A104_6", "pos": [-3650.0, 193.0, -820.0], "rot": [198, 0, 90], "tip_r": 55.366, "bbox": [-3617.0, 193.0, -839.0, -3596.7, 241.0, -829.0]},
+    {"name": "A104_7", "pos": [-3650.0, 193.0, -820.0], "rot": [234, 0, 90], "tip_r": 53.409, "bbox": [-3632.0, 193.0, -864.4, -3617.0, 241.0, -845.9]},
+    {"name": "A104_8", "pos": [-3650.0, 193.0, -820.0], "rot": [270, 0, 90], "tip_r": 52.2, "bbox": [-3652.0, 193.0, -872.2, -3648.0, 241.0, -852.2]},
+    {"name": "A104_9", "pos": [-3650.0, 193.0, -820.0], "rot": [306, 0, 90], "tip_r": 53.409, "bbox": [-3683.0, 193.0, -864.4, -3668.0, 241.0, -845.9]},
+    {"name": "A104_10", "pos": [-3650.0, 193.0, -820.0], "rot": [342, 0, 90], "tip_r": 55.366, "bbox": [-3703.3, 193.0, -839.0, -3683.0, 241.0, -829.0]}
    ]
   },
   "A105": {
@@ -1419,8 +1478,8 @@
    "dims": {"od": 128, "bore": 40, "thk_steel": 6.5, "bronze": {"d": 116, "thk": 1.5}, "notches": {"n": 6, "width": 14, "depth": 6, "phase_deg": 0}, "kural": "BRONZE FACES MUST BE INSTALLED TOWARD THE ROTOR (Eaton notu): _1 rot 0, _2 rot [0,0,180]", "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "Celik on yuz merkezi, x 0..thk_steel+bronze.thk, bronz yuz +X.",
    "instances": [
-    {"name": "A105_1", "pos": [1485.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1485.0, -963.6, -184.0, 1493.0, -836.4, -56.0]},
-    {"name": "A105_2", "pos": [1549.0, -900.0, -120.0], "rot": [0, 0, 180], "bbox": [1541.0, -963.6, -184.0, 1549.0, -836.4, -56.0]}
+    {"name": "A105_1", "pos": [-3650.0, 185.0, -820.0], "rot": [0, 0, 90], "bbox": [-3713.6, 185.0, -884.0, -3586.4, 193.0, -756.0]},
+    {"name": "A105_2", "pos": [-3650.0, 249.0, -820.0], "rot": [0, 0, -90], "bbox": [-3713.6, 241.0, -884.0, -3586.4, 249.0, -756.0]}
    ]
   },
   "A106": {
@@ -1428,7 +1487,7 @@
    "dims": {"od": 150, "thk": 30, "bore": 38, "pin_holes": {"d": 8, "depth": 10, "face": "-x", "centers_yz": [[0, 69], [0, -69]]}, "kidney_ports": {"d": 16, "centers_yz": [[40, 0], [-40, 0]]}, "varsayim": "ikiz_tasarim varsayimi: burclu (delik = mil capi)"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
    "instances": [
-    {"name": "A106_1", "pos": [1549.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1549.0, -975.0, -195.0, 1579.0, -825.0, -45.0]}
+    {"name": "A106_1", "pos": [-3650.0, 249.0, -820.0], "rot": [0, 0, 90], "bbox": [-3725.0, 249.0, -895.0, -3575.0, 279.0, -745.0]}
    ]
   },
   "A107": {
@@ -1436,7 +1495,7 @@
    "dims": {"od": 150, "thk": 35, "bore": 40, "pin_holes": {"d": 8, "depth": 10, "face": "+x", "centers_yz": [[0, 69], [0, -69]]}, "kidney_ports": {"d": 16, "centers_yz": [[40, 0], [-40, 0]]}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
    "instances": [
-    {"name": "A107_1", "pos": [1450.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1450.0, -975.0, -195.0, 1485.0, -825.0, -45.0]}
+    {"name": "A107_1", "pos": [-3650.0, 150.0, -820.0], "rot": [0, 0, 90], "bbox": [-3725.0, 150.0, -895.0, -3575.0, 185.0, -745.0]}
    ]
   },
   "A108": {
@@ -1444,7 +1503,7 @@
    "dims": {"od": 105, "width": 30, "cam": {"r_major": 37, "r_minor": 34, "n_pts": 72}, "pin_holes": {"d": 6, "centers_yz": [[0, 47], [0, -47]]}, "varsayim": "ikiz_tasarim varsayimi: cift loblu kam r(t)=ortalama+genlik*cos2t"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
    "instances": [
-    {"name": "A108_1", "pos": [1700.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1700.0, -952.5, -172.5, 1730.0, -847.5, -67.5]}
+    {"name": "A108_1", "pos": [-3650.0, 400.0, -820.0], "rot": [0, 0, 90], "bbox": [-3702.5, 400.0, -872.5, -3597.5, 430.0, -767.5]}
    ]
   },
   "A109": {
@@ -1452,7 +1511,7 @@
    "dims": {"od": 66, "bore": 30, "width": 30, "slots": {"n": 10, "width": 3, "bottom_r": 20, "phase_deg": 18}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..width.",
    "instances": [
-    {"name": "A109_1", "pos": [1700.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1700.0, -933.0, -153.0, 1730.0, -867.0, -87.0]}
+    {"name": "A109_1", "pos": [-3650.0, 400.0, -820.0], "rot": [0, 0, 90], "bbox": [-3683.0, 400.0, -853.0, -3617.0, 430.0, -787.0]}
    ]
   },
   "A110": {
@@ -1460,16 +1519,16 @@
    "dims": {"width": 30, "height": 13, "thk": 3, "tip_r": 36.7, "varsayim": "ikiz_tasarim varsayimi: tip_r instance bazli = kam(aci) - 0.3 (kanat ucu halkaya yaslanir)"},
    "local_origin": "Rotor on yuzu merkezi (eksen uzerinde); kanat +Y radyal, x 0..width; instance rot [aci,0,0] = rotor yuva acisi.",
    "instances": [
-    {"name": "A110_1", "pos": [1700.0, -900.0, -120.0], "rot": [18, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -878.2, -114.2, 1730.0, -864.9, -107.3]},
-    {"name": "A110_2", "pos": [1700.0, -900.0, -120.0], "rot": [54, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -888.4, -103.3, 1730.0, -878.4, -91.0]},
-    {"name": "A110_3", "pos": [1700.0, -900.0, -120.0], "rot": [90, 0, 0], "tip_r": 33.7, "bbox": [1700.0, -901.5, -99.3, 1730.0, -898.5, -86.3]},
-    {"name": "A110_4", "pos": [1700.0, -900.0, -120.0], "rot": [126, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -921.6, -103.3, 1730.0, -911.6, -91.0]},
-    {"name": "A110_5", "pos": [1700.0, -900.0, -120.0], "rot": [162, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -935.1, -114.2, 1730.0, -921.8, -107.3]},
-    {"name": "A110_6", "pos": [1700.0, -900.0, -120.0], "rot": [198, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -935.1, -132.7, 1730.0, -921.8, -125.8]},
-    {"name": "A110_7", "pos": [1700.0, -900.0, -120.0], "rot": [234, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -921.6, -149.0, 1730.0, -911.6, -136.7]},
-    {"name": "A110_8", "pos": [1700.0, -900.0, -120.0], "rot": [270, 0, 0], "tip_r": 33.7, "bbox": [1700.0, -901.5, -153.7, 1730.0, -898.5, -140.7]},
-    {"name": "A110_9", "pos": [1700.0, -900.0, -120.0], "rot": [306, 0, 0], "tip_r": 34.736, "bbox": [1700.0, -888.4, -149.0, 1730.0, -878.4, -136.7]},
-    {"name": "A110_10", "pos": [1700.0, -900.0, -120.0], "rot": [342, 0, 0], "tip_r": 36.414, "bbox": [1700.0, -878.2, -132.7, 1730.0, -864.9, -125.8]}
+    {"name": "A110_1", "pos": [-3650.0, 400.0, -820.0], "rot": [18, 0, 90], "tip_r": 36.414, "bbox": [-3685.1, 400.0, -814.2, -3671.8, 430.0, -807.3]},
+    {"name": "A110_2", "pos": [-3650.0, 400.0, -820.0], "rot": [54, 0, 90], "tip_r": 34.736, "bbox": [-3671.6, 400.0, -803.3, -3661.6, 430.0, -791.0]},
+    {"name": "A110_3", "pos": [-3650.0, 400.0, -820.0], "rot": [90, 0, 90], "tip_r": 33.7, "bbox": [-3651.5, 400.0, -799.3, -3648.5, 430.0, -786.3]},
+    {"name": "A110_4", "pos": [-3650.0, 400.0, -820.0], "rot": [126, 0, 90], "tip_r": 34.736, "bbox": [-3638.4, 400.0, -803.3, -3628.4, 430.0, -791.0]},
+    {"name": "A110_5", "pos": [-3650.0, 400.0, -820.0], "rot": [162, 0, 90], "tip_r": 36.414, "bbox": [-3628.2, 400.0, -814.2, -3614.9, 430.0, -807.3]},
+    {"name": "A110_6", "pos": [-3650.0, 400.0, -820.0], "rot": [198, 0, 90], "tip_r": 36.414, "bbox": [-3628.2, 400.0, -832.7, -3614.9, 430.0, -825.8]},
+    {"name": "A110_7", "pos": [-3650.0, 400.0, -820.0], "rot": [234, 0, 90], "tip_r": 34.736, "bbox": [-3638.4, 400.0, -849.0, -3628.4, 430.0, -836.7]},
+    {"name": "A110_8", "pos": [-3650.0, 400.0, -820.0], "rot": [270, 0, 90], "tip_r": 33.7, "bbox": [-3651.5, 400.0, -853.7, -3648.5, 430.0, -840.7]},
+    {"name": "A110_9", "pos": [-3650.0, 400.0, -820.0], "rot": [306, 0, 90], "tip_r": 34.736, "bbox": [-3671.6, 400.0, -849.0, -3661.6, 430.0, -836.7]},
+    {"name": "A110_10", "pos": [-3650.0, 400.0, -820.0], "rot": [342, 0, 90], "tip_r": 36.414, "bbox": [-3685.1, 400.0, -832.7, -3671.8, 430.0, -825.8]}
    ]
   },
   "A111": {
@@ -1477,8 +1536,8 @@
    "dims": {"od": 86, "bore": 32, "thk_steel": 5.5, "bronze": {"d": 76, "thk": 1.5}, "notches": {"n": 6, "width": 10, "depth": 4, "phase_deg": 0}, "kural": "BRONZE FACES MUST BE INSTALLED TOWARD THE ROTOR (Eaton notu): _1 rot 0, _2 rot [0,0,180]", "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "Celik on yuz merkezi, x 0..thk_steel+bronze.thk, bronz yuz +X.",
    "instances": [
-    {"name": "A111_1", "pos": [1693.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1693.0, -942.7, -163.0, 1700.0, -857.3, -77.0]},
-    {"name": "A111_2", "pos": [1737.0, -900.0, -120.0], "rot": [0, 0, 180], "bbox": [1730.0, -942.7, -163.0, 1737.0, -857.3, -77.0]}
+    {"name": "A111_1", "pos": [-3650.0, 393.0, -820.0], "rot": [0, 0, 90], "bbox": [-3692.7, 393.0, -863.0, -3607.3, 400.0, -777.0]},
+    {"name": "A111_2", "pos": [-3650.0, 437.0, -820.0], "rot": [0, 0, -90], "bbox": [-3692.7, 430.0, -863.0, -3607.3, 437.0, -777.0]}
    ]
   },
   "A112": {
@@ -1486,7 +1545,7 @@
    "dims": {"od": 105, "thk": 22, "bore": 32, "pin_holes": {"d": 6, "depth": 8, "face": "+x", "centers_yz": [[0, 47], [0, -47]]}, "kidney_ports": {"d": 10, "centers_yz": [[26, 0], [-26, 0]]}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
    "instances": [
-    {"name": "A112_1", "pos": [1671.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1671.0, -952.5, -172.5, 1693.0, -847.5, -67.5]}
+    {"name": "A112_1", "pos": [-3650.0, 371.0, -820.0], "rot": [0, 0, 90], "bbox": [-3702.5, 371.0, -872.5, -3597.5, 393.0, -767.5]}
    ]
   },
   "A113": {
@@ -1494,7 +1553,7 @@
    "dims": {"od": 105, "thk": 26, "bore": 30, "pin_holes": {"d": 6, "depth": 8, "face": "-x", "centers_yz": [[0, 47], [0, -47]]}, "kidney_ports": {"d": 10, "centers_yz": [[26, 0], [-26, 0]]}, "varsayim": "ikiz_tasarim varsayimi: burclu (delik = mil capi)"},
    "local_origin": "On yuz merkezi, eksen +X, x 0..thk.",
    "instances": [
-    {"name": "A113_1", "pos": [1737.0, -900.0, -120.0], "rot": [0, 0, 0], "bbox": [1737.0, -952.5, -172.5, 1763.0, -847.5, -67.5]}
+    {"name": "A113_1", "pos": [-3650.0, 437.0, -820.0], "rot": [0, 0, 90], "bbox": [-3702.5, 437.0, -872.5, -3597.5, 463.0, -767.5]}
    ]
   },
   "A114": {
@@ -1502,10 +1561,10 @@
    "dims": {"d": 8, "length": 84, "varsayim": "ikiz_tasarim varsayimi: 45VQ d8x84, 20VQ d6x60 (instance override)"},
    "local_origin": "Pim on ucu merkezi, eksen +X.",
    "instances": [
-    {"name": "A114_1", "pos": [1475.0, -900.0, -51.0], "rot": [0, 0, 0], "bbox": [1475.0, -904.0, -55.0, 1559.0, -896.0, -47.0]},
-    {"name": "A114_2", "pos": [1475.0, -900.0, -189.0], "rot": [0, 0, 0], "bbox": [1475.0, -904.0, -193.0, 1559.0, -896.0, -185.0]},
-    {"name": "A114_3", "pos": [1685.0, -900.0, -73.0], "rot": [0, 0, 0], "d": 6, "length": 60, "bbox": [1685.0, -903.0, -76.0, 1745.0, -897.0, -70.0]},
-    {"name": "A114_4", "pos": [1685.0, -900.0, -167.0], "rot": [0, 0, 0], "d": 6, "length": 60, "bbox": [1685.0, -903.0, -170.0, 1745.0, -897.0, -164.0]}
+    {"name": "A114_1", "pos": [-3650.0, 175.0, -751.0], "rot": [0, 0, 90], "bbox": [-3654.0, 175.0, -755.0, -3646.0, 259.0, -747.0]},
+    {"name": "A114_2", "pos": [-3650.0, 175.0, -889.0], "rot": [0, 0, 90], "bbox": [-3654.0, 175.0, -893.0, -3646.0, 259.0, -885.0]},
+    {"name": "A114_3", "pos": [-3650.0, 385.0, -773.0], "rot": [0, 0, 90], "d": 6, "length": 60, "bbox": [-3653.0, 385.0, -776.0, -3647.0, 445.0, -770.0]},
+    {"name": "A114_4", "pos": [-3650.0, 385.0, -867.0], "rot": [0, 0, 90], "d": 6, "length": 60, "bbox": [-3653.0, 385.0, -870.0, -3647.0, 445.0, -864.0]}
    ]
   },
   "A115": {
@@ -1513,10 +1572,10 @@
    "dims": {"d": 16, "length": 150, "head": {"s": 24, "h": 10}, "tork_Nm": [346, 373], "varsayim": "ikiz_tasarim varsayimi: 5/8 in ~ M16, boy 150 (A99 gecis + A98 30 mm dis)"},
    "local_origin": "Bas alt yuzu merkezi; govde +X, bas -X. Instance rot [0,0,180]: arka yuzden one dogru.",
    "instances": [
-    {"name": "A115_1", "pos": [1685.0, -815.0, -30.0], "rot": [0, 0, 180], "bbox": [1535.0, -827.0, -43.9, 1695.0, -803.0, -16.1]},
-    {"name": "A115_2", "pos": [1685.0, -815.0, -210.0], "rot": [0, 0, 180], "bbox": [1535.0, -827.0, -223.9, 1695.0, -803.0, -196.1]},
-    {"name": "A115_3", "pos": [1685.0, -985.0, -30.0], "rot": [0, 0, 180], "bbox": [1535.0, -997.0, -43.9, 1695.0, -973.0, -16.1]},
-    {"name": "A115_4", "pos": [1685.0, -985.0, -210.0], "rot": [0, 0, 180], "bbox": [1535.0, -997.0, -223.9, 1695.0, -973.0, -196.1]}
+    {"name": "A115_1", "pos": [-3735.0, 385.0, -730.0], "rot": [0, 0, -90], "bbox": [-3747.0, 235.0, -743.9, -3723.0, 395.0, -716.1]},
+    {"name": "A115_2", "pos": [-3735.0, 385.0, -910.0], "rot": [0, 0, -90], "bbox": [-3747.0, 235.0, -923.9, -3723.0, 395.0, -896.1]},
+    {"name": "A115_3", "pos": [-3565.0, 385.0, -730.0], "rot": [0, 0, -90], "bbox": [-3577.0, 235.0, -743.9, -3553.0, 395.0, -716.1]},
+    {"name": "A115_4", "pos": [-3565.0, 385.0, -910.0], "rot": [0, 0, -90], "bbox": [-3577.0, 235.0, -923.9, -3553.0, 395.0, -896.1]}
    ]
   },
   "A116": {
@@ -1524,10 +1583,10 @@
    "dims": {"d": 12, "length": 130, "head": {"s": 19, "h": 8}, "tork_Nm": [54, 68], "varsayim": "ikiz_tasarim varsayimi: 1/2 in ~ M12, boy 130 (A100 gecis + A99 20 mm dis)"},
    "local_origin": "Bas alt yuzu merkezi; govde +X, bas -X. Instance rot [0,0,180].",
    "instances": [
-    {"name": "A116_1", "pos": [1795.0, -845.0, -65.0], "rot": [0, 0, 180], "bbox": [1665.0, -854.5, -76.0, 1803.0, -835.5, -54.0]},
-    {"name": "A116_2", "pos": [1795.0, -845.0, -175.0], "rot": [0, 0, 180], "bbox": [1665.0, -854.5, -186.0, 1803.0, -835.5, -164.0]},
-    {"name": "A116_3", "pos": [1795.0, -955.0, -65.0], "rot": [0, 0, 180], "bbox": [1665.0, -964.5, -76.0, 1803.0, -945.5, -54.0]},
-    {"name": "A116_4", "pos": [1795.0, -955.0, -175.0], "rot": [0, 0, 180], "bbox": [1665.0, -964.5, -186.0, 1803.0, -945.5, -164.0]}
+    {"name": "A116_1", "pos": [-3705.0, 495.0, -765.0], "rot": [0, 0, -90], "bbox": [-3714.5, 365.0, -776.0, -3695.5, 503.0, -754.0]},
+    {"name": "A116_2", "pos": [-3705.0, 495.0, -875.0], "rot": [0, 0, -90], "bbox": [-3714.5, 365.0, -886.0, -3695.5, 503.0, -864.0]},
+    {"name": "A116_3", "pos": [-3595.0, 495.0, -765.0], "rot": [0, 0, -90], "bbox": [-3604.5, 365.0, -776.0, -3585.5, 503.0, -754.0]},
+    {"name": "A116_4", "pos": [-3595.0, 495.0, -875.0], "rot": [0, 0, -90], "bbox": [-3604.5, 365.0, -886.0, -3585.5, 503.0, -864.0]}
    ]
   },
   "A117": {
@@ -1535,7 +1594,7 @@
    "dims": {"d": 20, "length": 55, "neck": {"d": 14, "local_x_range": [20, 40]}, "ayar_psi": 2000, "seri": "232794..233020 (750..2500 psi)", "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "Tapa tarafi uc yuzu merkezi; eksen +X (yaya dogru). Instance rot [0,0,90] -> +Y.",
    "instances": [
-    {"name": "A117_1", "pos": [1779.0, -963.0, -85.0], "rot": [0, 0, 90], "bbox": [1769.0, -963.0, -95.0, 1789.0, -908.0, -75.0]}
+    {"name": "A117_1", "pos": [-3587.0, 479.0, -785.0], "rot": [0, 0, 180], "bbox": [-3642.0, 469.0, -795.0, -3587.0, 489.0, -775.0]}
    ]
   },
   "A118": {
@@ -1543,7 +1602,7 @@
    "dims": {"od": 16, "id": 10, "length": 71, "coils": {"n": 9, "groove_w": 3, "groove_depth": 2}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "Valf tarafi uc merkezi; eksen +X. Instance rot [0,0,90] -> +Y.",
    "instances": [
-    {"name": "A118_1", "pos": [1779.0, -908.0, -85.0], "rot": [0, 0, 90], "bbox": [1771.0, -908.0, -93.0, 1787.0, -837.0, -77.0]}
+    {"name": "A118_1", "pos": [-3642.0, 479.0, -785.0], "rot": [0, 0, 180], "bbox": [-3713.0, 471.0, -793.0, -3642.0, 487.0, -777.0]}
    ]
   },
   "A119": {
@@ -1551,8 +1610,8 @@
    "dims": {"d": 20, "length": 12, "socket": {"s": 10, "depth": 6}, "varsayim": "ikiz_tasarim varsayimi"},
    "local_origin": "Dis yuz merkezi; eksen +X yuvaya dogru.",
    "instances": [
-    {"name": "A119_1", "pos": [1779.0, -975.0, -85.0], "rot": [0, 0, 90], "bbox": [1769.0, -975.0, -95.0, 1789.0, -963.0, -75.0]},
-    {"name": "A119_2", "pos": [1779.0, -825.0, -85.0], "rot": [0, 0, -90], "bbox": [1769.0, -837.0, -95.0, 1789.0, -825.0, -75.0]}
+    {"name": "A119_1", "pos": [-3575.0, 479.0, -785.0], "rot": [0, 0, 180], "bbox": [-3587.0, 469.0, -795.0, -3575.0, 489.0, -775.0]},
+    {"name": "A119_2", "pos": [-3725.0, 479.0, -785.0], "rot": [0, 0, 0], "bbox": [-3725.0, 469.0, -795.0, -3713.0, 489.0, -775.0]}
    ]
   },
   "A71": {
@@ -2896,7 +2955,12 @@
    ["A83", "A85"],
    ["A81", "A85"],
    ["A13", "A14"],
-   ["A11", "A14"]
+   ["A11", "A14"],
+   ["A99", "A121"],
+   ["A61", "A121"],
+   ["A98", "A122"],
+   ["A100", "A122"],
+   ["A122", "A123"]
   ],
   "mesh_pairs": [["A91", "A26"], ["A91", "A93"]],
   "mesh_note": "Disli kavramalari: izinli temas ama girisim hacmi <50 mm3 olmali (faz hatasi ~5 cm3 verir)."

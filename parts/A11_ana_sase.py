@@ -15,4 +15,17 @@ def build(d, G, g):
     o = d["top_opening_biscuit_drop"]
     ox, oy = o["x_max"] - o["x_min"], o["y_max"] - o["y_min"]
     op = g.move(g.box(ox, oy, tp + 2), (o["x_min"] + o["x_max"]) / 2, (o["y_min"] + o["y_max"]) / 2, H - tp / 2)
-    return g.cut(shell, op)
+    shell = g.cut(shell, op)
+    # tank erisim acikligi (yan duvar, A61 sase icinde) - opsiyonel
+    ta = d.get("tank_access_opening")
+    if ta:
+        x0, x1 = ta["x_range"]
+        z0, z1 = ta["local_z_range"]
+        ys = -1 if ta["side"] == "-Y" else 1
+        yc = ys * (W / 2 - sw / 2)
+        shell = g.cut(shell, g.move(g.box(x1 - x0, sw + 2, z1 - z0), (x0 + x1) / 2, yc, (z0 + z1) / 2))
+    # boru gecis delikleri (X ekseninde: uc plakasi / enine kaburga)
+    for p in d.get("pipe_passages", []):
+        x0, x1 = p["x_range"]
+        shell = g.cut(shell, g.move(g.cyl(p["d"] / 2, x1 - x0, "x", center=False), x0, p["y"], p["local_z"]))
+    return shell

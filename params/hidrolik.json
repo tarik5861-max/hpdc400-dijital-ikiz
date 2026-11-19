@@ -32,7 +32,9 @@
      "A105",
      "A106",
      "A107",
-     "A114"
+     "A114",
+     "A121",
+     "A122"
     ],
     "varsayim": "ikiz_tasarim karari: 45VQ42 136 cm3/dev x 1480 d/dk x eta_v 0.95 = 191.2 L/dk (eski 120 L/dk ve 30 kW uyumsuzlugu kapandi, motor A120 55 kW). VARSAYIM: eta_v 0.95, eta_hm 0.92 (kanatli pompa 140 bar tipik, katalog egrisi degil). Sema P1'i degisken debili sayiyor; 4520VQ sabit deplasmanli -> debi/basinc ayari U12 oransal basinc+debi valfi (LKPP-03, S102/S103) ile yapilir, pompa kompanzatoru yok.",
     "deplasman_cm3_dev": 136.0,
@@ -62,7 +64,9 @@
      "A114",
      "A117",
      "A118",
-     "A119"
+     "A119",
+     "A121",
+     "A122"
     ],
     "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 (A120) milinden (eski 'M2' elektrik.json'da yok). 16.4 cm3/dev x 1480 x 0.95 = 23.1 L/dk. VARSAYIM: eta_v 0.95, eta_hm 0.92.",
     "deplasman_cm3_dev": 16.4,

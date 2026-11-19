@@ -82,6 +82,9 @@
         "A118",
         "A119",
         "A120",
+        "A121",
+        "A122",
+        "A123",
         "A71",
         "A72",
         "A81",
@@ -337,6 +340,9 @@
               {"id": "A119", "name": "Tapa 7077 (valf yuvasi, 2 adet)", "qty": 2, "script": "parts/A119_tapa.py"}
           ]
         },
+        {"id": "A121", "name": "Emis hatti (A99 -> tank A61, d89/80 sert boru)", "qty": 1, "script": "parts/A121_boru_hatti.py"},
+        {"id": "A122", "name": "Basinc hatti stub'i (P1 d48/38, P2 d25/19)", "qty": 2, "script": "parts/A121_boru_hatti.py", "note": "A121 ile ayni script, farkli olcu"},
+        {"id": "A123", "name": "Boru tespit konsolu (dikme + kelepce)", "qty": 2, "script": "parts/A123_boru_tespit.py"},
         {
           "id": "A59",
           "name": "Akumulator sepeti + valf blogu",
