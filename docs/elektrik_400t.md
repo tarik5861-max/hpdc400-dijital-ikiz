@@ -96,7 +96,7 @@ Her satırın ilk adımı: **GÜVENLİK ÖN ADIMI = LOTO 1–7** (kalıp açık,
 ## 7. Açık noktalar
 1. **HW Config adres eşlemesi:** şema klemens notasyonu (I10…I115) Siemens bayt.bit'e bağlanmadı; DI32 ve DO32 klemensleri boş.
 2. **DI5 kanal sırası** okuma sırasıdır, doğrulanmadı; DI5.24–32 okunamadı (itici limitleri muhtemelen burada; şimdilik DI9.10/11'de).
-3. **DO7.17–30 bulanık satırlar:** yavaş enjeksiyon / piston geri S-numaraları yok (tag_gecici Y1_YAVAS/Y1_GERI); 23/24 el yazısı Start1/Start2.
+3. **DO7.17–30 (KAPANDI, ikiz kararı):** DO7.23/24 core4 → kapsam dışı (core1-3 gibi). DO7.25/26 etiketleri Y1_YAVAS/Y1_GERI kalıcı kabul. KA9 paralel kontaklar = kapı kilit/extractor bypass kabul, modellenmez.
 4. ~~S121 polaritesi ve KA_ES~~ → karar K-EL-01 (enerjisiz = boşalt + KA_ES); saha doğrulaması bölüm 10.
 5. KA9 limit-2 kontaklarına paralel bulanık kontaklar (DCC630) — köprü mü, robot bypass'ı mı?
 6. 1B10 "displacement lock" / S601 "displacement flat" işlevi belirsiz → ayrılmış.

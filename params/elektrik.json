@@ -1840,13 +1840,13 @@
    "kanal": 23,
    "klemens": null,
    "tag": null,
-   "aciklama": "el yazisi 'Start1' (basili etiket cizilmis, muhtemelen core4 in)",
-   "durum": "ayrilmis",
+   "aciklama": "core4 in (el yazisi 'Start1')",
+   "durum": "kapsam_disi",
    "bagli_id": [],
    "hidrolik": null,
    "koken": "dcc630_sablon",
-   "guven": "dusuk",
-   "gerekce": "DCC630'a sonradan uyarlama; islevi bilinmiyor"
+   "guven": "orta",
+   "gerekce": "IKIZ KARARI: DO7.17-22 core1-3 gibi 4. maca da 400 t ikizde yok -> kapsam disi"
   },
   {
    "id": "DO7.24",
@@ -1855,13 +1855,13 @@
    "kanal": 24,
    "klemens": null,
    "tag": null,
-   "aciklama": "el yazisi 'Start2' (muhtemelen core4 out)",
-   "durum": "ayrilmis",
+   "aciklama": "core4 out (el yazisi 'Start2')",
+   "durum": "kapsam_disi",
    "bagli_id": [],
    "hidrolik": null,
    "koken": "dcc630_sablon",
-   "guven": "dusuk",
-   "gerekce": "DCC630'a sonradan uyarlama; islevi bilinmiyor"
+   "guven": "orta",
+   "gerekce": "IKIZ KARARI: core4 400 t ikizde yok -> kapsam disi"
   },
   {
    "id": "DO7.25",
@@ -1878,7 +1878,7 @@
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "S-numarasi okunamadi",
+   "not": "IKIZ KARARI: semada S-no okunamiyor; ikiz etiketi Y1_YAVAS kalici kabul (sahada gercek S-no ile degisir)",
    "tag_gecici": "Y1_YAVAS"
   },
   {
@@ -1897,7 +1897,7 @@
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "S-numarasi okunamadi",
+   "not": "IKIZ KARARI: semada S-no okunamiyor; ikiz etiketi Y1_GERI kalici kabul (sahada gercek S-no ile degisir)",
    "tag_gecici": "Y1_GERI"
   },
   {
@@ -2283,7 +2283,10 @@
    "tag": "LS2",
    "aciklama": "enjeksiyon ileri sinir (strok sonu) salteri LS2",
    "durum": "aktif",
-   "bagli_id": ["A66", "A52"],
+   "bagli_id": [
+    "A66",
+    "A52"
+   ],
    "hidrolik": null,
    "koken": "ikiz_tasarim",
    "guven": "orta",
@@ -2609,7 +2612,13 @@
    "koken": "dcc630_sema_9-8",
    "guven": "orta",
    "gerekce": "Sema 9-8 (DCC630): 'injection encoder' -> INCODER modulu (V+/V-/A/B/Z, +5 V) -> enkoder karti; PLC standart DI degil. Olcum: artimli kuadratur A/B/Z. A66 = bu enkoderin geometrisi (lineer sensor kolu A52 kaplinine bagli). Cozunurluk IKIZ TASARIM KARARI: 0,05 mm/sayim (x4 sonrasi); hizli vurus 5 m/s -> 100 kHz sayim hizi -> standart DI (<~100 Hz) YETMEZ, hizli sayici/enkoder karti zorunlu (semayla uyumlu). Faz gecisleri ikizde hala sure tabanli; ENC ile birlikte kullanilir.",
-   "sinyal": {"tip": "artimli kuadratur A/B/Z", "besleme": "+5 V", "cozunurluk_mm_sayim": 0.05, "max_sayim_hizi_kHz": 100, "alici": "enkoder karti (DB77/PCL), standart DI degil"},
+   "sinyal": {
+    "tip": "artimli kuadratur A/B/Z",
+    "besleme": "+5 V",
+    "cozunurluk_mm_sayim": 0.05,
+    "max_sayim_hizi_kHz": 100,
+    "alici": "enkoder karti (DB77/PCL), standart DI degil"
+   },
    "kaynak_sema": "9-8"
   }
  ],
@@ -2776,7 +2785,7 @@
    ],
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "semada her limit-2 kontagina paralel bulanik kontaklar var (kapi kilit / extractor?) -> ACIK NOKTA; 400 t'de paralel kopru YOK"
+   "not": "IKIZ KARARI: semadaki bulanik paralel kontaklar kapi kilit/extractor bypass kabul edildi; 400 t ikizde modellenmez (guvenlik: paralel kopru YOK). KA9 = limit2 ON seri limit2 ARKA"
   },
   {
    "tag": "KA2",
