@@ -19,9 +19,9 @@ _Son güncelleme: 2026-11-19. Her `/kapanis`'te yeniden yazılır (en fazla ~60 
 - KAPANDI (2026-11-19): P1 debi/motor uyuşmazlığı. P1 191,2 L/dk, P2 23,1 L/dk (A120 55 kW, 1480 d/dk); 140 bar mil gücü 57,2 kW = %104 SINIRDA (yalnız P1+P2 eşzamanlı tam yükte). Sabit deplasman + U12 oransal valf ikiz_tasarim kararı.
 
 ## 2026-11-19 tank + motor-pompa yerleşimi (rev: redüktör tarafı)
-- Arka yerleşim iptal. A61 tank şase içinde +X bölmesi (X 605..2135, 783,8 L), erişim +Y yan duvar X 740..1490. A62 grubu şase -Y yanında zeminde (X 620..2203, mil X ekseni). A121 emiş -Y yan duvardan (X 2025), A122 P1/P2 stub, A123 A62 plakası üstünde. A11 kaburga -1300/-600 geri; +X 700/1400/2000 → 590/2150. overall_length 5100. 172 instance, kontroller YEŞİL. Önizleme out/preview_redk_*.png.
+- rev2 (kullanıcı yan yerleşimi beğenmedi): A62 grubu şase dışında +X ucunda eksende (plaka X 2410..4010, Y ±320, rz 180; pompa şase tarafı, motor +X). Tank A61 şase içinde +X bölmesi (X 605..2135), erişim +Y X 740..1490. A121 emiş A11 +X uç plaka + kaburga 2150 üzerinden tank +X yüzüne. A122/A123 grupla rijit; P2 stub Z -700 (A121 altından). overall_length 7180. 172 instance, tüm kontroller YEŞİL. Önizleme out/preview_redk_*.png.
 - OLCU_TALEBI: A11 +X bölmesi 1540 mm açıklık (kaburgasız, A22/A23 + mafsal ağırlığı raylar üzerinden) mukavemet sağlaması (olcu-mimari). -X bölmesi OLCU_TALEBI'si kapandı (kaburgalar geri).
-- Elektrik: A72 → A120 klemens ~5,1 m < L_motor_m 8; ELEKTRIK_TALEBI yok.
+- Elektrik: A72 → A120 klemens (X 3360, gland -Y) ~5,6 m (+%10 pay ~6,1 m) < L_motor_m 8; ELEKTRIK_TALEBI yok.
 
 ## Sıradaki adım
 - Kademe 4 (Yazılım / PLC durum makinesi ve sıralama mantığı) çalışmalarına başlanması.
