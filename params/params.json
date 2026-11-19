@@ -1105,22 +1105,27 @@
      "included_in_length": true
     }
    },
-   "local_origin": "Center of the bottom face. Bottle axis vertical along +Z (z 0..1300); stands on frame top plate.",
+   "local_origin": "Center of the bottom face. Bottle axis vertical along +Z (z 0..1300); stands on A59 valve block top bosses.",
    "instances": [
-    {
-     "name": "A56_1",
-     "pos": [-1450, -390.0, -530.0],
-     "rot": [0, 0, 0],
-     "bbox": [-1560, -500.0, -530.0, -1340, -280.0, 770.0]
-    },
-    {
-     "name": "A56_2",
-     "pos": [-1800, -390.0, -530.0],
-     "rot": [0, 0, 0],
-     "bbox": [-1910, -500.0, -530.0, -1690, -280.0, 770.0]
-    }
+    {"name": "A56_1", "pos": [-2820, -345.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, -455.0, -180.0, -2710, -235.0, 1120.0]},
+    {"name": "A56_2", "pos": [-2820, -115.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, -225.0, -180.0, -2710, -5.0, 1120.0]},
+    {"name": "A56_3", "pos": [-2820, 115.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, 5.0, -180.0, -2710, 225.0, 1120.0]},
+    {"name": "A56_4", "pos": [-2820, 345.0, -180.0], "rot": [0, 0, 0], "bbox": [-2930, 235.0, -180.0, -2710, 455.0, 1120.0]}
    ],
-   "placement_note": "Y -330 -> -390 (2026-11-18): A13_2 alt kolon (|Y| 120..320 flans, cubuk 170..270) ile 10 mm bosluk; ayak halkasi sase kenarinda (Y=-500)"
+   "placement_note": "2026-11-19: 4 tup A59 valf blogunun ustunde, A14 arka yuzunun arkasinda (X=-2820, Y +-115/+-345), referans: Yizumi arka dikme + akumulator grubu"
+  },
+  "A59": {
+   "name": "Akumulator valf blogu (manifold)",
+   "dims": {
+    "body": {"depth_x": 240, "width_y": 980, "height_z": 320},
+    "seat_bosses": {"d": 200, "height": 20, "centers_y": [-345, -115, 115, 345], "x_local": -120},
+    "cartridges": {"size_xyz": [60, 140, 200], "centers_y": [-345, -115, 115, 345], "z_center": 160}
+   },
+   "local_origin": "Center of the +X face (face bolted to A14 rear face), z=0 at block bottom. Body x -240..0, y +-490, z 0..320; seat bosses z 320..340; cartridges on the -X (rear) face x -300..-240.",
+   "instances": [
+    {"name": "A59_1", "pos": [-2700.0, 0, -520.0], "rot": [0, 0, 0], "bbox": [-3000.0, -490.0, -520.0, -2700.0, 490.0, -180.0]}
+   ],
+   "note": "Temsili manifold: 4 akumulator tupu tabani + kartus valf yuvalari; ic kanal/port yok. Hidrolik sema gelince portlar eklenecek (hidrolik-muhendisi)."
   },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",
@@ -2066,20 +2071,21 @@
      "local_x_range": [0, 50],
      "y_range": [-400, 400],
      "z_range": [0, 1050],
-     "note": "X -2700..-2650, Z -530..520; A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
+     "top_corner_chamfer": 100,
+     "note": "X -2700..-2650, Z -530..520, ust kose pah 100 (2026-11-19, modern govde); A11 uc plakasi (X -2700..-2675) ustunde. On yuz X=-2650: 3 x A13 arka flansi kaynakli"
     },
     "gussets": {
      "count": 2,
      "thickness": 40,
      "y_ranges": [[340, 380], [-380, -340]],
-     "profile_xz": [[50, 0], [50, 1050], [250, 1050], [700, 0]],
+     "profile_xz": [[50, 0], [50, 960], [250, 960], [700, 0]],
      "note": "on tarafta (+X), taban X -2650..-2000 (ucu A11 enine kaburgasi X=-2000 ustunde); A55/A57'den |Y| ile uzak"
     },
     "upper_ribs": {
      "count": 2,
      "thickness_z": 30,
      "local_x_range": [50, 250],
-     "y_range": [-340, 340],
+     "y_ranges": [[-340, 340], [-300, 300]],
      "z_ranges": [[750, 780], [1020, 1050]],
      "note": "Z 220..250 ve 490..520: ust kolon flansinin (Z 260..480) 10 mm alti/ustu; levha ile yatay kiris"
     },
