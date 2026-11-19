@@ -8,7 +8,7 @@ Ortak adres: ürün ağacındaki ID'ler (A24, A56…). Hidrolik eleman, kablo, s
 | 0. Mekanik iskelet | Geometri, montaj, mafsal + kalıp yüksekliği kinematiği, otomatik çakışma kontrolleri, agent ekibi, GitHub + MCP | ✅ Bitti (71 parça) |
 | 1. Makineyi tamamlamak | Eksik mekanik tamamlanıyor: itici / pim düzeni (sabit plaka 16 delik), enjeksiyon–sabit plaka bağlantı çubukları (A58); satın alınan parçalar; pilot makinenin (LK) gerçek ölçüleri | 🔄 Devam ediyor |
 | 2. Elektrik ve kartlar | Elektrik şemasından: güç/kontrol devresi, güvenlik zinciri, I/O listesi, kablo/klemens no, bobin ve sensör ID'leri, kart + test noktası | 🔄 Taslak v1 yapıldı (2026-11-18): DCC630 şeması 400 t'ye uyarlandı (elektrik.json, mantık simülasyonu, testler); A97 ve TC1 kararları verildi (K-EL-07, K-EL-03); sıradaki: HW Config adres eşlemesi, bulanık kanalların doğrulanması, ürün ağacına elektrik parçaları |
-| 3. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | Öncelik 3 |
+| 3. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | 🔄 Taslak v1 yapıldı (2026-11-19): lib/hidrolik_ag_modeli.py ve akü deşarj/enjeksiyon faz simülasyon testleri eklendi |
 | 4. Yazılım (PLC ve sıralama) | Program → durum makinesi; duruşta "hangi adım, hangi koşul, hangi sensör". Seçenek: kontrol yazılımını kendimiz yazmak | Öncelik 4 |
 | 5. Pnömatik ve yağlama | Sprey havası, tutucular, merkezi yağlama ↔ mafsal aşınması | Bekliyor |
 | 6. Hücre çevresi | Kepçe, sprey robotu, parça alma, çapak presi, kalıp ısıtma, vakum, kilitlemeler | Bekliyor |

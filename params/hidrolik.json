@@ -1,0 +1,37 @@
+{
+ "meta": {
+  "aciklama": "HPDC-400 hidrolik katmani - ISO 1219 elemanlari, valf/sensör ID'leri ve ağ modeli tam haritalaması",
+  "tarih": "2026-11-19",
+  "yazan": "orkestratör",
+  "kaynaklar": [
+   "docs/hidrolik_sema_taslak.md",
+   "lib/hidrolik_ag_modeli.py",
+   "params/params.json",
+   "params/bom.json",
+   "params/elektrik.json"
+  ]
+ },
+ "elemanlar": {
+  "pompalar": [
+   {"id": "P1", "tip": "Ana Sabit/Değişken Debili Pompa", "motor": "M1", "nominal_debi_lpm": 120.0, "nominal_basinç_bar": 140.0},
+   {"id": "P2", "tip": "Pilot / Yardımcı Pompa", "motor": "M2", "nominal_debi_lpm": 25.0, "nominal_basinç_bar": 140.0}
+  ],
+  "akumulatorler": [
+   {"id": "ACC1", "tip": "Enjeksiyon Hızlı Vuruş Akümülatörü", "hacim_lt": 2.6, "basinc_bar": 140.0, "baglanti": "Enjeksiyon manifold bloğu"},
+   {"id": "ACC2", "tip": "Pilot / Kontrol Akümülatörü", "hacim_lt": 1.0, "basinc_bar": 40.0, "baglanti": "Pilot hat"}
+  ],
+  "valfler": [
+   {"id": "Y1", "tip": "Enjeksiyon Hızlı Vuruş Valfi (Oransal/Kartuş)", "bobin": "Y1", "fonksiyon": "Hızlı vuruş akümülatör deşarjı"},
+   {"id": "Y2", "tip": "Mengene Kapama Yön Valfi", "bobin": "Y2", "fonksiyon": "A22 hareketli plaka ileri/geri"},
+   {"id": "Y3", "tip": "İtici Yön Valfi", "bobin": "Y3", "fonksiyon": "A41 itici silindirleri ileri/geri"},
+   {"id": "DV1", "tip": "Güvenlik Acil Deşarj Valfi", "bobin": "KA_ES", "fonksiyon": "E-stop / enerji kesilmesinde akü deşarjı (S121 bağ)", "durum": "Enerjisiz = Açık (Boşalt)"},
+   {"id": "A55", "tip": "Basınç Artırma (Multiplikatör) Valfi", "bobin": "A55", "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)"}
+  ],
+  "sensorler": [
+   {"id": "PT1", "tip": "Sistem Basınç Sensörü", "kanal": "AI1.01", "aralik_bar": "0-250"},
+   {"id": "PT2", "tip": "Akümülatör Basınç Sensörü", "kanal": "AI1.02", "aralik_bar": "0-250", "guvenlik_ esigi_bar": 2.0},
+   {"id": "LS1", "tip": "Mengene Kapalı Sınır Şalteri", "kanal": "DI1.01"},
+   {"id": "LS2", "tip": "Enjeksiyon İleri Sınır Şalteri", "kanal": "DI1.02"}
+  ]
+ }
+}
