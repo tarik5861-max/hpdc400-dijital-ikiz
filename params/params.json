@@ -1298,9 +1298,9 @@
      "type": "Döküm kampana (CETOP / SAE standardı)"
     },
     "pump": {
-     "d": 260,
-     "local_x_range": [330, 650],
-     "type": "Eksenel pistonlu ana pompa + pilot dişli pompa (Rexroth A10VSO / Parker PV series)"
+     "d": 240,
+     "local_x_range": [330, 720],
+     "type": "Çiftli (tandem) sabit deplasmanlı paletli pompa grubu (Vickers / Denison tandem vane pump)"
     },
     "motor_feet": {
      "note": "block 500x360 from z=30 to z=80 under motor",
@@ -1313,7 +1313,7 @@
      "name": "A62_1",
      "pos": [1100, -900, -450.0],
      "rot": [0, 0, 0],
-     "bbox": [-142, -1150, -450.0, 2045, -650, 320.0]
+     "bbox": [-142, -1150, -450.0, 1820, -650, 146.0]
     }
    ]
   },
