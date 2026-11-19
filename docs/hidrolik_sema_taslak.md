@@ -7,7 +7,7 @@ Güvenlik: akümülatör deşarjı ve basınç boşaltma her onarım adımının
 | Şemadaki eleman | Ağaç ID | Modeldeki veri |
 |---|---|---|
 | TK1 yağ tankı | A61 | 784 L |
-| M1 + P1 motor-pompa | A62 | motor 30 kW |
+| M1 + P1/P2 motor-pompa | A62 (pompa A98..A119) + A120 (motor) | motor 55 kW 4p 1480 d/dk; 4520VQ tandem sabit deplasman: P1 45VQ42 191,2 L/dk, P2 20VQ5 23,1 L/dk (eta_v 0,95 VARSAYIM); 140 bar mil gücü 57,2 kW = %104 SINIRDA (params/hidrolik.json pompa_guc_kontrolu) |
 | ACC1 akümülatör | A56 (2 adet) | tüp OD220 × 1300 |
 | Çarpan (basınç artırıcı) | A55 | Ø200/Ø140, oran 2,04 |
 | CYL1 enjeksiyon silindiri | A54 | Ø140 sondaj |
@@ -25,7 +25,7 @@ Fonksiyon:
 4. Aktüatör hatları tek çizgi. Çift etkili silindirin iki portu (ileri/geri) vardır; geri dönüş hattı eksik. Enjeksiyon silindirinin geri hattı da yok.
 5. Pompa kaçak yağ (case drain) hattı yok. Eksenel pistonlu pompada zorunlu, doğrudan tanka gider.
 6. Kapama devresi eksik: "Kalıp kont." kutusu tek başına, kapama silindiri (A35) ve basınç kontrolü yok. "İtici kont." çift silindirli itici grubunu (A41, 2 adet paralel) göstermiyor. Kutular aktüatöre bağlanmıyor.
-7. Pompa kontrolü belirsiz: "eksenel pistonlu" yazmış ama basınç kompanzasyonlu değişken debili olduğu belirtilmemiş. Çıkışta basınç filtresi yok.
+7. Pompa kontrolü belirsiz (ikiz_tasarim kararı 2026-11-19: pompa 4520VQ sabit deplasmanlı; değişken debi/basınç kompanzasyonu yerine U12 oransal basınç+debi valfi kullanılır): "eksenel pistonlu" yazmış ama basınç kompanzasyonlu değişken debili olduğu belirtilmemiş. Çıkışta basınç filtresi yok.
 8. Emniyet valfi RV1 dönüşü soğutucudan geçen manifolda gidiyor; yüksek debide tanka doğrudan gitmeli.
 
 Çizim / eksik ayrıntı:
@@ -39,7 +39,7 @@ Fonksiyon:
 Eleman adları (TK1, P1, RV1, ACV1, ACC1, Y1, CYL1) kullanıcıdan; "öneri" işaretliler yeni, ID'leri Kademe 3'te kesinleşir.
 
 ```
- TK1 (A61) ── emiş vanası + kaba süzgeç ── P1 (A62: değişken debili pistonlu pompa, M1 30 kW)
+ TK1 (A61) ── emiş vanası + kaba süzgeç ── P1/P2 (A62: 4520VQ sabit deplasmanlı kanatlı tandem, M1=A120 55 kW; debi/basınç U12 oransal)
    ▲                                          │            └── kaçak yağ (case drain) ──► TK1
    │                                          ▼
    │                                   CV1 çek valf (öneri) → PF1 basınç filtresi (öneri)

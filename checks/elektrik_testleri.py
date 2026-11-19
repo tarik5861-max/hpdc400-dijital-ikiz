@@ -47,7 +47,7 @@ def ton_ac(ex):
     return ex
 
 
-def calistir(m, bekle_ms=6700):
+def calistir(m, bekle_ms=8700):
     """Start bas-birak, yildiz->ucgen gecisi bitene kadar calistir."""
     m.girdi["HW.1B11A1"] = 1
     for _ in range(5):
@@ -111,7 +111,7 @@ def s2(m):
     m.girdi["HW.1B11A1"] = 0
     t3_dusus = t2_cekme = None
     onceki3 = 0
-    for i in range(int(8000 / DT)):
+    for i in range(int(10000 / DT)):
         v = m.step(DT)
         if v["HW.KM2"] and v["HW.KM3"]:
             r.hata.append(f"KM2 ve KM3 ayni taramada 1 (t={m.t} ms)")
@@ -131,7 +131,7 @@ def s2(m):
     for _ in range(5):
         m2.step(DT)
     m2.girdi["HW.1B11A1"] = 0
-    for i in range(int(8000 / DT)):
+    for i in range(int(10000 / DT)):
         v = m2.step(DT)
         if v["HW.KM2"] and v["HW.KM3"]:
             r.hata.append("[PLC ariza] KM2 ve KM3 ayni taramada 1")

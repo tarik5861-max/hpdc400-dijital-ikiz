@@ -13,8 +13,8 @@
  },
  "elemanlar": {
   "pompalar": [
-   {"id": "P1", "tip": "Ana Sabit/Değişken Debili Pompa", "motor": "M1", "nominal_debi_lpm": 120.0, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ on kisim 45VQ (sabit deplasmanli kanatli kartus)", "bagli_id": ["A62", "A98", "A99", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A114"], "varsayim": "ikiz_tasarim varsayimi: en kucuk 45VQ42 ~136 cm3/dev (42 USgpm @1200 d/dk) -> 1460 d/dk'da ~195 L/dk; 140 bar'da ~45 kW > 30 kW motor; 120 L/dk ile uyusmaz (acik nokta)"},
-   {"id": "P2", "tip": "Pilot / Yardımcı Pompa", "motor": "M1", "nominal_debi_lpm": 25.0, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ arka kisim 20VQ5 (16,4 cm3/dev -> ~24 L/dk @1460 d/dk), emniyet valfi 2000 psi", "bagli_id": ["A62", "A99", "A100", "A101", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A117", "A118", "A119"], "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 milinden (eski 'M2' elektrik.json'da yok)"}
+   {"id": "P1", "tip": "Ana Sabit Deplasmanli Kanatli Pompa (45VQ42)", "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)", "nominal_debi_lpm": 191.2, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ on kisim 45VQ (sabit deplasmanli kanatli kartus)", "bagli_id": ["A62", "A120", "A98", "A99", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A114"], "varsayim": "ikiz_tasarim karari: 45VQ42 136 cm3/dev x 1480 d/dk x eta_v 0.95 = 191.2 L/dk (eski 120 L/dk ve 30 kW uyumsuzlugu kapandi, motor A120 55 kW). VARSAYIM: eta_v 0.95, eta_hm 0.92 (kanatli pompa 140 bar tipik, katalog egrisi degil). Sema P1'i degisken debili sayiyor; 4520VQ sabit deplasmanli -> debi/basinc ayari U12 oransal basinc+debi valfi (LKPP-03, S102/S103) ile yapilir, pompa kompanzatoru yok.", "deplasman_cm3_dev": 136.0, "devir_dpm": 1480, "eta_v": 0.95, "eta_hm": 0.92},
+   {"id": "P2", "tip": "Pilot / Yardimci Sabit Deplasmanli Kanatli Pompa (20VQ5)", "motor": "M1 (A120, 55 kW 4p, 1480 d/dk)", "nominal_debi_lpm": 23.1, "nominal_basinç_bar": 140.0, "pompa_modeli": "Vickers/Eaton 4520VQ arka kisim 20VQ5 (16,4 cm3/dev -> ~24 L/dk @1460 d/dk), emniyet valfi 2000 psi", "bagli_id": ["A62", "A120", "A99", "A100", "A101", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A117", "A118", "A119"], "varsayim": "ikiz_tasarim varsayimi: tandem pompa -> P2 de M1 (A120) milinden (eski 'M2' elektrik.json'da yok). 16.4 cm3/dev x 1480 x 0.95 = 23.1 L/dk. VARSAYIM: eta_v 0.95, eta_hm 0.92.", "deplasman_cm3_dev": 16.4, "devir_dpm": 1480, "eta_v": 0.95, "eta_hm": 0.92}
   ],
   "akumulatorler": [
    {"id": "ACC1", "tip": "Enjeksiyon Hızlı Vuruş Akümülatörü", "hacim_lt": 2.6, "basinc_bar": 140.0, "baglanti": "Enjeksiyon manifold bloğu"},
@@ -33,5 +33,29 @@
    {"id": "LS1", "tip": "Mengene Kapalı Sınır Şalteri", "kanal": "AI10.1", "not": "DCC630 semasinda ayri kalip kapali limiti yok; VR1 kalip pozisyon cetveli esigi"},
    {"id": "LS2", "tip": "Enjeksiyon İleri Sınır Şalteri", "kanal": "DI9.16"}
   ]
+ },
+ "pompa_guc_kontrolu": {
+  "motor_kW": 55.0,
+  "devir_dpm": 1480.0,
+  "basinc_bar": 140.0,
+  "pompalar": {
+   "P1": {
+    "debi_lpm": 191.2,
+    "hidrolik_kW": 44.62,
+    "mil_kW": 51.05
+   },
+   "P2": {
+    "debi_lpm": 23.1,
+    "hidrolik_kW": 5.38,
+    "mil_kW": 6.16
+   }
+  },
+  "toplam_hidrolik_kW": 50.0,
+  "toplam_mil_kW": 57.21,
+  "mil_yuk_orani": 1.04,
+  "durum": "SINIRDA",
+  "eta_hm_095_ile_mil_kW": 55.4,
+  "hesap": "lib/hidrolik_ag_modeli.py pompa_guc_kontrolu(); Q=V*n*eta_v/1000, P_hid=p*Q/600, P_mil=p*V*n/(600000*eta_hm)",
+  "degerlendirme": "Hidrolik cikis 50.0 kW <= 55 kW karsilanir. Mil gucu (eta_hm 0.92) 57.2 kW = %104 -> SINIRDA: yalniz P1+P2 ikisi birden 140 bar tam debide (akumulator sarji + pilot) surekli calisirsa motor ~%4 asiri yuklenir. Hafifletenler: P2 pilot hatti cogunlukla dusuk debide/emniyetten doner, U12 oransal basinc ile cevrim disi P1 bosaltma (unloading); sarj kisa sureli (S1 yerine S6 yuk). Surekli 140 bar tam debi gerekiyorsa 75 kW veya P2 icin bosaltma valfi."
  }
 }

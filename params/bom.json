@@ -81,6 +81,7 @@
         "A117",
         "A118",
         "A119",
+        "A120",
         "A71",
         "A72",
         "A81",
@@ -311,6 +312,7 @@
           "script": "parts/A62_motor_pompa.py",
           "note": "pompa agaci: Vickers/Eaton 4520VQ tandem kanatli pompa (45VQ + 20VQ kartus); A102/A108, A103/A109, A104/A110, A105/A111, A106/A107/A112/A113, A115/A116 ayni scripti farkli olculerle kullanir",
           "children": [
+              {"id": "A120", "name": "Elektrik motoru M1 55 kW 4 kutup (IEC 280S/M, B3)", "qty": 1, "script": "parts/A120_motor_55kw.py"},
               {"id": "A98", "name": "Pompa on govde 45VQ (montaj flansi, P1 cikis)", "qty": 1, "script": "parts/A98_pompa_on_govde.py"},
               {"id": "A99", "name": "Giris govdesi 252283 (ortak emis, 4-civatali flans)", "qty": 1, "script": "parts/A99_pompa_giris_govdesi.py"},
               {"id": "A100", "name": "Arka kapak 20VQ (4-civatali kapak 250824, P2 cikis, emniyet valfi yuvasi)", "qty": 1, "script": "parts/A100_pompa_arka_kapak.py"},

@@ -29,7 +29,7 @@ Sayım (131 kayıt): DI 65 (aktif 43, isteğe bağlı 6, ayrılmış 12, kapsam 
 | Ön kapı | M4 0,75 kW motorlu kapı + buton/emniyet | A71 elle sürgülü varsayıldı; motor/buton isteğe bağlı; limitler aktif | params A71 (kızak üzerinde sürgü) |
 | Arka kapı | arka kapı limit 1/2, ST3-1 | aktif ama **ağaçta arka koruma yok** (A71'e bağlandı) | açık nokta: bom'a arka koruma eklenmeli mi |
 | FR1 | 37–50 A | 28–40 A, ayar 33 A (faz yolunda) | 400t_hesap (aşağıda) |
-| TC1 | 630 VA, U1 de bundan beslenir | **Seçenek A (karar K-EL-03):** U1 ayrı L-N + 6 A MCB, TC1 630 VA kalır (yük 388 VA) | 400t_hesap, Claude kararı |
+| TC1 | 630 VA, U1 de bundan beslenir | **Seçenek A (karar K-EL-03):** U1 ayrı L-N + 6 A MCB, TC1 630 VA kalır (yük 425 VA, kalkış 785 VA SINIRDA) | 400t_hesap, Claude kararı |
 | FU12 | 16 A tek kol | 2×10 A (valf / oransal kart) önerisi | 400t_hesap |
 | Y-Δ geçişi | KT1 + KM2/KM3 NC yardımcı kilit | + 50 ms ölü zaman, KM2/KM3 geri bildirimi PLC'de izlenir | 400t_hesap / yeni |
 | KA9 | kapı limit 2 kontaklarına paralel bulanık kontaklar | paralel köprü YOK, seri zincir | güvenlik |
@@ -55,19 +55,20 @@ Sayım (131 kayıt): DI 65 (aktif 43, isteğe bağlı 6, ayrılmış 12, kapsam 
 Vuruş konumu (global.shot_position alt/orta/üst) mekanik ayardır (A57 takoz); elektrik kanalı yoktur. Konum bilgisi **operatör HMI girişidir** (P.VURUS_KONUMU_GIRILDI, enjeksiyon izninde). Yanlış giriş riskine karşı isteğe bağlı 3 endüktif sensör önerilir.
 
 ## 4. Hesaplar (formül, varsayım, sonuç)
-Kaynak tablo: IEC 60364-5-52 B.52.4 (Cu/PVC, yöntem B2). Motor verileri Y2 serisi tipik katalog değerleri (etiket gelince değişir). Eskiden KULLANICI_ONAYI işaretli kalemler 2026-11-18'de Claude kararı oldu (JSON'da `CLAUDE_KARARI_SAHA_DOGRULAMASI`); liste bölüm 9.
+Kaynak tablo: IEC 60364-5-52 B.52.4 (Cu/PVC, yöntem B2). Motor verileri 55 kW 4p tipik katalog değerleri = **ikiz_tasarim varsayımı** (2026-11-19: M1 30 → 55 kW, IEC 280S/M, A120; saha verisi istenmedi, etiket gelince değişir). Eskiden KULLANICI_ONAYI işaretli kalemler 2026-11-18'de Claude kararı oldu (JSON'da `CLAUDE_KARARI_SAHA_DOGRULAMASI`); liste bölüm 9.
 
 | Kalem | Formül / gerekçe | Sonuç |
 |---|---|---|
-| M1 In (30 kW, 380 V, η 0,922, cosφ 0,87) | P/(√3·U·η·cosφ) | **56,8 A**; faz sargısı In/√3 = 32,8 A; yıldızda kalkış ≈133 A |
-| FR1 konumu | şema 9-1: KM1 → FR1 → U1V1W1 = faz yolu | ayar **33 A**, aralık **28–40 A**. DCC630 37–50 A: faz yolunda alt sınır %13 yüksek (eksik koruma), hat yolunda üst sınır 56,8 A'nın altında → ikisine de uymuyor |
-| KM1 / KM2 | faz akımı ≥ 32,8 A AC-3 | 38–40 A sınıfı |
-| KM3 | In/3 = 18,9 A | 25 A sınıfı |
-| KT1 / ölü zaman | yüksüz pompa kalkışı varsayımı | 6 s / 50 ms (Claude kararı, bölüm 9) |
-| Ana besleme | Ib = 56,8 + 2,7 + 4,2 = 63,7 A; koruma 80 A MCCB | **25 mm²** (Iz 80 A), ΔU %0,43 @20 m (DCC630 ile aynı kesit) |
-| Motor ayakları (6 iletken) | 32,8 A / (0,87 ortam 40 °C × 0,80 gruplama) | **16 mm²** (30 °C'de 10 mm² yeterdi); katsayılar Claude kararı (bölüm 9) |
+| M1 In (55 kW, 380 V, η 0,936, cosφ 0,88; ikiz_tasarim varsayımı) | P/(√3·U·η·cosφ) | **101,5 A**; faz sargısı In/√3 = 58,6 A; DOL ≈ 710 A, Y-Δ yıldızda ≈ 237 A (1/3 DOL) |
+| FR1 konumu | şema 9-1: KM1 → FR1 → U1V1W1 = faz yolu | ayar **58,6 A**, aralık **45–63 A** (ayar/üst sınır 0,93 → **SINIRDA**). DCC630 37–50 A: 55 kW için **FAIL** (faz akımı 58,6 A > 50 A) |
+| KM1 / KM2 | faz akımı 58,6 A; 65 A sınıfı kullanım 0,90 = SINIRDA | **80 A AC-3** (kullanım 0,73) |
+| KM3 | In/3 = 33,8 A | **40 A AC-3**, kullanım 0,85 = **SINIRDA** (yalnız 8 s yıldız görevi; 50 A sınıfı alternatif 0,68) |
+| Kontaktör bobinleri | ikiz_tasarim varsayımı: KM1/KM2/KM3 çekme 200 VA, tutma 20 VA | TC1 yükünü artırır (aşağıda) |
+| KT1 / ölü zaman | 55 kW rotor ataleti, yıldız akımı 237 A; yüksüz kalkış varsayımı | **8 s** / 50 ms (ikiz_tasarim varsayımı; 30 kW'ta 6 s) |
+| Ana besleme | Ib = 101,5 + 2,7 + 4,2 = 108,4 A; koruma **125 A MCCB** (Ib/In 0,87 = SINIRDA); ayırıcı 160 A | **70 mm²** (Iz 151 A; 50 mm² Iz 119 A < 125 A FAIL), ΔU %0,31 @20 m. DCC630 3×25 mm² / 100 A bu motorda YETERSİZ. B2 tablosunda 50/70 mm² değerleri tablo uzantısı (ikiz_tasarim varsayımı) |
+| Motor ayakları (6 iletken) | 58,6 A / (0,87 ortam 40 °C × 0,80 gruplama) | **35 mm²** (Iz 99 × 0,696 = 68,9 A, kullanım 0,85 = **SINIRDA**; 50 mm² alternatif 0,71); 25 mm² FAIL; katsayılar Claude kararı (bölüm 9) |
 | 24 V bütçesi | 5×35 W solenoid + oransal kartlar 8,1 A + 2,15 A lojik | 17,5 A / 20,8 A = **%84 (sınırda)**; FU12 16 A'da yük/In 0,96 (sınırda) → 2×10 A kol; FU10 4 A ise 0,54 OK (1 A olsaydı yetersiz) |
-| TC1 | U1 753 VA (PF 0,65 varsayım) + PS307 230 + M10 107 + fan 19 + bobin 32 | tepe **1141 VA > 630 VA**. Öneri A: U1 ayrı L-N → TC1 yükü 388 VA (630 yeter). B: 1600 VA (FU11 10 A). Gerçek akım pensle ölçülmeli (DCC630 sahada çalışıyor; gerçek yük muhtemelen düşük) |
+| TC1 | U1 753 VA (PF 0,65 varsayım) + PS307 230 + M10 107 + fan 19 + bobin 69 (eskiden 32) | tepe **1178 VA > 630 VA** (kalkış 1538 VA). Öneri A: U1 ayrı L-N → TC1 yükü 425 VA (surekli 0,67 OK; KM1+KM3 çekme anında ~785 VA = 1,25×630, **SINIRDA**, ~100 ms). B: 1600 VA (FU11 10 A; kalkış 0,96 SINIRDA). Gerçek akım pensle ölçülmeli (DCC630 sahada çalışıyor; gerçek yük muhtemelen düşük) |
 | A95 (1,1 kW, 4p) | η 0,81, cosφ 0,76 | In **2,7 A**, QM2 2,5–4 A ayar 2,7 A; KM4/KM5 9 A AC-3 ters yön kilitli; 1,5 mm² |
 | A95 moment | 87 Nm pinyon / (35·0,94) | 2,64 Nm / 7,24 Nm = %37 |
 | A97 enkoder | 103,6 mm/dk / 1450 d/dk = 0,0714 mm/devir | 2 darbe/devir A/B → 48 Hz (standart DI yeter), 0,036 mm/darbe; >4 ppr ise hızlı sayıcı gerekir. Durma kayması 0,17 mm |
@@ -107,7 +108,7 @@ Her satırın ilk adımı: **GÜVENLİK ÖN ADIMI = LOTO 1–7** (kalıp açık,
 11. Enjeksiyon konum enkoderi ikizde ayrılmış; faz geçişleri süre parametresiyle (gerçek makinede konum tabanlı).
 
 ## 8. KARARLAR için önerilen satır
-| 2026-11-18 | Elektrik katmanı fonksiyon düzeyinde uyarlandı: DCC630 şablon, 400 t'ye göre yeniden boyutlandırıldı; tek kaynak params/elektrik.json (131 kanal kaydı, köken/güven/durum alanlı). Kalıp yüksekliği valf değil KM4/KM5 + A97 enkoder; kolon çekme ve maça kapsam dışı; FR1 28–40 A (faz yolu, 33 A); TC1 için U1 ayrı besleme (seçenek A); S121 enerjisiz = boşalt + KA_ES; S.AKU_BOS katı PT2 < 2 bar; kullanıcı bekleyen kararları devretti → hepsi `400t_hesap` / `claude_karari_saha_dogrulamasi_gerekir` (elektrik.json → kararlar[]) | Gerçek 400 t şeması yok; teşhis kademeleri için çalışan elektrik katmanı gerekli. Hesap: docs/elektrik_400t.md, out/elektrik_400t_hesap.txt |
+| 2026-11-18 | Elektrik katmanı fonksiyon düzeyinde uyarlandı: DCC630 şablon, 400 t'ye göre yeniden boyutlandırıldı; tek kaynak params/elektrik.json (131 kanal kaydı, köken/güven/durum alanlı). Kalıp yüksekliği valf değil KM4/KM5 + A97 enkoder; kolon çekme ve maça kapsam dışı; FR1 faz yolu (30 kW tasarımında 28–40 A / 33 A; 55 kW güncellemesi 2026-11-19: 45–63 A / 58,6 A); TC1 için U1 ayrı besleme (seçenek A); S121 enerjisiz = boşalt + KA_ES; S.AKU_BOS katı PT2 < 2 bar; kullanıcı bekleyen kararları devretti → hepsi `400t_hesap` / `claude_karari_saha_dogrulamasi_gerekir` (elektrik.json → kararlar[]) | Gerçek 400 t şeması yok; teşhis kademeleri için çalışan elektrik katmanı gerekli. Hesap: docs/elektrik_400t.md, out/elektrik_400t_hesap.txt |
 
 ## 9. Claude kararı, saha ölçümü gerekir (2026-11-18)
 Kullanıcı bekleyen tüm kararları devretti ("doğru olanı yap"). Aşağıdakiler `koken: 400t_hesap`, `durum: claude_karari_saha_dogrulamasi_gerekir` (elektrik.json → `kararlar[]`, ilgili kayıtlarda `karar` alanı). Saha ölçümü/etiket gelince değişir.
@@ -115,12 +116,12 @@ Kullanıcı bekleyen tüm kararları devretti ("doğru olanı yap"). Aşağıdak
 | Kalem | Karar / varsayım | Sahada ne ölçülecek |
 |---|---|---|
 | K-EL-01 S121 polaritesi | enerjisiz = boşalt (P.S121_ENERJILI_DESARJ = 0) + KA_ES (E-stop → S24V kesilir) | S121 valf tipi ve etiketi; deşarj orifisi ve boşalma süresi (PT2 < 2 bar); **E-stop'ta kontrolsüz silindir hareketi**: KA_ES oransal kart beslemesini de kestiğinden U16/S424 servo valfin enerjisiz sürgü konumu, S113 kapanma süresi; akümülatör boşalırken enjeksiyon silindirine yol açılıyor mu; A35 pilot çek valfi (mafsal ara konumda) |
-| K-EL-03 TC1 / U1 | seçenek A: U1 ayrı L-N + 6 A MCB; TC1 630 VA, yük 388 VA (oran 0,62) | U1 ve TC1 sekonder akımı pensle (motor kalkışı + tüm valfler) |
+| K-EL-03 TC1 / U1 | seçenek A: U1 ayrı L-N + 6 A MCB; TC1 630 VA, yük 425 VA (oran 0,67; kalkış 785 VA SINIRDA) | U1 ve TC1 sekonder akımı pensle (motor kalkışı + tüm valfler) |
 | 24 V bütçesi | 5 × 35 W solenoid, oransal kartlar 8,1 A, lojik 2,15 A → 17,5 A / 20,8 A (%84); FU12 2 × 10 A kola bölünür | valf etiket güçleri, U1 çıkış akımı |
-| Güç faktörü | U1 S-500-24 PFC'siz PF 0,65; motor cosφ 0,87 / A95 0,76 | U1 etiketi; M1 etiket akımı (In 56,8 A hesap) |
-| FR1 | faz yolunda 28–40 A, ayar 33 A | M1 etiket akımı; FR1 konumu (şema 9-1) |
-| KT1 / ölü zaman | yıldız 6 s, Y→Δ 50 ms | pompa yüksüz kalkış süresi (akım düşüşü) |
-| Kablo katsayıları | ortam 40 °C (0,87) × gruplama 0,80 → 16 mm² | pano içi sıcaklık |
+| Güç faktörü | U1 S-500-24 PFC'siz PF 0,65; motor cosφ 0,88 (ikiz_tasarim varsayımı) / A95 0,76 | U1 etiketi; M1 etiket akımı (In 101,5 A hesap) |
+| FR1 | faz yolunda 45–63 A, ayar 58,6 A (SINIRDA) | M1 etiket akımı; FR1 konumu (şema 9-1) |
+| KT1 / ölü zaman | yıldız 8 s, Y→Δ 50 ms | pompa yüksüz kalkış süresi (akım düşüşü) |
+| Kablo katsayıları | ortam 40 °C (0,87) × gruplama 0,80 → 35 mm² (SINIRDA) | pano içi sıcaklık |
 | Eşikler | PT2 enj. min 126 / yüksek 150 / deşarj tamam < 2 bar 10 s (K-EL-05, **katı lt**); PT1 düşük 112; yağ 55/65 °C; LOTO: AI10.1 > 20 mm, PT1 < 2, PCARP < 2 bar | işletme basınçları, PT2 sıfır kayması < 0,5 bar |
 | K-EL-06d FKAP eşiği | S.KILITLI_KUVVET_ALTINDA = DI5.08 ∧ (sensör yok ∨ FKAP > 50 kN); P.KAPAMA_KUVVET_SENSORU_VAR = 0 | DI5.08 mafsal kilidini mi kalıp temasını mı gösteriyor; sensör varsa sıfır kayması ≤ %1 FS |
 | Çevrim süreleri | FAZ1 800 / FAZ2 60 / FAZ3 3000 ms; piston geri 2500 ms; mafsal yağlama 5000 ms her 10 çevrimde; itici açıklık min 300 mm; S118 1500 ms | gerçek çevrim kaydı |

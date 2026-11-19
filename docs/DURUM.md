@@ -15,7 +15,7 @@ _Son güncelleme: 2026-11-19. Her `/kapanis`'te yeniden yazılır (en fazla ~60 
 - Statik kontrol YEŞİL: 166 instance, 0 hata, 0 uyarı.
 
 ## Açık noktalar
-- P1 debi uyuşmazlığı: en küçük 45VQ42 ~136 cm3/dev → 1460 d/dk'da ~195 L/dk (hidrolik.json 120 L/dk); 140 bar'da ~45 kW > 30 kW motor. Şema P1'i değişken debili pistonlu sayıyor, 4520VQ sabit deplasmanlı kanatlı.
+- KAPANDI (2026-11-19): P1 debi/motor uyuşmazlığı. P1 191,2 L/dk, P2 23,1 L/dk (A120 55 kW, 1480 d/dk); 140 bar mil gücü 57,2 kW = %104 SINIRDA (yalnız P1+P2 eşzamanlı tam yükte). Sabit deplasman + U12 oransal valf ikiz_tasarim kararı.
 
 ## Sıradaki adım
 - Kademe 4 (Yazılım / PLC durum makinesi ve sıralama mantığı) çalışmalarına başlanması.

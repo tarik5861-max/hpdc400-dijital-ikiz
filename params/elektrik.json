@@ -29,21 +29,20 @@
   "notes": [
    "HPDC-400 elektrik katmani - guc/kontrol hesaplari (olcu-mimari, 2026-11-18)",
    "Girdiler: params/params.json + elektrik.json hesap_girdileri. Varsayimlar CLAUDE_KARARI_SAHA_DOGRULAMASI isaretli.",
-   "1) M1 pompa motoru (A62)",
-   "In = P/(sqrt3*U*eta*cos) = 30000/(1.732*380*0.922*0.87) = 56.8 A",
-   "Faz sargisi akimi (ucgen calisma) = In/sqrt3 = 32.8 A",
-   "Kalkis: DOL ~7.0xIn = 398 A; yildizda 1/3 -> 133 A (moment 1/3)",
-   "FR1 konumu (sema 9-1, bu oturumda goruntu okundu, guven orta-yuksek): KM1 -> FR1 -> U1/V1/W1 = FAZ SARGI YOLU.",
-   "-> FR1 ayari = In/sqrt3 = 32.8 A. Uygun aralik 28-40 A (or. 3RU2136-4FB0 / LRD3355 sinifi), ayar 33 A.",
-   "DCC630 37-50 A: alt sinir 37 A = 1.13 x I_faz -> faz yolunda %13 eksik koruma;",
-   "hat yolunda olsaydi In 56.8 A > 50 A ust sinir -> ikisine de uymuyor. Ya motor etiket akimi farkli ya role secimi hatali. 400 t icin 28-40 A.",
-   "KM1 (ana) ve KM2 (ucgen) faz akimi tasir: >= 32.8 A AC-3 -> 38-40 A sinifi (or. LC1D38 / 3RT2035).",
-   "KM3 (yildiz) yildiz calismada In/3 = 18.9 A -> 25 A sinifi (or. LC1D25 / 3RT2026).",
-   "KT1 yildiz suresi 6 s (pompa yuksuz kalkis varsayimi), yildiz->ucgen olu zaman 50 ms + KM3 NC yardimci kontak kilidi (CLAUDE_KARARI_SAHA_DOGRULAMASI).",
+   "1) M1 pompa motoru (A62, A120) - 2026-11-19: 30 kW -> 55 kW 4 kutup (IEC 280S/M, A120), 380 V, yildiz-ucgen. Saha verisi YOK; tum degerler IKIZ_TASARIM_VARSAYIMI (katalog tipik): eta 0.936, cosphi 0.88, Ia/In 7.0",
+   "In = P/(sqrt3*U*eta*cos) = 55000/(1.732*380*0.936*0.88) = 101.5 A (varsayim 100-105 A bandinda)",
+   "Faz sargisi akimi (ucgen calisma) = In/sqrt3 = 58.6 A",
+   "Kalkis: DOL ~7.0xIn = 710 A; yildiz-ucgende 1/3 -> 237 A (moment 1/3)",
+   "FR1 konumu (sema 9-1, guven orta-yuksek): KM1 -> FR1 -> U1/V1/W1 = FAZ SARGI YOLU.",
+   "-> FR1 ayari = In/sqrt3 = 58.6 A. Uygun aralik 45-63 A (or. 3RU2146-4HB0 / LRD4365 sinifi), ayar 58.6 A (araligin ust bolgesi, 58.6/63 = 0.93: SINIRDA - aralik ustune yakin, ince ayar payi dar).",
+   "DCC630 37-50 A (30 kW icin secilmisti) 55 kW icin FAIL: faz akimi 58.6 A > 50 A ust sinir. DCC630 rolesi yeniden kullanilamaz.",
+   "KM1 (ana) ve KM2 (ucgen) faz akimi tasir: 58.6 A -> 65 A AC-3 sinifi kullanim 0.90 = SINIRDA; secim 80 A AC-3 (or. LC1D80 / 3RT2045), kullanim 0.73 OK.",
+   "KM3 (yildiz) yildiz calismada In/3 = 33.8 A -> 40 A AC-3 (or. LC1D40A / 3RT2036): kullanim 0.85 = SINIRDA (yalniz 6 s yildiz suresi, kisa sureli gorev; surekli degil). 50 A sinifi 0.68 OK alternatif.",
+   "KT1 yildiz suresi 6 s -> 8 s (IKIZ_TASARIM_VARSAYIMI: 55 kW pompa/rotor atalet ve yuksuz kalkis icin daha uzun hizlanma; yildiz akimi 237 A ~ In'nin 2.3 kati), yildiz->ucgen olu zaman 50 ms + KM3 NC yardimci kontak kilidi. Saha: yildizda hiz ~%90 olunca gecis (akim dususu olculmeli).",
    "2) Kablo kesitleri (IEC 60364-5-52 Tablo B.52.4, Cu/PVC 70C, 3 yuklu iletken, yontem B2 (kanal/boru icinde cok damarli))",
-   "Ana besleme: Ib = M1 56.8 + A95 2.7 + TC1(1.6 kVA) 4.2 = 63.7 A -> koruma 80 A MCCB; Iz>=In_koruma -> 25 mm2 (Iz 80 A)",
-   "Gerilim dusumu (20 m, cos 0.87) = %0.44 (< %3 OK). DCC630: 3x25 + N25 mm2, 100 A salter -> 400 t'de ayni kesit, salter 100 A ayirici + 80 A koruma.",
-   "Motor ayaklari (6 iletken, 2 devre gruplu): Ib = 32.8 A; k = 0.87*0.80 = 0.696 -> 16 mm2 (30C'de 10 mm2 yeterdi). DCC630: 3x16 mm2 -> ayni.",
+   "Ana besleme: Ib = M1 101.5 + A95 2.7 + TC1(1.6 kVA) 4.2 = 108.4 A -> koruma 125 A MCCB (Ib/In 0.87 SINIRDA); Iz>=In_koruma -> 70 mm2 (Iz 151 A; 50 mm2 Iz 119 A < 125 A FAIL, 35 mm2 FAIL). B2 tablosu 50/70 mm2 degerleri tablo uzantisi = IKIZ_TASARIM_VARSAYIMI.",
+   "Gerilim dusumu (20 m, cos 0.88) = %0.31 (< %3 OK). DCC630: 3x25+N25 mm2, 100 A salter -> 55 kW'ta YETERSIZ (25 mm2 Iz 80 A < Ib 108 A): 400 t'de 3x70+N35 mm2, 160 A ayirici + 125 A koruma.",
+   "Motor ayaklari (6 iletken, 2 devre gruplu): Ib = 58.6 A; k = 0.87*0.80 = 0.696 -> 35 mm2 (Iz 99 x 0.696 = 68.9 A, kullanim 0.85 = SINIRDA; 25 mm2 55.7 A FAIL; 50 mm2 82.8 A / 0.71 OK alternatif). DCC630: 3x16 mm2 -> 55 kW'ta YETERSIZ.",
    "A95 kalip yuksekligi motoru: 1.5 mm2 (4x1.5 + PE), enkoder ekranli 4x0.25.",
    "TC1 primer QF11 10 A / 2.5 mm2 (DCC630 ile ayni).",
    "3) 24 V DC butcesi (U1 S-500-24)",
@@ -54,11 +53,11 @@
    "FU10: bu oturumda 400 dpi okuma 'AS10-4A 10x38' (onceki okuma 1 A). 4 A ise yuk/In = 0.54 OK; 1 A olsaydi 2.1 A yuk icin YETERSIZ.",
    "4) TC1 380/220 V kontrol trafosu (DCC630: 630 VA; sema 9-3: U1 TC1 sekonderinden beslenir, guven orta)",
    "U1 giris: 421 W / eta 0.86 = 490 W, PF 0.65 -> 753 VA",
-   "PS307 5 A: 230 VA | M10 75 W: 107 VA | FAN1: 19 VA | bobin tutma: 32 VA",
-   "Surekli tepe = 1141 VA ; motor kalkisinda (KM1+KM3 cekme) = 1261 VA",
-   "630 VA ile oran = 1.81 -> YETERSIZ (tepe yukte). Trafo 1.2x kisa sureli asiri yuku kaldirir ama surekli degil.",
-   "400 t onerisi (CLAUDE_KARARI_SAHA_DOGRULAMASI, iki secenek): (A) U1'i TC1'den ayir, kendi L-N + 6 A MCB ile besle -> TC1 yuku 388 VA / 630 = 0.62 (DCC630 trafosu yeter);",
-   "(B) U1 TC1'de kalirsa TC1 >= 1268 VA -> 1600 VA standart boy. Gercek akim pens ampermetre ile olculmeli;",
+   "PS307 5 A: 230 VA | M10 75 W: 107 VA | FAN1: 19 VA | bobin tutma: 69 VA (2026-11-19: KM1/KM2/KM3 80/80/40 A sinifi bobinler 20 VA tutma, 200 VA cekme = IKIZ_TASARIM_VARSAYIMI; 30 kW'ta 32 VA idi)",
+   "Surekli tepe = 1178 VA ; motor kalkisinda (KM1+KM3 cekme) = 1538 VA (55 kW kontaktor bobinleri sonrasi; eski 1141/1261)",
+   "630 VA ile oran = 1.87 -> YETERSIZ (tepe yukte). Trafo 1.2x kisa sureli asiri yuku kaldirir ama surekli degil.",
+   "400 t onerisi (CLAUDE_KARARI_SAHA_DOGRULAMASI, iki secenek): (A) U1'i TC1'den ayir, kendi L-N + 6 A MCB ile besle -> TC1 yuku 425 VA / 630 = 0.67 surekli OK; KM1+KM3 cekme aninda (~100 ms) 785 VA = 1.25 x 630 -> SINIRDA (bobin gerilim cokmesi olasi, trafo regulasyonu/bobin secimi sahada dogrulanmali);",
+   "(B) U1 TC1'de kalirsa TC1 >= 1538 VA kalkista -> 1600 VA standart boy (kalkis 0.96 SINIRDA). Gercek akim pens ampermetre ile olculmeli;",
    "DCC630 sahada calistigina gore gercek yuk muhtemelen daha dusuk (oransal kartlar tepe akimda degil, es zamanli valf sayisi az).",
    "FU11 AG10-6A: (A) 630 VA/220 V = 2.9 A -> 6 A OK; (B) 1600 VA/220 V = 7.3 A -> 10 A gL'ye cikmali. QF11 10 A: (A) primer 1.7 A OK; (B) 4.2 A, inrush ~25x = 105 A -> 10 A D egrisi.",
    "5) Kalip yuksekligi motoru A95 (1.1 kW, 4 kutup, 1450 d/dk, i=35)",
@@ -130,12 +129,14 @@
    "koken": "dcc630_sablon"
   },
   "M1": {
-   "P_kW": 30,
+   "P_kW": 55,
    "kutup": 4,
-   "eta": 0.922,
-   "cosphi": 0.87,
+   "eta": 0.936,
+   "cosphi": 0.88,
    "Ia_In": 7.0,
-   "kaynak": "params.global.pump_motor_kW; eta/cosphi: Y2-200L-4 30 kW katalog tipik (380 V: 56,8 A). Etiket degeri gelince degisir",
+   "baglanti": "yildiz-ucgen, 380 V",
+   "govde": "IEC 280S/M",
+   "kaynak": "params.global.pump_motor_kW (55); IKIZ_TASARIM_VARSAYIMI: eta/cosphi 55 kW 4p katalog tipik (380 V: In ~101.5 A, bant 100-105 A); Y-D kalkis akimi ~1/3 DOL. Saha verisi istenmedi; etiket degeri gelince degisir",
    "onay": "CLAUDE_KARARI_SAHA_DOGRULAMASI: motor etiket akimi (In) sahadan okunmali"
   },
   "A95": {
@@ -156,8 +157,11 @@
     "10": 46,
     "16": 62,
     "25": 80,
-    "35": 99
+    "35": 99,
+    "50": 119,
+    "70": 151
    },
+   "Iz_B2_50_70_not": "IKIZ_TASARIM_VARSAYIMI: 50/70 mm2 degerleri tablo uzantisi (onceki sirayla uyumlu), IEC tablosundan dogrulanmali",
    "k_ortam_40C": 0.87,
    "k_grup_2devre": 0.8,
    "L_besleme_m": 20,
@@ -205,57 +209,77 @@
    "M10_cos": 0.7,
    "FAN1_W": 17,
    "bobin_tutma_VA": {
-    "KM1": 8,
-    "KM2": 8,
-    "KM3": 7,
+    "KM1": 20,
+    "KM2": 20,
+    "KM3": 20,
     "KT1": 2,
     "KM4_veya_KM5": 7
    },
    "bobin_cekme_VA": {
-    "KM1": 75,
-    "KM2": 75,
-    "KM3": 60
+    "KM1": 200,
+    "KM2": 200,
+    "KM3": 200
    }
   }
  },
  "hesap_sonuclari": {
   "M1": {
-   "In_A": 56.8,
-   "I_faz_A": 32.8,
-   "Ikalkis_DOL_A": 398,
-   "Ikalkis_yildiz_A": 133
+   "In_A": 101.5,
+   "I_faz_A": 58.6,
+   "Ikalkis_DOL_A": 710,
+   "Ikalkis_yildiz_A": 237,
+   "koken": "400t_hesap",
+   "varsayim": "IKIZ_TASARIM_VARSAYIMI (eta 0.936, cosphi 0.88, Y-D kalkis 1/3 DOL)"
   },
   "FR1": {
    "konum": "faz_sargi_yolu (KM1 ile U1V1W1 arasi)",
-   "ayar_A": 32.8,
+   "ayar_A": 58.6,
    "aralik_A": [
-    28,
-    40
+    45,
+    63
    ],
    "dcc630_degeri_A": [
     37,
     50
    ],
-   "degerlendirme": "DCC630 araligi 30 kW / 380 V icin uygun degil (faz yolunda alt sinir %13 yuksek)"
+   "durum": "SINIRDA (ayar/aralik ust siniri 0.93)",
+   "degerlendirme": "DCC630 araligi 37-50 A 55 kW icin FAIL (faz akimi 58.6 A > 50 A). 45-63 A rolede ayar araligin ust bolgesinde: SINIRDA"
   },
   "kontaktor": {
-   "KM1_AC3_min_A": 32.8,
-   "KM2_AC3_min_A": 32.8,
-   "KM3_AC3_min_A": 18.9,
+   "KM1_AC3_min_A": 58.6,
+   "KM2_AC3_min_A": 58.6,
+   "KM3_AC3_min_A": 33.8,
    "secim": {
-    "KM1": "38-40 A AC-3",
-    "KM2": "38-40 A AC-3",
-    "KM3": "25 A AC-3"
+    "KM1": "80 A AC-3",
+    "KM2": "80 A AC-3",
+    "KM3": "40 A AC-3"
    },
-   "KT1_s": 6.0,
+   "kullanim": {
+    "KM1": 0.73,
+    "KM2": 0.73,
+    "KM3": 0.85
+   },
+   "sinirda": "KM3 40 A: kullanim 0.85 SINIRDA (6-8 s kisa sureli yildiz gorevi); 65 A sinifi KM1/KM2 icin 0.90 SINIRDA oldugundan 80 A secildi",
+   "bobin_VA": {
+    "KM1": {"cekme": 200, "tutma": 20},
+    "KM2": {"cekme": 200, "tutma": 20},
+    "KM3": {"cekme": 200, "tutma": 20},
+    "kaynak": "IKIZ_TASARIM_VARSAYIMI: 40-80 A sinifi AC bobin tipik"
+   },
+   "KT1_s": 8.0,
    "olu_zaman_ms": 50
   },
   "kablo": {
-   "ana_besleme_mm2": 25.0,
-   "ana_Ib_A": 63.7,
-   "ana_koruma_A": 80,
-   "dU_ana_yuzde": 0.44,
-   "motor_ayak_mm2": 16.0,
+   "ana_besleme_mm2": 70.0,
+   "ana_Ib_A": 108.4,
+   "ana_koruma_A": 125,
+   "ana_koruma_durum": "SINIRDA (Ib/In 0.87)",
+   "ana_Iz_A": 151,
+   "dU_ana_yuzde": 0.31,
+   "motor_ayak_mm2": 35.0,
+   "motor_ayak_durum": "SINIRDA (58.6 / 68.9 = 0.85; 50 mm2 alternatif 0.71)",
+   "motor_ayak_Iz_derated_A": 68.9,
+   "ayirici_A": 160,
    "A95_mm2": 1.5,
    "TC1_primer_mm2": 2.5
   },
@@ -273,12 +297,15 @@
   },
   "TC1": {
    "dcc630_VA": 630,
-   "hesap_surekli_VA": 1141,
-   "hesap_kalkis_VA": 1261,
-   "oran_630": 1.81,
+   "hesap_surekli_VA": 1178,
+   "hesap_kalkis_VA": 1538,
+   "oran_630": 1.87,
+   "not": "2026-11-19: 55 kW kontaktor bobinleri (VA artisi) sonrasi; eski 1141/1261/1.81",
    "secenek_A": {
     "aciklama": "U1 ayri L-N + 6 A MCB, TC1 630 VA kalir",
-    "TC1_yuk_VA": 388,
+    "TC1_yuk_VA": 425,
+    "TC1_kalkis_VA": 785,
+    "durum": "surekli 0.67 OK; kalkis (KM1+KM3 cekme ~100 ms) 785/630 = 1.25 SINIRDA",
     "FU11_A": 6,
     "QF11_A": 10
    },
@@ -2635,9 +2662,10 @@
   },
   {
    "tag": "M1",
-   "aciklama": "ana yag pompasi motoru 30 kW 4p yildiz-ucgen",
+   "aciklama": "ana yag pompasi motoru 55 kW 4p yildiz-ucgen (IEC 280S/M; eta 0.936 cosphi 0.88 In ~101.5 A = IKIZ_TASARIM_VARSAYIMI)",
    "bagli_id": [
-    "A62"
+    "A62",
+    "A120"
    ],
    "koken": "dcc630_sablon",
    "guven": "yuksek"
@@ -2645,9 +2673,10 @@
   {
    "tag": "KM1",
    "aciklama": "ana kontaktor (faz yolu)",
-   "secim": "38-40 A AC-3",
+   "secim": "80 A AC-3",
    "bagli_id": [
     "A62",
+    "A120",
     "A72"
    ],
    "koken": "400t_hesap",
@@ -2656,9 +2685,10 @@
   {
    "tag": "KM2",
    "aciklama": "ucgen kontaktoru",
-   "secim": "38-40 A AC-3",
+   "secim": "80 A AC-3",
    "bagli_id": [
     "A62",
+    "A120",
     "A72"
    ],
    "koken": "400t_hesap",
@@ -2667,9 +2697,10 @@
   {
    "tag": "KM3",
    "aciklama": "yildiz kontaktoru",
-   "secim": "25 A AC-3",
+   "secim": "40 A AC-3 (SINIRDA: kullanim 0.85, kisa sureli gorev)",
    "bagli_id": [
     "A62",
+    "A120",
     "A72"
    ],
    "koken": "400t_hesap",
@@ -2678,34 +2709,36 @@
   {
    "tag": "KT1",
    "aciklama": "yildiz-ucgen zaman rolesi (NC gecikmeli -> KM3, NO gecikmeli -> KM2)",
-   "ayar_s": 6.0,
+   "ayar_s": 8.0,
    "olu_zaman_ms": 50,
    "bagli_id": [
     "A72"
    ],
    "koken": "dcc630_sablon",
    "guven": "yuksek",
-   "not": "sema 9-2 bu oturumda okundu"
+   "not": "sema 9-2 bu oturumda okundu; ayar 6 -> 8 s IKIZ_TASARIM_VARSAYIMI (55 kW, 2026-11-19)"
   },
   {
    "tag": "FR1",
    "aciklama": "termik role, FAZ YOLUNDA (KM1-U1V1W1); NC kontak tum bobinlerin N donusunde",
    "aralik_A": [
-    28,
-    40
+    45,
+    63
    ],
-   "ayar_A": 32.8,
+   "ayar_A": 58.6,
+   "durum": "SINIRDA (ayar/aralik ust siniri 0.93)",
    "bagli_id": [
-    "A62"
+    "A62",
+    "A120"
    ],
    "koken": "400t_hesap",
    "guven": "orta",
-   "dcc630": "37-50 A (uygun degil)"
+   "dcc630": "37-50 A (55 kW icin FAIL: faz akimi 58.6 A)"
   },
   {
    "tag": "TC1",
    "aciklama": "380/220 V kontrol trafosu",
-   "VA_oneri": "630 (secenek A: U1 ayri L-N + 6 A MCB; TC1 yuku 388 VA <= 630 VA)",
+   "VA_oneri": "630 (secenek A: U1 ayri L-N + 6 A MCB; TC1 yuku 425 VA <= 630 VA surekli; kalkis 785 VA SINIRDA)",
    "VA_dcc630": 630,
    "bagli_id": [
     "A72"
@@ -3183,7 +3216,7 @@
    "PCARP_bos_bar": 2
   },
   "zamanlar": {
-   "KT1_yildiz_ms": 6000,
+   "KT1_yildiz_ms": 8000,
    "YD_olu_zaman_ms": 50,
    "kapi_uyumsuzluk_ms": 500,
    "geri_bildirim_ms": 300,
@@ -3240,7 +3273,7 @@
     "ifade": [
      "ton",
      "HW.KM1",
-     6000
+     8000
     ],
     "koken": "dcc630_sablon"
    },

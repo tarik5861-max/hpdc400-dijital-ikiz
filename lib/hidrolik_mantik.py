@@ -12,7 +12,7 @@ class HidrolikSistem:
         self.tank_hacim_l = 784.0
         self.akumulator_adet = 2
         self.akumulator_hacim_l = 1.3 # Örnek tüp hacmi
-        self.pompakw = 30.0
+        self.pompakw = 55.0  # M1 A120 55 kW (params.json global.pump_motor_kW)
 
     def durum_kontrol(self):
         # Temel hidrolik güvenlik ve kapasite kontrolleri
