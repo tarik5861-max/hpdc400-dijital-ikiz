@@ -72,6 +72,7 @@ def build_hats(H, P, old=None):
             "id": float(h["ic_cap_mm"] if sert else h["hortum"]["ic_cap_mm"]),
             "pts": pts_of(h), "kaynak": h["kaynak"]["id"], "hedef": h["hedef"]["id"],
             "yay_payi_mm": h.get("yay_payi_mm", 0),
+            "hortum_uzunluk_mm": h.get("hortum_uzunluk_mm"),
             "rb_mm": h["min_bukum_yaricap_mm"] if sert else h["hortum"]["min_bukulme_yaricap_mm"],
         }
     # tee trim (sirayla; ana hatlar sert_boru ve kendileri degismez)
@@ -115,6 +116,8 @@ def to_local(hats, old):
         e = {"tip": h["tip"], "od": h["od"], "id": h["id"],
              "pts": [[round(p[i] - o[i], 3) for i in range(3)] for p in h["pts"]],
              "yay_payi_mm": h["yay_payi_mm"], "rb_mm": h["rb_mm"], "ucler": [h["kaynak"], h["hedef"]]}
+        if h["tip"] == "hortum" and h.get("hortum_uzunluk_mm"):
+            e["hortum_uzunluk_mm"] = h["hortum_uzunluk_mm"]   # sabit hortum boyu: lib/hortum_pose.py konuma bagli yol icin
         if "takip" in h:
             e["takip"] = h["takip"]
         if not all(h["halka"]):
@@ -192,7 +195,7 @@ def u_ara(hats, placed):
             continue
         ro, rb, pts = h["od"] / 2.0, h["rb_mm"], h["pts"]
         segs = sorted(range(len(pts) - 1), key=lambda i: -abs(sum(pts[i + 1][j] - pts[i][j] for j in range(3))))
-        D0 = min(h["yay_payi_mm"] / 2.0, 1.2 * rb)
+        D0 = h["yay_payi_mm"] / 2.0   # tam fazla boy (hortum_pose U derinligi = fazla/2); eskiden min(yay/2, 1.2*Rb)
         found = None
         for dm in (1.0, 0.75, 0.5, 0.3):
             for wm in (2.0, 1.4, 1.0):
@@ -254,7 +257,7 @@ def main():
         placed, _, _, _ = asm.assemble()
         # A160 haric tum parcalar + diger hatlar (kendisi dahil, halka hat uzerinde basladigi icin esik 50 mm3'te cakisma olusabilir)
         uh = u_ara(hats, {n: v for n, v in placed.items() if v[0] != "A160"})
-        old = {hid: dict((old or {}).get(hid, {}), u_halka=uh.get(hid)) for hid in hats}
+        old = {hid: dict((old or {}).get(hid, {}), u_halka=uh.get(hid) or (old or {}).get(hid, {}).get('u_halka')) for hid in hats}   # bulunamazsa eski secim korunur
     loc, pos = to_local(hats, old)
     dims = dict(ORTAK)
     dims["hatlar"] = loc

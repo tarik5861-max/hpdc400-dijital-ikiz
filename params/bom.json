@@ -1,503 +1,863 @@
 {
-  "machine": "HPDC-400 soguk kamarali yatay dokum makinesi (toggle kapama) - dijital ikiz",
-  "units": "mm",
-  "coordinate_system": "Origin = sabit plaka kalip baglama yuzeyi merkezi (makine ekseni). +X = sabit plakadan hareketli/arka plakaya (kapama yonu). +Z = yukari. +Y = operator tarafi. Enjeksiyon unitesi -X tarafinda. Zemin Z = -axis_height.",
-  "phases": [
+ "machine": "HPDC-400 soguk kamarali yatay dokum makinesi (toggle kapama) - dijital ikiz",
+ "units": "mm",
+ "coordinate_system": "Origin = sabit plaka kalip baglama yuzeyi merkezi (makine ekseni). +X = sabit plakadan hareketli/arka plakaya (kapama yonu). +Z = yukari. +Y = operator tarafi. Enjeksiyon unitesi -X tarafinda. Zemin Z = -axis_height.",
+ "phases": [
+  {
+   "phase": 1,
+   "name": "Omurga: sase + plakalar + kolonlar",
+   "items": [
+    "A11",
+    "A12",
+    "A13",
+    "A14",
+    "A21",
+    "A22",
+    "A23",
+    "A24",
+    "A25",
+    "A26",
+    "A28"
+   ]
+  },
+  {
+   "phase": 2,
+   "name": "Mafsal (toggle) + kapama silindiri + itici",
+   "items": [
+    "A31",
+    "A32",
+    "A33",
+    "A34",
+    "A35",
+    "A36",
+    "A37",
+    "A41",
+    "A42",
+    "A161",
+    "A162",
+    "A170",
+    "A171"
+   ]
+  },
+  {
+   "phase": 3,
+   "name": "Enjeksiyon unitesi",
+   "items": [
+    "A51",
+    "A52",
+    "A54",
+    "A55",
+    "A56",
+    "A57",
+    "A65",
+    "A66",
+    "A67",
+    "A140",
+    "A141",
+    "A142",
+    "A143",
+    "A144",
+    "A145"
+   ]
+  },
+  {
+   "phase": 4,
+   "name": "Hidrolik, kalip, guvenlik",
+   "items": [
+    "A59",
+    "A63",
+    "A64",
+    "A130",
+    "A131",
+    "A132",
+    "A133",
+    "A61",
+    "A62",
+    "A98",
+    "A99",
+    "A100",
+    "A101",
+    "A102",
+    "A103",
+    "A104",
+    "A105",
+    "A106",
+    "A107",
+    "A108",
+    "A109",
+    "A110",
+    "A111",
+    "A112",
+    "A113",
+    "A114",
+    "A115",
+    "A116",
+    "A117",
+    "A118",
+    "A119",
+    "A120",
+    "A121",
+    "A122",
+    "A123",
+    "A160",
+    "A124",
+    "A125",
+    "A126",
+    "A127",
+    "A128",
+    "A71",
+    "A72",
+    "A81",
+    "A82",
+    "A83",
+    "A84",
+    "A85",
+    "A163",
+    "A164",
+    "A165",
+    "A166",
+    "A167",
+    "A168",
+    "A169",
+    "A172",
+    "A173",
+    "A174",
+    "A175",
+    "A176",
+    "A177",
+    "A178",
+    "A179"
+   ]
+  },
+  {
+   "phase": 5,
+   "name": "Kalip yuksekligi ayar tahriki",
+   "items": [
+    "A91",
+    "A92",
+    "A93",
+    "A94",
+    "A95",
+    "A96",
+    "A97"
+   ]
+  }
+ ],
+ "tree": [
+  {
+   "id": "A10",
+   "name": "Sase grubu",
+   "children": [
     {
-      "phase": 1,
-      "name": "Omurga: sase + plakalar + kolonlar",
-      "items": [
-        "A11",
-        "A12",
-        "A13",
-        "A14",
-        "A21",
-        "A22",
-        "A23",
-        "A24",
-        "A25",
-        "A26",
-        "A28"
-      ]
+     "id": "A11",
+     "name": "Ana sase (kaynakli govde)",
+     "qty": 1,
+     "script": "parts/A11_ana_sase.py"
     },
     {
-      "phase": 2,
-      "name": "Mafsal (toggle) + kapama silindiri + itici",
-      "items": [
-        "A31",
-        "A32",
-        "A33",
-        "A34",
-        "A35",
-        "A36",
-        "A37",
-        "A41",
-        "A42"
-      ]
+     "id": "A12",
+     "name": "Hareketli plaka kizak raylari",
+     "qty": 2,
+     "script": "parts/A12_kizak_rayi.py"
     },
     {
-      "phase": 3,
-      "name": "Enjeksiyon unitesi",
-      "items": [
-        "A51",
-        "A52",
-        "A54",
-        "A55",
-        "A56",
-        "A57",
-        "A65",
-        "A66",
-        "A67",
-        "A140",
-        "A141",
-        "A142",
-        "A143",
-        "A144",
-        "A145"
-      ]
+     "id": "A13",
+     "name": "Sabit plaka destek kolonu (uzun, 2 alt + 1 ust)",
+     "qty": 3,
+     "script": "parts/A13_sabit_plaka_destek.py"
     },
     {
-      "phase": 4,
-      "name": "Hidrolik, kalip, guvenlik",
-      "items": [
-        "A59",
-        "A63",
-        "A64",
-        "A130",
-        "A131",
-        "A132",
-        "A133",
-        "A61",
-        "A62",
-        "A98",
-        "A99",
-        "A100",
-        "A101",
-        "A102",
-        "A103",
-        "A104",
-        "A105",
-        "A106",
-        "A107",
-        "A108",
-        "A109",
-        "A110",
-        "A111",
-        "A112",
-        "A113",
-        "A114",
-        "A115",
-        "A116",
-        "A117",
-        "A118",
-        "A119",
-        "A120",
-        "A121",
-        "A122",
-        "A123",
-        "A160",
-        "A124",
-        "A125",
-        "A126",
-        "A127",
-        "A128",
-        "A71",
-        "A72",
-        "A81",
-        "A82",
-        "A83",
-        "A84",
-        "A85"
-      ]
-    },
-    {
-      "phase": 5,
-      "name": "Kalip yuksekligi ayar tahriki",
-      "items": [
-        "A91",
-        "A92",
-        "A93",
-        "A94",
-        "A95",
-        "A96",
-        "A97"
-      ]
+     "id": "A14",
+     "name": "Kolon arka dikmesi (sase arka ucu, kaynakli)",
+     "qty": 1,
+     "script": "parts/A14_kolon_arka_dikme.py"
     }
-  ],
-  "tree": [
+   ]
+  },
+  {
+   "id": "A20",
+   "name": "Kapama unitesi",
+   "children": [
     {
-      "id": "A10",
-      "name": "Sase grubu",
-      "children": [
-        {
-          "id": "A11",
-          "name": "Ana sase (kaynakli govde)",
-          "qty": 1,
-          "script": "parts/A11_ana_sase.py"
-        },
-        {
-          "id": "A12",
-          "name": "Hareketli plaka kizak raylari",
-          "qty": 2,
-          "script": "parts/A12_kizak_rayi.py"
-        },
-        {
-          "id": "A13",
-          "name": "Sabit plaka destek kolonu (uzun, 2 alt + 1 ust)",
-          "qty": 3,
-          "script": "parts/A13_sabit_plaka_destek.py"
-        },
-        {
-          "id": "A14",
-          "name": "Kolon arka dikmesi (sase arka ucu, kaynakli)",
-          "qty": 1,
-          "script": "parts/A14_kolon_arka_dikme.py"
-        }
-      ]
+     "id": "A21",
+     "name": "Sabit plaka",
+     "qty": 1,
+     "script": "parts/A21_sabit_plaka.py"
     },
     {
-      "id": "A20",
-      "name": "Kapama unitesi",
-      "children": [
-        {
-          "id": "A21",
-          "name": "Sabit plaka",
-          "qty": 1,
-          "script": "parts/A21_sabit_plaka.py"
-        },
-        {
-          "id": "A22",
-          "name": "Hareketli plaka",
-          "qty": 1,
-          "script": "parts/A22_hareketli_plaka.py"
-        },
-        {
-          "id": "A23",
-          "name": "Arka plaka (mafsal tasiyici)",
-          "qty": 1,
-          "script": "parts/A23_arka_plaka.py"
-        },
-        {
-          "id": "A24",
-          "name": "Kolon (tie bar)",
-          "qty": 4,
-          "script": "parts/A24_kolon.py"
-        },
-        {
-          "id": "A25",
-          "name": "Kolon on somunu (sabit plaka)",
-          "qty": 4,
-          "script": "parts/A25_kolon_on_somun.py"
-        },
-        {
-          "id": "A26",
-          "name": "Kalip yuksekligi ayar somunu (disli, arka plaka)",
-          "qty": 4,
-          "script": "parts/A26_ayar_somunu.py"
-        },
-        {
-          "id": "A28",
-          "name": "Hareketli plaka kolon burcu",
-          "qty": 4,
-          "script": "parts/A28_burc.py"
-        }
-      ]
+     "id": "A22",
+     "name": "Hareketli plaka",
+     "qty": 1,
+     "script": "parts/A22_hareketli_plaka.py"
     },
     {
-      "id": "A30",
-      "name": "Mafsal mekanizmasi (5 noktali cift mafsal)",
-      "children": [
-        {
-          "id": "A31",
-          "name": "Capraz kafa (crosshead)",
-          "qty": 1,
-          "script": "parts/A31_capraz_kafa.py"
-        },
-        {
-          "id": "A32",
-          "name": "Buyuk mafsal kolu (arka plaka tarafi)",
-          "qty": 4,
-          "script": "parts/A32_buyuk_kol.py"
-        },
-        {
-          "id": "A33",
-          "name": "On mafsal kolu (hareketli plaka tarafi)",
-          "qty": 4,
-          "script": "parts/A33_on_kol.py"
-        },
-        {
-          "id": "A34",
-          "name": "Mafsal pimi",
-          "qty": 12,
-          "script": "parts/A34_pim.py"
-        },
-        {
-          "id": "A35",
-          "name": "Kapama silindiri",
-          "qty": 1,
-          "script": "parts/A35_kapama_silindiri.py"
-        },
-        {"id": "A130", "name": "Kapama valf blogu (manifold)", "qty": 1, "script": "parts/A130_kapama_valf_blogu.py"},
-        {"id": "A131", "name": "Kapama valf blogu konsolu (A35 bilezik)", "qty": 1, "script": "parts/A131_kapama_konsol.py"},
-        {"id": "A132", "name": "Kapama kartus valf", "qty": 4, "script": "parts/A132_kapama_kartus.py"},
-        {"id": "A133", "name": "Kapama solenoid bobini", "qty": 2, "script": "parts/A133_kapama_solenoid.py"},
-        {
-          "id": "A36",
-          "name": "Capraz kafa baglanti kolu",
-          "qty": 4,
-          "script": "parts/A36_capraz_kafa_kolu.py"
-        },
-        {
-          "id": "A37",
-          "name": "Kapama silindiri piston kolu",
-          "qty": 1,
-          "script": "parts/A37_kapama_piston_kolu.py"
-        }
-      ]
+     "id": "A23",
+     "name": "Arka plaka (mafsal tasiyici)",
+     "qty": 1,
+     "script": "parts/A23_arka_plaka.py"
     },
     {
-      "id": "A40",
-      "name": "Itici unitesi",
-      "children": [
-        {
-          "id": "A41",
-          "name": "Hidrolik itici silindiri (cift silindirli grup)",
-          "qty": 1,
-          "script": "parts/A41_itici_silindir.py"
-        },
-        {
-          "id": "A42",
-          "name": "Itici plakasi",
-          "qty": 1,
-          "script": "parts/A42_itici_plakasi.py"
-        }
-      ]
+     "id": "A24",
+     "name": "Kolon (tie bar)",
+     "qty": 4,
+     "script": "parts/A24_kolon.py"
     },
     {
-      "id": "A50",
-      "name": "Enjeksiyon unitesi",
-      "children": [
-        {
-          "id": "A51",
-          "name": "Dolum burcu (shot sleeve)",
-          "qty": 1,
-          "script": "parts/A51_dolum_burcu.py"
-        },
-        {
-          "id": "A52",
-          "name": "Enjeksiyon pistonu + piston kolu",
-          "qty": 1,
-          "script": "parts/A52_piston.py"
-        },
-        {
-          "id": "A54",
-          "name": "Enjeksiyon silindiri",
-          "qty": 1,
-          "script": "parts/A54_enjeksiyon_silindiri.py"
-        },
-        {
-          "id": "A55",
-          "name": "Carpan (multiplikator)",
-          "qty": 1,
-          "script": "parts/A55_carpan.py"
-        },
-        {
-          "id": "A56",
-          "name": "Akumulator tupu",
-          "qty": 4,
-          "script": "parts/A56_akumulator.py"
-        },
-        {
-          "id": "A57",
-          "name": "Enjeksiyon tasiyici konsol",
-          "qty": 1,
-          "script": "parts/A57_enj_konsol.py"
-        },
-        {"id": "A65", "name": "Enjeksiyon valf blogu (Y1 manifold + S424)", "qty": 1, "script": "parts/A65_enj_valf_blogu.py"},
-        {"id": "A66", "name": "Enjeksiyon konum sensoru + LS2", "qty": 1, "script": "parts/A66_enj_konum_sensoru.py"},
-        {"id": "A67", "name": "Enjeksiyon basinc vericisi", "qty": 2, "script": "parts/A67_basinc_vericisi.py"},
-        {"id": "A140", "name": "Kamara flansi civatalari (6xM12)", "qty": 1, "script": "parts/A140_burc_flans_civata.py"},
-        {"id": "A141", "name": "Dolum agzi hunisi (pour cup)", "qty": 1, "script": "parts/A141_dolum_agzi_hunisi.py"},
-        {"id": "A142", "name": "Kamara sogutma baglanti stub'lari", "qty": 1, "script": "parts/A142_kamara_sogutma_stub.py"},
-        {"id": "A143", "name": "Plunger yaglama unitesi", "qty": 1, "script": "parts/A143_plunger_yaglama.py"},
-        {"id": "A144", "name": "Piston kolu koruyucu kapak", "qty": 1, "script": "parts/A144_piston_kolu_koruyucu.py"},
-        {"id": "A145", "name": "A54 on kafa tutucu saplama uclari (4xM24)", "qty": 1, "script": "parts/A145_enj_silindiri_saplama.py"}
-      ]
+     "id": "A25",
+     "name": "Kolon on somunu (sabit plaka)",
+     "qty": 4,
+     "script": "parts/A25_kolon_on_somun.py"
     },
     {
-      "id": "A60",
-      "name": "Hidrolik unite",
-      "children": [
-        {
-          "id": "A61",
-          "name": "Hidrolik tank",
-          "qty": 1,
-          "script": "parts/A61_tank.py"
-        },
-        {
-          "id": "A62",
-          "name": "Motor-pompa grubu",
-          "qty": 1,
-          "script": "parts/A62_motor_pompa.py",
-          "note": "pompa agaci: Vickers/Eaton 4520VQ tandem kanatli pompa (45VQ + 20VQ kartus); A102/A108, A103/A109, A104/A110, A105/A111, A106/A107/A112/A113, A115/A116 ayni scripti farkli olculerle kullanir",
-          "children": [
-              {"id": "A120", "name": "Elektrik motoru M1 55 kW 4 kutup (IEC 280S/M, B3)", "qty": 1, "script": "parts/A120_motor_55kw.py"},
-              {"id": "A98", "name": "Pompa on govde 45VQ (montaj flansi, P1 cikis)", "qty": 1, "script": "parts/A98_pompa_on_govde.py"},
-              {"id": "A99", "name": "Giris govdesi 252283 (ortak emis, 4-civatali flans)", "qty": 1, "script": "parts/A99_pompa_giris_govdesi.py"},
-              {"id": "A100", "name": "Arka kapak 20VQ (4-civatali kapak 250824, P2 cikis, emniyet valfi yuvasi)", "qty": 1, "script": "parts/A100_pompa_arka_kapak.py"},
-              {"id": "A101", "name": "Pompa mili (kamali uc + 45VQ/20VQ spline)", "qty": 1, "script": "parts/A101_pompa_mili.py"},
-              {"id": "A102", "name": "45VQ halka (cam ring 297510)", "qty": 1, "script": "parts/A102_kartus_halka.py"},
-              {"id": "A103", "name": "45VQ rotor (283871)", "qty": 1, "script": "parts/A103_kartus_rotor.py"},
-              {"id": "A104", "name": "45VQ kanat (922701, 10 kanat + 10 insert)", "qty": 10, "script": "parts/A104_kartus_kanat.py"},
-              {"id": "A105", "name": "45VQ flex-side plaka (923954, bronz yuz rotora)", "qty": 2, "script": "parts/A105_kartus_yan_plaka.py"},
-              {"id": "A106", "name": "45VQ giris destek plakasi (430807 (burclu))", "qty": 1, "script": "parts/A106_kartus_destek_plakasi.py"},
-              {"id": "A107", "name": "45VQ cikis destek plakasi (415382)", "qty": 1, "script": "parts/A106_kartus_destek_plakasi.py"},
-              {"id": "A108", "name": "20VQ halka (cam ring 333624)", "qty": 1, "script": "parts/A102_kartus_halka.py"},
-              {"id": "A109", "name": "20VQ rotor (402690)", "qty": 1, "script": "parts/A103_kartus_rotor.py"},
-              {"id": "A110", "name": "20VQ kanat (922741, 10 kanat + 10 insert)", "qty": 10, "script": "parts/A104_kartus_kanat.py"},
-              {"id": "A111", "name": "20VQ flex-side plaka (923955, bronz yuz rotora)", "qty": 2, "script": "parts/A105_kartus_yan_plaka.py"},
-              {"id": "A112", "name": "20VQ giris destek plakasi (419502)", "qty": 1, "script": "parts/A106_kartus_destek_plakasi.py"},
-              {"id": "A113", "name": "20VQ cikis destek plakasi (419500 (burclu))", "qty": 1, "script": "parts/A106_kartus_destek_plakasi.py"},
-              {"id": "A114", "name": "Kartus konum pimi 422206 (2x45VQ + 2x20VQ)", "qty": 4, "script": "parts/A114_pompa_pimi.py"},
-              {"id": "A115", "name": "Govde baglanti civatasi 87947 (4 adet, 255-275 lb.ft)", "qty": 4, "script": "parts/A115_pompa_civatasi.py"},
-              {"id": "A116", "name": "Arka kapak civatasi 1296 (4 adet, 40-50 lb.ft)", "qty": 4, "script": "parts/A115_pompa_civatasi.py"},
-              {"id": "A117", "name": "Emniyet valfi kartusu (2327xx S/A, 20VQ)", "qty": 1, "script": "parts/A117_emniyet_valfi.py"},
-              {"id": "A118", "name": "Emniyet valfi yayi 239766", "qty": 1, "script": "parts/A118_valf_yayi.py"},
-              {"id": "A119", "name": "Tapa 7077 (valf yuvasi, 2 adet)", "qty": 2, "script": "parts/A119_tapa.py"}
-          ]
-        },
-        {"id": "A121", "name": "Emis hatti (A99 -> tank A61, d89/80 sert boru)", "qty": 1, "script": "parts/A121_boru_hatti.py"},
-        {"id": "A122", "name": "Basinc hatti stub'i (P1 d48/38, P2 d25/19)", "qty": 2, "script": "parts/A121_boru_hatti.py", "note": "A121 ile ayni script, farkli olcu"},
-        {"id": "A123", "name": "Boru tespit konsolu (dikme + kelepce)", "qty": 2, "script": "parts/A123_boru_tespit.py"},
-        {"id": "A160", "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01..H24)", "qty": 19, "script": "parts/A160_hat_boru.py", "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)"},
-        {
-          "id": "A59",
-          "name": "Akumulator sepeti + valf blogu",
-          "qty": 1,
-          "script": "parts/A59_valf_blogu.py"
-        },
-        {
-          "id": "A63",
-          "name": "Akumulator kelepce bantlari",
-          "qty": 2,
-          "script": "parts/A63_kelepce.py"
-        },
-        {
-          "id": "A64",
-          "name": "Akumulator toplayici borusu",
-          "qty": 1,
-          "script": "parts/A64_toplayici_boru.py"
-        }
-      ]
+     "id": "A26",
+     "name": "Kalip yuksekligi ayar somunu (disli, arka plaka)",
+     "qty": 4,
+     "script": "parts/A26_ayar_somunu.py"
     },
     {
-      "id": "A70",
-      "name": "Guvenlik / elektrik",
-      "children": [
-        {
-          "id": "A71",
-          "name": "Operator koruma kapisi",
-          "qty": 1,
-          "script": "parts/A71_koruma_kapisi.py",
-          "children": [
-            {"id": "A124", "name": "Kapi polikarbonat paneller (2 panel)", "qty": 1, "script": "parts/A124_kapi_paneller.py"},
-            {"id": "A125", "name": "Ust ray + makara arabalari + dikmeler", "qty": 1, "script": "parts/A125_ust_ray_makara.py"},
-            {"id": "A126", "name": "Pnomatik kapi tahrik silindiri", "qty": 1, "script": "parts/A126_tahrik_silindir.py"},
-            {"id": "A127", "name": "Kilitli guvenlik anahtari (kapali+acik)", "qty": 1, "script": "parts/A127_guvenlik_anahtari.py"},
-            {"id": "A128", "name": "Kapi kolu + koruyucu kenar", "qty": 1, "script": "parts/A128_kol_kenar.py"}
-          ]
-        },
-        {
-          "id": "A72",
-          "name": "Elektrik panosu",
-          "qty": 1,
-          "script": "parts/A72_pano.py"
-        }
-      ]
-    },
-    {
-      "id": "A80",
-      "name": "Kalip (temsili)",
-      "children": [
-        {
-          "id": "A81",
-          "name": "Sabit kalip yarisi",
-          "qty": 1,
-          "script": "parts/A81_sabit_kalip.py"
-        },
-        {
-          "id": "A82",
-          "name": "Hareketli kalip yarisi",
-          "qty": 1,
-          "script": "parts/A82_hareketli_kalip.py"
-        },
-        {
-          "id": "A83",
-          "name": "Kalip itici plakasi (itici + tutucu)",
-          "qty": 1,
-          "script": "parts/A83_kalip_itici_plakasi.py"
-        },
-        {
-          "id": "A84",
-          "name": "Itici pimi",
-          "qty": 24,
-          "script": "parts/A84_itici_pimi.py"
-        },
-        {
-          "id": "A85",
-          "name": "Geri donus pimi",
-          "qty": 4,
-          "script": "parts/A85_geri_donus_pimi.py"
-        }
-      ]
-    },
-    {
-      "id": "A90",
-      "name": "Kalip yuksekligi ayar tahriki (elektrikli redüktörlü motor)",
-      "children": [
-        {
-          "id": "A91",
-          "name": "Merkez disli (z210 m4)",
-          "qty": 1,
-          "script": "parts/A91_merkez_disli.py"
-        },
-        {
-          "id": "A92",
-          "name": "Merkez disli tasiyici yatak halkasi",
-          "qty": 1,
-          "script": "parts/A92_yatak_halkasi.py"
-        },
-        {
-          "id": "A93",
-          "name": "Pinyon (z20 m4) + mil",
-          "qty": 1,
-          "script": "parts/A93_pinyon.py"
-        },
-        {
-          "id": "A94",
-          "name": "Redüktör (helisel, i=35)",
-          "qty": 1,
-          "script": "parts/A94_reduktor.py"
-        },
-        {
-          "id": "A95",
-          "name": "Elektrik motoru 1.1 kW 4 kutup",
-          "qty": 1,
-          "script": "parts/A95_motor.py"
-        },
-        {
-          "id": "A96",
-          "name": "Motor-redüktör braketi",
-          "qty": 1,
-          "script": "parts/A96_braket.py"
-        },
-        {
-          "id": "A97",
-          "name": "Motor enkoderi (kalip yuksekligi sayimi)",
-          "qty": 1,
-          "script": "parts/A97_enkoder.py"
-        }
-      ]
+     "id": "A28",
+     "name": "Hareketli plaka kolon burcu",
+     "qty": 4,
+     "script": "parts/A28_burc.py"
     }
-  ]
+   ]
+  },
+  {
+   "id": "A30",
+   "name": "Mafsal mekanizmasi (5 noktali cift mafsal)",
+   "children": [
+    {
+     "id": "A31",
+     "name": "Capraz kafa (crosshead)",
+     "qty": 1,
+     "script": "parts/A31_capraz_kafa.py"
+    },
+    {
+     "id": "A32",
+     "name": "Buyuk mafsal kolu (arka plaka tarafi)",
+     "qty": 4,
+     "script": "parts/A32_buyuk_kol.py"
+    },
+    {
+     "id": "A33",
+     "name": "On mafsal kolu (hareketli plaka tarafi)",
+     "qty": 4,
+     "script": "parts/A33_on_kol.py"
+    },
+    {
+     "id": "A34",
+     "name": "Mafsal pimi",
+     "qty": 12,
+     "script": "parts/A34_pim.py"
+    },
+    {
+     "id": "A35",
+     "name": "Kapama silindiri",
+     "qty": 1,
+     "script": "parts/A35_kapama_silindiri.py"
+    },
+    {
+     "id": "A130",
+     "name": "Kapama valf blogu (manifold)",
+     "qty": 1,
+     "script": "parts/A130_kapama_valf_blogu.py"
+    },
+    {
+     "id": "A131",
+     "name": "Kapama valf blogu konsolu (A35 bilezik)",
+     "qty": 1,
+     "script": "parts/A131_kapama_konsol.py"
+    },
+    {
+     "id": "A132",
+     "name": "Kapama kartus valf",
+     "qty": 4,
+     "script": "parts/A132_kapama_kartus.py"
+    },
+    {
+     "id": "A133",
+     "name": "Kapama solenoid bobini",
+     "qty": 2,
+     "script": "parts/A133_kapama_solenoid.py"
+    },
+    {
+     "id": "A36",
+     "name": "Capraz kafa baglanti kolu",
+     "qty": 4,
+     "script": "parts/A36_capraz_kafa_kolu.py"
+    },
+    {
+     "id": "A37",
+     "name": "Kapama silindiri piston kolu",
+     "qty": 1,
+     "script": "parts/A37_kapama_piston_kolu.py"
+    },
+    {
+     "id": "A170",
+     "name": "Mafsal merkezi yaglama pompasi M10 (75 W, rezervuar + seviye/basinc salteri)",
+     "qty": 1,
+     "script": "parts/A170_yaglama_pompasi.py"
+    },
+    {
+     "id": "A171",
+     "name": "Mafsal yaglama dagitici blogu (progresif, 12 cikis)",
+     "qty": 1,
+     "script": "parts/A171_yaglama_dagitici.py"
+    }
+   ]
+  },
+  {
+   "id": "A40",
+   "name": "Itici unitesi",
+   "children": [
+    {
+     "id": "A41",
+     "name": "Hidrolik itici silindiri (cift silindirli grup)",
+     "qty": 1,
+     "script": "parts/A41_itici_silindir.py"
+    },
+    {
+     "id": "A42",
+     "name": "Itici plakasi",
+     "qty": 1,
+     "script": "parts/A42_itici_plakasi.py"
+    },
+    {
+     "id": "A161",
+     "name": "Itici strok sinirlama mansonu (A41 baglanti postu uzerinde, ayarli)",
+     "qty": 4,
+     "script": "parts/A161_itici_strok_sinirlayici.py"
+    },
+    {
+     "id": "A162",
+     "name": "Itici konum sensoru (M12 enduktif, 90 derece konnektor + braket)",
+     "qty": 2,
+     "script": "parts/A162_itici_sensor.py"
+    }
+   ]
+  },
+  {
+   "id": "A50",
+   "name": "Enjeksiyon unitesi",
+   "children": [
+    {
+     "id": "A51",
+     "name": "Dolum burcu (shot sleeve)",
+     "qty": 1,
+     "script": "parts/A51_dolum_burcu.py"
+    },
+    {
+     "id": "A52",
+     "name": "Enjeksiyon pistonu + piston kolu",
+     "qty": 1,
+     "script": "parts/A52_piston.py"
+    },
+    {
+     "id": "A54",
+     "name": "Enjeksiyon silindiri",
+     "qty": 1,
+     "script": "parts/A54_enjeksiyon_silindiri.py"
+    },
+    {
+     "id": "A55",
+     "name": "Carpan (multiplikator)",
+     "qty": 1,
+     "script": "parts/A55_carpan.py"
+    },
+    {
+     "id": "A56",
+     "name": "Akumulator tupu",
+     "qty": 4,
+     "script": "parts/A56_akumulator.py"
+    },
+    {
+     "id": "A57",
+     "name": "Enjeksiyon tasiyici konsol",
+     "qty": 1,
+     "script": "parts/A57_enj_konsol.py"
+    },
+    {
+     "id": "A65",
+     "name": "Enjeksiyon valf blogu (Y1 manifold + S424)",
+     "qty": 1,
+     "script": "parts/A65_enj_valf_blogu.py"
+    },
+    {
+     "id": "A66",
+     "name": "Enjeksiyon konum sensoru + LS2",
+     "qty": 1,
+     "script": "parts/A66_enj_konum_sensoru.py"
+    },
+    {
+     "id": "A67",
+     "name": "Enjeksiyon basinc vericisi",
+     "qty": 2,
+     "script": "parts/A67_basinc_vericisi.py"
+    },
+    {
+     "id": "A140",
+     "name": "Kamara flansi civatalari (6xM12)",
+     "qty": 1,
+     "script": "parts/A140_burc_flans_civata.py"
+    },
+    {
+     "id": "A141",
+     "name": "Dolum agzi hunisi (pour cup)",
+     "qty": 1,
+     "script": "parts/A141_dolum_agzi_hunisi.py"
+    },
+    {
+     "id": "A142",
+     "name": "Kamara sogutma baglanti stub'lari",
+     "qty": 1,
+     "script": "parts/A142_kamara_sogutma_stub.py"
+    },
+    {
+     "id": "A143",
+     "name": "Plunger yaglama unitesi",
+     "qty": 1,
+     "script": "parts/A143_plunger_yaglama.py"
+    },
+    {
+     "id": "A144",
+     "name": "Piston kolu koruyucu kapak",
+     "qty": 1,
+     "script": "parts/A144_piston_kolu_koruyucu.py"
+    },
+    {
+     "id": "A145",
+     "name": "A54 on kafa tutucu saplama uclari (4xM24)",
+     "qty": 1,
+     "script": "parts/A145_enj_silindiri_saplama.py"
+    }
+   ]
+  },
+  {
+   "id": "A60",
+   "name": "Hidrolik unite",
+   "children": [
+    {
+     "id": "A61",
+     "name": "Hidrolik tank",
+     "qty": 1,
+     "script": "parts/A61_tank.py"
+    },
+    {
+     "id": "A62",
+     "name": "Motor-pompa grubu",
+     "qty": 1,
+     "script": "parts/A62_motor_pompa.py",
+     "note": "pompa agaci: Vickers/Eaton 4520VQ tandem kanatli pompa (45VQ + 20VQ kartus); A102/A108, A103/A109, A104/A110, A105/A111, A106/A107/A112/A113, A115/A116 ayni scripti farkli olculerle kullanir",
+     "children": [
+      {
+       "id": "A120",
+       "name": "Elektrik motoru M1 55 kW 4 kutup (IEC 280S/M, B3)",
+       "qty": 1,
+       "script": "parts/A120_motor_55kw.py"
+      },
+      {
+       "id": "A98",
+       "name": "Pompa on govde 45VQ (montaj flansi, P1 cikis)",
+       "qty": 1,
+       "script": "parts/A98_pompa_on_govde.py"
+      },
+      {
+       "id": "A99",
+       "name": "Giris govdesi 252283 (ortak emis, 4-civatali flans)",
+       "qty": 1,
+       "script": "parts/A99_pompa_giris_govdesi.py"
+      },
+      {
+       "id": "A100",
+       "name": "Arka kapak 20VQ (4-civatali kapak 250824, P2 cikis, emniyet valfi yuvasi)",
+       "qty": 1,
+       "script": "parts/A100_pompa_arka_kapak.py"
+      },
+      {
+       "id": "A101",
+       "name": "Pompa mili (kamali uc + 45VQ/20VQ spline)",
+       "qty": 1,
+       "script": "parts/A101_pompa_mili.py"
+      },
+      {
+       "id": "A102",
+       "name": "45VQ halka (cam ring 297510)",
+       "qty": 1,
+       "script": "parts/A102_kartus_halka.py"
+      },
+      {
+       "id": "A103",
+       "name": "45VQ rotor (283871)",
+       "qty": 1,
+       "script": "parts/A103_kartus_rotor.py"
+      },
+      {
+       "id": "A104",
+       "name": "45VQ kanat (922701, 10 kanat + 10 insert)",
+       "qty": 10,
+       "script": "parts/A104_kartus_kanat.py"
+      },
+      {
+       "id": "A105",
+       "name": "45VQ flex-side plaka (923954, bronz yuz rotora)",
+       "qty": 2,
+       "script": "parts/A105_kartus_yan_plaka.py"
+      },
+      {
+       "id": "A106",
+       "name": "45VQ giris destek plakasi (430807 (burclu))",
+       "qty": 1,
+       "script": "parts/A106_kartus_destek_plakasi.py"
+      },
+      {
+       "id": "A107",
+       "name": "45VQ cikis destek plakasi (415382)",
+       "qty": 1,
+       "script": "parts/A106_kartus_destek_plakasi.py"
+      },
+      {
+       "id": "A108",
+       "name": "20VQ halka (cam ring 333624)",
+       "qty": 1,
+       "script": "parts/A102_kartus_halka.py"
+      },
+      {
+       "id": "A109",
+       "name": "20VQ rotor (402690)",
+       "qty": 1,
+       "script": "parts/A103_kartus_rotor.py"
+      },
+      {
+       "id": "A110",
+       "name": "20VQ kanat (922741, 10 kanat + 10 insert)",
+       "qty": 10,
+       "script": "parts/A104_kartus_kanat.py"
+      },
+      {
+       "id": "A111",
+       "name": "20VQ flex-side plaka (923955, bronz yuz rotora)",
+       "qty": 2,
+       "script": "parts/A105_kartus_yan_plaka.py"
+      },
+      {
+       "id": "A112",
+       "name": "20VQ giris destek plakasi (419502)",
+       "qty": 1,
+       "script": "parts/A106_kartus_destek_plakasi.py"
+      },
+      {
+       "id": "A113",
+       "name": "20VQ cikis destek plakasi (419500 (burclu))",
+       "qty": 1,
+       "script": "parts/A106_kartus_destek_plakasi.py"
+      },
+      {
+       "id": "A114",
+       "name": "Kartus konum pimi 422206 (2x45VQ + 2x20VQ)",
+       "qty": 4,
+       "script": "parts/A114_pompa_pimi.py"
+      },
+      {
+       "id": "A115",
+       "name": "Govde baglanti civatasi 87947 (4 adet, 255-275 lb.ft)",
+       "qty": 4,
+       "script": "parts/A115_pompa_civatasi.py"
+      },
+      {
+       "id": "A116",
+       "name": "Arka kapak civatasi 1296 (4 adet, 40-50 lb.ft)",
+       "qty": 4,
+       "script": "parts/A115_pompa_civatasi.py"
+      },
+      {
+       "id": "A117",
+       "name": "Emniyet valfi kartusu (2327xx S/A, 20VQ)",
+       "qty": 1,
+       "script": "parts/A117_emniyet_valfi.py"
+      },
+      {
+       "id": "A118",
+       "name": "Emniyet valfi yayi 239766",
+       "qty": 1,
+       "script": "parts/A118_valf_yayi.py"
+      },
+      {
+       "id": "A119",
+       "name": "Tapa 7077 (valf yuvasi, 2 adet)",
+       "qty": 2,
+       "script": "parts/A119_tapa.py"
+      }
+     ]
+    },
+    {
+     "id": "A121",
+     "name": "Emis hatti (A99 -> tank A61, d89/80 sert boru)",
+     "qty": 1,
+     "script": "parts/A121_boru_hatti.py"
+    },
+    {
+     "id": "A122",
+     "name": "Basinc hatti stub'i (P1 d48/38, P2 d25/19)",
+     "qty": 2,
+     "script": "parts/A121_boru_hatti.py",
+     "note": "A121 ile ayni script, farkli olcu"
+    },
+    {
+     "id": "A123",
+     "name": "Boru tespit konsolu (dikme + kelepce)",
+     "qty": 2,
+     "script": "parts/A123_boru_tespit.py"
+    },
+    {
+     "id": "A160",
+     "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01..H24)",
+     "qty": 19,
+     "script": "parts/A160_hat_boru.py",
+     "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)"
+    },
+    {
+     "id": "A59",
+     "name": "Akumulator sepeti + valf blogu",
+     "qty": 1,
+     "script": "parts/A59_valf_blogu.py"
+    },
+    {
+     "id": "A63",
+     "name": "Akumulator kelepce bantlari",
+     "qty": 2,
+     "script": "parts/A63_kelepce.py"
+    },
+    {
+     "id": "A64",
+     "name": "Akumulator toplayici borusu",
+     "qty": 1,
+     "script": "parts/A64_toplayici_boru.py"
+    },
+    {
+     "id": "A172",
+     "name": "Cek valf CV1 (H01 uzerinde, DN32 flansli govde, boruyu sarar)",
+     "qty": 1,
+     "script": "parts/A172_cek_valf.py"
+    },
+    {
+     "id": "A173",
+     "name": "Basinc filtresi PF1 (H01 X kosusu, kafa + alt kase)",
+     "qty": 1,
+     "script": "parts/A173_basinc_filtresi.py"
+    },
+    {
+     "id": "A174",
+     "name": "Donus filtresi RF1 (A61 donus filtre kapagi uzerinde, +Y disa)",
+     "qty": 1,
+     "script": "parts/A174_donus_filtresi.py"
+    },
+    {
+     "id": "A175",
+     "name": "Hat rafi konsolu (sase -Y yan duvari; 3 katman P/pilot/T)",
+     "qty": 6,
+     "script": "parts/A175_hat_rafi_konsolu.py"
+    },
+    {
+     "id": "A176",
+     "name": "A65 hortum gecis braketi (BRK_A65_P/PL/T: P d48, pilot d21, T d70 hortum -> sert boru)",
+     "qty": 1,
+     "script": "parts/A176_a65_braket.py"
+    },
+    {
+     "id": "A177",
+     "name": "A130 T hortum braketi (BRK_A130_T: T hortum DN32/48 -> d89 sert boru)",
+     "qty": 1,
+     "script": "parts/A177_a130_braket.py"
+    }
+   ]
+  },
+  {
+   "id": "A70",
+   "name": "Guvenlik / elektrik",
+   "children": [
+    {
+     "id": "A71",
+     "name": "Operator koruma kapisi",
+     "qty": 1,
+     "script": "parts/A71_koruma_kapisi.py",
+     "children": [
+      {
+       "id": "A124",
+       "name": "Kapi polikarbonat paneller (2 panel)",
+       "qty": 1,
+       "script": "parts/A124_kapi_paneller.py"
+      },
+      {
+       "id": "A125",
+       "name": "Ust ray + makara arabalari + dikmeler",
+       "qty": 1,
+       "script": "parts/A125_ust_ray_makara.py"
+      },
+      {
+       "id": "A126",
+       "name": "Pnomatik kapi tahrik silindiri",
+       "qty": 1,
+       "script": "parts/A126_tahrik_silindir.py"
+      },
+      {
+       "id": "A127",
+       "name": "Kilitli guvenlik anahtari (kapali+acik)",
+       "qty": 1,
+       "script": "parts/A127_guvenlik_anahtari.py"
+      },
+      {
+       "id": "A128",
+       "name": "Kapi kolu + koruyucu kenar",
+       "qty": 1,
+       "script": "parts/A128_kol_kenar.py"
+      }
+     ]
+    },
+    {
+     "id": "A72",
+     "name": "Elektrik panosu",
+     "qty": 1,
+     "script": "parts/A72_pano.py"
+    },
+    {
+     "id": "A163",
+     "name": "Acil durdurma istasyonu (80x80 sari kutu + d40 mantar basli)",
+     "qty": 4,
+     "script": "parts/A163_acil_durdurma.py"
+    },
+    {
+     "id": "A164",
+     "name": "Arka koruma kapisi paneli (kayar; profil cerceve + sac + polikarbonat + kol)",
+     "qty": 1,
+     "script": "parts/A164_arka_kapi_panel.py"
+    },
+    {
+     "id": "A165",
+     "name": "Arka kapi alt iz + ust ray + 2 dikme",
+     "qty": 1,
+     "script": "parts/A165_arka_kapi_ray.py"
+    },
+    {
+     "id": "A166",
+     "name": "Arka kapi kapali limit anahtari + kapi dili (2 adet seri, KA9 zinciri)",
+     "qty": 2,
+     "script": "parts/A166_arka_kapi_limit.py"
+    },
+    {
+     "id": "A178",
+     "name": "Alarm lambasi / sinyal kulesi HL1 (kirmizi-sari-yesil + sirene)",
+     "qty": 1,
+     "script": "parts/A178_alarm_lambasi.py"
+    },
+    {
+     "id": "A179",
+     "name": "Operator kutusu (HMI + jog/start/stop butonlari + ST4-1) ve zemin sehpasi",
+     "qty": 1,
+     "script": "parts/A179_operator_kutusu.py"
+    }
+   ]
+  },
+  {
+   "id": "A80",
+   "name": "Kalip (temsili)",
+   "children": [
+    {
+     "id": "A81",
+     "name": "Sabit kalip yarisi",
+     "qty": 1,
+     "script": "parts/A81_sabit_kalip.py"
+    },
+    {
+     "id": "A82",
+     "name": "Hareketli kalip yarisi",
+     "qty": 1,
+     "script": "parts/A82_hareketli_kalip.py"
+    },
+    {
+     "id": "A83",
+     "name": "Kalip itici plakasi (itici + tutucu)",
+     "qty": 1,
+     "script": "parts/A83_kalip_itici_plakasi.py"
+    },
+    {
+     "id": "A84",
+     "name": "Itici pimi",
+     "qty": 24,
+     "script": "parts/A84_itici_pimi.py"
+    },
+    {
+     "id": "A85",
+     "name": "Geri donus pimi",
+     "qty": 4,
+     "script": "parts/A85_geri_donus_pimi.py"
+    },
+    {
+     "id": "A167",
+     "name": "Maca cekme silindiri (hidrolik, bore 50/rod 28, strok 80, flansli)",
+     "qty": 4,
+     "script": "parts/A167_maca_silindiri.py"
+    },
+    {
+     "id": "A168",
+     "name": "Maca valf manifoldu (4 x NG6 icin alt plaka, A21 arka yuz)",
+     "qty": 1,
+     "script": "parts/A168_maca_manifold.py"
+    },
+    {
+     "id": "A169",
+     "name": "Maca NG6 yon valfi (4/3, cift solenoid DIN 43650)",
+     "qty": 4,
+     "script": "parts/A169_maca_valfi.py"
+    }
+   ]
+  },
+  {
+   "id": "A90",
+   "name": "Kalip yuksekligi ayar tahriki (elektrikli redüktörlü motor)",
+   "children": [
+    {
+     "id": "A91",
+     "name": "Merkez disli (z210 m4)",
+     "qty": 1,
+     "script": "parts/A91_merkez_disli.py"
+    },
+    {
+     "id": "A92",
+     "name": "Merkez disli tasiyici yatak halkasi",
+     "qty": 1,
+     "script": "parts/A92_yatak_halkasi.py"
+    },
+    {
+     "id": "A93",
+     "name": "Pinyon (z20 m4) + mil",
+     "qty": 1,
+     "script": "parts/A93_pinyon.py"
+    },
+    {
+     "id": "A94",
+     "name": "Redüktör (helisel, i=35)",
+     "qty": 1,
+     "script": "parts/A94_reduktor.py"
+    },
+    {
+     "id": "A95",
+     "name": "Elektrik motoru 1.1 kW 4 kutup",
+     "qty": 1,
+     "script": "parts/A95_motor.py"
+    },
+    {
+     "id": "A96",
+     "name": "Motor-redüktör braketi",
+     "qty": 1,
+     "script": "parts/A96_braket.py"
+    },
+    {
+     "id": "A97",
+     "name": "Motor enkoderi (kalip yuksekligi sayimi)",
+     "qty": 1,
+     "script": "parts/A97_enkoder.py"
+    }
+   ]
+  }
+ ]
 }

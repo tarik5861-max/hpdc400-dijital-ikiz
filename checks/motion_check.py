@@ -5,8 +5,8 @@ Her konumda hareketli parcalar ile tum parcalar arasinda common hacmi olculur.
 import os, sys, itertools
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path[:0] = [os.path.join(ROOT, "assembly"), os.path.join(ROOT, "lib")]
-import geo, kinematics          # noqa
-from assemble import assemble  # noqa
+import geo, kinematics, hortum_pose   # noqa
+from assemble import assemble, build_part  # noqa
 
 TOL = 50.0
 
@@ -19,6 +19,26 @@ def apply(shp, M):
     tr = gp_Trsf()
     tr.SetValues(R[0][0], R[0][1], R[0][2], t[0], R[1][0], R[1][1], R[1][2], t[1], R[2][0], R[2][1], R[2][2], t[2])
     return BRepBuilderAPI_Transform(shp, tr, True).Shape()
+
+
+def hortum_sekilleri(P, info, dz):
+    """Her hortumu (hatlar tip=hortum) o anki (dx_platen, delta, dz) icin yeniden olustur: {instance: (pid, shape)}."""
+    A = P["parts"]["A160"]
+    inst_hat = {i["hat"]: i for i in A["instances"]}
+    out = {}
+    for hid in hortum_pose.hortum_idler(P):
+        pts, _ = hortum_pose.hose_path(P, hid, info["dx_platen"], info["delta"], dz)
+        h, pos = hortum_pose.hose_dims_local(P, hid, pts)
+        dims = dict(A["dims"]); dims["hatlar"] = {hid: h}
+        shp = build_part("A160", "parts/A160_hat_boru.py", {"parts": {"A160": {"dims": dims}}, "global": P["global"]}, {"hat": hid})
+        ins = inst_hat[hid]
+        out[ins["name"]] = ("A160", geo.place(shp, ins["pos"], ins.get("rot", [0, 0, 0])))
+    return out
+
+
+def assemble_hose_names(P):
+    hat = P["parts"]["A160"]["dims"]["hatlar"]
+    return {i["name"]: i["hat"] for i in P["parts"]["A160"]["instances"] if hat[i["hat"]]["tip"] == "hortum"}
 
 
 def main():
@@ -44,10 +64,11 @@ def run(n, die_sweep, shot, quiet=False):
     G = P["global"]
     if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir; A83/84/85 (itici seti) kaydirma disinda
         placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82", "A83", "A84", "A85")}
-    # hortumlar (A160, tip=hortum) esnek: referans konumda cizildi, hareketli uclara (A130/A41/A65) uyum saglar -> hareket taramasindan cikarilir; sert borular taranir
+    # hortumlar (A160, tip=hortum) esnek: her adimda lib/hortum_pose.py ile yeniden olusturulur (sabit boy, uclar bagli); sert borular sabit taranir
     hat = P["parts"]["A160"]["dims"]["hatlar"] if "A160" in P["parts"] else {}
     inst_hat = {i["name"]: i["hat"] for i in P["parts"]["A160"]["instances"]} if "A160" in P["parts"] else {}
     placed = {k: v for k, v in placed.items() if not (v[0] == "A160" and hat[inst_hat[k]]["tip"] == "hortum")}
+    hose_names = set(k for k, v in assemble_hose_names(P).items())
     allowed = {frozenset(p) for p in P["clearances"]["allowed_contacts"]}
     limits = {frozenset(p[:2]): float(p[2]) for p in P["clearances"].get("allowed_limits", [])}
     mesh = {frozenset(p) for p in P["clearances"].get("mesh_pairs", [])}
@@ -59,9 +80,12 @@ def run(n, die_sweep, shot, quiet=False):
             s = i / n; dh = None
         tr, info = kinematics.pose_full(s, P, dh)
         cur = {k: (v[0], apply(v[2], tr[k]) if k in tr else v[2]) for k, v in placed.items()}
+        dz = G["shot_offset_z"] - G["shot_positions_z"]["alt"]
+        cur.update(hortum_sekilleri(P, info, dz))
+        tr_ = set(tr) | hose_names
         bb = {k: geo.bbox(v[1]) for k, v in cur.items()}
         for a, b in itertools.combinations(cur, 2):
-            if a not in tr and b not in tr:
+            if a not in tr_ and b not in tr_:
                 continue
             if not all(bb[a][j] <= bb[b][j + 3] and bb[b][j] <= bb[a][j + 3] for j in range(3)):
                 continue

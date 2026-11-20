@@ -15,3 +15,5 @@ Beyin fırtınasında çıkan, henüz kademeye girmemiş fikirler. Tek satır: t
 - 2026-11-20 — Hortumların kalıp yüksekliği/vuruşla gerçek takibi (esnek hortum animasyonu; geo.py'ye sweep) — K1/K7
 - 2026-11-20 — Su soğutmalı plunger ucu için A52 içi su yolu + dönel rakor modeli — K1
 - 2026-11-20 — A65 hızlı vuruş dönüşü için rejeneratif devre/yüksek debili dönüş alternatiflerinin hidrolik modelde karşılaştırılması — K3
+- 2026-11-20 — Hortum hareketi: A160 hortumları (H06/H07: A130→A41) sabit grupta, platen açılınca (420 mm) ve kalıp yüksekliği ayarında A41'den ayrılıyor. Çözüm: hortumu pozisyona bağlı çiz (uçlar A130/A41'e bağlı, U-halka stroka göre), makro + kontrol güncelle; uzunluk/min bükülme açık-kapalı-kalıp yüksekliği uçlarında kontrol. Onay verildi, sıra bekliyor.
+- 2026-11-20 — İtici: strok 145 (A41) vs kalıp limiti 65 → mekanik stop + ileri/geri proximity sensör parçası BOM'da yok; motion_check itici stroku taramıyor (out/itici_tarama.py ile elle tarandı, strok 65'te çarpışma 0).

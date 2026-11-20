@@ -65,6 +65,10 @@ def run(phase=None, shot=None, write=True, verbose=True):
                            "msg": f"{v/1000:.1f} cm3"})
 
     errors += kural_kontrol(P)
+    if phase is None and shot is None:   # itici strok taramasi (A42 ej 0 / -65, mafsal s=0/1), yalniz tam montajda
+        import itici_tarama
+        for a, b, s_, ej, v in itici_tarama.tara(placed, P):
+            errors.append({"part": f"{a} x {b}", "type": "ITICI_CAKISMA", "msg": f"s={s_} ej={ej} {v:.1f} cm3"})
     if not write:
         return errors, warns, len(names)
 

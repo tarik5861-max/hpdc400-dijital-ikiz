@@ -13,8 +13,10 @@ from PySide import QtCore
 _ROOT = os.environ.get("HPDC_ROOT") or r"C:\Users\tarik\projects\hpdc400"
 if os.path.join(_ROOT, "lib") not in sys.path:
     sys.path.insert(0, os.path.join(_ROOT, "lib"))
-import kinematics
+import kinematics, hortum_pose
 importlib.reload(kinematics)
+importlib.reload(hortum_pose)
+import Part
 _P = json.load(open(os.path.join(_ROOT, "params", "params.json"), encoding="utf-8"))
 _G = _P["global"]
 _doc = App.getDocument("HPDC400")
@@ -41,6 +43,37 @@ def _base(o):
 _state = {"t": 0.0, "timer": None, "s": 0.0, "dh": _G["die_height_current"], "mode": None, "dh_from": None, "dh_to": None}
 
 
+# Hortumlar: her adimda lib/hortum_pose.py ile (sabit boy, bagli uclar, U-halka) yeniden cizilir; sert borular sabit kalir.
+_hoses = {i["name"]: i["hat"] for i in _P["parts"]["A160"]["instances"]
+          if _P["parts"]["A160"]["dims"]["hatlar"][i["hat"]]["tip"] == "hortum"}
+_AXV = {"x": App.Vector(1, 0, 0), "y": App.Vector(0, 1, 0), "z": App.Vector(0, 0, 1)}
+
+
+def _hortum_sekil(hid, pts):
+    sh = []
+    for sp in hortum_pose.cyl_specs(_P, hid, pts):
+        if sp[0] == "cyl":
+            _, c, ax, L, r = sp
+            if L > 1e-6:
+                sh.append(Part.makeCylinder(r, L, App.Vector(*c), _AXV[ax]))
+        else:
+            sh.append(Part.makeSphere(sp[2], App.Vector(*sp[1])))
+    return Part.makeCompound(sh)
+
+
+def _hortumlar(info):
+    dz = _G["shot_offset_z"] - _G["shot_positions_z"]["alt"]
+    for name, hid in _hoses.items():
+        o = _doc.getObject(name)
+        if o is None:
+            continue
+        pts, inf = hortum_pose.hose_path(_P, hid, info["dx_platen"], info["delta"], dz)
+        o.Shape = _hortum_sekil(hid, pts)     # global koordinatta cizilir -> Placement birim
+        o.Placement = App.Placement()
+        if inf["eksik_mm"] > 0:
+            print(f"UYARI {hid}: hortum {inf['eksik_mm']:.0f} mm kisa (gerilir)")
+
+
 def hpdc_poz(s, dh=None):
     if dh is None:
         dh = _state["dh"]
@@ -49,6 +82,7 @@ def hpdc_poz(s, dh=None):
         o = _doc.getObject(name)
         if o is not None:
             o.Placement = _plc(M).multiply(_base(o))
+    _hortumlar(info)
     _state["s"], _state["dh"] = s, dh
     Gui.updateGui()
     return info

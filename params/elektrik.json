@@ -78,12 +78,13 @@
    "yag_sicaklik_dur_C = 65",
    "onay = CLAUDE_KARARI_SAHA_DOGRULAMASI: 0.9/1.07/0.8 x sistem basinci ve 55/65 C standart degil, isletme degerleri gelince degisir",
    "7) Kanal sayilari (yon -> durum)",
-   "DI: {'aktif': 47, 'ayrilmis': 8, 'kapsam_disi': 4, 'istege_bagli': 6, 'toplam': 65}",
-   "DO: {'istege_bagli': 16, 'aktif': 23, 'ayrilmis': 1, 'kapsam_disi': 8, 'toplam': 48}",
+   "DI: {'aktif': 51, 'ayrilmis': 8, 'kapsam_disi': 0, 'istege_bagli': 6, 'toplam': 65} (2026-11-20: maca DI5.14-17 aktif)",
+   "DO: {'istege_bagli': 16, 'aktif': 31, 'ayrilmis': 1, 'kapsam_disi': 0, 'toplam': 48} (2026-11-20: maca DO7.17-24 aktif)",
    "AI: {'aktif': 6, 'istege_bagli': 3, 'toplam': 9}",
    "AO: {'aktif': 5, 'ayrilmis': 4, 'toplam': 9}",
-   "genel: {'aktif': 81, 'ayrilmis': 13, 'istege_bagli': 25, 'kapsam_disi': 12, 'toplam': 131}",
-   "2026-11-18 karar turu (olcu-mimari): kullanici bekleyen kararlari devretti -> K-EL-01..06f (kararlar[]). FKAP esigi: 5 kN/somun -> motor 2,64 Nm (dogrusal); 7,24 Nm nominal -> 13,7 kN/somun x 4 = 54,8 kN; esik 50 kN (%91). A97: 1450/60 x 2 = 48,3 Hz, darbe genisligi 10,3 ms (standart DI icin sinirda)."
+   "genel: {'aktif': 93, 'ayrilmis': 13, 'istege_bagli': 25, 'kapsam_disi': 0, 'toplam': 131}",
+   "2026-11-18 karar turu (olcu-mimari): kullanici bekleyen kararlari devretti -> K-EL-01..06f (kararlar[]). FKAP esigi: 5 kN/somun -> motor 2,64 Nm (dogrusal); 7,24 Nm nominal -> 13,7 kN/somun x 4 = 54,8 kN; esik 50 kN (%91). A97: 1450/60 x 2 = 48,3 Hz, darbe genisligi 10,3 ms (standart DI icin sinirda).",
+   "2026-11-20: Maca (core) kontrolu kapsama alindi (ikiz varsayimi, kullanici istegi: tum eksikleri tamamla): DO7.17..24 + DI5.14..17 aktif, bagli_id A167/A169; A168 manifold. Hidrolik Y4 hortum hatlari hatlar.json'da YOK (OLCU_TALEBI). Yeni parca bagli_id: A162 itici sensor, A163 e-stop, A164-A166 arka kapi, A170/A171 yaglama, A174 RF1, A178 lamba, A179 operator kutusu."
   ],
   "kanal_sayilari": {
    "DI": {
@@ -261,9 +262,18 @@
    },
    "sinirda": "KM3 40 A: kullanim 0.85 SINIRDA (6-8 s kisa sureli yildiz gorevi); 65 A sinifi KM1/KM2 icin 0.90 SINIRDA oldugundan 80 A secildi",
    "bobin_VA": {
-    "KM1": {"cekme": 200, "tutma": 20},
-    "KM2": {"cekme": 200, "tutma": 20},
-    "KM3": {"cekme": 200, "tutma": 20},
+    "KM1": {
+     "cekme": 200,
+     "tutma": 20
+    },
+    "KM2": {
+     "cekme": 200,
+     "tutma": 20
+    },
+    "KM3": {
+     "cekme": 200,
+     "tutma": 20
+    },
     "kaynak": "IKIZ_TASARIM_VARSAYIMI: 40-80 A sinifi AC bobin tipik"
    },
    "KT1_s": 8.0,
@@ -420,7 +430,8 @@
    "aciklama": "kalip kapama butonu 1",
    "durum": "aktif",
    "bagli_id": [
-    "A35"
+    "A35",
+    "A179"
    ],
    "hidrolik": "Y2",
    "koken": "dcc630_sablon",
@@ -436,7 +447,8 @@
    "aciklama": "kalip acma butonu",
    "durum": "aktif",
    "bagli_id": [
-    "A35"
+    "A35",
+    "A179"
    ],
    "hidrolik": "Y2",
    "koken": "dcc630_sablon",
@@ -452,7 +464,8 @@
    "aciklama": "enjeksiyon butonu",
    "durum": "aktif",
    "bagli_id": [
-    "A54"
+    "A54",
+    "A179"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -469,7 +482,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A54",
-    "A52"
+    "A52",
+    "A179"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -486,7 +500,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A54",
-    "A52"
+    "A52",
+    "A179"
    ],
    "hidrolik": "Y1",
    "koken": "dcc630_sablon",
@@ -502,7 +517,8 @@
    "aciklama": "itici ileri (manuel knob)",
    "durum": "aktif",
    "bagli_id": [
-    "A41"
+    "A41",
+    "A179"
    ],
    "hidrolik": "Y3",
    "koken": "dcc630_sablon",
@@ -518,7 +534,8 @@
    "aciklama": "itici geri (manuel knob)",
    "durum": "aktif",
    "bagli_id": [
-    "A41"
+    "A41",
+    "A179"
    ],
    "hidrolik": "Y3",
    "koken": "dcc630_sablon",
@@ -534,7 +551,8 @@
    "aciklama": "manuel mod secici",
    "durum": "aktif",
    "bagli_id": [
-    "A72"
+    "A72",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -550,7 +568,8 @@
    "aciklama": "otomatik mod secici",
    "durum": "aktif",
    "bagli_id": [
-    "A72"
+    "A72",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -566,7 +585,8 @@
    "aciklama": "piston yaglama knob (S605)",
    "durum": "aktif",
    "bagli_id": [
-    "A52"
+    "A52",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -633,7 +653,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A95",
-    "A26"
+    "A26",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -650,7 +671,8 @@
    "aciklama": "yari otomatik secici",
    "durum": "aktif",
    "bagli_id": [
-    "A72"
+    "A72",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -666,7 +688,8 @@
    "aciklama": "kalip kapama butonu 2",
    "durum": "aktif",
    "bagli_id": [
-    "A35"
+    "A35",
+    "A179"
    ],
    "hidrolik": "Y2",
    "koken": "dcc630_sablon",
@@ -1010,12 +1033,14 @@
    "aciklama": "back door close limit 2",
    "durum": "aktif",
    "bagli_id": [
-    "A71"
+    "A164",
+    "A165",
+    "A166"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "arka koruma kapisi agacta YOK (A71 yalniz operator tarafi); KA9 zinciri; kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
+   "not": "KA9 zinciri; kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
   },
   {
    "id": "DI5.04",
@@ -1027,12 +1052,14 @@
    "aciklama": "back door close limit 1",
    "durum": "aktif",
    "bagli_id": [
-    "A71"
+    "A164",
+    "A165",
+    "A166"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "arka koruma agacta yok; kanal no = okuma sirasi, klemens/bit DOGRULANMADI",
+   "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI",
    "saglam_deger": 1,
    "saglam_aciklama": "arka kapi limit 1 kapali = 1"
   },
@@ -1082,7 +1109,8 @@
    "aciklama": "yaglama yag seviyesi alarmi",
    "durum": "aktif",
    "bagli_id": [
-    "A30"
+    "A170",
+    "A171"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -1136,7 +1164,8 @@
    "aciklama": "yaglama basinc alarmi",
    "durum": "aktif",
    "bagli_id": [
-    "A30"
+    "A170",
+    "A171"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -1206,12 +1235,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core 1 in/out secici",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca (core) silindirleri 400 t ikizde yok (hidrolik taslak Y4 'model disi')",
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20: maca kontrolu kapsama alindi (kullanici istegi: tum eksikleri tamamla)",
    "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
   },
   {
@@ -1222,12 +1254,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core 2 in/out secici",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca (core) silindirleri 400 t ikizde yok (hidrolik taslak Y4 'model disi')",
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20: maca kontrolu kapsama alindi (kullanici istegi: tum eksikleri tamamla)",
    "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
   },
   {
@@ -1238,12 +1273,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core 3 in/out secici",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca (core) silindirleri 400 t ikizde yok (hidrolik taslak Y4 'model disi')",
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20: maca kontrolu kapsama alindi (kullanici istegi: tum eksikleri tamamla)",
    "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
   },
   {
@@ -1254,12 +1292,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core 4 in/out secici",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca (core) silindirleri 400 t ikizde yok (hidrolik taslak Y4 'model disi')",
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20: maca kontrolu kapsama alindi (kullanici istegi: tum eksikleri tamamla)",
    "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
   },
   {
@@ -1647,7 +1688,8 @@
    "aciklama": "acil stop gosterge lambasi",
    "durum": "aktif",
    "bagli_id": [
-    "A72"
+    "A72",
+    "A178"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
@@ -1793,12 +1835,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core1 in",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.18",
@@ -1808,12 +1853,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core1 out",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.19",
@@ -1823,12 +1871,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core2 in",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.20",
@@ -1838,12 +1889,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core2 out",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.21",
@@ -1853,12 +1907,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core3 in",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.22",
@@ -1868,12 +1925,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core3 out",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
    "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "maca silindiri 400 t ikizde yok"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.23",
@@ -1883,12 +1943,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core4 in (el yazisi 'Start1')",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
-   "hidrolik": null,
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
+   "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "IKIZ KARARI: DO7.17-22 core1-3 gibi 4. maca da 400 t ikizde yok -> kapsam disi"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.24",
@@ -1898,12 +1961,15 @@
    "klemens": null,
    "tag": null,
    "aciklama": "core4 out (el yazisi 'Start2')",
-   "durum": "kapsam_disi",
-   "bagli_id": [],
-   "hidrolik": null,
+   "durum": "aktif",
+   "bagli_id": [
+    "A167",
+    "A169"
+   ],
+   "hidrolik": "Y4",
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "gerekce": "IKIZ KARARI: core4 400 t ikizde yok -> kapsam disi"
+   "gerekce": "IKIZ VARSAYIMI 2026-11-20 (kullanici istegi: tum eksikleri tamamla): maca kontrolu kapsama alindi; A167 silindir + A169 NG6 valf. Hortumlar hatlar.json Y4 (OLCU_TALEBI)"
   },
   {
    "id": "DO7.25",
@@ -2170,7 +2236,8 @@
    "aciklama": "kalip yuksekligi KALIN jog butonu",
    "durum": "aktif",
    "bagli_id": [
-    "A95"
+    "A95",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "yeni",
@@ -2186,7 +2253,8 @@
    "aciklama": "kalip yuksekligi INCE jog butonu",
    "durum": "aktif",
    "bagli_id": [
-    "A95"
+    "A95",
+    "A179"
    ],
    "hidrolik": null,
    "koken": "yeni",
@@ -2221,7 +2289,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A41",
-    "A42"
+    "A42",
+    "A162"
    ],
    "hidrolik": null,
    "koken": "yeni",
@@ -2241,7 +2310,8 @@
    "durum": "aktif",
    "bagli_id": [
     "A41",
-    "A42"
+    "A42",
+    "A162"
    ],
    "hidrolik": null,
    "koken": "yeni",
@@ -2292,7 +2362,8 @@
    "aciklama": "donus filtresi tikanma gostergesi",
    "durum": "istege_bagli",
    "bagli_id": [
-    "A61"
+    "A61",
+    "A174"
    ],
    "hidrolik": null,
    "koken": "yeni",
@@ -2417,7 +2488,11 @@
    "koken": "ikiz_tasarim",
    "guven": "dusuk",
    "gerekce": "ikiz_tasarim: yedek analog; akis anahtari DI5.31 yeterliyse kullanilmaz",
-   "olcek": {"birim": "C", "min": 0, "max": 100}
+   "olcek": {
+    "birim": "C",
+    "min": 0,
+    "max": 100
+   }
   },
   {
    "id": "AO10.1",
@@ -2852,7 +2927,8 @@
    "tag": "KA1",
    "aciklama": "yaglama pompasi rolesi (DO7.32)",
    "bagli_id": [
-    "A30"
+    "A170",
+    "A171"
    ],
    "koken": "dcc630_sablon",
    "guven": "orta"
@@ -2861,7 +2937,8 @@
    "tag": "ST1-1",
    "aciklama": "acil stop: elektrik panosu",
    "bagli_id": [
-    "A72"
+    "A72",
+    "A163"
    ],
    "koken": "dcc630_sablon",
    "guven": "orta"
@@ -2871,7 +2948,8 @@
    "aciklama": "acil stop: enjeksiyon tarafi",
    "bagli_id": [
     "A54",
-    "A57"
+    "A57",
+    "A163"
    ],
    "koken": "dcc630_sablon",
    "guven": "orta"
@@ -2880,17 +2958,18 @@
    "tag": "ST3-1",
    "aciklama": "acil stop: arka kapi",
    "bagli_id": [
-    "A71"
+    "A165",
+    "A163"
    ],
    "koken": "dcc630_sablon",
-   "guven": "orta",
-   "not": "arka koruma agacta yok"
+   "guven": "orta"
   },
   {
    "tag": "ST4-1",
    "aciklama": "acil stop: operator kutusu",
    "bagli_id": [
-    "A72"
+    "A179",
+    "A163"
    ],
    "koken": "dcc630_sablon",
    "guven": "orta"
@@ -2899,7 +2978,8 @@
    "tag": "1B11A1",
    "aciklama": "pompa start (donanim NO, KM1 muhur paralel)",
    "bagli_id": [
-    "A62"
+    "A62",
+    "A179"
    ],
    "koken": "dcc630_sablon",
    "guven": "yuksek"
@@ -2908,7 +2988,8 @@
    "tag": "1B12A",
    "aciklama": "pompa stop (donanim NC)",
    "bagli_id": [
-    "A62"
+    "A62",
+    "A179"
    ],
    "koken": "dcc630_sablon",
    "guven": "yuksek"
@@ -3109,9 +3190,13 @@
     "DO7.17-22 core",
     "DI5.14-17 secici"
    ],
-   "bagli_id": [],
-   "guven": "-",
-   "durum": "kapsam_disi"
+   "bagli_id": [
+    "A167",
+    "A168",
+    "A169"
+   ],
+   "guven": "orta",
+   "durum": "aktif"
   },
   {
    "hidrolik": "ACV1 akumulator sarj blogu",

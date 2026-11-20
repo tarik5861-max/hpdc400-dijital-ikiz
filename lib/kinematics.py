@@ -34,7 +34,7 @@ def joints(theta_deg, sz, T):
     return {"A": (Ax, Az), "B": B, "C": C, "E": E, "D": D}
 
 
-MOVING_PLATEN_GROUP = ("A22", "A28", "A82", "A41", "A42", "A83", "A84", "A85")
+MOVING_PLATEN_GROUP = ("A22", "A28", "A82", "A41", "A42", "A83", "A84", "A85", "A161", "A162")   # A161 strok mansonu, A162 itici sensorleri: A22/A41 ile gider
 CROSSHEAD_GROUP = ("A31", "A37")          # capraz kafa + kapama piston kolu (A35 govdesi sabit)
 
 
@@ -88,7 +88,8 @@ DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar
                           "A98", "A99", "A100", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119", "A120",
                           "A121", "A122", "A123", "A160",
                           "A59", "A63", "A64", "A65", "A66", "A67",
-                          "A140", "A141", "A142", "A143", "A144", "A145")   # A160: hidrolik hat/hortumlar (hortum esnek, REFERANS KONUMDA cizilir; hortum instance'lari motion_check'te atlanir, sert borular sabit); A98..A119: A62 pompa agaci, A120: M1 motor, A121..A123 emis/basinc borulari + tespit (2026-11-19 rev: +X ucu sase -Y yani zeminde, sabit); A61 tank sase icinde (sabit); A59 akumulator sepeti/valf blogu, A63 kelepce, A64 toplayici boru, A65-A67 enjeksiyon valf/sensorleri: kalip yuksekliginde kaymaz; A124..A128 kapi alt parcalari A71 ile birlikte sabit (sase gibi)
+                          "A140", "A141", "A142", "A143", "A144", "A145",
+                          "A163", "A164", "A165", "A166", "A167", "A168", "A169", "A172", "A173", "A174", "A175", "A176", "A177", "A178", "A179")   # 2026-11-20 yeni parcalar (A161/A162 MOVING, A170+A171 A23 ile kayar -> FIXED degil)   # A160: hidrolik hat/hortumlar (hortum esnek, REFERANS KONUMDA cizilir; hortum instance'lari motion_check'te atlanir, sert borular sabit); A98..A119: A62 pompa agaci, A120: M1 motor, A121..A123 emis/basinc borulari + tespit (2026-11-19 rev: +X ucu sase -Y yani zeminde, sabit); A61 tank sase icinde (sabit); A59 akumulator sepeti/valf blogu, A63 kelepce, A64 toplayici boru, A65-A67 enjeksiyon valf/sensorleri: kalip yuksekliginde kaymaz; A124..A128 kapi alt parcalari A71 ile birlikte sabit (sase gibi)
 
 
 def _mat_ry(deg):
