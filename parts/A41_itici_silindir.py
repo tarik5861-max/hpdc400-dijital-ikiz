@@ -13,4 +13,13 @@ def build(d, G, g):
         s = g.fuse(s, g.move(g.cyl(cap["od"] / 2, cx1 - cx0, "x"), (cx0 + cx1) / 2, y, z))
         s = g.fuse(s, g.move(g.cyl(rod["d"] / 2, rx1 - rx0, "x"), (rx0 + rx1) / 2, y, z))
         s = g.fuse(s, g.move(g.cyl(pi["d"] / 2, ix1 - ix0, "x"), (ix0 + ix1) / 2, y, z))
+    bo = d["ports"]["boss"]
+    (bx_0, bx_1), (by_0, by_1), (bz_0, bz_1) = bo["x_range"], bo["y_range"], bo["z_range"]
+    s = g.fuse(s, g.move(g.box(bx_1 - bx_0, by_1 - by_0, bz_1 - bz_0), (bx_0 + bx_1) / 2, (by_0 + by_1) / 2, (bz_0 + bz_1) / 2))
+    for e in d["ports"]["liste"]:
+        x, y, z = e["konum_lokal"]; r = e["d"] / 2; dp = e["derinlik"]
+        if e.get("eksen") == "z":  # kapak alti radyal
+            s = g.cut(s, g.move(g.cyl(r, dp + 1, "z", center=False), x, y, z - 1))
+        else:  # boss -Y yuzunden flush
+            s = g.cut(s, g.move(g.cyl(r, dp, "y", center=False), x, y, z))
     return s

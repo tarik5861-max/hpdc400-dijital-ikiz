@@ -38,7 +38,8 @@
    "A13 limits: long columns carry NO lateral (Y) load (216 N/mm) -> A21 needs a transverse key to A12/A11 (open). Injection reaction 430 kN now runs A57-A11-A14-A13 each shot (215 kN/lower column, 27 MPa). Thermal dT 20 K -> 0.58 mm over 2430 mm (open risk: shim/slotted front flange). Shot line clearances in out/olcu_2026-11-18_A13_bosluk.txt.",
    "SHOT POSITIONS 2026-11-18 (formula + full-assembly BRepExtrema scan): global.shot_position alt|orta|ust -> Z -150/-75/0 (default alt). A51/A52/A54/A55 pos Z = z_sel; A21 shot hole + A81 sleeve bore follow; A57 saddle top local 230/305/380 (0/1/2 x 75 mm spacers). All three: 0 collisions; min gaps A55-A57 10 (vertical, constant), A54-A13 lower 20 (Y, constant), A57 saddle-A13 lower 115.5/52.6/20, A51-A13 lower flange 25/37/71, A55-A14 rib 40 (X), A54-A13_3 upper -/-/160, A55-A13_3 -/-/153, A51-A13_3 -/-/165.",
    "SHOT POSITION LIMITS: 3 separate d140 holes impossible (step 75 < 140; range -150..+70 max) -> physical A21 vertical window 140x290 (Z -220..+70) with 2 bolted 75 mm filler blocks; model draws only the selected hole. Upper limit Z<=+70 from A55 vs A14 upper rib (Z 220, 10 mm), Z<=+150 from A54 vs A13_3. Ladle free height above pour hole under A13_3 rod: 390/315/240 mm (under front flange 340/265/190). 'ust' = machine centre (Z=0).",
-   "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust."
+   "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust.",
+   "2026-11-20 port/delik (olcu-mimari): port bore hizlari v=Q/(pi d^2/4): A130 A2 d20 94.2 L/dk 5.0, B2 d16 65 5.4, Pi d12 0.9; A35 A d32 279.7 5.8, B d25 191.2 6.5; A41 A d16 94.2 7.8 (yuksek), B d16 5.4, capraz d14 47.1 5.1; A65 P d32 191.2 4.0, T d51 1625.8 13.4 (2xd51 6.7), Pi d10 1.3; A59 P d38 2.8, Pi d19 1.4, T d30 290 6.8; A61 T d80 1905.8 6.3 (tepe, ort ~1.9). A11 -Y duvar gecisi d150 (H24 flans d142 = 89x1.6)."
   ],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
@@ -328,6 +329,18 @@
       "local_z": 390,
       "d": 95,
       "note": "2026-11-20 rev3: delik Y 0 -> 380 (tank emis portu Y=380 ile ayni eksen; eski Y=0 deligi kaldirildi). 2026-11-19 rev2: A121 emis hatti alt kosu (Z=-760), kaburga X=2150 gecisi -> tank A61 +X uc yuzu (X=2135). Eski -Y yan duvar gecisi (X=2025) kaldirildi"
+     },
+     {
+      "name": "T_donus_-Y_yan_duvar",
+      "axis": "y",
+      "x": 1000,
+      "y_range": [
+       -501,
+       -474
+      ],
+      "local_z": 350,
+      "d": 150,
+      "note": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): H24 (OD89) + flansi (d142 t14) gecer; OLCU_TALEBI d95 idi, d95'te H24 flansi duvara gomulurdu -> d150 (flansa radyal 4). Global X1000 Z-800. Duvar 620 yuksek, delik z 275..425; tank erisim acikligi +Y, kaburga yok (590/2150)."
      }
     ],
     "cross_rib_thk": 20,
@@ -1858,8 +1871,41 @@
     "stroke": 260.0,
     "required_crosshead_travel": 237.978,
     "ports": {
-     "d": 30,
-     "optional": true
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): A_kapak arka kapak (rear_cap x 440..480) alt cevresinde radyal; B_kol on flans arka yuzunde (x=40) eksenel delik + flans ici L kanal -> kol odasi (kanal cizilmez). Konum lokal.",
+     "liste": [
+      {
+       "ad": "A_kapak",
+       "yuz": "-Z (rear_cap silindirik alt)",
+       "tip": "flush_delik_radyal",
+       "konum_lokal": [
+        460,
+        0,
+        -100
+       ],
+       "d": 32,
+       "derinlik": 20,
+       "eksen": "z",
+       "hat": "H04",
+       "hiz_m_s": 5.8,
+       "not": "x 444..476 kapak icinde"
+      },
+      {
+       "ad": "B_kol",
+       "yuz": "+X (on flans arka yuzu, x=40)",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        40,
+        130,
+        -85
+       ],
+       "d": 25,
+       "derinlik": 30,
+       "eksen": "x",
+       "hat": "H05",
+       "hiz_m_s": 6.49,
+       "not": "eski y150 (flans kenari, port yarisi disarida) -> (y130,z-85): r155.3, hortum (r20) A131 bilezigine (r130) 5.3 mm; d25 flans kenarina 7.5, (120,-120) civata deligine (d26) 10.9 lig. (y120 denendi: A131 x H05 12.6 cm3)"
+      }
+     ]
     },
     "dropped": "rod and piston REMOVED (now part A37, moves with crosshead). Nothing of A35 may extend to local x<0."
    },
@@ -2001,7 +2047,86 @@
     "force_push_kN_total": 219.911,
     "force_return_kN_total": 150.9,
     "sizing_source": "formul: F_req/cyl = 215.5/2 = 107.8 kN; d = sqrt(4F/(pi p)) = sqrt(4*107756/(pi*14)) = 99.0 -> ISO 3320 bore 100, rod 56 (ISO 3320 pair).",
-    "envelope_note": "overall length 425 unchanged (rear cap X=1445 at full opening vs crosshead hub 1458). Whole unit |Y|<=120 (barrels 5..120), |Z|<=100 (bridge). Knee pins |Y|>=127.5 -> 7.5 mm, big links |Y|>=130 -> 10 mm."
+    "envelope_note": "overall length 425 unchanged (rear cap X=1445 at full opening vs crosshead hub 1458). Whole unit |Y|<=120 (barrels 5..120), |Z|<=100 (bridge). Knee pins |Y|>=127.5 -> 7.5 mm, big links |Y|>=130 -> 10 mm.",
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): port yalniz -Y silindirde (A, B) + iki silindir kapak alti capraz (A_alt). Kapak (x 405..425) 20 mm dar oldugundan -Y kapak yanina kaynakli port boss. B kol odasina cift cidarli ic boru (cizilmez). Konum lokal (A22 arka yuzu, eksen).",
+     "boss": {
+      "x_range": [
+       395,
+       425
+      ],
+      "y_range": [
+       -120,
+       -80
+      ],
+      "z_range": [
+       -50,
+       50
+      ],
+      "not": "-Y silindir arka kapak+govde ucu yanina kaynakli blok; dis yuz y=-120 (bbox degismez)"
+     },
+     "liste": [
+      {
+       "ad": "A_kapak_-Y",
+       "yuz": "-Y (boss)",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        415,
+        -120,
+        -30
+       ],
+       "d": 16,
+       "derinlik": 25,
+       "hat": "H06",
+       "hiz_m_s": 7.81,
+       "not": "x 407..423; hiz 7.8 m/s yuksek (kisa itici stroku), saha: SAE/BSP port boyu"
+      },
+      {
+       "ad": "B_kapak_-Y",
+       "yuz": "-Y (boss)",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        415,
+        -120,
+        30
+       ],
+       "d": 16,
+       "derinlik": 25,
+       "hat": "H07",
+       "hiz_m_s": 5.39
+      },
+      {
+       "ad": "A_kapak_alt_-Y",
+       "yuz": "-Z (kapak alt)",
+       "tip": "flush_delik_radyal",
+       "konum_lokal": [
+        410,
+        -62.5,
+        -57.5
+       ],
+       "d": 14,
+       "derinlik": 10,
+       "eksen": "z",
+       "hat": "H08",
+       "hiz_m_s": 5.1
+      },
+      {
+       "ad": "A_kapak_alt_+Y",
+       "yuz": "-Z (kapak alt)",
+       "tip": "flush_delik_radyal",
+       "konum_lokal": [
+        410,
+        62.5,
+        -57.5
+       ],
+       "d": 14,
+       "derinlik": 10,
+       "eksen": "z",
+       "hat": "H08",
+       "hiz_m_s": 5.1
+      }
+     ]
+    }
    },
    "local_origin": "Machine axis on the A22 back face (post foot plane). Everything extends along +X (posts 0..205, bridge 205..240, barrels 240..405, caps 405..425). Cylinders at (Y,Z)=(+-62.5,0).",
    "instances": [
@@ -2516,6 +2641,70 @@
       480
      ],
      "x_local": -135
+    },
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): portlar valf blogu alt yuzunde (lokal z=40, sepet tablasi ustu). Her portta bloga kaynakli nipel tabla deliginden gecer (z 0..40), hat flansi tabla altinda (z=0, global -220) nipele oturur -> A160 H01/H10/H21 kirp 40 tutarli. Tabla delikleri nipelden genis (radyal 5.5..7). Konum lokal.",
+     "liste": [
+      {
+       "ad": "P_alt",
+       "yuz": "-Z (valf blogu alti)",
+       "tip": "nipel",
+       "konum_lokal": [
+        -45,
+        0,
+        40
+       ],
+       "d": 38,
+       "nipel_od": 48,
+       "nipel_z": [
+        0,
+        40
+       ],
+       "tabla_delik_d": 60,
+       "hat": "H01",
+       "hiz_m_s": 2.81
+      },
+      {
+       "ad": "Pi_alt",
+       "yuz": "-Z (valf blogu alti)",
+       "tip": "nipel",
+       "konum_lokal": [
+        -100,
+        0,
+        40
+       ],
+       "d": 19,
+       "nipel_od": 25,
+       "nipel_z": [
+        0,
+        40
+       ],
+       "tabla_delik_d": 36,
+       "hat": "H10",
+       "hiz_m_s": 1.36
+      },
+      {
+       "ad": "T_alt",
+       "yuz": "-Z (valf blogu alti)",
+       "tip": "nipel",
+       "konum_lokal": [
+        -150,
+        0,
+        40
+       ],
+       "d": 30,
+       "nipel_od": 40,
+       "nipel_z": [
+        0,
+        40
+       ],
+       "tabla_delik_d": 54,
+       "hat": "H21",
+       "hiz_m_s": 6.84,
+       "not": "eski x -155 -> -150 (d30 blok kenarina 5 lig.); DV1 kisa desarj 290 L/dk"
+      }
+     ],
+     "tabla_delik_not": "OLCU_TALEBI'ndeki 3 x d60 merkez araligi 55'te birbirine giriyordu -> P d60 / Pi d36 / T d54 (aralar 7 / 5 mm)"
     }
    },
    "local_origin": "Center of the +X face (face against A14 rear face X=-2900), z=0 at tray bottom. Tray x -270..0, y +-560, z 0..40 + rim to 100; valve block x -170..0, y +-60, z 40..820 between the middle tubes; 3 cartridge boxes on its rear face; 2 legs to the floor (Z=-1150).",
@@ -2686,6 +2875,69 @@
      "body_d": 90,
      "body_len": 180,
      "z_center": 230
+    },
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): tum portlar blok -Y yuzunde (y=-150) flush; yuz 160x160 (x +-80, z 150..310). T icin 2 x d51 (T1 bagli H20H, T2 tapali yedek): 1625.8 L/dk tek d51'de 13.4 m/s, ikide 6.7 m/s. Donus devresi karari docs/fikirler.md (hidrolik-muhendisi).",
+     "liste": [
+      {
+       "ad": "P",
+       "yuz": "-Y",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        20,
+        -150,
+        275
+       ],
+       "d": 32,
+       "derinlik": 40,
+       "hat": "H02H",
+       "hiz_m_s": 3.96
+      },
+      {
+       "ad": "T",
+       "yuz": "-Y",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -50,
+        -150,
+        190
+       ],
+       "d": 51,
+       "derinlik": 40,
+       "hat": "H20H",
+       "hiz_m_s": 13.37,
+       "not": "tek basina 13.4 m/s; T2 acilinca 6.7"
+      },
+      {
+       "ad": "T2",
+       "yuz": "-Y",
+       "tip": "flush_delik_tapali",
+       "konum_lokal": [
+        -50,
+        -150,
+        270
+       ],
+       "d": 51,
+       "derinlik": 40,
+       "hat": null,
+       "hiz_m_s": 6.68,
+       "not": "yedek T (tapa cizilir, hat yok); T1 ile z ara 29, P ile x ara 28"
+      },
+      {
+       "ad": "Pi",
+       "yuz": "-Y",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        65,
+        -150,
+        210
+       ],
+       "d": 10,
+       "derinlik": 30,
+       "hat": "H11H",
+       "hiz_m_s": 1.27
+      }
+     ]
     }
    },
    "local_origin": "Vurus ekseni yuksekligi (pos Z = shot z_sel), blok merkezi x/y. Blok A54 arka kafasi ustunde (kafa ust yuzu +150 lokal), servo valf (S424, U16 TDP050EH) +Y yan yuzunde. A64 toplayici boru blok ustune iner.",
@@ -2712,7 +2964,7 @@
      ]
     }
    ],
-   "note": "Temsili: ic kanal/port yok. elektrik.json: Y1, S424/U16 (bagli_id A54, A56)."
+   "note": "Temsili: ic kanal yok; portlar dims.ports (2026-11-20). elektrik.json: Y1, S424/U16 (bagli_id A54, A56)."
   },
   "A66": {
    "name": "Enjeksiyon konum sensoru (lineer) + ileri limit LS2",
@@ -3156,10 +3408,60 @@
       "len": 25,
       "x": 0,
       "y": 0
+     },
+     "ek_portlar": {
+      "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): Y3 (A132_2, itici yon) icin A2/B2 -Y yuzunde cikintisiz (flush) port; Pi pilot +X yuzunde kisa tapali stub (P/T/A/B stub ile ayni tip). Konum lokal (blok merkezi). Hat ucu = port agzi (A2/B2: y=-100 yuz; Pi: stub ucu x=160).",
+      "liste": [
+       {
+        "ad": "A2",
+        "yuz": "-Y",
+        "tip": "flush_delik",
+        "konum_lokal": [
+         115,
+         -100,
+         20
+        ],
+        "d": 20,
+        "derinlik": 30,
+        "hat": "H06",
+        "hiz_m_s": 5.0,
+        "not": "x 105..125 (+X kenara 5 lig.), A132_4 (x<=88) disinda; hortum DN25"
+       },
+       {
+        "ad": "B2",
+        "yuz": "-Y",
+        "tip": "flush_delik",
+        "konum_lokal": [
+         115,
+         -100,
+         70
+        ],
+        "d": 16,
+        "derinlik": 30,
+        "hat": "H07",
+        "hiz_m_s": 5.39,
+        "not": "z 62..78 (ust yuze 12 lig.); hortum DN19"
+       },
+       {
+        "ad": "Pi",
+        "yuz": "+X",
+        "tip": "stub",
+        "konum_lokal": [
+         130,
+         0,
+         0
+        ],
+        "d": 12,
+        "stub_len": 30,
+        "hat": "H12",
+        "hiz_m_s": 0.88,
+        "not": "+X yuz merkezi; P/T/A/B stub'larina (y+-55,z+-35, r15) min 44 mm"
+       }
+      ]
      }
     }
    },
-   "local_origin": "Blok merkezi. P/T/A/B kisa tapali stub +X (arka) yuzunde (sirasiyla y-55 z35 / y55 z35 / y-55 z-35 / y55 z-35); PT1/manometre portu ust yuzde.",
+   "local_origin": "Blok merkezi. P/T/A/B kisa tapali stub +X (arka) yuzunde (sirasiyla y-55 z35 / y55 z35 / y-55 z-35 / y55 z-35); PT1/manometre portu ust yuzde. Ek portlar dims.ports.ek_portlar: A2/B2 -Y yuzunde flush delik, Pi +X yuz merkezinde d12 stub (x 130..160).",
    "instances": [
     {
      "name": "A130_1",
@@ -3639,8 +3941,27 @@
     ],
     "suction_port_note": "2026-11-20 rev3: port Y 0 -> 380 (A121 grup rz 90 sonrasi Y=380 ekseninde gelir; port d95 kenari Y 427.5 < tank yan yuzu 470)",
     "placement_note": "2026-11-19 rev (kullanici: reduktor tarafinda): tank sase (A11) ICINDE, +X bolmesinde enine kaburga X=590 ile X=2150 arasinda (ic X 600..2140), zemine oturur; uc bosluklari 5, yan bosluk 5, ust bosluk 35 (A11 ust plaka alti Z=-570). Kalip yuksekligi tahriki (A91..A97), A23/A26 ve raylar sase ustunde (Z>=-530) -> dusey ayrik. Erisim: +Y (operator) yan duvardaki A11.dims.tank_access_opening (X 740..1490) icinden gozlem cami, yan kapak, dolum/hava filtresi, donus filtresi. Emis 2026-11-20 rev3: port Y 380 (A121 grup rz 90 sonrasi; uc plaka + kaburga 2150 delikleri Y 380). Emis 2026-11-19 rev2: A121 tank +X uc yuzunden (X=2135, Y=0, Z=-760; kaburga 2150 + A11 +X uc plakasi gecisleri), motor-pompa A62 sase disinda +X ucunda makine ekseninde (eski -Y yuz emis portu kaldirildi).",
-    "varsayim": "ikiz_tasarim varsayimi: sase ici tank 1530x940x545; ic bolme/perde, seviye switch ve sicaklik sensoru cizilmez; tank ici emis borusu dibe iner (cizilmez)",
-    "model": "solid box + +Y yuzunde erisim elemanlari"
+    "varsayim": "ikiz_tasarim varsayimi: sase ici tank 1530x940x545; ic bolme/perde, seviye switch ve sicaklik sensoru cizilmez; tank ici emis borusu dibe iner (cizilmez); T donus portu -Y yuz (return_port) 2026-11-20",
+    "model": "solid box + +Y yuzunde erisim elemanlari",
+    "return_port": {
+     "ad": "T_donus",
+     "yuz": "-Y (y=-470)",
+     "tip": "flans_yuzu_delik",
+     "konum_lokal": [
+      -370,
+      -470,
+      350
+     ],
+     "d": 80,
+     "derinlik": 6,
+     "flans_bag": {
+      "d": 142,
+      "civata": "4xM16 PCD115 (temsili, cizilmez)"
+     },
+     "hat": "H24",
+     "hiz_m_s": 6.32,
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): global (1000,-470,-800). Cikinti yok (bbox degismez); H24 flansi (d142, t14, Y -484..-470) tank yuzune A11 -Y duvar gecisi (d150) icinden civatalanir. Tank ici RF1'e (+Y, x-170) ic boru cizilmez. Port z 350 (310..390) yag seviyesi altinda (~%80 = 436)."
+    }
    },
    "local_origin": "Center of the bottom face (on floor). Local axes parallel to global; z 0..545. Erisim (+Y) yuzu y=+470.",
    "instances": [
@@ -8344,7 +8665,7 @@
     }
    ]
   },
-  "A160": {"name": "Hidrolik hatlar (sert boru + hortum, generic)", "dims": {"acik_pay": 1.0, "halka_oran": 0.8, "flans_oran": 1.6, "flans_thk": 14.0, "ferrul_oran": 1.1, "ferrul_boy": 70.0, "hatlar": {"H01": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, 0, 70], [0, -1025, 70], [-575, -1025, 70], [-575, -1025, -240], [-5760, -1025, -240], [-5760, -485, -240], [-5905, -485, -240], [-5905, -485, 180.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A122", "A59"], "kirp": [0.0, 40.0]}, "H02R": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, 316.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["H01", "BRK"]}, "H02H": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [0, 0, 425], [0, 390, 425]], "yay_payi_mm": 860, "rb_mm": 250, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1675, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 0, "eksen": "x", "isaret": 1, "derinlik": 430.0, "genislik": 250.0}}, "H03": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0.0, 0], [0, 56.0, 0], [-100, 56.0, 0], [-100, 56.0, 155], [-100, 461.0, 155], [-135, 461.0, 155]], "yay_payi_mm": 254, "rb_mm": 250, "ucler": ["H01", "A130"], "hortum_uzunluk_mm": 1005, "u_halka": {"seg": 3, "eksen": "x", "isaret": 1, "derinlik": 127.0, "genislik": 250.0}}, "H04": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [60, 0, 0], [60, 55, 0], [60, 55, 155], [15, 55, 155], [15, 55, 195]], "yay_payi_mm": 0, "rb_mm": 250, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 355}, "H05": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [20, 0, 0], [20, 95, 0], [20, 95, 215], [-405, 95, 215]], "yay_payi_mm": 0, "rb_mm": 200, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 755}, "H06": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [0, -395, 0], [-1195, -395, 0], [-1195, -395, 200], [-1195, -20, 200]], "yay_payi_mm": 50, "rb_mm": 200, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2215, "u_halka": {"seg": 1, "eksen": "y", "isaret": -1, "derinlik": 25.0, "genislik": 400.0}}, "H07": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0, 0], [0, -445, 0], [-1195, -445, 0], [-1195, -445, 205], [-1195, -20, 205]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2320, "u_halka": {"seg": 1, "eksen": "y", "isaret": 1, "derinlik": 25.0, "genislik": 260.0}}, "H08": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0.0, 0.0], [0, 0.0, -47.5], [0, 125.0, -47.5], [0, 125.0, 0.0]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A41", "A41"], "hortum_uzunluk_mm": 270}, "H10": {"tip": "sert_boru", "od": 25.0, "id": 19.0, "pts": [[0, 0, 0.0], [0, 0, 400.0], [0, -1290, 400.0], [-585, -1290, 400.0], [-585, -1290, -35.0], [-5830, -1290, -35.0], [-5830, -705, -35.0], [-5980, -705, -35.0], [-5980, -705, 450.0]], "yay_payi_mm": 0, "rb_mm": 37.5, "ucler": ["A122", "A59"], "kirp": [30.0, 40.0]}, "H11R": {"tip": "sert_boru", "od": 16.0, "id": 12.0, "pts": [[0, 0, 0.0], [0, 0, 392.5]], "yay_payi_mm": 0, "rb_mm": 24.0, "ucler": ["H10", "BRK"]}, "H11H": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [0, 0, 360], [0, 435, 360]], "yay_payi_mm": 358, "rb_mm": 90, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1153, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 1, "eksen": "x", "isaret": 1, "derinlik": 179.0, "genislik": 180.0}}, "H12": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0.0, 0], [0, 322.5, 0], [0, 322.5, -130], [-435, 322.5, -130], [-435, 572.5, -130], [-435, 572.5, 10], [-450, 572.5, 10]], "yay_payi_mm": 252, "rb_mm": 90, "ucler": ["H10", "A130"], "hortum_uzunluk_mm": 1545, "u_halka": {"seg": 2, "eksen": "y", "isaret": 1, "derinlik": 126.0, "genislik": 180.0}}, "H21": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, -580.0], [275, 0, -580.0], [275, -595, -580.0], [995, -595, -580.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A59", "H20"], "kirp": [40.0, 0.0]}, "H20H": {"tip": "hortum", "od": 70.0, "id": 50.8, "pts": [[0, 0, 0], [0, -510, 0], [0, -510, -340]], "yay_payi_mm": 200, "rb_mm": 450, "ucler": ["A65", "BRK"], "hortum_uzunluk_mm": 1050, "takip": {"idx": [0, 1]}}, "H20R": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -500], [0, 65, -500], [3060, 65, -500]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, true]}, "H22": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [120, 0, 0], [120, 0, 75], [120, -715, 75], [85, -715, 75], [85, -715, -175]], "yay_payi_mm": 400, "rb_mm": 250, "ucler": ["A130", "BRK"], "hortum_uzunluk_mm": 1595, "u_halka": {"seg": 2, "eksen": "x", "isaret": 1, "derinlik": 200.0, "genislik": 500.0}}, "H23": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -400], [0, 65, -400], [-1335, 65, -400]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, false]}, "H24": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 95.0, 0]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["H20R", "A61"], "halka": [false, true], "kirp": [0.0, 30.0]}}}, "local_origin": "hattin ilk noktasi (baglanti agzi merkezi); eksenler global ile paralel; hat verisi params/hatlar.json'dan tools/hat_senkron.py ile uretilir (elle degistirme)", "note": "hortum = esnek, referans konumda (kalip yuksekligi 400, vurus alt, mafsal kapali) cizilir; A65 uclari vurus ile Z'de kayar (takip). ikiz_tasarim varsayimi.", "instances": [{"name": "A160_1", "pos": [2960.0, 485.0, -400.0], "rot": [0, 0, 0], "hat": "H01", "bbox": [-2983.4, -564.0, -664.0, 2998.4, 523.4, -220.0]}, {"name": "A160_2", "pos": [-1990.0, -540.0, -616.0], "rot": [0, 0, 0], "hat": "H02R", "bbox": [-2028.4, -578.4, -616.0, -1951.6, -501.6, -300.0]}, {"name": "A160_3", "pos": [-1990.0, -540.0, -300.0], "rot": [0, 0, 0], "hat": "H02H"}, {"name": "A160_4", "pos": [2385.0, -516.0, -380.0], "rot": [0, 0, 0], "hat": "H03", "bbox": [2250.0, -516.0, -406.4, 2436.0, -28.6, -198.6]}, {"name": "A160_5", "pos": [2250.0, -55.0, -295.0], "rot": [0, 0, 0], "hat": "H04", "bbox": [2238.6, -81.4, -321.4, 2334.0, 26.4, -100.0]}, {"name": "A160_6", "pos": [2250.0, 55.0, -295.0], "rot": [0, 0, 0], "hat": "H05", "bbox": [1845.0, 33.0, -317.0, 2290.0, 172.0, -58.0]}, {"name": "A160_7", "pos": [2210.0, -100.0, -230.0], "rot": [0, 0, 0], "hat": "H06", "bbox": [993.0, -540.0, -252.0, 2232.0, -100.0, -8.0]}, {"name": "A160_8", "pos": [2210.0, -100.0, -175.0], "rot": [0, 0, 0], "hat": "H07", "bbox": [997.4, -561.0, -192.6, 2227.6, -100.0, 47.6]}, {"name": "A160_9", "pos": [1010.0, -62.5, -57.5], "rot": [0, 0, 0], "hat": "H08", "bbox": [992.4, -80.1, -121.0, 1027.6, 80.1, -57.5]}, {"name": "A160_10", "pos": [2980.0, 705.0, -670.0], "rot": [0, 0, 0], "hat": "H10", "bbox": [-3020.0, -597.5, -717.5, 3000.0, 725.0, -220.0]}, {"name": "A160_11", "pos": [-1945.0, -585.0, -692.5], "rot": [0, 0, 0], "hat": "H11R", "bbox": [-1957.8, -597.8, -692.5, -1932.2, -572.2, -300.0]}, {"name": "A160_12", "pos": [-1945.0, -585.0, -300.0], "rot": [0, 0, 0], "hat": "H11H"}, {"name": "A160_13", "pos": [2700.0, -572.5, -270.0], "rot": [0, 0, 0], "hat": "H12", "bbox": [2250.0, -572.5, -410.5, 2711.6, 11.6, -248.4]}, {"name": "A160_14", "pos": [-3055.0, 0.0, -220.0], "rot": [0, 0, 0], "hat": "H21", "bbox": [-3093.4, -633.4, -838.4, -2060.0, 38.4, -220.0]}, {"name": "A160_15", "pos": [-2060.0, -150.0, 40.0], "rot": [0, 0, 0], "hat": "H20H"}, {"name": "A160_16", "pos": [-2060.0, -660.0, -300.0], "rot": [0, 0, 0], "hat": "H20R", "bbox": [-2104.5, -704.5, -871.2, 1000.0, -523.8, -300.0]}, {"name": "A160_17", "pos": [2250.0, 55.0, -225.0], "rot": [0, 0, 0], "hat": "H22", "bbox": [2250.0, -686.4, -400.0, 2594.0, 81.4, -126.0]}, {"name": "A160_18", "pos": [2335.0, -660.0, -400.0], "rot": [0, 0, 0], "hat": "H23", "bbox": [1000.0, -704.5, -844.5, 2379.5, -550.5, -400.0]}, {"name": "A160_19", "pos": [1000.0, -595.0, -800.0], "rot": [0, 0, 0], "hat": "H24", "bbox": [928.8, -595.0, -871.2, 1071.2, -500.0, -728.8]}]},
+  "A160": {"name": "Hidrolik hatlar (sert boru + hortum, generic)", "dims": {"acik_pay": 1.0, "halka_oran": 0.8, "flans_oran": 1.6, "flans_thk": 14.0, "ferrul_oran": 1.1, "ferrul_boy": 70.0, "hatlar": {"H01": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, 0, 70], [0, -1025, 70], [-575, -1025, 70], [-575, -1025, -240], [-5760, -1025, -240], [-5760, -485, -240], [-5905, -485, -240], [-5905, -485, 180.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A122", "A59"], "kirp": [0.0, 40.0]}, "H02R": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, 316.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["H01", "BRK"]}, "H02H": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [0, 0, 425], [0, 390, 425]], "yay_payi_mm": 860, "rb_mm": 250, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1675, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 0, "eksen": "x", "isaret": 1, "derinlik": 430.0, "genislik": 250.0}}, "H03": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0.0, 0], [0, 56.0, 0], [-100, 56.0, 0], [-100, 56.0, 155], [-100, 461.0, 155], [-135, 461.0, 155]], "yay_payi_mm": 254, "rb_mm": 250, "ucler": ["H01", "A130"], "hortum_uzunluk_mm": 1005, "u_halka": {"seg": 3, "eksen": "x", "isaret": 1, "derinlik": 127.0, "genislik": 250.0}}, "H04": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [60, 0, 0], [60, 55, 0], [60, 55, 155], [15, 55, 155], [15, 55, 195]], "yay_payi_mm": 0, "rb_mm": 250, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 355}, "H05": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [20, 0, 0], [20, 75, 0], [20, 75, 210], [-405, 75, 210]], "yay_payi_mm": 0, "rb_mm": 200, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 730}, "H06": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [0, -395, 0], [-1190, -395, 0], [-1190, -395, 210], [-1190, -20, 210]], "yay_payi_mm": 50, "rb_mm": 200, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2220, "u_halka": {"seg": 1, "eksen": "y", "isaret": -1, "derinlik": 25.0, "genislik": 400.0}}, "H07": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0, 0], [0, -445, 0], [-1190, -445, 0], [-1190, -445, 220], [-1190, -20, 220]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2330, "u_halka": {"seg": 1, "eksen": "y", "isaret": 1, "derinlik": 25.0, "genislik": 260.0}}, "H08": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0.0, 0.0], [0, 0.0, -47.5], [0, 125.0, -47.5], [0, 125.0, 0.0]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A41", "A41"], "hortum_uzunluk_mm": 270}, "H10": {"tip": "sert_boru", "od": 25.0, "id": 19.0, "pts": [[0, 0, 0.0], [0, 0, 400.0], [0, -1290, 400.0], [-585, -1290, 400.0], [-585, -1290, -35.0], [-5830, -1290, -35.0], [-5830, -705, -35.0], [-5980, -705, -35.0], [-5980, -705, 450.0]], "yay_payi_mm": 0, "rb_mm": 37.5, "ucler": ["A122", "A59"], "kirp": [30.0, 40.0]}, "H11R": {"tip": "sert_boru", "od": 16.0, "id": 12.0, "pts": [[0, 0, 0.0], [0, 0, 392.5]], "yay_payi_mm": 0, "rb_mm": 24.0, "ucler": ["H10", "BRK"]}, "H11H": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [0, 0, 360], [0, 435, 360]], "yay_payi_mm": 358, "rb_mm": 90, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1153, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 1, "eksen": "x", "isaret": 1, "derinlik": 179.0, "genislik": 180.0}}, "H12": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0.0, 0], [0, 322.5, 0], [0, 322.5, -130], [-435, 322.5, -130], [-435, 572.5, -130], [-435, 572.5, 10], [-450, 572.5, 10]], "yay_payi_mm": 252, "rb_mm": 90, "ucler": ["H10", "A130"], "hortum_uzunluk_mm": 1545, "u_halka": {"seg": 2, "eksen": "y", "isaret": 1, "derinlik": 126.0, "genislik": 180.0}}, "H21": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, -580.0], [270, 0, -580.0], [270, -595, -580.0], [990, -595, -580.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A59", "H20"], "kirp": [40.0, 0.0]}, "H20H": {"tip": "hortum", "od": 70.0, "id": 50.8, "pts": [[0, 0, 0], [0, -510, 0], [0, -510, -340]], "yay_payi_mm": 200, "rb_mm": 450, "ucler": ["A65", "BRK"], "hortum_uzunluk_mm": 1050, "takip": {"idx": [0, 1]}}, "H20R": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -500], [0, 65, -500], [3060, 65, -500]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, true]}, "H22": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [120, 0, 0], [120, 0, 75], [120, -715, 75], [85, -715, 75], [85, -715, -175]], "yay_payi_mm": 400, "rb_mm": 250, "ucler": ["A130", "BRK"], "hortum_uzunluk_mm": 1595, "u_halka": {"seg": 2, "eksen": "x", "isaret": 1, "derinlik": 200.0, "genislik": 500.0}}, "H23": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -400], [0, 65, -400], [-1335, 65, -400]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, false]}, "H24": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 125, 0]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["H20R", "A61"], "halka": [false, true]}}}, "local_origin": "hattin ilk noktasi (baglanti agzi merkezi); eksenler global ile paralel; hat verisi params/hatlar.json'dan tools/hat_senkron.py ile uretilir (elle degistirme)", "note": "hortum = esnek, referans konumda (kalip yuksekligi 400, vurus alt, mafsal kapali) cizilir; A65 uclari vurus ile Z'de kayar (takip). ikiz_tasarim varsayimi.", "instances": [{"name": "A160_1", "pos": [2960.0, 485.0, -400.0], "rot": [0, 0, 0], "hat": "H01", "bbox": [-2983.4, -564.0, -664.0, 2998.4, 523.4, -220.0]}, {"name": "A160_2", "pos": [-1990.0, -540.0, -616.0], "rot": [0, 0, 0], "hat": "H02R", "bbox": [-2028.4, -578.4, -616.0, -1951.6, -501.6, -300.0]}, {"name": "A160_3", "pos": [-1990.0, -540.0, -300.0], "rot": [0, 0, 0], "hat": "H02H"}, {"name": "A160_4", "pos": [2385.0, -516.0, -380.0], "rot": [0, 0, 0], "hat": "H03", "bbox": [2250.0, -516.0, -406.4, 2436.0, -28.6, -198.6]}, {"name": "A160_5", "pos": [2250.0, -55.0, -295.0], "rot": [0, 0, 0], "hat": "H04", "bbox": [2238.6, -81.4, -321.4, 2334.0, 26.4, -100.0]}, {"name": "A160_6", "pos": [2250.0, 55.0, -295.0], "rot": [0, 0, 0], "hat": "H05", "bbox": [1845.0, 33.0, -317.0, 2290.0, 152.0, -63.0]}, {"name": "A160_7", "pos": [2205.0, -100.0, -240.0], "rot": [0, 0, 0], "hat": "H06", "bbox": [993.0, -540.0, -262.0, 2227.0, -100.0, -8.0]}, {"name": "A160_8", "pos": [2205.0, -100.0, -190.0], "rot": [0, 0, 0], "hat": "H07", "bbox": [997.4, -561.0, -207.6, 2222.6, -100.0, 47.6]}, {"name": "A160_9", "pos": [1010.0, -62.5, -57.5], "rot": [0, 0, 0], "hat": "H08", "bbox": [992.4, -80.1, -121.0, 1027.6, 80.1, -57.5]}, {"name": "A160_10", "pos": [2980.0, 705.0, -670.0], "rot": [0, 0, 0], "hat": "H10", "bbox": [-3020.0, -597.5, -717.5, 3000.0, 725.0, -220.0]}, {"name": "A160_11", "pos": [-1945.0, -585.0, -692.5], "rot": [0, 0, 0], "hat": "H11R", "bbox": [-1957.8, -597.8, -692.5, -1932.2, -572.2, -300.0]}, {"name": "A160_12", "pos": [-1945.0, -585.0, -300.0], "rot": [0, 0, 0], "hat": "H11H"}, {"name": "A160_13", "pos": [2700.0, -572.5, -270.0], "rot": [0, 0, 0], "hat": "H12", "bbox": [2250.0, -572.5, -410.5, 2711.6, 11.6, -248.4]}, {"name": "A160_14", "pos": [-3050.0, 0.0, -220.0], "rot": [0, 0, 0], "hat": "H21", "bbox": [-3088.4, -633.4, -838.4, -2060.0, 38.4, -220.0]}, {"name": "A160_15", "pos": [-2060.0, -150.0, 40.0], "rot": [0, 0, 0], "hat": "H20H"}, {"name": "A160_16", "pos": [-2060.0, -660.0, -300.0], "rot": [0, 0, 0], "hat": "H20R", "bbox": [-2104.5, -704.5, -871.2, 1000.0, -523.8, -300.0]}, {"name": "A160_17", "pos": [2250.0, 55.0, -225.0], "rot": [0, 0, 0], "hat": "H22", "bbox": [2250.0, -686.4, -400.0, 2594.0, 81.4, -126.0]}, {"name": "A160_18", "pos": [2335.0, -660.0, -400.0], "rot": [0, 0, 0], "hat": "H23", "bbox": [1000.0, -704.5, -844.5, 2379.5, -550.5, -400.0]}, {"name": "A160_19", "pos": [1000.0, -595.0, -800.0], "rot": [0, 0, 0], "hat": "H24", "bbox": [928.8, -595.0, -871.2, 1071.2, -470.0, -728.8]}]},
   "A161": {
    "name": "Itici strok sinirlama mansonu (A41 baglanti postu uzerinde, ayarli)",
    "dims": {

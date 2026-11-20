@@ -23,4 +23,10 @@ def build(d, G, g):
         c = d[k]
         x, z = c["local_xz"]
         parts.append(g.move(g.cyl(c["d"] / 2, c["length"], "y", center=False), x, yf if sgn > 0 else yf - c["length"], z))
-    return g.fuse(body, *parts)
+    rp = d["return_port"]
+    px, py, pz = rp["konum_lokal"]
+    ps = 1 if py > 0 else -1
+    dep = rp["derinlik"]
+    y0 = py - 1 if ps < 0 else py - dep
+    hole = g.move(g.cyl(rp["d"] / 2, dep + 1, "y", center=False), px, y0, pz)
+    return g.cut(g.fuse(body, *parts), hole)

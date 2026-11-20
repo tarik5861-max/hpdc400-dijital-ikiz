@@ -7,4 +7,11 @@ def build(d, G, g):
         s.append(g.move(g.cyl(p["stub_d"] / 2, p["stub_len"], "x", center=False), L / 2, y, z))
     m = p["gauge_port"]   # PT1/manometre portu: ust yuz
     s.append(g.move(g.cyl(m["d"] / 2, m["len"], "z", center=False), m["x"], m["y"], H / 2))
-    return g.fuse(*s)
+    r = g.fuse(*s)
+    for e in p["ek_portlar"]["liste"]:  # A2/B2: -Y yuzunde flush delik; Pi: +X yuzunde stub
+        x, y, z = e["konum_lokal"]
+        if e["tip"] == "stub":
+            r = g.fuse(r, g.move(g.cyl(e["d"] / 2, e["stub_len"], "x", center=False), x, y, z))
+        else:
+            r = g.cut(r, g.move(g.cyl(e["d"] / 2, e["derinlik"], "y", center=False), x, y, z))
+    return r

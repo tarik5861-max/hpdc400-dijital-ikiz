@@ -551,10 +551,10 @@
     "port": "B_kol",
     "nokta": [
      1845,
-     150,
-     -80
+     130,
+     -85
     ],
-    "varsayim": "port yeri ikiz_tasarim: on flans arka yuzu, A92 tup ic"
+    "varsayim": "A35.dims.ports B_kol lokal (40,130,-85) (2026-11-20 olcu-mimari; eski y150 flans kenarindaydi)"
    },
    "bagli_id": [
     "A35",
@@ -578,7 +578,7 @@
     "kaynak": "A130 ile A35 birlikte hareket eder: goreli sabit"
    },
    "yay_payi_mm": 0,
-   "hortum_uzunluk_mm": 755,
+   "hortum_uzunluk_mm": 730,
    "yay_payi_not": "goreli sabit: yalniz montaj payi (nominal yola %3)",
    "guzergah": {
     "baslangic": [
@@ -594,19 +594,19 @@
      ],
      [
       2270,
-      150,
+      130,
       -295
      ],
      [
       2270,
-      150,
-      -80
+      130,
+      -85
      ]
     ],
     "bitis": [
      1845,
-     150,
-     -80
+     130,
+     -85
     ],
     "dik": true,
     "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
@@ -633,11 +633,11 @@
     "id": "A130",
     "port": "A2",
     "nokta": [
-     2210,
+     2205,
      -100,
-     -230
+     -240
     ],
-    "varsayim": "ek port: Y3 icin -Y yuz, ikiz_tasarim; OLCU_TALEBI A130"
+    "varsayim": "A130.dims.ports.ek_portlar A2 lokal (115,-100,20) (2026-11-20 olcu-mimari)"
    },
    "hedef": {
     "id": "A41",
@@ -647,7 +647,7 @@
      -120,
      -30
     ],
-    "varsayim": "VARSAYIM: -Y silindir arka kapak yan portu Z-30 (ikiz_tasarim); OLCU_TALEBI A41"
+    "varsayim": "A41.dims.ports A_kapak_-Y (boss) lokal (415,-120,-30)"
    },
    "bagli_id": [
     "A130",
@@ -671,24 +671,24 @@
     "kaynak": "global.opening_stroke (A41, A22 ile)"
    },
    "yay_payi_mm": 50,
-   "hortum_uzunluk_mm": 2215,
+   "hortum_uzunluk_mm": 2220,
    "yay_payi_not": "VARSAYIM: hortum_uzunluk = tarama max ortogonal yol + 50 mm (gercek bukumlu yol daha kisa); fazla boy U-halka (hat_senkron --u-ara) veya sarkma",
    "guzergah": {
     "baslangic": [
-     2210,
+     2205,
      -100,
-     -230
+     -240
     ],
     "ara_noktalar": [
      [
-      2210,
+      2205,
       -495,
-      -230
+      -240
      ],
      [
       1015,
       -495,
-      -230
+      -240
      ],
      [
       1015,
@@ -727,11 +727,11 @@
     "id": "A130",
     "port": "B2",
     "nokta": [
-     2210,
+     2205,
      -100,
-     -175
+     -190
     ],
-    "varsayim": "ek port, ikiz_tasarim; OLCU_TALEBI A130"
+    "varsayim": "A130.dims.ports.ek_portlar B2 lokal (115,-100,70) (2026-11-20 olcu-mimari)"
    },
    "hedef": {
     "id": "A41",
@@ -741,7 +741,7 @@
      -120,
      30
     ],
-    "varsayim": "VARSAYIM: B (kol odasi) portu -Y silindir arka kapak yaninda Z+30, kol odasina cift cidarli ic boru ile (ikiz_tasarim; kopru X805..840 mafsal zarfinda); OLCU_TALEBI A41"
+    "varsayim": "A41.dims.ports B_kapak_-Y (boss) lokal (415,-120,30); kol odasina cift cidarli ic boru (cizilmez)"
    },
    "bagli_id": [
     "A130",
@@ -765,24 +765,24 @@
     "kaynak": "global.opening_stroke"
    },
    "yay_payi_mm": 50,
-   "hortum_uzunluk_mm": 2320,
+   "hortum_uzunluk_mm": 2330,
    "yay_payi_not": "VARSAYIM: hortum_uzunluk = tarama max ortogonal yol + 50 mm (gercek bukumlu yol daha kisa); fazla boy U-halka (hat_senkron --u-ara) veya sarkma",
    "guzergah": {
     "baslangic": [
-     2210,
+     2205,
      -100,
-     -175
+     -190
     ],
     "ara_noktalar": [
      [
-      2210,
+      2205,
       -545,
-      -175
+      -190
      ],
      [
       1015,
       -545,
-      -175
+      -190
      ],
      [
       1015,
@@ -1152,7 +1152,7 @@
      0,
      -260
     ],
-    "varsayim": "pilot portu +X yuz merkez ikiz_tasarim; OLCU_TALEBI A130"
+    "varsayim": "A130.dims.ports.ek_portlar Pi stub ucu (lokal 160,0,0)"
    },
    "bagli_id": [
     "A130"
@@ -1243,7 +1243,7 @@
     "id": "A59",
     "port": "T_alt",
     "nokta": [
-     -3055,
+     -3050,
      0,
      -180
     ],
@@ -1269,13 +1269,13 @@
    "kelepce_aralik_mm": 1500,
    "guzergah": {
     "baslangic": [
-     -3055,
+     -3050,
      0,
      -180
     ],
     "ara_noktalar": [
      [
-      -3055,
+      -3050,
       0,
       -800
      ],
@@ -1624,7 +1624,7 @@
   },
   {
    "id": "H24",
-   "ad": "T: tank donus portu (A11 -Y duvar gecisi + tank -Y yuz T portu, filtre RF1 girisi)",
+   "ad": "T: tank donus portu (A11 -Y duvar gecisi d150 + tank -Y yuz T portu d80, filtre RF1 girisi)",
    "sinif": "T",
    "kaynak": {
     "id": "H20R",
@@ -1643,7 +1643,7 @@
      -470,
      -800
     ],
-    "varsayim": "tank -Y yuz T portu; OLCU_TALEBI A61 port + A11 duvar gecisi d95"
+    "varsayim": "A61.dims.return_port (lokal -370,-470,350, d80) + A11 pipe_passages T_donus_-Y_yan_duvar d150 (2026-11-20 olcu-mimari)"
    },
    "bagli_id": [
     "A61"
@@ -1809,16 +1809,16 @@
     -820
    ],
    "bagli_id": "A61",
-   "OLCU_TALEBI": "A61 -Y yuz T portu + RF1 girisi ic baglantisi (A61 dims eklenmeli)"
+   "OLCU_TALEBI": "COZULDU 2026-11-20: A61.dims.return_port eklendi; tank ici RF1 baglantisi cizilmez (varsayim)"
   }
  ],
  "olcu_talepleri": [
-  "OLCU_TALEBI: A130 Y3 icin ek portlar A2/B2 (-Y yuz X2210, Z-230/-175, d30 stub 30) ve pilot portu Pi (+X yuz 2250,0,-260 d12); bloktaki 4 port yalniz P/T/A/B",
-  "OLCU_TALEBI: A35 baglanti portlari: A_kapak (alt, 2265,0,-100) ve B_kol (on flans arka yuz, 1845,150,-80) dims.ports yalniz d30 optional",
-  "OLCU_TALEBI: A41 port tanimi: -Y arka kapak yan portlari A (1015,-120,-30) ve B (1015,-120,+30, kol odasina cift cidarli ic boru), alt kapak capraz portlari (1010,+-62.5,-57.5); eski X822 kopru portu mafsal zarfinda kaldigi icin iptal",
-  "OLCU_TALEBI: A65 -Y yuz port tanimi: P (-1990,-150,125), T (-2060,-150,40), Pi (-1945,-150,60)",
-  "OLCU_TALEBI: A59 valf blogu alt portlari P(-2945,0,-180), Pi(-3000,0,-180), T(-3055,0,-180) + sepet plakasi 3 delik d60 (Z-220..-180)",
-  "OLCU_TALEBI: A61 -Y yuz tank T donus portu (1000,-470,-800) + A11 -Y yan duvar gecisi d95 (X1000,Z-800) + A11.pipe_passages girdisi",
+  "COZULDU 2026-11-20 (A130.dims.ports.ek_portlar): OLCU_TALEBI: A130 Y3 icin ek portlar A2/B2 (-Y yuz X2210, Z-230/-175, d30 stub 30) ve pilot portu Pi (+X yuz 2250,0,-260 d12); bloktaki 4 port yalniz P/T/A/B",
+  "COZULDU 2026-11-20 (A35.dims.ports): OLCU_TALEBI: A35 baglanti portlari: A_kapak (alt, 2265,0,-100) ve B_kol (on flans arka yuz, 1845,150,-80) dims.ports yalniz d30 optional",
+  "COZULDU 2026-11-20 (A41.dims.ports): OLCU_TALEBI: A41 port tanimi: -Y arka kapak yan portlari A (1015,-120,-30) ve B (1015,-120,+30, kol odasina cift cidarli ic boru), alt kapak capraz portlari (1010,+-62.5,-57.5); eski X822 kopru portu mafsal zarfinda kaldigi icin iptal",
+  "COZULDU 2026-11-20 (A65.dims.ports): OLCU_TALEBI: A65 -Y yuz port tanimi: P (-1990,-150,125), T (-2060,-150,40), Pi (-1945,-150,60)",
+  "COZULDU 2026-11-20 (A59.dims.ports): OLCU_TALEBI: A59 valf blogu alt portlari P(-2945,0,-180), Pi(-3000,0,-180), T(-3055,0,-180) + sepet plakasi 3 delik d60 (Z-220..-180)",
+  "COZULDU 2026-11-20 (A61.dims.return_port + A11.pipe_passages): OLCU_TALEBI: A61 -Y yuz tank T donus portu (1000,-470,-800) + A11 -Y yan duvar gecisi d95 (X1000,Z-800) + A11.pipe_passages girdisi",
   "OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok",
   "OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)",
   "OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok"

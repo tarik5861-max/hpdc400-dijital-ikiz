@@ -14,7 +14,7 @@ _Son güncelleme: 2026-11-20 (akşam)._ Her `/kapanis`'te yeniden yazılır (en 
 ## Açık noktalar
 - Y4 maça hortumları (A168→4 silindir, 8 hat) hatlar.json'da yok; A171 dağıtıcı 12 çıkış boruları yok; CV1/PF1 H01'i sarıyor (H01 bölünmeli); hat_listesi.md eski güzergahı anlatıyor; hortum bükülme ihlalleri (H22 8, H03 9, H12 7 dirsek) saha/katalog doğrulaması; ST2 yeri saha fotoğrafıyla teyit.
 - A11 +X bölmesi (1540 mm kaburgasız açıklık) mukavemet sağlaması (OLCU_TALEBI, olcu-mimari).
-- Portlar/delikler çizilmedi: A130 (Y3 A2/B2, Pi), A35, A41, A65, A59 (P/Pi/T + sepet plakası 3 delik d60), A61 T dönüş portu + A11 -Y duvar geçişi d95 (H24 tanka ulaşmıyor); hat rafı konsolları/kelepçeler, CV1 çek valf, PF1 filtre ağaçta yok.
+- Portlar/delikler çizildi (2026-11-20, TASARIM VARSAYIMI; params ports/return_port/pipe_passages): A130, A35, A41 (boss), A65 (T2 tapalı yedek), A59 (nipel+tabla delikleri), A61 d80 dönüş portu, A11 -Y geçişi d150 (d95 yetmedi, H24 flanşı d142); H24 tanka ulaşıyor. Kalan: hat rafı konsolları/kelepçeler, CV1 çek valf, PF1 filtre ağaçta yok; A41 A portu d16 7,8 m/s (saha teyidi).
 - A65 T dönüşü hızlı vuruşta ~1625 L/dk (DN51 hortum 13 m/s): yüksek debili/rejeneratif dönüş devresi kararı.
 - A41 çapraz hortum H08: açık konumda A31 crosshead yüzüne 13 mm; hortumlar referans konumda sabit (kayan uçları takip etmez).
 - Enjeksiyon: su soğutmalı plunger ucu (A52 içi su yolu) ve kamara arka desteği çizilmedi; A54/A55 ek portları yok.
@@ -26,5 +26,5 @@ _Son güncelleme: 2026-11-20 (akşam)._ Her `/kapanis`'te yeniden yazılır (en 
 - `lib/hidrolik_mantik.py` eski sabitleri (2 tüp × 1,3 L) içerir, kullanılmıyor.
 
 ## Sıradaki adım
-- Port/delik eksiklerini ve tank dönüş geçişini kapat, hatlar tamamlansın; sonra A11 +X mukavemeti ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
+- Hatlar tamamlansın (Y4 maça, A171 çıkışları, H01 bölme, CV1/PF1); sonra A11 +X mukavemeti ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
 - Yeni pencerede: `git pull` → `/devam` → FreeCAD makrosu (`HPDC400_yukle.FCMacro`) doğrudan klon klasöründen; Report view'da `SON COMMIT` hash'ini kontrol et.
