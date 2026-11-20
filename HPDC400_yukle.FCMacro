@@ -40,10 +40,15 @@ _COL = {"A1": (0.48, 0.50, 0.53), "A2": (0.23, 0.43, 0.65), "A3": (0.82, 0.55, 0
 _ps = [o for o in App.ActiveDocument.Objects if o.TypeId == "Part::Feature"]
 for o in _ps:
     o.ViewObject.ShapeColor = _COL.get(o.Name[:2], (0.7, 0.7, 0.7))
-    if o.Name[:2] in ("A6", "A7"):      # hidrolik unite ve koruma/pano: gorunumu acik tutmak icin gizli
+    if os.environ.get("HPDC_GIZLE") == "1" and o.Name[:2] in ("A6", "A7"):   # istege bagli: hidrolik unite/koruma gizle
         o.ViewObject.Visibility = False
 exec(open(os.path.join(R, "HPDC400_hareket.FCMacro"), encoding="utf-8").read(), globals())
-print("HPDC400 PARCA", len(_ps), "GECERSIZ", [o.Name for o in _ps if not o.Shape.isValid()], "KOK", R)
+try:
+    import subprocess
+    _h = subprocess.run(["git", "-C", R, "log", "--oneline", "-1"], capture_output=True, text=True).stdout.strip()
+except Exception:
+    _h = "?"
+print("HPDC400 PARCA", len(_ps), "GECERSIZ", [o.Name for o in _ps if not o.Shape.isValid()], "KOK", R, "SON COMMIT", _h)
 _v = Gui.activeDocument().activeView()
 _v.viewIsometric()
 _v.fitAll()
