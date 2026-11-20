@@ -89,6 +89,10 @@
   "T89x4.5": {
    "dis_mm": 89,
    "et_mm": 4.5
+  },
+  "T60x3.6": {
+   "dis_mm": 60.3,
+   "et_mm": 3.6
   }
  },
  "hareket_tanimi": {
@@ -1509,10 +1513,10 @@
     "dik": true,
     "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
    },
-   "debi_lpm": 1625.8,
+   "debi_lpm": 812.9,
    "basinc_bar": 5,
-   "hiz_m_s": 13.37,
-   "dp_bar_tahmin": 0.22,
+   "hiz_m_s": 6.69,
+   "dp_bar_tahmin": 0.5,
    "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
    "kontrol": {
     "parca_cakisma": [],
@@ -1521,9 +1525,88 @@
     ],
     "hareket_tarama": "motion_check (mafsal s 0..1, kalip yuk. 200..750, vurus alt/orta/ust) hortum carpismasi 0; hortum_pose eksik_mm 0"
    },
-   "not": "RISK: hizli vurus kol tarafi dönüs debisi ~1625 L/dk; tek hat ve 89 mm rijit hat 5.4 m/s (80 ic), DN51 hortumda 13 m/s",
+   "not": "2026-11-20 KARAR: 2 x DN51 paralel (H20H + H20H2), her biri 812.9 L/dk = 6.69 m/s (onceden tek hortum 13.4 m/s); RISK kapandi (tek-hat), kalan: DN51 hiz 6.7 > 6 m/s sadece 60 ms hizli vurus",
    "dp_not": "fluids (Darcy, HLP46 870 kg/m3 32 cSt VARSAYIM): hortum boyu 2339->1050 mm, duz hat farki -0.505 bar",
    "rev": "2026-11-20 rota (hidrolik-muhendisi): yalniz hortum boyu kisaltildi (guzergah ayni)"
+  },
+  {
+   "id": "H20H2",
+   "ad": "T2: A65 T2 portu -> braket (2. donus hortumu, A65 Z kaymasi 0..150)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "A65",
+    "port": "T2",
+    "nokta": [
+     -2060,
+     -150,
+     120
+    ]
+   },
+   "hedef": {
+    "id": "BRK",
+    "port": "BRK_A65_T2",
+    "nokta": [
+     -2060,
+     -800,
+     -300
+    ]
+   },
+   "bagli_id": [
+    "A65"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 70,
+   "hortum": {
+    "seri": "4SP DN51",
+    "ic_cap_mm": 50.8,
+    "min_bukulme_yaricap_mm": 450,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "Z",
+    "aralik_mm": [
+     0,
+     150
+    ],
+    "kaynak": "shot_positions_z"
+   },
+   "yay_payi_mm": 200,
+   "hortum_uzunluk_mm": 1270,
+   "yay_payi_not": "VARSAYIM: hortum_uzunluk = tarama max ortogonal yol + 50 mm (gercek bukumlu yol daha kisa); fazla boy U-halka (hat_senkron --u-ara) veya sarkma",
+   "guzergah": {
+    "baslangic": [
+     -2060,
+     -150,
+     120
+    ],
+    "ara_noktalar": [
+     [
+      -2060,
+      -800,
+      120
+     ]
+    ],
+    "bitis": [
+     -2060,
+     -800,
+     -300
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 812.9,
+   "basinc_bar": 5,
+   "hiz_m_s": 6.69,
+   "dp_bar_tahmin": 0.5,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   },
+   "not": "2026-11-20 KARAR (hidrolik-muhendisi, ikiz tasarim varsayimi): A65 T2 tapasi kalkti, 2 x DN51 paralel; her hortum 812.9 L/dk = 6.69 m/s (tek hortumda 13.4); hiz sadece 60 ms hizli vurusta",
+   "dp_not": "fluids (Darcy, HLP46 870 kg/m3 32 cSt VARSAYIM): hortum boyu 2339->1050 mm, duz hat farki -0.505 bar",
+   "rev": "2026-11-20 yeni hat"
   },
   {
    "id": "H20R",
@@ -1591,6 +1674,67 @@
      "bacak2=65 kisa"
     ]
    }
+  },
+  {
+   "id": "H20R2",
+   "ad": "T2: A65 braket T2 -> H20R dikey kosusuna (2. donus kolu)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "BRK",
+    "port": "BRK_A65_T2",
+    "nokta": [
+     -2060,
+     -800,
+     -300
+    ]
+   },
+   "hedef": {
+    "id": "H20R",
+    "port": "TEE_T2R",
+    "nokta": [
+     -2060,
+     -660,
+     -420
+    ]
+   },
+   "tip": "sert_boru",
+   "dis_cap_mm": 60.3,
+   "et_mm": 3.6,
+   "ic_cap_mm": 53.1,
+   "min_bukum_yaricap_mm": 90.5,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     -2060,
+     -800,
+     -300
+    ],
+    "ara_noktalar": [
+     [
+      -2060,
+      -800,
+      -420
+     ]
+    ],
+    "bitis": [
+     -2060,
+     -660,
+     -420
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 812.9,
+   "basinc_bar": 5,
+   "hiz_m_s": 6.1,
+   "dp_bar_tahmin": 0.1,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   },
+   "bagli_id": [],
+   "not": "60.3x3.6: 89 mm flans A72 panosuna (X -2000) 11 mm giriyordu; kisa kol (260 mm), 812.9 L/dk 6.1 m/s yalniz 60 ms"
   },
   {
    "id": "H22",
@@ -4189,6 +4333,24 @@
     -800
    ],
    "not_": "H20R T rafi X kosusu (Y-595 Z-800) uzerinde T-tee X-280, dal +Y (H39, A168 maca T); Y-660 yukseltici (H23 deseni)"
+  },
+  {
+   "id": "BRK_A65_T2",
+   "nokta": [
+    -2060,
+    -800,
+    -300
+   ],
+   "not_": "sabit braket T2 deligi (2. DN51 donus hortumu, 2026-11-20 karar: ikiz tasarim varsayimi)"
+  },
+  {
+   "id": "TEE_T2R",
+   "nokta": [
+    -2060,
+    -660,
+    -420
+   ],
+   "not_": "H20R2 -> H20R dikey kosusuna T-tee (2. donus kolu birlesimi)"
   }
  ],
  "inline_elemanlar": [

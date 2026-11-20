@@ -823,8 +823,8 @@
     },
     {
      "id": "A160",
-     "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01a..H52, 44 hat)",
-     "qty": 44,
+     "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01a..H52, 46 hat)",
+     "qty": 46,
      "script": "parts/A160_hat_boru.py",
      "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)",
      "ad_tr": "Hidrolik hatlar (boru + hortum)",
