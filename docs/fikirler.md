@@ -12,3 +12,6 @@ Beyin fırtınasında çıkan, henüz kademeye girmemiş fikirler. Tek satır: t
 - 2026-11-18: Enjeksiyon ünitesi X-Y-Z ince ayar mekanizması (kovan hizalama); kepçe/robot erişimi üst konumda.
 - 2026-11-19 — Hidrolik akış simülasyonu için döküm anı geçici basınç dalgalanmaları (waterhammer) modellemesi eklenebilir — K3
 
+- 2026-11-20 — Hortumların kalıp yüksekliği/vuruşla gerçek takibi (esnek hortum animasyonu; geo.py'ye sweep) — K1/K7
+- 2026-11-20 — Su soğutmalı plunger ucu için A52 içi su yolu + dönel rakor modeli — K1
+- 2026-11-20 — A65 hızlı vuruş dönüşü için rejeneratif devre/yüksek debili dönüş alternatiflerinin hidrolik modelde karşılaştırılması — K3
