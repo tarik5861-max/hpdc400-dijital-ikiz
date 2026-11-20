@@ -59,6 +59,18 @@
    "dis": 70,
    "rb": 450,
    "seri": "4SP DN51"
+  },
+  "YAG8": {
+   "ic": 6.0,
+   "dis": 8.0,
+   "rb": 50,
+   "seri": "PA12 8x1 yaglama ana hatti (VARSAYIM; A170->A171)"
+  },
+  "YAG6": {
+   "ic": 4.0,
+   "dis": 6.0,
+   "rb": 35,
+   "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)"
   }
  },
  "rijit_tipleri": {
@@ -107,8 +119,8 @@
  },
  "hatlar": [
   {
-   "id": "H01",
-   "ad": "P1 ana basinc hatti: A98 cikis stub -> A59 akumulator blogu P (CV1 + PF1 hat uzerinde)",
+   "id": "H01a",
+   "ad": "P1 ana basinc hatti (a): A122 P1 cikis stub -> CV1 (A172) giris",
    "sinif": "P",
    "kaynak": {
     "id": "A122",
@@ -121,18 +133,18 @@
     "inst": "A122_1"
    },
    "hedef": {
-    "id": "A59",
-    "port": "P_alt",
+    "id": "A172",
+    "port": "giris_+Y",
     "nokta": [
-     -2945,
-     0,
-     -180
+     2960,
+     60,
+     -330
     ],
-    "tray_deligi": true
+    "varsayim": "A172 dims len 120 (eksen Y, merkez 2960,0,-330) -> +Y yuz; dims.ports yok (OLCU_TALEBI)"
    },
    "bagli_id": [
     "A122",
-    "A59"
+    "A172"
    ],
    "tip": "sert_boru",
    "dis_cap_mm": 48,
@@ -151,12 +163,134 @@
       2960,
       485,
       -330
-     ],
+     ]
+    ],
+    "bitis": [
+     2960,
+     60,
+     -330
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.81,
+   "dp_bar_tahmin": 0.029,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "bolunme": "2026-11-20: eski H01 (A122->A59) CV1/PF1 govde portlarinda H01a/b/c olarak bolundu",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=70<72"
+    ]
+   }
+  },
+  {
+   "id": "H01b",
+   "ad": "P1 ana basinc hatti (b): CV1 (A172) cikis -> PF1 (A173) giris",
+   "sinif": "P",
+   "kaynak": {
+    "id": "A172",
+    "port": "cikis_-Y",
+    "nokta": [
+     2960,
+     -60,
+     -330
+    ]
+   },
+   "hedef": {
+    "id": "A173",
+    "port": "giris_+X",
+    "nokta": [
+     2580,
+     -540,
+     -330
+    ],
+    "varsayim": "A173 dims head_len 160 (eksen X, merkez 2500,-540,-330) -> +X yuz; dims.ports yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A172",
+    "A173"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 48,
+   "et_mm": 5,
+   "ic_cap_mm": 38,
+   "min_bukum_yaricap_mm": 72.0,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     2960,
+     -60,
+     -330
+    ],
+    "ara_noktalar": [
      [
       2960,
       -540,
       -330
-     ],
+     ]
+    ],
+    "bitis": [
+     2580,
+     -540,
+     -330
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.81,
+   "dp_bar_tahmin": 0.043,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "bolunme": "2026-11-20: eski H01 (A122->A59) CV1/PF1 govde portlarinda H01a/b/c olarak bolundu",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H01c",
+   "ad": "P1 ana basinc hatti (c): PF1 (A173) cikis -> P rafi -> A59 akumulator blogu P (TEE_PA130, TEE_PA65 bu hatta)",
+   "sinif": "P",
+   "kaynak": {
+    "id": "A173",
+    "port": "cikis_-X",
+    "nokta": [
+     2420,
+     -540,
+     -330
+    ]
+   },
+   "hedef": {
+    "id": "A59",
+    "port": "P_alt",
+    "nokta": [
+     -2945,
+     0,
+     -180
+    ],
+    "tray_deligi": true
+   },
+   "bagli_id": [
+    "A173",
+    "A59"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 48,
+   "et_mm": 5,
+   "ic_cap_mm": 38,
+   "min_bukum_yaricap_mm": 72.0,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     2420,
+     -540,
+     -330
+    ],
+    "ara_noktalar": [
      [
       2385,
       -540,
@@ -194,12 +328,13 @@
    "debi_lpm": 191.2,
    "basinc_bar": 140,
    "hiz_m_s": 2.81,
-   "dp_bar_tahmin": 0.41,
+   "dp_bar_tahmin": 0.308,
    "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "bolunme": "2026-11-20: eski H01 (A122->A59) CV1/PF1 govde portlarinda H01a/b/c olarak bolundu",
    "kontrol": {
     "parca_cakisma": [],
     "bukum_uyari": [
-     "bacak1=70 kisa"
+     "bacak1=35<72"
     ]
    }
   },
@@ -208,7 +343,7 @@
    "ad": "P dallanma (sert kisim): ana hat T-tee -> A65 braket",
    "sinif": "P",
    "kaynak": {
-    "id": "H01",
+    "id": "H01c",
     "port": "TEE_PA65",
     "nokta": [
      -1990,
@@ -338,7 +473,7 @@
    "ad": "P kapama dali (hortum): ana hat T-tee -> A130 P; A130 X kaymasi -200..+350 (kalip yuksekligi)",
    "sinif": "P",
    "kaynak": {
-    "id": "H01",
+    "id": "H01c",
     "port": "TEE_PA130",
     "nokta": [
      2385,
@@ -1680,6 +1815,2095 @@
      "bacak1=125 kisa"
     ]
    }
+  },
+  {
+   "id": "H30",
+   "ad": "Y4.1 maca B hortumu: A168 B1 -> A167_1 kol (B, maca geri/out) portu",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A168",
+    "port": "B1",
+    "nokta": [
+     -400,
+     215,
+     36
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "B_kol",
+    "nokta": [
+     85,
+     315,
+     230
+    ],
+    "inst": "A167_1",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2465,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     215,
+     36
+    ],
+    "ara_noktalar": [
+     [
+      -595,
+      215,
+      36
+     ],
+     [
+      -595,
+      215,
+      700
+     ],
+     [
+      -110,
+      215,
+      700
+     ],
+     [
+      -110,
+      478,
+      700
+     ],
+     [
+      100,
+      478,
+      700
+     ],
+     [
+      100,
+      478,
+      295
+     ],
+     [
+      100,
+      315,
+      295
+     ],
+     [
+      85,
+      315,
+      295
+     ]
+    ],
+    "bitis": [
+     85,
+     315,
+     230
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 8.09,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.9,
+   "dp_bar_tahmin": 0.5,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.1 NG6 DO7.17 in / DO7.18 out; Re 564",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak7=163<180",
+     "bacak8=15<180",
+     "bacak9=65<90"
+    ]
+   }
+  },
+  {
+   "id": "H31",
+   "ad": "Y4.1 maca A hortumu: A168 A1 -> A167_1 kapak (A, maca ileri/in) portu",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A168",
+    "port": "A1",
+    "nokta": [
+     -400,
+     165,
+     36
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "A_kapak",
+    "nokta": [
+     85,
+     420,
+     230
+    ],
+    "inst": "A167_1",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2540,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     165,
+     36
+    ],
+    "ara_noktalar": [
+     [
+      -595,
+      165,
+      36
+     ],
+     [
+      -595,
+      165,
+      730
+     ],
+     [
+      -110,
+      165,
+      730
+     ],
+     [
+      -110,
+      478,
+      730
+     ],
+     [
+      135,
+      478,
+      730
+     ],
+     [
+      135,
+      478,
+      255
+     ],
+     [
+      135,
+      420,
+      255
+     ],
+     [
+      85,
+      420,
+      255
+     ]
+    ],
+    "bitis": [
+     85,
+     420,
+     230
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 11.78,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.775,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.1 NG6 DO7.17 in / DO7.18 out; Re 822",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak7=58<180",
+     "bacak8=50<180",
+     "bacak9=25<90"
+    ]
+   }
+  },
+  {
+   "id": "H32",
+   "ad": "Y4.2 maca B hortumu: A168 B2 -> A167_2 kol (B, maca geri/out) portu",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A168",
+    "port": "B2",
+    "nokta": [
+     -400,
+     215,
+     98
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "B_kol",
+    "nokta": [
+     85,
+     315,
+     -110
+    ],
+    "inst": "A167_2",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2523,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     215,
+     98
+    ],
+    "ara_noktalar": [
+     [
+      -560,
+      215,
+      98
+     ],
+     [
+      -560,
+      215,
+      640
+     ],
+     [
+      -110,
+      215,
+      640
+     ],
+     [
+      -110,
+      478,
+      640
+     ],
+     [
+      30,
+      478,
+      640
+     ],
+     [
+      30,
+      478,
+      -40
+     ],
+     [
+      30,
+      315,
+      -40
+     ],
+     [
+      85,
+      315,
+      -40
+     ]
+    ],
+    "bitis": [
+     85,
+     315,
+     -110
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 8.09,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.9,
+   "dp_bar_tahmin": 0.511,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.2 NG6 DO7.19 in / DO7.20 out; Re 564",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak5=140<180",
+     "bacak7=163<180",
+     "bacak8=55<180",
+     "bacak9=70<90"
+    ]
+   }
+  },
+  {
+   "id": "H33",
+   "ad": "Y4.2 maca A hortumu: A168 A2 -> A167_2 kapak (A, maca ileri/in) portu",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A168",
+    "port": "A2",
+    "nokta": [
+     -400,
+     165,
+     98
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "A_kapak",
+    "nokta": [
+     85,
+     420,
+     -110
+    ],
+    "inst": "A167_2",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2528,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     165,
+     98
+    ],
+    "ara_noktalar": [
+     [
+      -560,
+      165,
+      98
+     ],
+     [
+      -560,
+      165,
+      670
+     ],
+     [
+      -110,
+      165,
+      670
+     ],
+     [
+      -110,
+      478,
+      670
+     ],
+     [
+      65,
+      478,
+      670
+     ],
+     [
+      65,
+      478,
+      -80
+     ],
+     [
+      65,
+      420,
+      -80
+     ],
+     [
+      85,
+      420,
+      -80
+     ]
+    ],
+    "bitis": [
+     85,
+     420,
+     -110
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 11.78,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.771,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.2 NG6 DO7.19 in / DO7.20 out; Re 822",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak5=175<180",
+     "bacak7=58<180",
+     "bacak8=20<180",
+     "bacak9=30<90"
+    ]
+   }
+  },
+  {
+   "id": "H34",
+   "ad": "Y4.3 maca B hortumu: A168 B3 -> A167_3 kol (B, maca geri/out) portu",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A168",
+    "port": "B3",
+    "nokta": [
+     -400,
+     215,
+     160
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "B_kol",
+    "nokta": [
+     85,
+     -315,
+     230
+    ],
+    "inst": "A167_3",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2391,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     215,
+     160
+    ],
+    "ara_noktalar": [
+     [
+      -525,
+      215,
+      160
+     ],
+     [
+      -525,
+      215,
+      580
+     ],
+     [
+      -110,
+      215,
+      580
+     ],
+     [
+      -110,
+      -478,
+      580
+     ],
+     [
+      100,
+      -478,
+      580
+     ],
+     [
+      100,
+      -478,
+      295
+     ],
+     [
+      100,
+      -315,
+      295
+     ],
+     [
+      85,
+      -315,
+      295
+     ]
+    ],
+    "bitis": [
+     85,
+     -315,
+     230
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 8.09,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.9,
+   "dp_bar_tahmin": 0.487,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.3 NG6 DO7.21 in / DO7.22 out; Re 564",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak7=163<180",
+     "bacak8=15<180",
+     "bacak9=65<90"
+    ]
+   }
+  },
+  {
+   "id": "H35",
+   "ad": "Y4.3 maca A hortumu: A168 A3 -> A167_3 kapak (A, maca ileri/in) portu",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A168",
+    "port": "A3",
+    "nokta": [
+     -400,
+     165,
+     160
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "A_kapak",
+    "nokta": [
+     85,
+     -420,
+     230
+    ],
+    "inst": "A167_3",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2366,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     165,
+     160
+    ],
+    "ara_noktalar": [
+     [
+      -525,
+      165,
+      160
+     ],
+     [
+      -525,
+      165,
+      610
+     ],
+     [
+      -110,
+      165,
+      610
+     ],
+     [
+      -110,
+      -478,
+      610
+     ],
+     [
+      135,
+      -478,
+      610
+     ],
+     [
+      135,
+      -478,
+      255
+     ],
+     [
+      135,
+      -420,
+      255
+     ],
+     [
+      85,
+      -420,
+      255
+     ]
+    ],
+    "bitis": [
+     85,
+     -420,
+     230
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 11.78,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.727,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.3 NG6 DO7.21 in / DO7.22 out; Re 822",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak7=58<180",
+     "bacak8=50<180",
+     "bacak9=25<90"
+    ]
+   }
+  },
+  {
+   "id": "H36",
+   "ad": "Y4.4 maca B hortumu: A168 B4 -> A167_4 kol (B, maca geri/out) portu",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A168",
+    "port": "B4",
+    "nokta": [
+     -400,
+     215,
+     222
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "B_kol",
+    "nokta": [
+     85,
+     -315,
+     -110
+    ],
+    "inst": "A167_4",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2449,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     215,
+     222
+    ],
+    "ara_noktalar": [
+     [
+      -490,
+      215,
+      222
+     ],
+     [
+      -490,
+      215,
+      520
+     ],
+     [
+      -110,
+      215,
+      520
+     ],
+     [
+      -110,
+      -478,
+      520
+     ],
+     [
+      30,
+      -478,
+      520
+     ],
+     [
+      30,
+      -478,
+      -40
+     ],
+     [
+      30,
+      -315,
+      -40
+     ],
+     [
+      85,
+      -315,
+      -40
+     ]
+    ],
+    "bitis": [
+     85,
+     -315,
+     -110
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 8.09,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.9,
+   "dp_bar_tahmin": 0.497,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.4 NG6 DO7.23 in / DO7.24 out; Re 564",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak5=140<180",
+     "bacak7=163<180",
+     "bacak8=55<180",
+     "bacak9=70<90"
+    ]
+   }
+  },
+  {
+   "id": "H37",
+   "ad": "Y4.4 maca A hortumu: A168 A4 -> A167_4 kapak (A, maca ileri/in) portu",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A168",
+    "port": "A4",
+    "nokta": [
+     -400,
+     165,
+     222
+    ],
+    "inst": "A168_1",
+    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A167",
+    "port": "A_kapak",
+    "nokta": [
+     85,
+     -420,
+     -110
+    ],
+    "inst": "A167_4",
+    "varsayim": "A167 primitives port stub'lari (lokal x45=B kol/flans tarafi, x150=A kapak tarafi; z 35..60 ust uc)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169",
+    "A167"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: DN10 2SN (NG6 4/3 + bore50 icin); bukulme katalog tipik; SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "-",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A168 (A21 arka yuz) ve A167 (A81 yan yuz) sabit taraf: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 2354,
+   "yay_payi_not": "goreli sabit; montaj payi yok (nominal yol)",
+   "guzergah": {
+    "baslangic": [
+     -400,
+     165,
+     222
+    ],
+    "ara_noktalar": [
+     [
+      -490,
+      165,
+      222
+     ],
+     [
+      -490,
+      165,
+      550
+     ],
+     [
+      -110,
+      165,
+      550
+     ],
+     [
+      -110,
+      -478,
+      550
+     ],
+     [
+      65,
+      -478,
+      550
+     ],
+     [
+      65,
+      -478,
+      -80
+     ],
+     [
+      65,
+      -420,
+      -80
+     ],
+     [
+      85,
+      -420,
+      -80
+     ]
+    ],
+    "bitis": [
+     85,
+     -420,
+     -110
+    ],
+    "dik": true,
+    "not_": "A168 -X yuzu -> X dusus (ic ice L, alt port en dista) -> A21 ust (Z>=520 katmanli) -> X-110 Y kosusu -> +-Y478 serit (kolon Y410 / kapi Y500 arasi) -> silindir portu; A22 min kalip yuk. X200 onunde (X<=146)"
+   },
+   "debi_lpm": 11.78,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.724,
+   "debi_kaynak": "A167 bore 50/rod 28, VARSAYIM maca hizi 100 mm/s -> A 11.78 / B 8.09 L/dk; Y4.4 NG6 DO7.23 in / DO7.24 out; Re 822",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak5=175<180",
+     "bacak7=58<180",
+     "bacak8=20<180",
+     "bacak9=30<90"
+    ]
+   }
+  },
+  {
+   "id": "H40",
+   "ad": "Yaglama besleme: A170 M10 pompa cikisi -> A171 dagitici girisi",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A170",
+    "port": "cikis",
+    "nokta": [
+     2105,
+     455,
+     -210
+    ],
+    "varsayim": "VARSAYIM: cikis +X salter blogu yuzu (2105,455,-210); A170.dims.ports yok (OLCU_TALEBI)"
+   },
+   "hedef": {
+    "id": "A171",
+    "port": "giris",
+    "nokta": [
+     1640,
+     0,
+     525
+    ],
+    "varsayim": "A171 primitives giris stub'i (lokal x-85..-60, z35) -X ucu"
+   },
+   "bagli_id": [
+    "A170",
+    "A171"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 8.0,
+   "hortum": {
+    "seri": "PA12 8x1 yaglama ana hatti (VARSAYIM; A170->A171)",
+    "ic_cap_mm": 6.0,
+    "min_bukulme_yaricap_mm": 50,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1965,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     2105,
+     455,
+     -210
+    ],
+    "ara_noktalar": [
+     [
+      2145,
+      455,
+      -210
+     ],
+     [
+      2145,
+      455,
+      600
+     ],
+     [
+      2145,
+      0,
+      600
+     ],
+     [
+      1600,
+      0,
+      600
+     ],
+     [
+      1600,
+      0,
+      525
+     ]
+    ],
+    "bitis": [
+     1640,
+     0,
+     525
+    ],
+    "dik": true,
+    "not_": "pompa +X -> Z600 (A94 reduktor ustu) -> X1600 -> A171 -X giris"
+   },
+   "debi_lpm": 0.15,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.09,
+   "dp_bar_tahmin": 0.043,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 17",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=40<50",
+     "bacak5=75<100",
+     "bacak6=40<50"
+    ]
+   }
+  },
+  {
+   "id": "H41",
+   "ad": "Yaglama cikisi 1: A171 +Y1 -> A23 nipel -> mafsal pimi A34_AT",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y1",
+    "nokta": [
+     1675,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_AT_ust",
+    "nokta": [
+     1675,
+     110,
+     490
+    ],
+    "hedef_nokta": "A34_AT",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 85,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1675,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1675,
+      110,
+      530
+     ]
+    ],
+    "bitis": [
+     1675,
+     110,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.001,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H42",
+   "ad": "Yaglama cikisi 2: A171 +Y2 -> A23 nipel -> mafsal pimi A34_BT1",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y2",
+    "nokta": [
+     1695,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_BT1_ust",
+    "nokta": [
+     1695,
+     150,
+     490
+    ],
+    "hedef_nokta": "A34_BT1",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 125,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1695,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1695,
+      150,
+      530
+     ]
+    ],
+    "bitis": [
+     1695,
+     150,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.001,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H43",
+   "ad": "Yaglama cikisi 3: A171 +Y3 -> A23 nipel -> mafsal pimi A34_CT",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y3",
+    "nokta": [
+     1715,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_CT_ust",
+    "nokta": [
+     1715,
+     190,
+     490
+    ],
+    "hedef_nokta": "A34_CT",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 165,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1715,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1715,
+      190,
+      530
+     ]
+    ],
+    "bitis": [
+     1715,
+     190,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.002,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H44",
+   "ad": "Yaglama cikisi 4: A171 +Y4 -> A23 nipel -> mafsal pimi A34_AB",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y4",
+    "nokta": [
+     1735,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_AB_yan",
+    "nokta": [
+     1735,
+     460,
+     -150
+    ],
+    "hedef_nokta": "A34_AB",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1735,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1735,
+      490,
+      530
+     ],
+     [
+      1735,
+      490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1735,
+     460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H45",
+   "ad": "Yaglama cikisi 5: A171 +Y5 -> A23 nipel -> mafsal pimi A34_BB1",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y5",
+    "nokta": [
+     1755,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_BB1_yan",
+    "nokta": [
+     1755,
+     460,
+     -150
+    ],
+    "hedef_nokta": "A34_BB1",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1755,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1755,
+      490,
+      530
+     ],
+     [
+      1755,
+      490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1755,
+     460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H46",
+   "ad": "Yaglama cikisi 6: A171 +Y6 -> A23 nipel -> mafsal pimi A34_CB",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_+Y6",
+    "nokta": [
+     1775,
+     65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_CB_yan",
+    "nokta": [
+     1775,
+     460,
+     -150
+    ],
+    "hedef_nokta": "A34_CB",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1775,
+     65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1775,
+      490,
+      530
+     ],
+     [
+      1775,
+      490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1775,
+     460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H47",
+   "ad": "Yaglama cikisi 7: A171 -Y1 -> A23 nipel -> mafsal pimi A34_ET",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y1",
+    "nokta": [
+     1675,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_ET_ust",
+    "nokta": [
+     1675,
+     -110,
+     490
+    ],
+    "hedef_nokta": "A34_ET",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 85,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1675,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1675,
+      -110,
+      530
+     ]
+    ],
+    "bitis": [
+     1675,
+     -110,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.001,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H48",
+   "ad": "Yaglama cikisi 8: A171 -Y2 -> A23 nipel -> mafsal pimi A34_BT2",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y2",
+    "nokta": [
+     1695,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_BT2_ust",
+    "nokta": [
+     1695,
+     -150,
+     490
+    ],
+    "hedef_nokta": "A34_BT2",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 125,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1695,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1695,
+      -150,
+      530
+     ]
+    ],
+    "bitis": [
+     1695,
+     -150,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.001,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H49",
+   "ad": "Yaglama cikisi 9: A171 -Y3 -> A23 nipel -> mafsal pimi A34_DT",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y3",
+    "nokta": [
+     1715,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_DT_ust",
+    "nokta": [
+     1715,
+     -190,
+     490
+    ],
+    "hedef_nokta": "A34_DT",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 165,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1715,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1715,
+      -190,
+      530
+     ]
+    ],
+    "bitis": [
+     1715,
+     -190,
+     490
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust yuzu nipeli (Z490)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.002,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H50",
+   "ad": "Yaglama cikisi 10: A171 -Y4 -> A23 nipel -> mafsal pimi A34_EB",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y4",
+    "nokta": [
+     1735,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_EB_yan",
+    "nokta": [
+     1735,
+     -460,
+     -150
+    ],
+    "hedef_nokta": "A34_EB",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1735,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1735,
+      -490,
+      530
+     ],
+     [
+      1735,
+      -490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1735,
+     -460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H51",
+   "ad": "Yaglama cikisi 11: A171 -Y5 -> A23 nipel -> mafsal pimi A34_BB2",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y5",
+    "nokta": [
+     1755,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_BB2_yan",
+    "nokta": [
+     1755,
+     -460,
+     -150
+    ],
+    "hedef_nokta": "A34_BB2",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1755,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1755,
+      -490,
+      530
+     ],
+     [
+      1755,
+      -490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1755,
+     -460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H52",
+   "ad": "Yaglama cikisi 12: A171 -Y6 -> A23 nipel -> mafsal pimi A34_DB",
+   "sinif": "YAG",
+   "kaynak": {
+    "id": "A171",
+    "port": "cikis_-Y6",
+    "nokta": [
+     1775,
+     -65,
+     530
+    ],
+    "varsayim": "A171 primitives cikis stub'i (y+-65 ucu, z530)"
+   },
+   "hedef": {
+    "id": "A23",
+    "port": "yag_DB_yan",
+    "nokta": [
+     1775,
+     -460,
+     -150
+    ],
+    "hedef_nokta": "A34_DB",
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+   },
+   "bagli_id": [
+    "A171",
+    "A23",
+    "A34"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 6.0,
+   "hortum": {
+    "seri": "PA12 6x1 yaglama dagitim tupu (VARSAYIM; A171 cikislari)",
+    "ic_cap_mm": 4.0,
+    "min_bukulme_yaricap_mm": 35,
+    "varsayim": "VARSAYIM: yaglama tupu (hortum tipi: uclar A23 grubu ile kalip yuksekliginde kayar, hortum_pose otelemesi); SAHA_DOGRULAMA"
+   },
+   "kelepce_aralik_mm": 300,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A170/A171/A23 birlikte kalip yuksekligi (-200..+350) ile kayar: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 1135,
+   "yay_payi_not": "goreli sabit",
+   "guzergah": {
+    "baslangic": [
+     1775,
+     -65,
+     530
+    ],
+    "ara_noktalar": [
+     [
+      1775,
+      -490,
+      530
+     ],
+     [
+      1775,
+      -490,
+      -150
+     ]
+    ],
+    "bitis": [
+     1775,
+     -460,
+     -150
+    ],
+    "dik": true,
+    "not_": "A171 cikis -> A23 ust -> yan yuz (Y+-460) Z-150 nipeli (H06/H07 Z-240/-190 serit ustu)"
+   },
+   "debi_lpm": 0.0125,
+   "basinc_bar": 30.0,
+   "hiz_m_s": 0.02,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "VARSAYIM M10 (75 W) progresif yaglama 0.15 L/dk @ 30 bar; cikis basi Q/12; Re 2",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<35"
+    ]
+   }
   }
  ],
  "dugumler": [
@@ -1690,7 +3914,7 @@
     -540,
     -640
    ],
-   "not_": "H01 uzerinde T-tee, P dalı A65"
+   "not_": "H01c uzerinde T-tee, P dalı A65"
   },
   {
    "id": "TEE_PA130",
@@ -1699,7 +3923,7 @@
     -540,
     -380
    ],
-   "not_": "H01 dikey kosusu (X2385, PF1 sonrasi) uzerinde T-tee, dal +Y; A130 P hortumu (rev 2026-11-20 rota: sabit uc hareketli blok bolgesi disinda)"
+   "not_": "H01c dikey kosusu (X2385, PF1 sonrasi) uzerinde T-tee, dal +Y; A130 P hortumu (rev 2026-11-20 rota: sabit uc hareketli blok bolgesi disinda)"
   },
   {
    "id": "TEE_PLA65",
@@ -1778,26 +4002,50 @@
   {
    "id": "CV1",
    "ad": "Cek valf (pompa hatti, akumulator geri akis korumasi)",
-   "hat": "H01",
+   "hat": "H01a/H01b",
    "nokta": [
     2960,
     0,
     -330
    ],
-   "bagli_id": null,
-   "OLCU_TALEBI": "CV1 cek valf govdesi bom.json de yok (ID uydurulmadi); konum: H01 ilk Y kosusu ortasi"
+   "bagli_id": "A172",
+   "OLCU_TALEBI": "COZULDU 2026-11-20: A172 agacta; H01a/H01b govde Y yuzlerinde (+-60) biter; acik: A172.dims.ports alani yok (yuzler len'den turetildi)",
+   "portlar": {
+    "giris": [
+     2960,
+     60,
+     -330
+    ],
+    "cikis": [
+     2960,
+     -60,
+     -330
+    ]
+   }
   },
   {
    "id": "PF1",
    "ad": "Basinc filtresi",
-   "hat": "H01",
+   "hat": "H01b/H01c",
    "nokta": [
     2500,
     -540,
     -330
    ],
-   "bagli_id": null,
-   "OLCU_TALEBI": "PF1 filtre govdesi bom.json de yok; konum: H01 Z-330 kosusu"
+   "bagli_id": "A173",
+   "OLCU_TALEBI": "COZULDU 2026-11-20: A173 agacta; H01b/H01c kafa X yuzlerinde (+-80) biter; acik: A173.dims.ports alani yok (yuzler head_len'den turetildi)",
+   "portlar": {
+    "giris": [
+     2580,
+     -540,
+     -330
+    ],
+    "cikis": [
+     2420,
+     -540,
+     -330
+    ]
+   }
   },
   {
    "id": "RF1",
@@ -1819,16 +4067,22 @@
   "COZULDU 2026-11-20 (A65.dims.ports): OLCU_TALEBI: A65 -Y yuz port tanimi: P (-1990,-150,125), T (-2060,-150,40), Pi (-1945,-150,60)",
   "COZULDU 2026-11-20 (A59.dims.ports): OLCU_TALEBI: A59 valf blogu alt portlari P(-2945,0,-180), Pi(-3000,0,-180), T(-3055,0,-180) + sepet plakasi 3 delik d60 (Z-220..-180)",
   "COZULDU 2026-11-20 (A61.dims.return_port + A11.pipe_passages): OLCU_TALEBI: A61 -Y yuz tank T donus portu (1000,-470,-800) + A11 -Y yan duvar gecisi d95 (X1000,Z-800) + A11.pipe_passages girdisi",
-  "OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok",
-  "OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)",
-  "OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok"
+  "COZULDU 2026-11-20 (A175 hat rafi konsolu x6, A176 A65 braketi, A177 A130 T braketi agacta): OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok",
+  "COZULDU 2026-11-20 (A172/A173 agacta, H01 -> H01a/b/c bolundu): OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)",
+  "OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok",
+  "OLCU_TALEBI: A168 port tanimi (A1..A4 / B1..B4 -X yuzu X-400 Y165/Y215 Z36/98/160/222 VARSAYIM) + P/T besleme portlari; A168.dims.ports 'modellenmez'",
+  "OLCU_TALEBI: A170 yaglama pompasi cikis portu (VARSAYIM +X salter blogu 2105,455,-210 d8)",
+  "OLCU_TALEBI: A23 yaglama nipelleri (12): ust yuz Z490 X1675/1695/1715 Y+-110/150/190; yan yuz Y+-460 Z-150 X1735/1755/1775; pime ic kanallar",
+  "OLCU_TALEBI: A172/A173 dims.ports (giris/cikis) alani; simdilik yuzler len/head_len'den (CV1 Y+-60, PF1 X+-80)"
  ],
  "saha_dogrulama": [
   "Hortum min bukulme yaricaplari ve dis caplar (DN10..DN51) katalogdan",
   "Itici hizi 100 mm/s (VARSAYIM) -> A41 hat debileri 94/65 L/dk",
   "DV1 acil desarj debisi 290 L/dk (VARSAYIM) ve T hat boyutu",
   "Kelepce araliklari (ISO tipik tablo) uretici/ISO 4413 ile",
-  "A65 kol tarafi donus debisi ~1626 L/dk icin dönüs devresi (regeneratif/yuksek debili T) karari"
+  "A65 kol tarafi donus debisi ~1626 L/dk icin dönüs devresi (regeneratif/yuksek debili T) karari",
+  "Maca silindiri hizi 100 mm/s (VARSAYIM) -> Y4 A 11.78 / B 8.09 L/dk; NG6 valf ve maca kalip-bagimli",
+  "Yaglama: M10 debi 0.15 L/dk @ 30 bar, PA12 6x1/8x1 tup, 12 nokta pim eslemesi ve A23 ic kanallari (VARSAYIM)"
  ],
  "riskler": [
   "RISK: A41 hortumlari mafsal kollarina en yakin s~0.75 (X_rel 1015 penceresi |z|<75; H06 z-30 r20, H07 z+30 r16 -> ~25 mm); H08 A36 kollarina 20 mm (s=1)",

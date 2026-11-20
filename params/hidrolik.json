@@ -1,7 +1,7 @@
 {
  "meta": {
   "aciklama": "HPDC-400 hidrolik katmani - ISO 1219 elemanlari, valf/sensör ID'leri ve ağ modeli tam haritalaması",
-  "tarih": "2026-11-19",
+  "tarih": "2026-11-20",
   "yazan": "orkestratör",
   "kaynaklar": [
    "docs/hidrolik_sema_taslak.md",
@@ -119,7 +119,12 @@
     "id": "Y2",
     "tip": "Mengene Kapama Yön Valfi",
     "bobin": "Y2",
-    "bagli_id": ["A130", "A131", "A132", "A133"],
+    "bagli_id": [
+     "A130",
+     "A131",
+     "A132",
+     "A133"
+    ],
     "yerlesim": "A35 altı, kapama valf bloğu A130 (kartuş A132_1 + bobin A133_1), A35 gövdesine A131 bilezikle asılı; kalıp yüksekliğiyle birlikte hareket eder (ikiz_tasarim varsayımı)",
     "fonksiyon": "A22 hareketli plaka ileri/geri"
    },
@@ -127,7 +132,11 @@
     "id": "Y3",
     "tip": "İtici Yön Valfi",
     "bobin": "Y3",
-    "bagli_id": ["A130", "A132", "A133"],
+    "bagli_id": [
+     "A130",
+     "A132",
+     "A133"
+    ],
     "yerlesim": "A130 bloğu, kartuş A132_2 + bobin A133_2",
     "fonksiyon": "A41 itici silindirleri ileri/geri"
    },
@@ -143,6 +152,130 @@
     "tip": "Basınç Artırma (Multiplikatör) Valfi",
     "bobin": "A55",
     "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)"
+   },
+   {
+    "id": "Y4.1",
+    "tip": "Maca yon valfi NG6 4/3 cift solenoid (DIN 43650)",
+    "bobin": "Y4.1a (in) / Y4.1b (out)",
+    "bagli_id": [
+     "A169",
+     "A168",
+     "A167"
+    ],
+    "elektrik": {
+     "in": "DO7.17",
+     "out": "DO7.18"
+    },
+    "yerlesim": "A168 maca manifoldu (A21 arka yuz) +Y yuzu, A169_1; silindir A167_1 (A81 yan yuz)",
+    "hatlar": {
+     "A": "H31",
+     "B": "H30"
+    },
+    "hesap": {
+     "bore_mm": 50,
+     "rod_mm": 28,
+     "v_m_s": 0.1,
+     "Q_A_lpm": 11.78,
+     "Q_B_lpm": 8.09,
+     "F_ileri_kN_140bar": 27.5,
+     "F_geri_kN_140bar": 18.9,
+     "hortum": "DN10 2SN ic 9.5: v_A 2.77 / v_B 1.90 m/s, dP 0.49..0.78 bar (fluids)"
+    },
+    "varsayim": "VARSAYIM: maca hizi 100 mm/s; P/T besleme hatti A168'e henuz yok (OLCU_TALEBI); SAHA_DOGRULAMA",
+    "fonksiyon": "core1 maca ileri (A) / geri (B)"
+   },
+   {
+    "id": "Y4.2",
+    "tip": "Maca yon valfi NG6 4/3 cift solenoid (DIN 43650)",
+    "bobin": "Y4.2a (in) / Y4.2b (out)",
+    "bagli_id": [
+     "A169",
+     "A168",
+     "A167"
+    ],
+    "elektrik": {
+     "in": "DO7.19",
+     "out": "DO7.20"
+    },
+    "yerlesim": "A168 maca manifoldu (A21 arka yuz) +Y yuzu, A169_2; silindir A167_2 (A81 yan yuz)",
+    "hatlar": {
+     "A": "H33",
+     "B": "H32"
+    },
+    "hesap": {
+     "bore_mm": 50,
+     "rod_mm": 28,
+     "v_m_s": 0.1,
+     "Q_A_lpm": 11.78,
+     "Q_B_lpm": 8.09,
+     "F_ileri_kN_140bar": 27.5,
+     "F_geri_kN_140bar": 18.9,
+     "hortum": "DN10 2SN ic 9.5: v_A 2.77 / v_B 1.90 m/s, dP 0.49..0.78 bar (fluids)"
+    },
+    "varsayim": "VARSAYIM: maca hizi 100 mm/s; P/T besleme hatti A168'e henuz yok (OLCU_TALEBI); SAHA_DOGRULAMA",
+    "fonksiyon": "core2 maca ileri (A) / geri (B)"
+   },
+   {
+    "id": "Y4.3",
+    "tip": "Maca yon valfi NG6 4/3 cift solenoid (DIN 43650)",
+    "bobin": "Y4.3a (in) / Y4.3b (out)",
+    "bagli_id": [
+     "A169",
+     "A168",
+     "A167"
+    ],
+    "elektrik": {
+     "in": "DO7.21",
+     "out": "DO7.22"
+    },
+    "yerlesim": "A168 maca manifoldu (A21 arka yuz) +Y yuzu, A169_3; silindir A167_3 (A81 yan yuz)",
+    "hatlar": {
+     "A": "H35",
+     "B": "H34"
+    },
+    "hesap": {
+     "bore_mm": 50,
+     "rod_mm": 28,
+     "v_m_s": 0.1,
+     "Q_A_lpm": 11.78,
+     "Q_B_lpm": 8.09,
+     "F_ileri_kN_140bar": 27.5,
+     "F_geri_kN_140bar": 18.9,
+     "hortum": "DN10 2SN ic 9.5: v_A 2.77 / v_B 1.90 m/s, dP 0.49..0.78 bar (fluids)"
+    },
+    "varsayim": "VARSAYIM: maca hizi 100 mm/s; P/T besleme hatti A168'e henuz yok (OLCU_TALEBI); SAHA_DOGRULAMA",
+    "fonksiyon": "core3 maca ileri (A) / geri (B)"
+   },
+   {
+    "id": "Y4.4",
+    "tip": "Maca yon valfi NG6 4/3 cift solenoid (DIN 43650)",
+    "bobin": "Y4.4a (in) / Y4.4b (out)",
+    "bagli_id": [
+     "A169",
+     "A168",
+     "A167"
+    ],
+    "elektrik": {
+     "in": "DO7.23",
+     "out": "DO7.24"
+    },
+    "yerlesim": "A168 maca manifoldu (A21 arka yuz) +Y yuzu, A169_4; silindir A167_4 (A81 yan yuz)",
+    "hatlar": {
+     "A": "H37",
+     "B": "H36"
+    },
+    "hesap": {
+     "bore_mm": 50,
+     "rod_mm": 28,
+     "v_m_s": 0.1,
+     "Q_A_lpm": 11.78,
+     "Q_B_lpm": 8.09,
+     "F_ileri_kN_140bar": 27.5,
+     "F_geri_kN_140bar": 18.9,
+     "hortum": "DN10 2SN ic 9.5: v_A 2.77 / v_B 1.90 m/s, dP 0.49..0.78 bar (fluids)"
+    },
+    "varsayim": "VARSAYIM: maca hizi 100 mm/s; P/T besleme hatti A168'e henuz yok (OLCU_TALEBI); SAHA_DOGRULAMA",
+    "fonksiyon": "core4 maca ileri (A) / geri (B)"
    }
   ],
   "sensorler": [
@@ -169,6 +302,47 @@
     "id": "LS2",
     "tip": "Enjeksiyon İleri Sınır Şalteri",
     "kanal": "DI9.16"
+   }
+  ],
+  "yaglama": [
+   {
+    "id": "LUB1",
+    "tip": "Progresif merkezi yaglama (M10 pompa + 12 cikisli dagitici)",
+    "bagli_id": [
+     "A170",
+     "A171",
+     "A23",
+     "A34"
+    ],
+    "elektrik": {
+     "pompa": "DO7.32 KA1 -> M10",
+     "seviye": "DI5.07",
+     "basinc": "DI5.10"
+    },
+    "hatlar": {
+     "besleme": "H40",
+     "cikislar": [
+      "H41",
+      "H42",
+      "H43",
+      "H44",
+      "H45",
+      "H46",
+      "H47",
+      "H48",
+      "H49",
+      "H50",
+      "H51",
+      "H52"
+     ]
+    },
+    "hesap": {
+     "Q_pompa_lpm": 0.15,
+     "p_bar": 30.0,
+     "P_hid_W": 7.5,
+     "Q_cikis_lpm": 0.0125
+    },
+    "varsayim": "VARSAYIM (ikiz tasarim): 12 cikis = 12 A34 pimi; A23 nipel + ic kanal; debi/basinc SAHA_DOGRULAMA"
    }
   ]
  },
