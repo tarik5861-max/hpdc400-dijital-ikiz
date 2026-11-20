@@ -34,6 +34,7 @@ def run(phase=None, shot=None, write=True, verbose=True):
             (warns if st == "EKSIK_SCRIPT" else errors).append({"part": pid, "type": st, "msg": msg})
 
     allowed = {frozenset(p) for p in P.get("clearances", {}).get("allowed_contacts", [])}
+    limits = {frozenset(p[:2]): float(p[2]) for p in P.get("clearances", {}).get("allowed_limits", [])}   # cift-bazli ozel esik (mm3), or. boru T/dirsek birlesimleri
     floor = -P["global"]["axis_height"]
     names = list(placed)
     boxes = {n: geo.bbox(placed[n][2]) for n in names}
@@ -58,7 +59,7 @@ def run(phase=None, shot=None, write=True, verbose=True):
         v = geo.volume(geo.common(placed[a][2], placed[b][2]))
         # izinli temas = yuzey temasi / nominal-esit gecme: hacim ~0 olmali. Buyuk hacim -> gomulme.
         mesh = {frozenset(x) for x in P["clearances"].get("mesh_pairs", [])}
-        lim = TOL_VOL if frozenset((pa, pb)) in mesh else (TOL_ALLOWED if is_allowed else TOL_VOL)
+        lim = TOL_VOL if frozenset((pa, pb)) in mesh else (limits.get(frozenset((pa, pb)), TOL_ALLOWED) if is_allowed else TOL_VOL)
         if v > lim:
             errors.append({"part": f"{a} x {b}", "type": "GOMULME" if is_allowed else "CAKISMA",
                            "msg": f"{v/1000:.1f} cm3"})

@@ -836,15 +836,10 @@
    "guzergah": {
     "baslangic": [
      1015,
-     -120,
-     0
+     -150,
+     -20
     ],
     "ara_noktalar": [
-     [
-      1015,
-      -150,
-      0
-     ],
      [
       1015,
       -150,
@@ -883,7 +878,8 @@
      "bacak5=30<130"
     ]
    },
-   "not": "RISK: A41 kapagi acik konumda crosshead A31 yuzune 13 mm; hortum Z-110 pozisyonu motion_check ile dogrulanmali"
+   "not": "RISK: A41 kapagi acik konumda crosshead A31 yuzune 13 mm; hortum Z-110 pozisyonu motion_check ile dogrulanmali",
+   "rev": "2026-11-20 hat_senkron: baslangic H06 hortumu uzerinde T (y-150, z-20); eski baslangic H06 ucuyla ust uste biniyordu"
   },
   {
    "id": "H10",
@@ -1177,7 +1173,12 @@
       -485
      ],
      [
-      2245,
+      2265,
+      0,
+      -485
+     ],
+     [
+      2265,
       0,
       -260
      ]
@@ -1200,7 +1201,8 @@
     "bukum_uyari": [
      "bacak4=5<90"
     ]
-   }
+   },
+   "rev": "2026-11-20 hat_senkron: son bacak A130 +X yuzune dik gelsin diye x=2265 (eski 2245 blok icine giriyordu; 2280 H04 ile cakisiyordu)"
   },
   {
    "id": "H21",

@@ -95,6 +95,7 @@
         "A121",
         "A122",
         "A123",
+        "A160",
         "A124",
         "A125",
         "A126",
@@ -368,6 +369,7 @@
         {"id": "A121", "name": "Emis hatti (A99 -> tank A61, d89/80 sert boru)", "qty": 1, "script": "parts/A121_boru_hatti.py"},
         {"id": "A122", "name": "Basinc hatti stub'i (P1 d48/38, P2 d25/19)", "qty": 2, "script": "parts/A121_boru_hatti.py", "note": "A121 ile ayni script, farkli olcu"},
         {"id": "A123", "name": "Boru tespit konsolu (dikme + kelepce)", "qty": 2, "script": "parts/A123_boru_tespit.py"},
+        {"id": "A160", "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01..H24)", "qty": 19, "script": "parts/A160_hat_boru.py", "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)"},
         {
           "id": "A59",
           "name": "Akumulator sepeti + valf blogu",

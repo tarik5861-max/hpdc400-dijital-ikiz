@@ -84,11 +84,11 @@ if __name__ == "__main__":
 # M = (R, t): R 3x3 satır listesi, t = (tx, ty, tz).  p' = R p + t
 I3 = ((1, 0, 0), (0, 1, 0), (0, 0, 1))
 DIE_HEIGHT_GROUP_FIXED = ("A11", "A12", "A21", "A24", "A25", "A81",   # kolonlar, sabit plaka, şase: hareket etmez
-                          "A13", "A14", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72",
+                          "A13", "A14", "A51", "A52", "A54", "A55", "A56", "A57", "A58", "A61", "A62", "A71", "A72", "A124", "A125", "A126", "A127", "A128",
                           "A98", "A99", "A100", "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110", "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119", "A120",
-                          "A121", "A122", "A123",
+                          "A121", "A122", "A123", "A160",
                           "A59", "A63", "A64", "A65", "A66", "A67",
-                          "A140", "A141", "A142", "A143", "A144", "A145")   # A98..A119: A62 pompa agaci, A120: M1 motor, A121..A123 emis/basinc borulari + tespit (2026-11-19 rev: +X ucu sase -Y yani zeminde, sabit); A61 tank sase icinde (sabit); A59 akumulator sepeti/valf blogu, A63 kelepce, A64 toplayici boru, A65-A67 enjeksiyon valf/sensorleri: kalip yuksekliginde kaymaz
+                          "A140", "A141", "A142", "A143", "A144", "A145")   # A160: hidrolik hat/hortumlar (hortum esnek, REFERANS KONUMDA cizilir; hortum instance'lari motion_check'te atlanir, sert borular sabit); A98..A119: A62 pompa agaci, A120: M1 motor, A121..A123 emis/basinc borulari + tespit (2026-11-19 rev: +X ucu sase -Y yani zeminde, sabit); A61 tank sase icinde (sabit); A59 akumulator sepeti/valf blogu, A63 kelepce, A64 toplayici boru, A65-A67 enjeksiyon valf/sensorleri: kalip yuksekliginde kaymaz; A124..A128 kapi alt parcalari A71 ile birlikte sabit (sase gibi)
 
 
 def _mat_ry(deg):

@@ -25,5 +25,10 @@ _Son güncelleme: 2026-11-19. Her `/kapanis`'te yeniden yazılır (en fazla ~60 
 
 - rev3 (2026-11-20, kullanıcı: motoru 90° döndür, ortaya hizala): A62 grubu rz 90, plaka X 2410..3050 / Y ±800 (orta Y=0), mil Y boyunca X 2730; pompa +Y, motor -Y, klemens gland -X. A121 emiş: pompa üstü → -X → -Y (Y 380) → A11 uç plaka + kaburga 2150 (Y 380) → tank portu (X 2135, Y 380). A122/A123 rijit. overall_length 6220, genişlik 1950. Kablo A72→A120 ~4,5 m (+%10 ~5,0 m) < 8 m. 172 instance, tüm kontroller YEŞİL. Önizleme out/preview_redk_*.png (rev2 notu yukarıda tarihsel).
 
+## 2026-11-20 hidrolik hatlar (A160)
+- params/hatlar.json 19 hat (H01..H24) FreeCAD modelinde görünür: A160_1..A160_19 (sert boru kırmızı, hortum siyah önizlemede). `python3 tools/hat_senkron.py [--kirp] [--u-ara]` hatlar.json → params A160 (kirp = blok yüzüne bitişik stub, u-ara = hortum yay payı U-halkası). Önizleme out/preview_hatlar_*.png.
+- hatlar.json düzeltme: H12 son bacak x=2265 (A130'a giriyordu), H08 başlangıcı H06 üzerinde T. H20H U-halka yok (DN51 Rb 450 sığmıyor). Kelepce listesi yok → A161 yok. OLCU_TALEBI portlar/delikler hat_listesi.md'de duruyor (portlar çizilmedi).
+- Hortumlar motion_check dışında (esnek, referans konum); A65 uçlu hortumlar vuruşla Z'de kayar (takip).
+
 ## Sıradaki adım
 - Kademe 4 (Yazılım / PLC durum makinesi ve sıralama mantığı) çalışmalarına başlanması.

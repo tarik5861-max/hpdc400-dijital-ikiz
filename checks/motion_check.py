@@ -44,7 +44,12 @@ def run(n, die_sweep, shot, quiet=False):
     G = P["global"]
     if die_sweep:   # kalip yuksekligi ayari kalip sokulu yapilir; A83/84/85 (itici seti) kaydirma disinda
         placed = {k: v for k, v in placed.items() if v[0] not in ("A81", "A82", "A83", "A84", "A85")}
+    # hortumlar (A160, tip=hortum) esnek: referans konumda cizildi, hareketli uclara (A130/A41/A65) uyum saglar -> hareket taramasindan cikarilir; sert borular taranir
+    hat = P["parts"]["A160"]["dims"]["hatlar"] if "A160" in P["parts"] else {}
+    inst_hat = {i["name"]: i["hat"] for i in P["parts"]["A160"]["instances"]} if "A160" in P["parts"] else {}
+    placed = {k: v for k, v in placed.items() if not (v[0] == "A160" and hat[inst_hat[k]]["tip"] == "hortum")}
     allowed = {frozenset(p) for p in P["clearances"]["allowed_contacts"]}
+    limits = {frozenset(p[:2]): float(p[2]) for p in P["clearances"].get("allowed_limits", [])}
     mesh = {frozenset(p) for p in P["clearances"].get("mesh_pairs", [])}
     worst = {}
     for i in range(n + 1):
@@ -62,7 +67,7 @@ def run(n, die_sweep, shot, quiet=False):
                 continue
             v = geo.volume(geo.common(cur[a][1], cur[b][1]))
             pr = frozenset((cur[a][0], cur[b][0]))
-            lim = TOL if pr in mesh else (5000.0 if pr in allowed else TOL)
+            lim = TOL if pr in mesh else (limits.get(pr, 5000.0) if pr in allowed else TOL)
             if v > lim:
                 key = (a, b)
                 if key not in worst or v > worst[key][1]:
