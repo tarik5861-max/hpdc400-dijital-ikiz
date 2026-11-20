@@ -7,9 +7,10 @@ Ortak adres: ürün ağacındaki ID'ler (A24, A56…). Hidrolik eleman, kablo, s
 |---|---|---|
 | 0. Mekanik iskelet | Geometri, montaj, mafsal + kalıp yüksekliği kinematiği, otomatik çakışma kontrolleri, agent ekibi, GitHub + MCP | ✅ Bitti (71 parça) |
 | 1. Makineyi tamamlamak | Eksik mekanik tamamlanıyor: itici / pim düzeni, pompa/motor/tank, T kanalları, kapı, kapama valf bloğu, enjeksiyon eksikleri, boru/hortum hatları (A160); satın alınan parçalar; pilot makinenin gerçek ölçüleri | 🔄 Devam ediyor (210 parça; kalan: portlar/delikler, A11 +X mukavemeti) |
+| 1b. Cevrim animasyonu | Tam dokum cevrimi makrosu (HPDC400_cevrim.FCMacro): kapa, kilitle, yavas+hizli vurus, bekle, ac, itici ileri/geri, maca cek/gir, yaglama; zaman tabanli, mevcut kinematik ustune | ⏳ Siradaki (Kademe 1 kalanlariyla) |
 | 2. Elektrik ve kartlar | Elektrik şemasından: güç/kontrol devresi, güvenlik zinciri, I/O listesi, kablo/klemens no, bobin ve sensör ID'leri, kart + test noktası | 🔄 Taslak v1 yapıldı (2026-11-18): DCC630 şeması 400 t'ye uyarlandı (elektrik.json, mantık simülasyonu, testler); A97 ve TC1 kararları verildi (K-EL-07, K-EL-03); M1 55 kW hesapları, yeni parça bağlantıları (A127, A130..A133, A142, A143) işlendi, bulanık DO7.17-30 ve KA9 ikiz kararlarıyla kapatıldı; sıradaki: HW Config adres eşlemesi (saha) |
 | 3. Hidrolik | Şema → ağ modeli, basınç/debi simülasyonu, eleman arıza modları (kaçak, takılma, yavaş tepki) | 🔄 Taslak v1 yapıldı (2026-11-19): lib/hidrolik_ag_modeli.py ve akü deşarj/enjeksiyon faz simülasyon testleri eklendi |
-| 4. Yazılım (PLC ve sıralama) | Program → durum makinesi; duruşta "hangi adım, hangi koşul, hangi sensör". Seçenek: kontrol yazılımını kendimiz yazmak | Öncelik 4 |
+| 4. Yazılım (PLC ve sıralama) | Program → durum makinesi (1b'deki çevrim adımları sensör/valf/basınç koşullu);  duruşta "hangi adım, hangi koşul, hangi sensör". Seçenek: kontrol yazılımını kendimiz yazmak | Öncelik 4 |
 | 5. Pnömatik ve yağlama | Sprey havası, tutucular, merkezi yağlama ↔ mafsal aşınması | Bekliyor |
 | 6. Hücre çevresi | Kepçe, sprey robotu, parça alma, çapak presi, kalıp ısıtma, vakum, kilitlemeler | Bekliyor |
 | 7. Teşhis motoru | Sebep-sonuç grafiği, aday daraltma, test önerisi, zorunlu güvenlik adımları; arızalı parça FreeCAD'de kırmızı | Bekliyor |

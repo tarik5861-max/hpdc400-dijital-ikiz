@@ -26,5 +26,5 @@ _Son güncelleme: 2026-11-20 (akşam)._ Her `/kapanis`'te yeniden yazılır (en 
 - `lib/hidrolik_mantik.py` eski sabitleri (2 tüp × 1,3 L) içerir, kullanılmıyor.
 
 ## Sıradaki adım
-- A11 +X mukavemeti (OLCU_TALEBI); sonra A65 dönüş devresi ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
+- A11 +X mukavemeti (OLCU_TALEBI); A65 dönüş devresi; Kademe 1b çevrim makrosu (HPDC400_cevrim.FCMacro, KARARLAR 2026-11-20) ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
 - Yeni pencerede: `git pull` → `/devam` → FreeCAD makrosu (`HPDC400_yukle.FCMacro`) doğrudan klon klasöründen; Report view'da `SON COMMIT` hash'ini kontrol et.
