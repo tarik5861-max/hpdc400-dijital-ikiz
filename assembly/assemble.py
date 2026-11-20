@@ -131,9 +131,15 @@ def to_freecad_doc(placed, B, path):
     groups = {}
     for grp in B["tree"]:
         groups[grp["id"]] = doc.addObject("App::DocumentObjectGroup", f"{grp['id']}_{grp['name'].split()[0]}")
+    info = {c["id"]: c for _, c in leaves(B)}
     for name, (pid, gid, shp) in placed.items():
         o = doc.addObject("Part::Feature", name)
         o.Shape = shp
+        c = info.get(pid, {})
+        if c.get("ad_tr"):                       # sanayi adi + islev (bom.json: ad_tr, ad_en, islev)
+            o.Label = f"{name} | {c['ad_tr']}"
+            if hasattr(o, "Label2"):
+                o.Label2 = f"{c.get('ad_en', '')} - {c.get('islev', '')}".strip(" -")
         groups[gid].addObject(o)
     doc.recompute()
     doc.saveAs(path)

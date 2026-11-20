@@ -152,25 +152,37 @@
      "id": "A11",
      "name": "Ana sase (kaynakli govde)",
      "qty": 1,
-     "script": "parts/A11_ana_sase.py"
+     "script": "parts/A11_ana_sase.py",
+     "ad_tr": "Ana şase (kaynaklı gövde)",
+     "ad_en": "Machine base / frame",
+     "islev": "Makine gövdesini taşıyan, tüm üniteleri üzerinde toplayan kaynaklı çelik şase."
     },
     {
      "id": "A12",
      "name": "Hareketli plaka kizak raylari",
      "qty": 2,
-     "script": "parts/A12_kizak_rayi.py"
+     "script": "parts/A12_kizak_rayi.py",
+     "ad_tr": "Hareketli plaka kızak rayları",
+     "ad_en": "Moving platen slide rails",
+     "islev": "Hareketli plakayı şase üzerinde yataklayıp kapama ekseninde yönlendiren raylar."
     },
     {
      "id": "A13",
      "name": "Sabit plaka destek kolonu (uzun, 2 alt + 1 ust)",
      "qty": 3,
-     "script": "parts/A13_sabit_plaka_destek.py"
+     "script": "parts/A13_sabit_plaka_destek.py",
+     "ad_tr": "Sabit plaka destek kolonu",
+     "ad_en": "Stationary platen support",
+     "islev": "Sabit plakayı şaseye oturtup kalıp yükünü şaseye ileten destek ayakları."
     },
     {
      "id": "A14",
      "name": "Kolon arka dikmesi (sase arka ucu, kaynakli)",
      "qty": 1,
-     "script": "parts/A14_kolon_arka_dikme.py"
+     "script": "parts/A14_kolon_arka_dikme.py",
+     "ad_tr": "Kolon arka dikmesi",
+     "ad_en": "Rear tie bar support post",
+     "islev": "Şase arka ucunda kolon/arka plaka tarafını destekleyen kaynaklı dikme. (varsayım)"
     }
    ]
   },
@@ -182,43 +194,64 @@
      "id": "A21",
      "name": "Sabit plaka",
      "qty": 1,
-     "script": "parts/A21_sabit_plaka.py"
+     "script": "parts/A21_sabit_plaka.py",
+     "ad_tr": "Sabit plaka",
+     "ad_en": "Stationary (fixed) platen",
+     "islev": "Sabit kalıp yarısını taşıyan ve kolonların ön ucunu tutan plaka."
     },
     {
      "id": "A22",
      "name": "Hareketli plaka",
      "qty": 1,
-     "script": "parts/A22_hareketli_plaka.py"
+     "script": "parts/A22_hareketli_plaka.py",
+     "ad_tr": "Hareketli plaka",
+     "ad_en": "Moving platen",
+     "islev": "Hareketli kalıp yarısını taşıyıp kolonlar üzerinde kayarak kalıbı açıp kapatan plaka."
     },
     {
      "id": "A23",
      "name": "Arka plaka (mafsal tasiyici)",
      "qty": 1,
-     "script": "parts/A23_arka_plaka.py"
+     "script": "parts/A23_arka_plaka.py",
+     "ad_tr": "Arka plaka (mafsal taşıyıcı)",
+     "ad_en": "Rear (toggle) platen",
+     "islev": "Mafsal mekanizmasının dayanak noktası olan ve kolonların arka ucunu tutan plaka."
     },
     {
      "id": "A24",
      "name": "Kolon (tie bar)",
      "qty": 4,
-     "script": "parts/A24_kolon.py"
+     "script": "parts/A24_kolon.py",
+     "ad_tr": "Kolon (tie bar)",
+     "ad_en": "Tie bar",
+     "islev": "Kapama kuvvetini taşıyan, sabit plaka ile arka plakayı bağlayan gerilme çubuğu."
     },
     {
      "id": "A25",
      "name": "Kolon on somunu (sabit plaka)",
      "qty": 4,
-     "script": "parts/A25_kolon_on_somun.py"
+     "script": "parts/A25_kolon_on_somun.py",
+     "ad_tr": "Kolon ön somunu",
+     "ad_en": "Tie bar front nut",
+     "islev": "Kolonu sabit plakaya bağlayıp kapama kuvvetini plakaya aktaran somun."
     },
     {
      "id": "A26",
      "name": "Kalip yuksekligi ayar somunu (disli, arka plaka)",
      "qty": 4,
-     "script": "parts/A26_ayar_somunu.py"
+     "script": "parts/A26_ayar_somunu.py",
+     "ad_tr": "Kalıp yüksekliği ayar somunu (dişli)",
+     "ad_en": "Die height adjusting nut (geared)",
+     "islev": "Arka plakayı kolon üzerinde kaydırarak kalıp yüksekliğini ayarlayan dişli somun."
     },
     {
      "id": "A28",
      "name": "Hareketli plaka kolon burcu",
      "qty": 4,
-     "script": "parts/A28_burc.py"
+     "script": "parts/A28_burc.py",
+     "ad_tr": "Hareketli plaka kolon burcu",
+     "ad_en": "Moving platen tie bar bushing",
+     "islev": "Hareketli plakanın kolon üzerinde sürtünmesiz kaymasını sağlayan burç."
     }
    ]
   },
@@ -230,79 +263,118 @@
      "id": "A31",
      "name": "Capraz kafa (crosshead)",
      "qty": 1,
-     "script": "parts/A31_capraz_kafa.py"
+     "script": "parts/A31_capraz_kafa.py",
+     "ad_tr": "Çapraz kafa (crosshead)",
+     "ad_en": "Crosshead",
+     "islev": "Kapama silindirinin hareketini bağlantı kolları üzerinden mafsallara ileten kayar gövde."
     },
     {
      "id": "A32",
      "name": "Buyuk mafsal kolu (arka plaka tarafi)",
      "qty": 4,
-     "script": "parts/A32_buyuk_kol.py"
+     "script": "parts/A32_buyuk_kol.py",
+     "ad_tr": "Büyük mafsal kolu",
+     "ad_en": "Toggle link (rear / long)",
+     "islev": "Arka plaka ile orta mafsal noktası arasında kuvveti çoğaltıp ileten mafsal kolu."
     },
     {
      "id": "A33",
      "name": "On mafsal kolu (hareketli plaka tarafi)",
      "qty": 4,
-     "script": "parts/A33_on_kol.py"
+     "script": "parts/A33_on_kol.py",
+     "ad_tr": "Ön mafsal kolu",
+     "ad_en": "Toggle link (front / short)",
+     "islev": "Mafsal orta noktasını hareketli plakaya bağlayıp kapama kuvvetini ileten kol."
     },
     {
      "id": "A34",
      "name": "Mafsal pimi",
      "qty": 12,
-     "script": "parts/A34_pim.py"
+     "script": "parts/A34_pim.py",
+     "ad_tr": "Mafsal pimi",
+     "ad_en": "Toggle pin",
+     "islev": "Mafsal kollarını birbirine ve plakalara mafsallı bağlayan pim."
     },
     {
      "id": "A35",
      "name": "Kapama silindiri",
      "qty": 1,
-     "script": "parts/A35_kapama_silindiri.py"
+     "script": "parts/A35_kapama_silindiri.py",
+     "ad_tr": "Kapama silindiri",
+     "ad_en": "Clamping cylinder",
+     "islev": "Çapraz kafayı hareket ettirerek mafsal mekanizmasını süren hidrolik silindir."
     },
     {
      "id": "A130",
      "name": "Kapama valf blogu (manifold)",
      "qty": 1,
-     "script": "parts/A130_kapama_valf_blogu.py"
+     "script": "parts/A130_kapama_valf_blogu.py",
+     "ad_tr": "Kapama valf bloğu (manifold)",
+     "ad_en": "Clamping valve manifold",
+     "islev": "Kapama silindirinin yön ve debi kontrol valflerini taşıyan manifold bloğu."
     },
     {
      "id": "A131",
      "name": "Kapama valf blogu konsolu (A35 bilezik)",
      "qty": 1,
-     "script": "parts/A131_kapama_konsol.py"
+     "script": "parts/A131_kapama_konsol.py",
+     "ad_tr": "Kapama valf bloğu konsolu",
+     "ad_en": "Clamping valve block bracket",
+     "islev": "Kapama valf bloğunu kapama silindirine bilezikle tespit eden konsol."
     },
     {
      "id": "A132",
      "name": "Kapama kartus valf",
      "qty": 4,
-     "script": "parts/A132_kapama_kartus.py"
+     "script": "parts/A132_kapama_kartus.py",
+     "ad_tr": "Kapama kartuş valf",
+     "ad_en": "Clamping cartridge valve",
+     "islev": "Kapama devresinde yağ akışını açıp kapayan kartuş tipi valf."
     },
     {
      "id": "A133",
      "name": "Kapama solenoid bobini",
      "qty": 2,
-     "script": "parts/A133_kapama_solenoid.py"
+     "script": "parts/A133_kapama_solenoid.py",
+     "ad_tr": "Kapama solenoid bobini",
+     "ad_en": "Clamping solenoid coil",
+     "islev": "Kapama valfini elektrik sinyaliyle tetikleyen solenoid bobin."
     },
     {
      "id": "A36",
      "name": "Capraz kafa baglanti kolu",
      "qty": 4,
-     "script": "parts/A36_capraz_kafa_kolu.py"
+     "script": "parts/A36_capraz_kafa_kolu.py",
+     "ad_tr": "Çapraz kafa bağlantı kolu",
+     "ad_en": "Crosshead link",
+     "islev": "Çapraz kafayı mafsal kollarına bağlayıp hareketi ileten kol."
     },
     {
      "id": "A37",
      "name": "Kapama silindiri piston kolu",
      "qty": 1,
-     "script": "parts/A37_kapama_piston_kolu.py"
+     "script": "parts/A37_kapama_piston_kolu.py",
+     "ad_tr": "Kapama silindiri piston kolu",
+     "ad_en": "Clamping cylinder piston rod",
+     "islev": "Kapama silindirinin kuvvetini çapraz kafaya ileten piston kolu."
     },
     {
      "id": "A170",
      "name": "Mafsal merkezi yaglama pompasi M10 (75 W, rezervuar + seviye/basinc salteri)",
      "qty": 1,
-     "script": "parts/A170_yaglama_pompasi.py"
+     "script": "parts/A170_yaglama_pompasi.py",
+     "ad_tr": "Mafsal merkezi yağlama pompası",
+     "ad_en": "Central lubrication pump (toggle)",
+     "islev": "Mafsal noktalarına periyodik gres/yağ basan merkezi yağlama pompası. (varsayım)"
     },
     {
      "id": "A171",
      "name": "Mafsal yaglama dagitici blogu (progresif, 12 cikis)",
      "qty": 1,
-     "script": "parts/A171_yaglama_dagitici.py"
+     "script": "parts/A171_yaglama_dagitici.py",
+     "ad_tr": "Mafsal yağlama dağıtıcı bloğu",
+     "ad_en": "Progressive lubrication distributor",
+     "islev": "Yağlama pompası yağını 12 mafsal noktasına paylaştıran progresif dağıtıcı. (varsayım)"
     }
    ]
   },
@@ -314,25 +386,37 @@
      "id": "A41",
      "name": "Hidrolik itici silindiri (cift silindirli grup)",
      "qty": 1,
-     "script": "parts/A41_itici_silindir.py"
+     "script": "parts/A41_itici_silindir.py",
+     "ad_tr": "Hidrolik itici silindiri",
+     "ad_en": "Ejector cylinder",
+     "islev": "Dökümü kalıptan çıkaran itici plakayı süren çift silindirli hidrolik grup."
     },
     {
      "id": "A42",
      "name": "Itici plakasi",
      "qty": 1,
-     "script": "parts/A42_itici_plakasi.py"
+     "script": "parts/A42_itici_plakasi.py",
+     "ad_tr": "İtici plakası",
+     "ad_en": "Ejector plate (machine side)",
+     "islev": "İtici silindir kuvvetini kalıp itici plakasına ileten makine tarafı plaka. (varsayım)"
     },
     {
      "id": "A161",
      "name": "Itici strok sinirlama mansonu (A41 baglanti postu uzerinde, ayarli)",
      "qty": 4,
-     "script": "parts/A161_itici_strok_sinirlayici.py"
+     "script": "parts/A161_itici_strok_sinirlayici.py",
+     "ad_tr": "İtici strok sınırlama mansonu",
+     "ad_en": "Ejector stroke limiter sleeve",
+     "islev": "İtici strokunu ayarlı olarak sınırlayan manşon. (varsayım)"
     },
     {
      "id": "A162",
      "name": "Itici konum sensoru (M12 enduktif, 90 derece konnektor + braket)",
      "qty": 2,
-     "script": "parts/A162_itici_sensor.py"
+     "script": "parts/A162_itici_sensor.py",
+     "ad_tr": "İtici konum sensörü",
+     "ad_en": "Ejector position sensor",
+     "islev": "İtici plakasının ileri/geri konumunu algılayan endüktif sensör."
     }
    ]
   },
@@ -344,91 +428,136 @@
      "id": "A51",
      "name": "Dolum burcu (shot sleeve)",
      "qty": 1,
-     "script": "parts/A51_dolum_burcu.py"
+     "script": "parts/A51_dolum_burcu.py",
+     "ad_tr": "Dolum burcu (shot sleeve)",
+     "ad_en": "Shot sleeve / cold chamber",
+     "islev": "Dökülen metalin alındığı ve plunger ile kalıba itildiği soğuk kamara."
     },
     {
      "id": "A52",
      "name": "Enjeksiyon pistonu + piston kolu",
      "qty": 1,
-     "script": "parts/A52_piston.py"
+     "script": "parts/A52_piston.py",
+     "ad_tr": "Enjeksiyon pistonu + piston kolu",
+     "ad_en": "Shot plunger tip and rod",
+     "islev": "Metali kamarada kalıba iten piston ve onu enjeksiyon silindirine bağlayan kol."
     },
     {
      "id": "A54",
      "name": "Enjeksiyon silindiri",
      "qty": 1,
-     "script": "parts/A54_enjeksiyon_silindiri.py"
+     "script": "parts/A54_enjeksiyon_silindiri.py",
+     "ad_tr": "Enjeksiyon silindiri",
+     "ad_en": "Injection (shot) cylinder",
+     "islev": "Plunger'ı yüksek hızda süren enjeksiyon hidrolik silindiri."
     },
     {
      "id": "A55",
      "name": "Carpan (multiplikator)",
      "qty": 1,
-     "script": "parts/A55_carpan.py"
+     "script": "parts/A55_carpan.py",
+     "ad_tr": "Çarpan (multiplikatör)",
+     "ad_en": "Intensifier (multiplier)",
+     "islev": "Enjeksiyon sonu metal basıncını yükselten basınç çoğaltıcı."
     },
     {
      "id": "A56",
      "name": "Akumulator tupu",
      "qty": 4,
-     "script": "parts/A56_akumulator.py"
+     "script": "parts/A56_akumulator.py",
+     "ad_tr": "Akümülatör tüpü",
+     "ad_en": "Accumulator",
+     "islev": "Enjeksiyon için yüksek debiyi hızlı sağlayan basınçlı yağ depolayan akümülatör."
     },
     {
      "id": "A57",
      "name": "Enjeksiyon tasiyici konsol",
      "qty": 1,
-     "script": "parts/A57_enj_konsol.py"
+     "script": "parts/A57_enj_konsol.py",
+     "ad_tr": "Enjeksiyon taşıyıcı konsol",
+     "ad_en": "Injection unit carrier / bracket",
+     "islev": "Enjeksiyon ünitesini şaseye oturtup taşıyan konsol. (varsayım)"
     },
     {
      "id": "A65",
      "name": "Enjeksiyon valf blogu (Y1 manifold + S424)",
      "qty": 1,
-     "script": "parts/A65_enj_valf_blogu.py"
+     "script": "parts/A65_enj_valf_blogu.py",
+     "ad_tr": "Enjeksiyon valf bloğu",
+     "ad_en": "Injection valve manifold",
+     "islev": "Enjeksiyon silindirinin hız/basınç valflerini taşıyan manifold bloğu."
     },
     {
      "id": "A66",
      "name": "Enjeksiyon konum sensoru + LS2",
      "qty": 1,
-     "script": "parts/A66_enj_konum_sensoru.py"
+     "script": "parts/A66_enj_konum_sensoru.py",
+     "ad_tr": "Enjeksiyon konum sensörü + LS2",
+     "ad_en": "Injection position sensor + limit switch LS2",
+     "islev": "Plunger konumunu/hızını ölçen sensör ve LS2 limit anahtarı. (varsayım)"
     },
     {
      "id": "A67",
      "name": "Enjeksiyon basinc vericisi",
      "qty": 2,
-     "script": "parts/A67_basinc_vericisi.py"
+     "script": "parts/A67_basinc_vericisi.py",
+     "ad_tr": "Enjeksiyon basınç vericisi",
+     "ad_en": "Injection pressure transmitter",
+     "islev": "Enjeksiyon hat basıncını ölçüp kontrolöre ileten verici."
     },
     {
      "id": "A140",
      "name": "Kamara flansi civatalari (6xM12)",
      "qty": 1,
-     "script": "parts/A140_burc_flans_civata.py"
+     "script": "parts/A140_burc_flans_civata.py",
+     "ad_tr": "Kamara flanşı cıvataları",
+     "ad_en": "Chamber flange bolts",
+     "islev": "Dolum burcunu sabit plakaya bağlayan M12 cıvatalar."
     },
     {
      "id": "A141",
      "name": "Dolum agzi hunisi (pour cup)",
      "qty": 1,
-     "script": "parts/A141_dolum_agzi_hunisi.py"
+     "script": "parts/A141_dolum_agzi_hunisi.py",
+     "ad_tr": "Dolum ağzı hunisi (pour cup)",
+     "ad_en": "Pour cup / pouring hole",
+     "islev": "Sıvı metalin kamaraya döküldüğü huni."
     },
     {
      "id": "A142",
      "name": "Kamara sogutma baglanti stub'lari",
      "qty": 1,
-     "script": "parts/A142_kamara_sogutma_stub.py"
+     "script": "parts/A142_kamara_sogutma_stub.py",
+     "ad_tr": "Kamara soğutma bağlantı stub'ları",
+     "ad_en": "Chamber cooling connection stubs",
+     "islev": "Dolum burcu soğutma suyu devresi bağlantı uçları. (varsayım)"
     },
     {
      "id": "A143",
      "name": "Plunger yaglama unitesi",
      "qty": 1,
-     "script": "parts/A143_plunger_yaglama.py"
+     "script": "parts/A143_plunger_yaglama.py",
+     "ad_tr": "Plunger yağlama ünitesi",
+     "ad_en": "Plunger lubrication unit",
+     "islev": "Plunger ve kamara yüzeyine yağlayıcı uygulayan ünite. (varsayım)"
     },
     {
      "id": "A144",
      "name": "Piston kolu koruyucu kapak",
      "qty": 1,
-     "script": "parts/A144_piston_kolu_koruyucu.py"
+     "script": "parts/A144_piston_kolu_koruyucu.py",
+     "ad_tr": "Piston kolu koruyucu kapak",
+     "ad_en": "Plunger rod guard",
+     "islev": "Hareketli piston kolunu çevreden koruyan kapak. (varsayım)"
     },
     {
      "id": "A145",
      "name": "A54 on kafa tutucu saplama uclari (4xM24)",
      "qty": 1,
-     "script": "parts/A145_enj_silindiri_saplama.py"
+     "script": "parts/A145_enj_silindiri_saplama.py",
+     "ad_tr": "Ön kafa tutucu saplama uçları (A54)",
+     "ad_en": "Cylinder tie rod ends (A54)",
+     "islev": "Enjeksiyon silindiri ön kafasını tutan M24 saplama uçları. (varsayım)"
     }
    ]
   },
@@ -440,7 +569,10 @@
      "id": "A61",
      "name": "Hidrolik tank",
      "qty": 1,
-     "script": "parts/A61_tank.py"
+     "script": "parts/A61_tank.py",
+     "ad_tr": "Hidrolik tank",
+     "ad_en": "Hydraulic reservoir / tank",
+     "islev": "Hidrolik yağı depolayan, soğutup çökelten tank."
     },
     {
      "id": "A62",
@@ -453,221 +585,332 @@
        "id": "A120",
        "name": "Elektrik motoru M1 55 kW 4 kutup (IEC 280S/M, B3)",
        "qty": 1,
-       "script": "parts/A120_motor_55kw.py"
+       "script": "parts/A120_motor_55kw.py",
+       "ad_tr": "Elektrik motoru M1 55 kW",
+       "ad_en": "Electric motor M1 55 kW",
+       "islev": "Hidrolik pompayı döndüren ana tahrik motoru."
       },
       {
        "id": "A98",
        "name": "Pompa on govde 45VQ (montaj flansi, P1 cikis)",
        "qty": 1,
-       "script": "parts/A98_pompa_on_govde.py"
+       "script": "parts/A98_pompa_on_govde.py",
+       "ad_tr": "Pompa ön gövde 45VQ",
+       "ad_en": "Pump front body 45VQ",
+       "islev": "Pompanın montaj flanşını ve P1 çıkışını taşıyan ön gövde."
       },
       {
        "id": "A99",
        "name": "Giris govdesi 252283 (ortak emis, 4-civatali flans)",
        "qty": 1,
-       "script": "parts/A99_pompa_giris_govdesi.py"
+       "script": "parts/A99_pompa_giris_govdesi.py",
+       "ad_tr": "Giriş gövdesi (ortak emiş)",
+       "ad_en": "Pump inlet body (common suction)",
+       "islev": "İki pompa kartuşuna ortak emiş sağlayan giriş gövdesi."
       },
       {
        "id": "A100",
        "name": "Arka kapak 20VQ (4-civatali kapak 250824, P2 cikis, emniyet valfi yuvasi)",
        "qty": 1,
-       "script": "parts/A100_pompa_arka_kapak.py"
+       "script": "parts/A100_pompa_arka_kapak.py",
+       "ad_tr": "Arka kapak 20VQ",
+       "ad_en": "Pump rear cover 20VQ",
+       "islev": "20VQ kartuşunu kapatan, P2 çıkışı ve emniyet valfi yuvası olan kapak."
       },
       {
        "id": "A101",
        "name": "Pompa mili (kamali uc + 45VQ/20VQ spline)",
        "qty": 1,
-       "script": "parts/A101_pompa_mili.py"
+       "script": "parts/A101_pompa_mili.py",
+       "ad_tr": "Pompa mili",
+       "ad_en": "Pump drive shaft",
+       "islev": "Motor torkunu iki pompa kartuşunun rotoruna ileten kamalı mil."
       },
       {
        "id": "A102",
        "name": "45VQ halka (cam ring 297510)",
        "qty": 1,
-       "script": "parts/A102_kartus_halka.py"
+       "script": "parts/A102_kartus_halka.py",
+       "ad_tr": "45VQ halka (cam ring)",
+       "ad_en": "45VQ cam ring",
+       "islev": "Kanatların izlediği eliptik/kam yüzeyi oluşturan halka."
       },
       {
        "id": "A103",
        "name": "45VQ rotor (283871)",
        "qty": 1,
-       "script": "parts/A103_kartus_rotor.py"
+       "script": "parts/A103_kartus_rotor.py",
+       "ad_tr": "45VQ rotor",
+       "ad_en": "45VQ rotor",
+       "islev": "Kanatları taşıyıp mil ile dönen rotor."
       },
       {
        "id": "A104",
        "name": "45VQ kanat (922701, 10 kanat + 10 insert)",
        "qty": 10,
-       "script": "parts/A104_kartus_kanat.py"
+       "script": "parts/A104_kartus_kanat.py",
+       "ad_tr": "45VQ kanat (vane)",
+       "ad_en": "45VQ vane",
+       "islev": "Halka ile rotor arasında basınç odacıklarını oluşturan kanat."
       },
       {
        "id": "A105",
        "name": "45VQ flex-side plaka (923954, bronz yuz rotora)",
        "qty": 2,
-       "script": "parts/A105_kartus_yan_plaka.py"
+       "script": "parts/A105_kartus_yan_plaka.py",
+       "ad_tr": "45VQ yan plaka (flex-side)",
+       "ad_en": "45VQ side plate (flex-side)",
+       "islev": "Rotor yüzünü sızdırmazlayan, yağ giriş/çıkış kanallarını taşıyan plaka."
       },
       {
        "id": "A106",
        "name": "45VQ giris destek plakasi (430807 (burclu))",
        "qty": 1,
-       "script": "parts/A106_kartus_destek_plakasi.py"
+       "script": "parts/A106_kartus_destek_plakasi.py",
+       "ad_tr": "45VQ giriş destek plakası",
+       "ad_en": "45VQ inlet support plate",
+       "islev": "Kartuşun giriş tarafını destekleyen plaka."
       },
       {
        "id": "A107",
        "name": "45VQ cikis destek plakasi (415382)",
        "qty": 1,
-       "script": "parts/A106_kartus_destek_plakasi.py"
+       "script": "parts/A106_kartus_destek_plakasi.py",
+       "ad_tr": "45VQ çıkış destek plakası",
+       "ad_en": "45VQ outlet support plate",
+       "islev": "Kartuşun çıkış tarafını destekleyen plaka."
       },
       {
        "id": "A108",
        "name": "20VQ halka (cam ring 333624)",
        "qty": 1,
-       "script": "parts/A102_kartus_halka.py"
+       "script": "parts/A102_kartus_halka.py",
+       "ad_tr": "20VQ halka (cam ring)",
+       "ad_en": "20VQ cam ring",
+       "islev": "Kanatların izlediği kam yüzeyini oluşturan halka."
       },
       {
        "id": "A109",
        "name": "20VQ rotor (402690)",
        "qty": 1,
-       "script": "parts/A103_kartus_rotor.py"
+       "script": "parts/A103_kartus_rotor.py",
+       "ad_tr": "20VQ rotor",
+       "ad_en": "20VQ rotor",
+       "islev": "Kanatları taşıyıp mil ile dönen rotor."
       },
       {
        "id": "A110",
        "name": "20VQ kanat (922741, 10 kanat + 10 insert)",
        "qty": 10,
-       "script": "parts/A104_kartus_kanat.py"
+       "script": "parts/A104_kartus_kanat.py",
+       "ad_tr": "20VQ kanat (vane)",
+       "ad_en": "20VQ vane",
+       "islev": "Halka ile rotor arasında basınç odacıklarını oluşturan kanat."
       },
       {
        "id": "A111",
        "name": "20VQ flex-side plaka (923955, bronz yuz rotora)",
        "qty": 2,
-       "script": "parts/A105_kartus_yan_plaka.py"
+       "script": "parts/A105_kartus_yan_plaka.py",
+       "ad_tr": "20VQ yan plaka (flex-side)",
+       "ad_en": "20VQ side plate (flex-side)",
+       "islev": "Rotor yüzünü sızdırmazlayan, yağ kanallarını taşıyan plaka."
       },
       {
        "id": "A112",
        "name": "20VQ giris destek plakasi (419502)",
        "qty": 1,
-       "script": "parts/A106_kartus_destek_plakasi.py"
+       "script": "parts/A106_kartus_destek_plakasi.py",
+       "ad_tr": "20VQ giriş destek plakası",
+       "ad_en": "20VQ inlet support plate",
+       "islev": "Kartuşun giriş tarafını destekleyen plaka."
       },
       {
        "id": "A113",
        "name": "20VQ cikis destek plakasi (419500 (burclu))",
        "qty": 1,
-       "script": "parts/A106_kartus_destek_plakasi.py"
+       "script": "parts/A106_kartus_destek_plakasi.py",
+       "ad_tr": "20VQ çıkış destek plakası",
+       "ad_en": "20VQ outlet support plate",
+       "islev": "Kartuşun çıkış tarafını destekleyen plaka."
       },
       {
        "id": "A114",
        "name": "Kartus konum pimi 422206 (2x45VQ + 2x20VQ)",
        "qty": 4,
-       "script": "parts/A114_pompa_pimi.py"
+       "script": "parts/A114_pompa_pimi.py",
+       "ad_tr": "Kartuş konum pimi",
+       "ad_en": "Cartridge locating pin",
+       "islev": "Kartuş parçalarını doğru açısal konumda sabitleyen pim."
       },
       {
        "id": "A115",
        "name": "Govde baglanti civatasi 87947 (4 adet, 255-275 lb.ft)",
        "qty": 4,
-       "script": "parts/A115_pompa_civatasi.py"
+       "script": "parts/A115_pompa_civatasi.py",
+       "ad_tr": "Gövde bağlantı cıvatası",
+       "ad_en": "Pump body bolt",
+       "islev": "Pompa gövdelerini birbirine bağlayan yüksek torklu cıvata."
       },
       {
        "id": "A116",
        "name": "Arka kapak civatasi 1296 (4 adet, 40-50 lb.ft)",
        "qty": 4,
-       "script": "parts/A115_pompa_civatasi.py"
+       "script": "parts/A115_pompa_civatasi.py",
+       "ad_tr": "Arka kapak cıvatası",
+       "ad_en": "Rear cover bolt",
+       "islev": "Arka kapağı gövdeye bağlayan cıvata."
       },
       {
        "id": "A117",
        "name": "Emniyet valfi kartusu (2327xx S/A, 20VQ)",
        "qty": 1,
-       "script": "parts/A117_emniyet_valfi.py"
+       "script": "parts/A117_emniyet_valfi.py",
+       "ad_tr": "Emniyet valfi kartuşu",
+       "ad_en": "Relief valve cartridge",
+       "islev": "20VQ çıkışında aşırı basıncı sınırlayan emniyet valfi kartuşu."
       },
       {
        "id": "A118",
        "name": "Emniyet valfi yayi 239766",
        "qty": 1,
-       "script": "parts/A118_valf_yayi.py"
+       "script": "parts/A118_valf_yayi.py",
+       "ad_tr": "Emniyet valfi yayı",
+       "ad_en": "Relief valve spring",
+       "islev": "Emniyet valfinin açma basıncını belirleyen yay."
       },
       {
        "id": "A119",
        "name": "Tapa 7077 (valf yuvasi, 2 adet)",
        "qty": 2,
-       "script": "parts/A119_tapa.py"
+       "script": "parts/A119_tapa.py",
+       "ad_tr": "Tapa (valf yuvası)",
+       "ad_en": "Plug (valve port)",
+       "islev": "Kullanılmayan valf yuvası deliklerini kapatan tapa."
       }
-     ]
+     ],
+     "ad_tr": "Motor-pompa grubu",
+     "ad_en": "Motor-pump unit",
+     "islev": "Hidrolik basınç ve debiyi üreten motor ve tandem pompa grubu."
     },
     {
      "id": "A121",
      "name": "Emis hatti (A99 -> tank A61, d89/80 sert boru)",
      "qty": 1,
-     "script": "parts/A121_boru_hatti.py"
+     "script": "parts/A121_boru_hatti.py",
+     "ad_tr": "Emiş hattı (sert boru)",
+     "ad_en": "Suction line (rigid pipe)",
+     "islev": "Tank yağını pompa giriş gövdesine ileten emiş borusu."
     },
     {
      "id": "A122",
      "name": "Basinc hatti stub'i (P1 d48/38, P2 d25/19)",
      "qty": 2,
      "script": "parts/A121_boru_hatti.py",
-     "note": "A121 ile ayni script, farkli olcu"
+     "note": "A121 ile ayni script, farkli olcu",
+     "ad_tr": "Basınç hattı stub'ı",
+     "ad_en": "Pressure line stub",
+     "islev": "Pompa P1/P2 çıkışlarından basınç hattına geçiş yapan kısa boru ucu. (varsayım)"
     },
     {
      "id": "A123",
      "name": "Boru tespit konsolu (dikme + kelepce)",
      "qty": 2,
-     "script": "parts/A123_boru_tespit.py"
+     "script": "parts/A123_boru_tespit.py",
+     "ad_tr": "Boru tespit konsolu",
+     "ad_en": "Pipe support bracket",
+     "islev": "Boru hatlarını dikme ve kelepce ile sabitleyen konsol. (varsayım)"
     },
     {
      "id": "A160",
      "name": "Hidrolik hatlar (sert boru + hortum, hatlar.json H01..H24)",
      "qty": 19,
      "script": "parts/A160_hat_boru.py",
-     "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)"
+     "note": "tek generic script; instance override hat=<ID>; veri params A160.dims.hatlar (tools/hat_senkron.py)",
+     "ad_tr": "Hidrolik hatlar (boru + hortum)",
+     "ad_en": "Hydraulic lines (pipe + hose)",
+     "islev": "Hidrolik üniteleri birbirine bağlayan sert boru ve hortum hatları."
     },
     {
      "id": "A59",
      "name": "Akumulator sepeti + valf blogu",
      "qty": 1,
-     "script": "parts/A59_valf_blogu.py"
+     "script": "parts/A59_valf_blogu.py",
+     "ad_tr": "Akümülatör sepeti + valf bloğu",
+     "ad_en": "Accumulator rack + valve block",
+     "islev": "Akümülatörleri taşıyan sepet ve emniyet/boşaltma valf bloğu. (varsayım)"
     },
     {
      "id": "A63",
      "name": "Akumulator kelepce bantlari",
      "qty": 2,
-     "script": "parts/A63_kelepce.py"
+     "script": "parts/A63_kelepce.py",
+     "ad_tr": "Akümülatör kelepce bantları",
+     "ad_en": "Accumulator clamp straps",
+     "islev": "Akümülatör tüplerini sepete sabitleyen bantlar. (varsayım)"
     },
     {
      "id": "A64",
      "name": "Akumulator toplayici borusu",
      "qty": 1,
-     "script": "parts/A64_toplayici_boru.py"
+     "script": "parts/A64_toplayici_boru.py",
+     "ad_tr": "Akümülatör toplayıcı borusu",
+     "ad_en": "Accumulator manifold pipe",
+     "islev": "Akümülatörlerin çıkışlarını ortak hatta toplayan boru. (varsayım)"
     },
     {
      "id": "A172",
      "name": "Cek valf CV1 (H01 uzerinde, DN32 flansli govde, boruyu sarar)",
      "qty": 1,
-     "script": "parts/A172_cek_valf.py"
+     "script": "parts/A172_cek_valf.py",
+     "ad_tr": "Çek valf CV1",
+     "ad_en": "Check valve CV1",
+     "islev": "H01 hattında akışı tek yöne izin veren çek valf."
     },
     {
      "id": "A173",
      "name": "Basinc filtresi PF1 (H01 X kosusu, kafa + alt kase)",
      "qty": 1,
-     "script": "parts/A173_basinc_filtresi.py"
+     "script": "parts/A173_basinc_filtresi.py",
+     "ad_tr": "Basınç filtresi PF1",
+     "ad_en": "Pressure filter PF1",
+     "islev": "Basınç hattındaki yağı süzen filtre."
     },
     {
      "id": "A174",
      "name": "Donus filtresi RF1 (A61 donus filtre kapagi uzerinde, +Y disa)",
      "qty": 1,
-     "script": "parts/A174_donus_filtresi.py"
+     "script": "parts/A174_donus_filtresi.py",
+     "ad_tr": "Dönüş filtresi RF1",
+     "ad_en": "Return filter RF1",
+     "islev": "Tanka dönen yağı süzen dönüş filtresi."
     },
     {
      "id": "A175",
      "name": "Hat rafi konsolu (sase -Y yan duvari; 3 katman P/pilot/T)",
      "qty": 6,
-     "script": "parts/A175_hat_rafi_konsolu.py"
+     "script": "parts/A175_hat_rafi_konsolu.py",
+     "ad_tr": "Hat rafı konsolu",
+     "ad_en": "Pipe rack bracket",
+     "islev": "Şase yan duvarında P/pilot/T hatlarını katmanlı taşıyan konsol. (varsayım)"
     },
     {
      "id": "A176",
      "name": "A65 hortum gecis braketi (BRK_A65_P/PL/T: P d48, pilot d21, T d70 hortum -> sert boru)",
      "qty": 1,
-     "script": "parts/A176_a65_braket.py"
+     "script": "parts/A176_a65_braket.py",
+     "ad_tr": "A65 hortum geçiş braketi",
+     "ad_en": "A65 hose transition bracket",
+     "islev": "A65 bloğundaki hortumlardan sert boruya geçişi tutan braket. (varsayım)"
     },
     {
      "id": "A177",
      "name": "A130 T hortum braketi (BRK_A130_T: T hortum DN32/48 -> d89 sert boru)",
      "qty": 1,
-     "script": "parts/A177_a130_braket.py"
+     "script": "parts/A177_a130_braket.py",
+     "ad_tr": "A130 T hortum braketi",
+     "ad_en": "A130 T hose bracket",
+     "islev": "A130 T hortumunu d89 sert boruya bağlayan braket. (varsayım)"
     }
    ]
   },
@@ -685,75 +928,114 @@
        "id": "A124",
        "name": "Kapi polikarbonat paneller (2 panel)",
        "qty": 1,
-       "script": "parts/A124_kapi_paneller.py"
+       "script": "parts/A124_kapi_paneller.py",
+       "ad_tr": "Kapı polikarbonat panelleri",
+       "ad_en": "Gate polycarbonate panels",
+       "islev": "Kapıda görüş sağlayıp sıçramaya karşı koruyan şeffaf paneller."
       },
       {
        "id": "A125",
        "name": "Ust ray + makara arabalari + dikmeler",
        "qty": 1,
-       "script": "parts/A125_ust_ray_makara.py"
+       "script": "parts/A125_ust_ray_makara.py",
+       "ad_tr": "Üst ray + makara arabaları + dikmeler",
+       "ad_en": "Gate top rail + roller carriages + posts",
+       "islev": "Koruma kapısını asıp kaydıran ray, makara ve dikmeler."
       },
       {
        "id": "A126",
        "name": "Pnomatik kapi tahrik silindiri",
        "qty": 1,
-       "script": "parts/A126_tahrik_silindir.py"
+       "script": "parts/A126_tahrik_silindir.py",
+       "ad_tr": "Pnömatik kapı tahrik silindiri",
+       "ad_en": "Pneumatic gate actuator cylinder",
+       "islev": "Koruma kapısını açıp kapatan pnömatik silindir."
       },
       {
        "id": "A127",
        "name": "Kilitli guvenlik anahtari (kapali+acik)",
        "qty": 1,
-       "script": "parts/A127_guvenlik_anahtari.py"
+       "script": "parts/A127_guvenlik_anahtari.py",
+       "ad_tr": "Kilitli güvenlik anahtarı",
+       "ad_en": "Safety interlock switch",
+       "islev": "Kapı konumunu algılayıp açıkken makine hareketini engelleyen kilitli anahtar. (varsayım)"
       },
       {
        "id": "A128",
        "name": "Kapi kolu + koruyucu kenar",
        "qty": 1,
-       "script": "parts/A128_kol_kenar.py"
+       "script": "parts/A128_kol_kenar.py",
+       "ad_tr": "Kapı kolu + koruyucu kenar",
+       "ad_en": "Gate handle + safety edge",
+       "islev": "Kapıyı elle hareket ettirme kolu ve sıkışma koruyucu kenar. (varsayım)"
       }
-     ]
+     ],
+     "ad_tr": "Operatör koruma kapısı",
+     "ad_en": "Operator safety gate",
+     "islev": "Operatörü kalıp bölgesinden ayıran, kilitli güvenlik kapısı."
     },
     {
      "id": "A72",
      "name": "Elektrik panosu",
      "qty": 1,
-     "script": "parts/A72_pano.py"
+     "script": "parts/A72_pano.py",
+     "ad_tr": "Elektrik panosu",
+     "ad_en": "Electrical control cabinet",
+     "islev": "PLC, sürücü ve güç elemanlarını barındıran pano."
     },
     {
      "id": "A163",
      "name": "Acil durdurma istasyonu (80x80 sari kutu + d40 mantar basli)",
      "qty": 4,
-     "script": "parts/A163_acil_durdurma.py"
+     "script": "parts/A163_acil_durdurma.py",
+     "ad_tr": "Acil durdurma istasyonu",
+     "ad_en": "Emergency stop station",
+     "islev": "Basıldığında makineyi güvenli duruma alan mantar başlı acil stop kutusu."
     },
     {
      "id": "A164",
      "name": "Arka koruma kapisi paneli (kayar; profil cerceve + sac + polikarbonat + kol)",
      "qty": 1,
-     "script": "parts/A164_arka_kapi_panel.py"
+     "script": "parts/A164_arka_kapi_panel.py",
+     "ad_tr": "Arka koruma kapısı paneli",
+     "ad_en": "Rear safety gate panel",
+     "islev": "Makine arka tarafını kapatan kayar koruma kapısı paneli. (varsayım)"
     },
     {
      "id": "A165",
      "name": "Arka kapi alt iz + ust ray + 2 dikme",
      "qty": 1,
-     "script": "parts/A165_arka_kapi_ray.py"
+     "script": "parts/A165_arka_kapi_ray.py",
+     "ad_tr": "Arka kapı alt iz + üst ray + dikmeler",
+     "ad_en": "Rear gate track, rail and posts",
+     "islev": "Arka koruma kapısını yönlendiren iz, ray ve dikmeler. (varsayım)"
     },
     {
      "id": "A166",
      "name": "Arka kapi kapali limit anahtari + kapi dili (2 adet seri, KA9 zinciri)",
      "qty": 2,
-     "script": "parts/A166_arka_kapi_limit.py"
+     "script": "parts/A166_arka_kapi_limit.py",
+     "ad_tr": "Arka kapı kapalı limit anahtarı + dil",
+     "ad_en": "Rear gate closed limit switch + tongue",
+     "islev": "Arka kapının kapalı olduğunu güvenlik zincirine bildiren anahtar ve dil."
     },
     {
      "id": "A178",
      "name": "Alarm lambasi / sinyal kulesi HL1 (kirmizi-sari-yesil + sirene)",
      "qty": 1,
-     "script": "parts/A178_alarm_lambasi.py"
+     "script": "parts/A178_alarm_lambasi.py",
+     "ad_tr": "Alarm lambası / sinyal kulesi (HL1)",
+     "ad_en": "Signal tower / alarm beacon (HL1)",
+     "islev": "Makine durumunu renk ve siren ile bildiren sinyal kulesi."
     },
     {
      "id": "A179",
      "name": "Operator kutusu (HMI + jog/start/stop butonlari + ST4-1) ve zemin sehpasi",
      "qty": 1,
-     "script": "parts/A179_operator_kutusu.py"
+     "script": "parts/A179_operator_kutusu.py",
+     "ad_tr": "Operatör kutusu (HMI) + sehpa",
+     "ad_en": "Operator control box (HMI) + stand",
+     "islev": "Operatörün jog/start/stop ve HMI ile makineyi yönettiği kutu ve sehpası."
     }
    ]
   },
@@ -765,49 +1047,73 @@
      "id": "A81",
      "name": "Sabit kalip yarisi",
      "qty": 1,
-     "script": "parts/A81_sabit_kalip.py"
+     "script": "parts/A81_sabit_kalip.py",
+     "ad_tr": "Sabit kalıp yarısı",
+     "ad_en": "Fixed die half (cover die)",
+     "islev": "Sabit plakaya bağlı, döküm boşluğunun bir yarısını oluşturan kalıp (temsili)."
     },
     {
      "id": "A82",
      "name": "Hareketli kalip yarisi",
      "qty": 1,
-     "script": "parts/A82_hareketli_kalip.py"
+     "script": "parts/A82_hareketli_kalip.py",
+     "ad_tr": "Hareketli kalıp yarısı",
+     "ad_en": "Moving die half (ejector die)",
+     "islev": "Hareketli plakaya bağlı, döküm boşluğunun diğer yarısını oluşturan kalıp (temsili)."
     },
     {
      "id": "A83",
      "name": "Kalip itici plakasi (itici + tutucu)",
      "qty": 1,
-     "script": "parts/A83_kalip_itici_plakasi.py"
+     "script": "parts/A83_kalip_itici_plakasi.py",
+     "ad_tr": "Kalıp itici plakası",
+     "ad_en": "Die ejector plate set",
+     "islev": "İtici pimlerini taşıyıp hareket ettiren kalıp içi itici plakası."
     },
     {
      "id": "A84",
      "name": "Itici pimi",
      "qty": 24,
-     "script": "parts/A84_itici_pimi.py"
+     "script": "parts/A84_itici_pimi.py",
+     "ad_tr": "İtici pimi",
+     "ad_en": "Ejector pin",
+     "islev": "Soğuyan dökümü kalıp boşluğundan dışarı iten pim."
     },
     {
      "id": "A85",
      "name": "Geri donus pimi",
      "qty": 4,
-     "script": "parts/A85_geri_donus_pimi.py"
+     "script": "parts/A85_geri_donus_pimi.py",
+     "ad_tr": "Geri dönüş pimi",
+     "ad_en": "Return pin",
+     "islev": "Kalıp kapanırken itici plakayı geri başlangıç konumuna iten pim."
     },
     {
      "id": "A167",
      "name": "Maca cekme silindiri (hidrolik, bore 50/rod 28, strok 80, flansli)",
      "qty": 4,
-     "script": "parts/A167_maca_silindiri.py"
+     "script": "parts/A167_maca_silindiri.py",
+     "ad_tr": "Maça çekme silindiri",
+     "ad_en": "Core pull cylinder",
+     "islev": "Kalıp maçasını döküm sonrası çeken/süren hidrolik silindir."
     },
     {
      "id": "A168",
      "name": "Maca valf manifoldu (4 x NG6 icin alt plaka, A21 arka yuz)",
      "qty": 1,
-     "script": "parts/A168_maca_manifold.py"
+     "script": "parts/A168_maca_manifold.py",
+     "ad_tr": "Maça valf manifoldu",
+     "ad_en": "Core pull valve manifold",
+     "islev": "4 adet NG6 maça valfini taşıyan alt plaka."
     },
     {
      "id": "A169",
      "name": "Maca NG6 yon valfi (4/3, cift solenoid DIN 43650)",
      "qty": 4,
-     "script": "parts/A169_maca_valfi.py"
+     "script": "parts/A169_maca_valfi.py",
+     "ad_tr": "Maça NG6 yön valfi",
+     "ad_en": "Core pull NG6 directional valve",
+     "islev": "Maça silindirinin yönünü belirleyen 4/3 çift solenoidli valf."
     }
    ]
   },
@@ -819,43 +1125,64 @@
      "id": "A91",
      "name": "Merkez disli (z210 m4)",
      "qty": 1,
-     "script": "parts/A91_merkez_disli.py"
+     "script": "parts/A91_merkez_disli.py",
+     "ad_tr": "Merkez dişli",
+     "ad_en": "Central (ring) gear",
+     "islev": "Dört ayar somununu birlikte döndüren merkez dişli."
     },
     {
      "id": "A92",
      "name": "Merkez disli tasiyici yatak halkasi",
      "qty": 1,
-     "script": "parts/A92_yatak_halkasi.py"
+     "script": "parts/A92_yatak_halkasi.py",
+     "ad_tr": "Merkez dişli taşıyıcı yatak halkası",
+     "ad_en": "Central gear bearing ring",
+     "islev": "Merkez dişliyi arka plaka üzerinde yataklayan halka. (varsayım)"
     },
     {
      "id": "A93",
      "name": "Pinyon (z20 m4) + mil",
      "qty": 1,
-     "script": "parts/A93_pinyon.py"
+     "script": "parts/A93_pinyon.py",
+     "ad_tr": "Pinyon + mil",
+     "ad_en": "Pinion + shaft",
+     "islev": "Redüktör çıkışından merkez dişliyi döndüren pinyon ve mili."
     },
     {
      "id": "A94",
      "name": "Redüktör (helisel, i=35)",
      "qty": 1,
-     "script": "parts/A94_reduktor.py"
+     "script": "parts/A94_reduktor.py",
+     "ad_tr": "Redüktör (helisel)",
+     "ad_en": "Gear reducer (helical)",
+     "islev": "Motor devrini düşürüp tork artıran helisel redüktör."
     },
     {
      "id": "A95",
      "name": "Elektrik motoru 1.1 kW 4 kutup",
      "qty": 1,
-     "script": "parts/A95_motor.py"
+     "script": "parts/A95_motor.py",
+     "ad_tr": "Elektrik motoru 1,1 kW",
+     "ad_en": "Electric motor 1.1 kW",
+     "islev": "Kalıp yüksekliği ayar tahrikini döndüren elektrik motoru."
     },
     {
      "id": "A96",
      "name": "Motor-redüktör braketi",
      "qty": 1,
-     "script": "parts/A96_braket.py"
+     "script": "parts/A96_braket.py",
+     "ad_tr": "Motor-redüktör braketi",
+     "ad_en": "Motor-reducer bracket",
+     "islev": "Motor ve redüktörü arka plakaya tespit eden braket. (varsayım)"
     },
     {
      "id": "A97",
      "name": "Motor enkoderi (kalip yuksekligi sayimi)",
      "qty": 1,
-     "script": "parts/A97_enkoder.py"
+     "script": "parts/A97_enkoder.py",
+     "ad_tr": "Motor enkoderi",
+     "ad_en": "Motor encoder",
+     "islev": "Kalıp yüksekliği ayarı için motor dönüşünü sayan enkoder. (varsayım)"
     }
    ]
   }
