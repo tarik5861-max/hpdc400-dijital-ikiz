@@ -19,6 +19,19 @@ def _prim(g, p):
     return g.move(s, *off)
 
 
+def _portlar(g, shape, d):
+    # d["ports"]["liste"]: yuz noktasindan iceri derinlik kadar silindirik delik (flush)
+    e = 1.0  # yuzun disina tasma (kozmetik, temiz kesim)
+    for p in d["ports"]["liste"]:
+        ax = p["yuz"][1].lower()
+        sg = 1 if p["yuz"][0] == "+" else -1
+        i = "xyz".index(ax)
+        c = list(p["konum_lokal"])
+        c[i] = c[i] - sg * (p["derinlik"] - e) / 2
+        shape = g.cut(shape, g.move(g.cyl(p["d"] / 2, p["derinlik"] + e, ax), *c))
+    return shape
+
+
 def build(d, G, g):
     shape = None
     for p in d["primitives"]:

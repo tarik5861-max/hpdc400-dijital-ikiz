@@ -164,3 +164,13 @@ Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.p
 - A61 `dims.return_port` (yeni): -Y yüz T_donus d80, lokal (-370,-470,350) = global (1000,-470,-800), çıkıntısız (bbox değişmez), H24 flanşı d142 tank yüzüne cıvatalı.
 - A11 `pipe_passages` + T_donus_-Y_yan_duvar: axis y, X1000, y -501..-474, local_z 350, d150 (talep d95 -> 150); neden: H24 uç flanşı d142×14 (Y -484..-470) d95'te duvara gömülürdü. H24 kirp [0,30] -> yok: hat artık tank yüzüne ulaşıyor.
 - Kontrol: check.py 0 hata, vuruş taraması 3×0, motion_check 0 çarpışma, hortum_pose eksik 0.
+
+## Port ölçüleri 2: A168 / A170 / A23 nipelleri / A172 / A173 – 2026-11-20 (olcu-mimari)
+- Kaynak: hatlar.json hat uçları (H01a/b/c, H30..H37, H40, H41..H52) + olcu_talepleri, hidrolik.json Y4 debileri. Hepsi İKİZ TASARIM VARSAYIMI (ikiz_tasarim), saha teyidi sonra. Hız v=Q/(πd²/4), sonuç meta.notes'ta.
+- A168 `dims.ports` "P,T,A1..A4,B1..B4 (modellenmez)" -> {not, liste}: A1..A4 / B1..B4 -X yüz flush d10 G3/8 derinlik 25, lokal (-180, -25/+25, -99/-37/25/87) = global X-400 Y165/215 Z36/98/160/222; 11,78 L/dk 2,5 m/s. P d16 G1/2 lokal (-130,0,130) = global (-350,190,265), T d20 G3/4 (-60,0,130) = (-280,190,265), üst yüz +Z; 4 maça eş zamanlı 47,1 L/dk -> P 3,9 / T 2,5 m/s. Neden üst yüz: -X yüzü A/B ile dolu, -Y yüzü A13_3 (Y≤110) ile dar; üstte H36/H37 yatayına (Z520/550) 255 mm, A25 somununa Y 49 mm. P/T hattı yok (hidrolik-muhendisi).
+- A170 `dims.ports` (yeni): çıkış +X şalter bloğu yüzü flush d6 M10x1, lokal (80,0,320) = global (2105,455,-210); 0,15 L/dk VARSAYIM.
+- A172 `dims.ports` (yeni): giriş +Y (0,60,0), çıkış -Y (0,-60,0), flanş yüzü d32 (SAE J518 kod 61 1-1/4", DN32 VARSAYIM), boru OD48 gövdeden geçer; 191,2 L/dk 3,96 m/s.
+- A173 `dims.ports` (yeni): giriş +X (80,0,0), çıkış -X (-80,0,0), aynı flanş; akış +X->-X.
+- A23 `dims.yaglama_nipelleri` (yeni, 12): üst yüz +Z lokal (50/70/90, ±110/±150/±190, 490) AT/BT1/CT/ET/BT2/DT; yan yüz ±Y lokal (110/130/150, ±460, -150) AB/BB1/CB/EB/BB2/DB. İtmeli rakor M8x1 gövde d12 boy 18, d6,2 tüp deliği, yüzden 18 mm havşaya (d16) gömülü. Neden gömme: kalıp değişiminde darbe koruması + bbox değişmez (BBOX_SAPMA yok) + tüp ucu yüzde kalır (A160×A23 örtüşme yok). Yan nipel aralığı 20 -> havşa arası et 4 mm. Pim iç kanalları çizilmez.
+- Hat ucu - port farkı: 25 hat ucunun hepsinde 0,0 mm; hat ucu değişmedi.
+- Kontrol: check.py 0 hata.

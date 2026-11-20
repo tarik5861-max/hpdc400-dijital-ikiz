@@ -17,4 +17,15 @@ def build(d, G, g):
     cuts += [g.move(g.cyl(tb["d"] / 2, t + 2, "x"), t / 2, y, z) for y, z in tb["centers_yz"]]
     ch = d["central_hole"]
     cuts.append(g.move(g.cyl(ch["d"] / 2, t + 2, "x"), t / 2, ch["center_yz"][0], ch["center_yz"][1]))
-    return g.cut(s, *cuts)
+    s = g.cut(s, *cuts)
+    # yaglama nipelleri: once havsa cut, sonra itmeli rakor (tup delikli) fuse; uc yuzde
+    for n in d["yaglama_nipelleri"]["liste"]:
+        ax, sg, c = n["eksen"], n["yon"], list(n["konum_lokal"])
+        i = "xyz".index(ax)
+        cc = list(c)
+        cc[i] = c[i] - sg * (n["havsa_derinlik"] - 1.0) / 2
+        s = g.cut(s, g.move(g.cyl(n["havsa_d"] / 2, n["havsa_derinlik"] + 1.0, ax), *cc))
+        cn = list(c)
+        cn[i] = c[i] - sg * n["boy"] / 2
+        s = g.fuse(s, g.move(g.tube(n["nipel_od"] / 2, n["d"] / 2, n["boy"], ax), *cn))
+    return s

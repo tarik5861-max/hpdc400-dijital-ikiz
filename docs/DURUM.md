@@ -12,7 +12,7 @@ _Son güncelleme: 2026-11-20 (akşam)._ Her `/kapanis`'te yeniden yazılır (en 
 - FreeCAD'e basma bu bulut oturumunda yapılamadı (MCP yok); kullanıcı kendi bilgisayarında makroyu çalıştırır. Makro artık A6/A7'yi gösterir (`HPDC_GIZLE=1` ile gizle) ve kök yol + son commit yazar.
 
 ## Açık noktalar
-- Hatlar 42 (H01a..H52, 2026-11-20 gece): Y4 maça hortumları H30..H37 (A168→4×A167, DN10), yağlama H40 (A170→A171) + H41..H52 (A171 12 çıkış→A23 nipelleri, PA12 tüp, hortum tipi); H01 → H01a/b/c (A172 CV1, A173 PF1 portlarında bölündü). Açık: A168 P/T besleme hattı yok; hortum bükülme ihlalleri (H22 8, H03 9, H12 7 dirsek) saha/katalog doğrulaması; ST2 yeri saha fotoğrafıyla teyit; A168 A1..4/B1..4 + P/T portları, A170 çıkış portu, A23 12 yağlama nipeli ve iç kanallar, A172/A173 dims.ports ölçüsü yok (olcu-mimari).
+- Hatlar 44 (H01a..H52, 273 instance): Y4 maça H30..H37 + P/T besleme H38 (P, H01c tee, 140 bar basınç düşürücüsüz = karar önerisi) / H39 (T→H20R tee); yağlama H40..H52; H01→H01a/b/c (A172 CV1, A173 PF1). Portlar/nipeller çizildi: A168 (A1..A4/B1..B4, P, T), A170 çıkış, A23 12 nipel. Açık: H38 son bacağı 25 mm (90° dirsek rakoru gerekir); maça P besleme kaynağı/basınç düşürücü saha teyidi; A54/A55 port talebi; hortum bükülme ihlalleri (H22 8, H03 9, H12 7 dirsek); ST2 yeri saha fotoğrafıyla teyit; yağlama iç kanalları çizilmedi.
 - A11 +X bölmesi (1540 mm kaburgasız açıklık) mukavemet sağlaması (OLCU_TALEBI, olcu-mimari).
 - Portlar/delikler çizildi (2026-11-20, TASARIM VARSAYIMI): A130, A35, A41 (boss), A65 (T2 tapalı yedek), A59 (nipel+tabla delikleri), A61 d80 dönüş portu, A11 -Y geçişi d150; H24 tanka ulaşıyor. Kalan: hat rafı kelepçeleri; A41 A portu d16 7,8 m/s (saha teyidi). CV1/PF1/RF1 = A172/A173/A174, A175..A177 konsol/braketler ağaçta.
 - A65 T dönüşü hızlı vuruşta ~1625 L/dk (DN51 hortum 13 m/s): yüksek debili/rejeneratif dönüş devresi kararı.
@@ -26,5 +26,5 @@ _Son güncelleme: 2026-11-20 (akşam)._ Her `/kapanis`'te yeniden yazılır (en 
 - `lib/hidrolik_mantik.py` eski sabitleri (2 tüp × 1,3 L) içerir, kullanılmıyor.
 
 ## Sıradaki adım
-- A168 P/T besleme hattı + A168/A170/A23/A172/A173 port ölçüleri (olcu-mimari); sonra A11 +X mukavemeti ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
+- A11 +X mukavemeti (OLCU_TALEBI); sonra A65 dönüş devresi ve A65 dönüş devresi. Kademe 4 (PLC durum makinesi) ondan sonra.
 - Yeni pencerede: `git pull` → `/devam` → FreeCAD makrosu (`HPDC400_yukle.FCMacro`) doğrudan klon klasöründen; Report view'da `SON COMMIT` hash'ini kontrol et.

@@ -140,7 +140,7 @@
      60,
      -330
     ],
-    "varsayim": "A172 dims len 120 (eksen Y, merkez 2960,0,-330) -> +Y yuz; dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A172.dims.ports giris +Y (0,60,0) flans yuzu d32 SAE J518 kod 61 1-1/4 (DN32 VARSAYIM, 2026-11-20 olcu-mimari); hat ucu-port farki 0,0 mm"
    },
    "bagli_id": [
     "A122",
@@ -207,7 +207,7 @@
      -540,
      -330
     ],
-    "varsayim": "A173 dims head_len 160 (eksen X, merkez 2500,-540,-330) -> +X yuz; dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A173.dims.ports giris +X (80,0,0) flans yuzu d32 SAE J518 kod 61 (DN32 VARSAYIM, 2026-11-20 olcu-mimari); hat ucu-port farki 0,0 mm"
    },
    "bagli_id": [
     "A172",
@@ -1829,7 +1829,7 @@
      36
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports B1 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -1950,7 +1950,7 @@
      36
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports A1 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2071,7 +2071,7 @@
      98
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports B2 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2193,7 +2193,7 @@
      98
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports A2 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2315,7 +2315,7 @@
      160
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports B3 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2436,7 +2436,7 @@
      160
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports A3 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2557,7 +2557,7 @@
      222
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports B4 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2679,7 +2679,7 @@
      222
     ],
     "inst": "A168_1",
-    "varsayim": "VARSAYIM: A168 -X yuzu (X-400) portlari A1..A4 Y165 / B1..B4 Y215, Z = A169_i valf Z (36/98/160/222); A168.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A168.dims.ports A4 -X yuz flush d10 G3/8 derinlik 25 (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A167",
@@ -2800,7 +2800,7 @@
      455,
      -210
     ],
-    "varsayim": "VARSAYIM: cikis +X salter blogu yuzu (2105,455,-210); A170.dims.ports yok (OLCU_TALEBI)"
+    "varsayim": "A170.dims.ports cikis +X salter blogu yuzu flush d6 M10x1, lokal (80,0,320) = global (2105,455,-210) (2026-11-20 olcu-mimari, VARSAYIM); hat ucu-port farki 0,0 mm"
    },
    "hedef": {
     "id": "A171",
@@ -2914,7 +2914,7 @@
      490
     ],
     "hedef_nokta": "A34_AT",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -2995,7 +2995,7 @@
      490
     ],
     "hedef_nokta": "A34_BT1",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3076,7 +3076,7 @@
      490
     ],
     "hedef_nokta": "A34_CT",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3157,7 +3157,7 @@
      -150
     ],
     "hedef_nokta": "A34_AB",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3245,7 +3245,7 @@
      -150
     ],
     "hedef_nokta": "A34_BB1",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3333,7 +3333,7 @@
      -150
     ],
     "hedef_nokta": "A34_CB",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3421,7 +3421,7 @@
      490
     ],
     "hedef_nokta": "A34_ET",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3502,7 +3502,7 @@
      490
     ],
     "hedef_nokta": "A34_BT2",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3583,7 +3583,7 @@
      490
     ],
     "hedef_nokta": "A34_DT",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3664,7 +3664,7 @@
      -150
     ],
     "hedef_nokta": "A34_EB",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3752,7 +3752,7 @@
      -150
     ],
     "hedef_nokta": "A34_BB2",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3840,7 +3840,7 @@
      -150
     ],
     "hedef_nokta": "A34_DB",
-    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); kanal cizilmez, A23.dims'te yok (OLCU_TALEBI)"
+    "varsayim": "IKIZ TASARIM VARSAYIMI: nipel A23 yuzunde, A34 pimine A23 ic kanali (A pimi dogrudan; B/E A pimi halka olugu + A32 kanali; C B->A33; D E->A36); nipel A23.dims.yaglama_nipelleri (itmeli M8x1, havsaya gomulu, 2026-11-20 olcu-mimari); ic kanallar cizilmez (VARSAYIM); hat ucu-nipel farki 0,0 mm"
    },
    "bagli_id": [
     "A171",
@@ -3902,6 +3902,181 @@
     "parca_cakisma": [],
     "bukum_uyari": [
      "bacak3=30<35"
+    ]
+   }
+  },
+  {
+   "id": "H38",
+   "ad": "Y4 maca P besleme: H01c P rafi T-tee (X-350) -> A168 ust yuz P portu (4 x NG6 ortak P galerisi)",
+   "sinif": "P",
+   "kaynak": {
+    "id": "H01c",
+    "port": "TEE_PA168",
+    "nokta": [
+     -350,
+     -540,
+     -640
+    ]
+   },
+   "hedef": {
+    "id": "A168",
+    "port": "P",
+    "nokta": [
+     -350,
+     190,
+     265
+    ],
+    "inst": "A168_1",
+    "varsayim": "A168.dims.ports P d16 G1/2 ust yuz +Z lokal (-130,0,130) = global (-350,190,265) (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM)"
+   },
+   "bagli_id": [
+    "A168",
+    "A169"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 20,
+   "et_mm": 2,
+   "ic_cap_mm": 16,
+   "min_bukum_yaricap_mm": 30.0,
+   "kelepce_aralik_mm": 900,
+   "guzergah": {
+    "baslangic": [
+     -350,
+     -540,
+     -640
+    ],
+    "ara_noktalar": [
+     [
+      -350,
+      -540,
+      290
+     ],
+     [
+      -350,
+      190,
+      290
+     ]
+    ],
+    "bitis": [
+     -350,
+     190,
+     265
+    ],
+    "dik": true,
+    "not_": "P rafi (Y-540 Z-640) T-tee -> sase -Y yan duvari ile A165 kapi izi (Y<=-570) arasi Y-540 dikey (kapi ic tarafi) -> Z290 +Y kosusu (A13_3 cubugu alti Z310 / A24_3 ucu Z320 alti, A25_3 somununun X-330 -X tarafi) -> A168 ust yuz P; H30..H37 Z520..730 katmanina girmez"
+   },
+   "debi_lpm": 47.1,
+   "basinc_bar": 140,
+   "hiz_m_s": 3.91,
+   "dp_bar_tahmin": 0.385,
+   "debi_kaynak": "hidrolik.json Y4.1..Y4.4 A tarafi 11.78 L/dk x 4 maca eszamanli (en kotu durum VARSAYIM; maca hizi 100 mm/s VARSAYIM)",
+   "hesap": "fluids: 20x2 (ic 16) Re 1953 laminer, f 0.0328, L 1.66 m, 2 dirsek (rc 1.5 OD, K 0.447) + tee dali K 1.0 + rakor 0.5 -> dP 0.385 bar; Barlow DIN 2413 E235 S1.5 + %15 tolerans: t_min 1.05 < 2 mm. Port d16 hizi 3.9 m/s.",
+   "tip_karar": "sert boru: A168 sabit plaka (A21) arka yuzunde, A21 ve sase (A11) hareketsiz; kalip yuksekligi (A22/A23/A35 grubu) ve vurus pozisyonu (A54/A55/A65) bu hatti tasimaz -> goreli hareket yok (motion_check kurali: hareketli uc yoksa hortum gerekmez)",
+   "varsayim": "VARSAYIM: boru DIN 2391 E235 20x2, DIN 2353 rakor; A168 portunda 90 derece dirsek rakoru (son bacak 25 mm < 2Rb); maca P basinci = sistem 140 bar (basinc dusurucu yok)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=25<30"
+    ]
+   }
+  },
+  {
+   "id": "H39",
+   "ad": "Y4 maca T donus: A168 ust yuz T portu -> T rafi T-tee (H20R, X-280) -> tank",
+   "sinif": "T",
+   "kaynak": {
+    "id": "A168",
+    "port": "T",
+    "nokta": [
+     -280,
+     190,
+     265
+    ],
+    "inst": "A168_1",
+    "varsayim": "A168.dims.ports T d20 G3/4 ust yuz +Z lokal (-60,0,130) = global (-280,190,265) (2026-11-20 olcu-mimari, ikiz_tasarim VARSAYIM)"
+   },
+   "hedef": {
+    "id": "H20R",
+    "port": "TEE_TA168",
+    "nokta": [
+     -280,
+     -595,
+     -800
+    ]
+   },
+   "bagli_id": [
+    "A168",
+    "A169"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 25,
+   "et_mm": 3,
+   "ic_cap_mm": 19,
+   "min_bukum_yaricap_mm": 37.5,
+   "kelepce_aralik_mm": 1000,
+   "guzergah": {
+    "baslangic": [
+     -280,
+     190,
+     265
+    ],
+    "ara_noktalar": [
+     [
+      -280,
+      190,
+      470
+     ],
+     [
+      -280,
+      -200,
+      470
+     ],
+     [
+      -280,
+      -200,
+      500
+     ],
+     [
+      -280,
+      -540,
+      500
+     ],
+     [
+      -280,
+      -540,
+      -595
+     ],
+     [
+      -280,
+      -660,
+      -595
+     ],
+     [
+      -280,
+      -660,
+      -800
+     ]
+    ],
+    "bitis": [
+     -280,
+     -595,
+     -800
+    ],
+    "dik": true,
+    "not_": "A168 ust yuz T -> Z470 -Y (H36 Z520 uzak, A13_3 cubugu ustu) -> Y-200'de Z500'e kademe (A25_3 somunu ustu Z475) -> Y-540 dikey (kapi ic tarafi) -> Z-595 (A165 kapi izi Z-570 alti, H01c Z-616 ustu) -Y -> Y-660 T yukselticisi -> T rafi Y-595 Z-800 tee (H23 deseni)"
+   },
+   "debi_lpm": 47.1,
+   "basinc_bar": 5,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.325,
+   "debi_kaynak": "hidrolik.json Y4.1..Y4.4 A tarafi 11.78 L/dk x 4 maca eszamanli (en kotu durum VARSAYIM; maca hizi 100 mm/s VARSAYIM); geri donuste B tarafi alan orani ile T = A tarafi debisi (ileri hareket A giris, B donus 32.4 L/dk) - en kotu 47.1 alindi",
+   "hesap": "fluids: 25x3 (ic 19) Re 1645 laminer, f 0.0389, L 2.45 m, 7 dirsek (K 0.462) + tee 1.0 + rakor 0.5 -> dP 0.325 bar; T hiz 2.8 m/s (<3 donus hatti siniri). Port d20 hizi 2.5 m/s.",
+   "tip_karar": "sert boru: A168 (A21) ve T rafi (A11) goreli sabit",
+   "varsayim": "VARSAYIM: boru DIN 2391 E235 25x3, DIN 2353 rakor; T karsi basinc <5 bar (NG6 T portu siniri tipik 160..210 bar, sorun yok)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=30<37.5"
     ]
    }
   }
@@ -3996,6 +4171,24 @@
     -400
    ],
    "not_": "sabit braket (A130 T hortum ucu), sase -Y yani; kayar uc A130 ile 550 mm"
+  },
+  {
+   "id": "TEE_PA168",
+   "nokta": [
+    -350,
+    -540,
+    -640
+   ],
+   "not_": "H01c P rafi X kosusu (Y-540 Z-640) uzerinde T-tee X-350, dal +Z (H38, A168 maca P); A175_3 (X-750) ile A175_4 (X200) konsollari arasi"
+  },
+  {
+   "id": "TEE_TA168",
+   "nokta": [
+    -280,
+    -595,
+    -800
+   ],
+   "not_": "H20R T rafi X kosusu (Y-595 Z-800) uzerinde T-tee X-280, dal +Y (H39, A168 maca T); Y-660 yukseltici (H23 deseni)"
   }
  ],
  "inline_elemanlar": [
@@ -4009,7 +4202,7 @@
     -330
    ],
    "bagli_id": "A172",
-   "OLCU_TALEBI": "COZULDU 2026-11-20: A172 agacta; H01a/H01b govde Y yuzlerinde (+-60) biter; acik: A172.dims.ports alani yok (yuzler len'den turetildi)",
+   "OLCU_TALEBI": "COZULDU 2026-11-20: A172 agacta + A172.dims.ports (giris +Y / cikis -Y, d32 flans); H01a/H01b uclari 0,0 mm",
    "portlar": {
     "giris": [
      2960,
@@ -4033,7 +4226,7 @@
     -330
    ],
    "bagli_id": "A173",
-   "OLCU_TALEBI": "COZULDU 2026-11-20: A173 agacta; H01b/H01c kafa X yuzlerinde (+-80) biter; acik: A173.dims.ports alani yok (yuzler head_len'den turetildi)",
+   "OLCU_TALEBI": "COZULDU 2026-11-20: A173 agacta + A173.dims.ports (giris +X / cikis -X, d32 flans); H01b/H01c uclari 0,0 mm",
    "portlar": {
     "giris": [
      2580,
@@ -4070,10 +4263,10 @@
   "COZULDU 2026-11-20 (A175 hat rafi konsolu x6, A176 A65 braketi, A177 A130 T braketi agacta): OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok",
   "COZULDU 2026-11-20 (A172/A173 agacta, H01 -> H01a/b/c bolundu): OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)",
   "OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok",
-  "OLCU_TALEBI: A168 port tanimi (A1..A4 / B1..B4 -X yuzu X-400 Y165/Y215 Z36/98/160/222 VARSAYIM) + P/T besleme portlari; A168.dims.ports 'modellenmez'",
-  "OLCU_TALEBI: A170 yaglama pompasi cikis portu (VARSAYIM +X salter blogu 2105,455,-210 d8)",
-  "OLCU_TALEBI: A23 yaglama nipelleri (12): ust yuz Z490 X1675/1695/1715 Y+-110/150/190; yan yuz Y+-460 Z-150 X1735/1755/1775; pime ic kanallar",
-  "OLCU_TALEBI: A172/A173 dims.ports (giris/cikis) alani; simdilik yuzler len/head_len'den (CV1 Y+-60, PF1 X+-80)"
+  "COZULDU 2026-11-20 (A168.dims.ports liste: A1..A4/B1..B4 -X yuz d10, P d16 / T d20 ust yuz; P/T hatlari H38/H39): OLCU_TALEBI: A168 port tanimi (A1..A4 / B1..B4 -X yuzu X-400 Y165/Y215 Z36/98/160/222 VARSAYIM) + P/T besleme portlari; A168.dims.ports 'modellenmez'",
+  "COZULDU 2026-11-20 (A170.dims.ports cikis d6 M10x1): OLCU_TALEBI: A170 yaglama pompasi cikis portu (VARSAYIM +X salter blogu 2105,455,-210 d8)",
+  "COZULDU 2026-11-20 (A23.dims.yaglama_nipelleri 12 adet; pim ic kanallari cizilmez - VARSAYIM): OLCU_TALEBI: A23 yaglama nipelleri (12): ust yuz Z490 X1675/1695/1715 Y+-110/150/190; yan yuz Y+-460 Z-150 X1735/1755/1775; pime ic kanallar",
+  "COZULDU 2026-11-20 (A172.dims.ports / A173.dims.ports, d32 SAE kod 61 flans): OLCU_TALEBI: A172/A173 dims.ports (giris/cikis) alani; simdilik yuzler len/head_len'den (CV1 Y+-60, PF1 X+-80)"
  ],
  "saha_dogrulama": [
   "Hortum min bukulme yaricaplari ve dis caplar (DN10..DN51) katalogdan",
@@ -4082,7 +4275,8 @@
   "Kelepce araliklari (ISO tipik tablo) uretici/ISO 4413 ile",
   "A65 kol tarafi donus debisi ~1626 L/dk icin dönüs devresi (regeneratif/yuksek debili T) karari",
   "Maca silindiri hizi 100 mm/s (VARSAYIM) -> Y4 A 11.78 / B 8.09 L/dk; NG6 valf ve maca kalip-bagimli",
-  "Yaglama: M10 debi 0.15 L/dk @ 30 bar, PA12 6x1/8x1 tup, 12 nokta pim eslemesi ve A23 ic kanallari (VARSAYIM)"
+  "Yaglama: M10 debi 0.15 L/dk @ 30 bar, PA12 6x1/8x1 tup, 12 nokta pim eslemesi ve A23 ic kanallari (VARSAYIM)",
+  "Y4 maca P/T (H38/H39): 4 maca eszamanli 47.1 L/dk varsayimi, maca P basinci (basinc dusurucu var mi), A168 ust yuz port yeri ve dirsek rakoru; saha makinesinde maca P beslemesi hangi hattan aliniyor"
  ],
  "riskler": [
   "RISK: A41 hortumlari mafsal kollarina en yakin s~0.75 (X_rel 1015 penceresi |z|<75; H06 z-30 r20, H07 z+30 r16 -> ~25 mm); H08 A36 kollarina 20 mm (s=1)",
@@ -4090,6 +4284,7 @@
   "RISK: A130 hortumlari 550 mm kayar (kalip yuksekligi): sabit uclar hareketli blok bolgesi disinda (TEE_PA130 X2385, TEE_PLA130 X2700, BRK_A130_T Y-660); H12 serit A120 motor ustune 9.5 mm, H03 serit PF1 kasesine 11 mm",
   "RISK: A41 hortumlari her cevrimde 420 mm gidip gelir (yorulma/ome)",
   "RISK: T rafi A72 panosuna 12 mm, P rafi sase duvarina 16 mm bosluk",
-  "RISK: tum rijit/hortum kisa bacaklar (<2Rb) bukum uyarisi: dirsek fitting ile (hat.kontrol.bukum_uyari)"
+  "RISK: tum rijit/hortum kisa bacaklar (<2Rb) bukum uyarisi: dirsek fitting ile (hat.kontrol.bukum_uyari)",
+  "RISK: H38 (P 20x2) A13_3 cubugu altina ~10 mm, A25_3 somununa X'te ~10 mm; H39 (T 25x3) A25_3 somun ustune ~10 mm, H01c ustune ~8 mm; kapi izi (A165) ic tarafi Y-540 dikeyleri"
  ]
 }

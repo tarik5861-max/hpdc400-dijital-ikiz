@@ -39,7 +39,8 @@
    "SHOT POSITIONS 2026-11-18 (formula + full-assembly BRepExtrema scan): global.shot_position alt|orta|ust -> Z -150/-75/0 (default alt). A51/A52/A54/A55 pos Z = z_sel; A21 shot hole + A81 sleeve bore follow; A57 saddle top local 230/305/380 (0/1/2 x 75 mm spacers). All three: 0 collisions; min gaps A55-A57 10 (vertical, constant), A54-A13 lower 20 (Y, constant), A57 saddle-A13 lower 115.5/52.6/20, A51-A13 lower flange 25/37/71, A55-A14 rib 40 (X), A54-A13_3 upper -/-/160, A55-A13_3 -/-/153, A51-A13_3 -/-/165.",
    "SHOT POSITION LIMITS: 3 separate d140 holes impossible (step 75 < 140; range -150..+70 max) -> physical A21 vertical window 140x290 (Z -220..+70) with 2 bolted 75 mm filler blocks; model draws only the selected hole. Upper limit Z<=+70 from A55 vs A14 upper rib (Z 220, 10 mm), Z<=+150 from A54 vs A13_3. Ladle free height above pour hole under A13_3 rod: 390/315/240 mm (under front flange 340/265/190). 'ust' = machine centre (Z=0).",
    "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust.",
-   "2026-11-20 port/delik (olcu-mimari): port bore hizlari v=Q/(pi d^2/4): A130 A2 d20 94.2 L/dk 5.0, B2 d16 65 5.4, Pi d12 0.9; A35 A d32 279.7 5.8, B d25 191.2 6.5; A41 A d16 94.2 7.8 (yuksek), B d16 5.4, capraz d14 47.1 5.1; A65 P d32 191.2 4.0, T d51 1625.8 13.4 (2xd51 6.7), Pi d10 1.3; A59 P d38 2.8, Pi d19 1.4, T d30 290 6.8; A61 T d80 1905.8 6.3 (tepe, ort ~1.9). A11 -Y duvar gecisi d150 (H24 flans d142 = 89x1.6)."
+   "2026-11-20 port/delik (olcu-mimari): port bore hizlari v=Q/(pi d^2/4): A130 A2 d20 94.2 L/dk 5.0, B2 d16 65 5.4, Pi d12 0.9; A35 A d32 279.7 5.8, B d25 191.2 6.5; A41 A d16 94.2 7.8 (yuksek), B d16 5.4, capraz d14 47.1 5.1; A65 P d32 191.2 4.0, T d51 1625.8 13.4 (2xd51 6.7), Pi d10 1.3; A59 P d38 2.8, Pi d19 1.4, T d30 290 6.8; A61 T d80 1905.8 6.3 (tepe, ort ~1.9). A11 -Y duvar gecisi d150 (H24 flans d142 = 89x1.6).",
+   "2026-11-20 port-2 (olcu-mimari): v=Q/(pi d^2/4): A168 A/B d10 11.78 L/dk 2.50 m/s (B 8.09 -> 1.72); P d16 47.1 L/dk (4 maca es zamanli) 3.91; T d20 47.1 2.50; A170 cikis d6 0.15 L/dk 0.09; A172/A173 DN32 d32 191.2 L/dk 3.96 (boru ID38 2.81). A23 12 gomme nipel d12/havsa d16 boy 18; yan yuz nipel araligi 20 -> havsa arasi et 4 mm. Hat ucu - port farki 25 hat ucunun hepsinde 0.0 mm (A168 P/T hatsiz)."
   ],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
@@ -810,7 +811,252 @@
      "pin_axis": "Y",
      "note": "gap |Y|<60 must stay free: crosshead links A36 (|Y| 25..55) and tongue swing through it when opening"
     },
-    "edge_chamfer": 5
+    "edge_chamfer": 5,
+    "yaglama_nipelleri": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): 12 adet itmeli yaglama rakoru (PA12 6x1, M8x1) yuzden 18 mm havsaya gomulu (kalip degisiminde darbe korumasi); nipel govdesi d12 boy 18 havsa dibinden yuze kadar, ortasinda d6.2 tup deligi (tup ucu yuzde = hat ucu). Konum = yuz noktasi (lokal), nipel yuz-icine (-yon) uzanir; bbox degismez. Pim ic kanallari (A pimi dogrudan; B/E A pimi halka olugu + A32; C B->A33; D E->A36) CIZILMEZ.",
+     "liste": [
+      {
+       "ad": "yag_AT_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        50.0,
+        110,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H41",
+       "pim": "A34_AT"
+      },
+      {
+       "ad": "yag_BT1_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        70.0,
+        150,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H42",
+       "pim": "A34_BT1"
+      },
+      {
+       "ad": "yag_CT_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        90.0,
+        190,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H43",
+       "pim": "A34_CT"
+      },
+      {
+       "ad": "yag_AB_yan",
+       "yuz": "+Y",
+       "eksen": "y",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        110.0,
+        460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H44",
+       "pim": "A34_AB"
+      },
+      {
+       "ad": "yag_BB1_yan",
+       "yuz": "+Y",
+       "eksen": "y",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        130.0,
+        460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H45",
+       "pim": "A34_BB1"
+      },
+      {
+       "ad": "yag_CB_yan",
+       "yuz": "+Y",
+       "eksen": "y",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        150.0,
+        460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H46",
+       "pim": "A34_CB"
+      },
+      {
+       "ad": "yag_ET_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        50.0,
+        -110,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H47",
+       "pim": "A34_ET"
+      },
+      {
+       "ad": "yag_BT2_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        70.0,
+        -150,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H48",
+       "pim": "A34_BT2"
+      },
+      {
+       "ad": "yag_DT_ust",
+       "yuz": "+Z",
+       "eksen": "z",
+       "yon": 1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        90.0,
+        -190,
+        490
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H49",
+       "pim": "A34_DT"
+      },
+      {
+       "ad": "yag_EB_yan",
+       "yuz": "-Y",
+       "eksen": "y",
+       "yon": -1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        110.0,
+        -460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H50",
+       "pim": "A34_EB"
+      },
+      {
+       "ad": "yag_BB2_yan",
+       "yuz": "-Y",
+       "eksen": "y",
+       "yon": -1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        130.0,
+        -460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H51",
+       "pim": "A34_BB2"
+      },
+      {
+       "ad": "yag_DB_yan",
+       "yuz": "-Y",
+       "eksen": "y",
+       "yon": -1,
+       "tip": "gomme_nipel",
+       "konum_lokal": [
+        150.0,
+        -460,
+        -150
+       ],
+       "d": 6.2,
+       "nipel_od": 12,
+       "boy": 18,
+       "havsa_d": 16,
+       "havsa_derinlik": 18,
+       "dis": "M8x1",
+       "hat": "H52",
+       "pim": "A34_DB"
+      }
+     ]
+    }
    },
    "local_origin": "Center of the front (toggle side, -X) face. Plate thickness along +X (body x 0..180); lugs extend to x=-320. Width along Y, height along Z.",
    "instances": [
@@ -8665,7 +8911,7 @@
     }
    ]
   },
-  "A160": {"name": "Hidrolik hatlar (sert boru + hortum, generic)", "dims": {"acik_pay": 1.0, "halka_oran": 0.8, "flans_oran": 1.6, "flans_thk": 14.0, "ferrul_oran": 1.1, "ferrul_boy": 70.0, "hatlar": {"H01a": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, 0, 70], [0, -425, 70]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A122", "A172"]}, "H01b": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, -480, 0], [-380, -480, 0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A172", "A173"]}, "H01c": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [-35, 0, 0], [-35, 0, -310], [-5220, 0, -310], [-5220, 540, -310], [-5365, 540, -310], [-5365, 540, 110.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A173", "A59"], "kirp": [0.0, 40.0]}, "H02R": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, 316.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["H01c", "BRK"]}, "H02H": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [0, 0, 425], [0, 390, 425]], "yay_payi_mm": 860, "rb_mm": 250, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1675, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 0, "eksen": "x", "isaret": 1, "derinlik": 430.0, "genislik": 250.0}}, "H03": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0.0, 0], [0, 56.0, 0], [-100, 56.0, 0], [-100, 56.0, 155], [-100, 461.0, 155], [-135, 461.0, 155]], "yay_payi_mm": 254, "rb_mm": 250, "ucler": ["H01c", "A130"], "hortum_uzunluk_mm": 1005, "u_halka": {"seg": 3, "eksen": "x", "isaret": 1, "derinlik": 127.0, "genislik": 250.0}}, "H04": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [60, 0, 0], [60, 55, 0], [60, 55, 155], [15, 55, 155], [15, 55, 195]], "yay_payi_mm": 0, "rb_mm": 250, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 355}, "H05": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [20, 0, 0], [20, 75, 0], [20, 75, 210], [-405, 75, 210]], "yay_payi_mm": 0, "rb_mm": 200, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 730}, "H06": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [0, -395, 0], [-1190, -395, 0], [-1190, -395, 210], [-1190, -20, 210]], "yay_payi_mm": 50, "rb_mm": 200, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2220, "u_halka": {"seg": 1, "eksen": "y", "isaret": -1, "derinlik": 25.0, "genislik": 400.0}}, "H07": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0, 0], [0, -445, 0], [-1190, -445, 0], [-1190, -445, 220], [-1190, -20, 220]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2330, "u_halka": {"seg": 1, "eksen": "y", "isaret": 1, "derinlik": 25.0, "genislik": 260.0}}, "H08": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0.0, 0.0], [0, 0.0, -47.5], [0, 125.0, -47.5], [0, 125.0, 0.0]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A41", "A41"], "hortum_uzunluk_mm": 270}, "H10": {"tip": "sert_boru", "od": 25.0, "id": 19.0, "pts": [[0, 0, 0.0], [0, 0, 400.0], [0, -1290, 400.0], [-585, -1290, 400.0], [-585, -1290, -35.0], [-5830, -1290, -35.0], [-5830, -705, -35.0], [-5980, -705, -35.0], [-5980, -705, 450.0]], "yay_payi_mm": 0, "rb_mm": 37.5, "ucler": ["A122", "A59"], "kirp": [30.0, 40.0]}, "H11R": {"tip": "sert_boru", "od": 16.0, "id": 12.0, "pts": [[0, 0, 0.0], [0, 0, 392.5]], "yay_payi_mm": 0, "rb_mm": 24.0, "ucler": ["H10", "BRK"]}, "H11H": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [0, 0, 360], [0, 435, 360]], "yay_payi_mm": 358, "rb_mm": 90, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1153, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 1, "eksen": "x", "isaret": 1, "derinlik": 179.0, "genislik": 180.0}}, "H12": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0.0, 0], [0, 322.5, 0], [0, 322.5, -130], [-435, 322.5, -130], [-435, 572.5, -130], [-435, 572.5, 10], [-450, 572.5, 10]], "yay_payi_mm": 252, "rb_mm": 90, "ucler": ["H10", "A130"], "hortum_uzunluk_mm": 1545, "u_halka": {"seg": 2, "eksen": "y", "isaret": 1, "derinlik": 126.0, "genislik": 180.0}}, "H21": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, -580.0], [270, 0, -580.0], [270, -595, -580.0], [990, -595, -580.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A59", "H20"], "kirp": [40.0, 0.0]}, "H20H": {"tip": "hortum", "od": 70.0, "id": 50.8, "pts": [[0, 0, 0], [0, -510, 0], [0, -510, -340]], "yay_payi_mm": 200, "rb_mm": 450, "ucler": ["A65", "BRK"], "hortum_uzunluk_mm": 1050, "takip": {"idx": [0, 1]}}, "H20R": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -500], [0, 65, -500], [3060, 65, -500]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, true]}, "H22": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [120, 0, 0], [120, 0, 75], [120, -715, 75], [85, -715, 75], [85, -715, -175]], "yay_payi_mm": 400, "rb_mm": 250, "ucler": ["A130", "BRK"], "hortum_uzunluk_mm": 1595, "u_halka": {"seg": 2, "eksen": "x", "isaret": 1, "derinlik": 200.0, "genislik": 500.0}}, "H23": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -400], [0, 65, -400], [-1335, 65, -400]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, false]}, "H24": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 125, 0]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["H20R", "A61"], "halka": [false, true]}, "H30": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-195, 0, 0], [-195, 0, 664], [290, 0, 664], [290, 263, 664], [500, 263, 664], [500, 263, 259], [500, 100, 259], [485, 100, 259], [485, 100, 194]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2465}, "H31": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-195, 0, 0], [-195, 0, 694], [290, 0, 694], [290, 313, 694], [535, 313, 694], [535, 313, 219], [535, 255, 219], [485, 255, 219], [485, 255, 194]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2540}, "H32": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-160, 0, 0], [-160, 0, 542], [290, 0, 542], [290, 263, 542], [430, 263, 542], [430, 263, -138], [430, 100, -138], [485, 100, -138], [485, 100, -208]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2523}, "H33": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-160, 0, 0], [-160, 0, 572], [290, 0, 572], [290, 313, 572], [465, 313, 572], [465, 313, -178], [465, 255, -178], [485, 255, -178], [485, 255, -208]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2528}, "H34": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-125, 0, 0], [-125, 0, 420], [290, 0, 420], [290, -693, 420], [500, -693, 420], [500, -693, 135], [500, -530, 135], [485, -530, 135], [485, -530, 70]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2391}, "H35": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-125, 0, 0], [-125, 0, 450], [290, 0, 450], [290, -643, 450], [535, -643, 450], [535, -643, 95], [535, -585, 95], [485, -585, 95], [485, -585, 70]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2366}, "H36": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-90, 0, 0], [-90, 0, 298], [290, 0, 298], [290, -693, 298], [430, -693, 298], [430, -693, -262], [430, -530, -262], [485, -530, -262], [485, -530, -332]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2449}, "H37": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-90, 0, 0], [-90, 0, 328], [290, 0, 328], [290, -643, 328], [465, -643, 328], [465, -643, -302], [465, -585, -302], [485, -585, -302], [485, -585, -332]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2354}, "H40": {"tip": "hortum", "od": 8.0, "id": 6.0, "pts": [[0, 0, 0], [40, 0, 0], [40, 0, 810], [40, -455, 810], [-505, -455, 810], [-505, -455, 735], [-465, -455, 735]], "yay_payi_mm": 0, "rb_mm": 50, "ucler": ["A170", "A171"], "hortum_uzunluk_mm": 1965}, "H41": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 45, 0], [0, 45, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 85}, "H42": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 85, 0], [0, 85, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 125}, "H43": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 125, 0], [0, 125, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 165}, "H44": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H45": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H46": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H47": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -45, 0], [0, -45, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 85}, "H48": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -85, 0], [0, -85, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 125}, "H49": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -125, 0], [0, -125, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 165}, "H50": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H51": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H52": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}}}, "local_origin": "hattin ilk noktasi (baglanti agzi merkezi); eksenler global ile paralel; hat verisi params/hatlar.json'dan tools/hat_senkron.py ile uretilir (elle degistirme)", "note": "hortum = esnek, referans konumda (kalip yuksekligi 400, vurus alt, mafsal kapali) cizilir; A65 uclari vurus ile Z'de kayar (takip). ikiz_tasarim varsayimi.", "instances": [{"name": "A160_1", "pos": [2960.0, 485.0, -400.0], "rot": [0, 0, 0], "hat": "H01a", "bbox": [2921.6, 60.0, -400.0, 2998.4, 523.4, -291.6]}, {"name": "A160_2", "pos": [2960.0, -60.0, -330.0], "rot": [0, 0, 0], "hat": "H01b", "bbox": [2580.0, -578.4, -368.4, 2998.4, -60.0, -291.6]}, {"name": "A160_3", "pos": [2420.0, -540.0, -330.0], "rot": [0, 0, 0], "hat": "H01c", "bbox": [-2983.4, -578.4, -664.0, 2420.0, 38.4, -220.0]}, {"name": "A160_4", "pos": [-1990.0, -540.0, -616.0], "rot": [0, 0, 0], "hat": "H02R", "bbox": [-2028.4, -578.4, -616.0, -1951.6, -501.6, -300.0]}, {"name": "A160_5", "pos": [-1990.0, -540.0, -300.0], "rot": [0, 0, 0], "hat": "H02H"}, {"name": "A160_6", "pos": [2385.0, -516.0, -380.0], "rot": [0, 0, 0], "hat": "H03", "bbox": [2250.0, -516.0, -406.4, 2436.0, -28.6, -198.6]}, {"name": "A160_7", "pos": [2250.0, -55.0, -295.0], "rot": [0, 0, 0], "hat": "H04", "bbox": [2238.6, -81.4, -321.4, 2334.0, 26.4, -100.0]}, {"name": "A160_8", "pos": [2250.0, 55.0, -295.0], "rot": [0, 0, 0], "hat": "H05", "bbox": [1845.0, 33.0, -317.0, 2290.0, 152.0, -63.0]}, {"name": "A160_9", "pos": [2205.0, -100.0, -240.0], "rot": [0, 0, 0], "hat": "H06", "bbox": [993.0, -540.0, -262.0, 2227.0, -100.0, -8.0]}, {"name": "A160_10", "pos": [2205.0, -100.0, -190.0], "rot": [0, 0, 0], "hat": "H07", "bbox": [997.4, -561.0, -207.6, 2222.6, -100.0, 47.6]}, {"name": "A160_11", "pos": [1010.0, -62.5, -57.5], "rot": [0, 0, 0], "hat": "H08", "bbox": [992.4, -80.1, -121.0, 1027.6, 80.1, -57.5]}, {"name": "A160_12", "pos": [2980.0, 705.0, -670.0], "rot": [0, 0, 0], "hat": "H10", "bbox": [-3020.0, -597.5, -717.5, 3000.0, 725.0, -220.0]}, {"name": "A160_13", "pos": [-1945.0, -585.0, -692.5], "rot": [0, 0, 0], "hat": "H11R", "bbox": [-1957.8, -597.8, -692.5, -1932.2, -572.2, -300.0]}, {"name": "A160_14", "pos": [-1945.0, -585.0, -300.0], "rot": [0, 0, 0], "hat": "H11H"}, {"name": "A160_15", "pos": [2700.0, -572.5, -270.0], "rot": [0, 0, 0], "hat": "H12", "bbox": [2250.0, -572.5, -410.5, 2711.6, 11.6, -248.4]}, {"name": "A160_16", "pos": [-3050.0, 0.0, -220.0], "rot": [0, 0, 0], "hat": "H21", "bbox": [-3088.4, -633.4, -838.4, -2060.0, 38.4, -220.0]}, {"name": "A160_17", "pos": [-2060.0, -150.0, 40.0], "rot": [0, 0, 0], "hat": "H20H"}, {"name": "A160_18", "pos": [-2060.0, -660.0, -300.0], "rot": [0, 0, 0], "hat": "H20R", "bbox": [-2104.5, -704.5, -871.2, 1000.0, -523.8, -300.0]}, {"name": "A160_19", "pos": [2250.0, 55.0, -225.0], "rot": [0, 0, 0], "hat": "H22", "bbox": [2250.0, -686.4, -400.0, 2594.0, 81.4, -126.0]}, {"name": "A160_20", "pos": [2335.0, -660.0, -400.0], "rot": [0, 0, 0], "hat": "H23", "bbox": [1000.0, -704.5, -844.5, 2379.5, -550.5, -400.0]}, {"name": "A160_21", "pos": [1000.0, -595.0, -800.0], "rot": [0, 0, 0], "hat": "H24", "bbox": [928.8, -595.0, -871.2, 1071.2, -470.0, -728.8]}, {"name": "A160_22", "pos": [-400.0, 215.0, 36.0], "rot": [0, 0, 0], "hat": "H30", "bbox": [-605.5, 203.4, 24.4, 110.5, 488.5, 710.5]}, {"name": "A160_23", "pos": [-400.0, 165.0, 36.0], "rot": [0, 0, 0], "hat": "H31", "bbox": [-605.5, 153.4, 24.4, 145.5, 488.5, 740.5]}, {"name": "A160_24", "pos": [-400.0, 215.0, 98.0], "rot": [0, 0, 0], "hat": "H32", "bbox": [-570.5, 203.4, -110.0, 96.5, 488.5, 650.5]}, {"name": "A160_25", "pos": [-400.0, 165.0, 98.0], "rot": [0, 0, 0], "hat": "H33", "bbox": [-570.5, 153.4, -110.0, 96.5, 488.5, 680.5]}, {"name": "A160_26", "pos": [-400.0, 215.0, 160.0], "rot": [0, 0, 0], "hat": "H34", "bbox": [-535.5, -488.5, 148.4, 110.5, 226.6, 590.5]}, {"name": "A160_27", "pos": [-400.0, 165.0, 160.0], "rot": [0, 0, 0], "hat": "H35", "bbox": [-535.5, -488.5, 148.4, 145.5, 176.6, 620.5]}, {"name": "A160_28", "pos": [-400.0, 215.0, 222.0], "rot": [0, 0, 0], "hat": "H36", "bbox": [-500.5, -488.5, -110.0, 96.5, 226.6, 530.5]}, {"name": "A160_29", "pos": [-400.0, 165.0, 222.0], "rot": [0, 0, 0], "hat": "H37", "bbox": [-500.5, -488.5, -110.0, 96.5, 176.6, 560.5]}, {"name": "A160_30", "pos": [2105.0, 455.0, -210.0], "rot": [0, 0, 0], "hat": "H40", "bbox": [1596.0, -4.4, -214.4, 2149.0, 459.4, 604.0]}, {"name": "A160_31", "pos": [1675.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H41", "bbox": [1671.7, 65.0, 490.0, 1678.3, 113.3, 533.3]}, {"name": "A160_32", "pos": [1695.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H42", "bbox": [1691.7, 65.0, 490.0, 1698.3, 153.3, 533.3]}, {"name": "A160_33", "pos": [1715.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H43", "bbox": [1711.7, 65.0, 490.0, 1718.3, 193.3, 533.3]}, {"name": "A160_34", "pos": [1735.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H44", "bbox": [1731.7, 65.0, -153.3, 1738.3, 493.0, 533.3]}, {"name": "A160_35", "pos": [1755.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H45", "bbox": [1751.7, 65.0, -153.3, 1758.3, 493.0, 533.3]}, {"name": "A160_36", "pos": [1775.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H46", "bbox": [1771.7, 65.0, -153.3, 1778.3, 493.0, 533.3]}, {"name": "A160_37", "pos": [1675.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H47", "bbox": [1671.7, -113.3, 490.0, 1678.3, -65.0, 533.3]}, {"name": "A160_38", "pos": [1695.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H48", "bbox": [1691.7, -153.3, 490.0, 1698.3, -65.0, 533.3]}, {"name": "A160_39", "pos": [1715.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H49", "bbox": [1711.7, -193.3, 490.0, 1718.3, -65.0, 533.3]}, {"name": "A160_40", "pos": [1735.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H50", "bbox": [1731.7, -493.0, -153.3, 1738.3, -65.0, 533.3]}, {"name": "A160_41", "pos": [1755.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H51", "bbox": [1751.7, -493.0, -153.3, 1758.3, -65.0, 533.3]}, {"name": "A160_42", "pos": [1775.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H52", "bbox": [1771.7, -493.0, -153.3, 1778.3, -65.0, 533.3]}]},
+  "A160": {"name": "Hidrolik hatlar (sert boru + hortum, generic)", "dims": {"acik_pay": 1.0, "halka_oran": 0.8, "flans_oran": 1.6, "flans_thk": 14.0, "ferrul_oran": 1.1, "ferrul_boy": 70.0, "hatlar": {"H01a": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, 0, 70], [0, -425, 70]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A122", "A172"]}, "H01b": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [0, -480, 0], [-380, -480, 0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A172", "A173"]}, "H01c": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0], [-35, 0, 0], [-35, 0, -310], [-5220, 0, -310], [-5220, 540, -310], [-5365, 540, -310], [-5365, 540, 110.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A173", "A59"], "kirp": [0.0, 40.0]}, "H02R": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, 316.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["H01c", "BRK"]}, "H02H": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [0, 0, 425], [0, 390, 425]], "yay_payi_mm": 860, "rb_mm": 250, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1675, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 0, "eksen": "x", "isaret": 1, "derinlik": 430.0, "genislik": 250.0}}, "H03": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0.0, 0], [0, 56.0, 0], [-100, 56.0, 0], [-100, 56.0, 155], [-100, 461.0, 155], [-135, 461.0, 155]], "yay_payi_mm": 254, "rb_mm": 250, "ucler": ["H01c", "A130"], "hortum_uzunluk_mm": 1005, "u_halka": {"seg": 3, "eksen": "x", "isaret": 1, "derinlik": 127.0, "genislik": 250.0}}, "H04": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [60, 0, 0], [60, 55, 0], [60, 55, 155], [15, 55, 155], [15, 55, 195]], "yay_payi_mm": 0, "rb_mm": 250, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 355}, "H05": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [20, 0, 0], [20, 75, 0], [20, 75, 210], [-405, 75, 210]], "yay_payi_mm": 0, "rb_mm": 200, "ucler": ["A130", "A35"], "hortum_uzunluk_mm": 730}, "H06": {"tip": "hortum", "od": 40.0, "id": 25.4, "pts": [[0, 0, 0], [0, -395, 0], [-1190, -395, 0], [-1190, -395, 210], [-1190, -20, 210]], "yay_payi_mm": 50, "rb_mm": 200, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2220, "u_halka": {"seg": 1, "eksen": "y", "isaret": -1, "derinlik": 25.0, "genislik": 400.0}}, "H07": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0, 0], [0, -445, 0], [-1190, -445, 0], [-1190, -445, 220], [-1190, -20, 220]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A130", "A41"], "hortum_uzunluk_mm": 2330, "u_halka": {"seg": 1, "eksen": "y", "isaret": 1, "derinlik": 25.0, "genislik": 260.0}}, "H08": {"tip": "hortum", "od": 32.0, "id": 19.0, "pts": [[0, 0.0, 0.0], [0, 0.0, -47.5], [0, 125.0, -47.5], [0, 125.0, 0.0]], "yay_payi_mm": 50, "rb_mm": 130, "ucler": ["A41", "A41"], "hortum_uzunluk_mm": 270}, "H10": {"tip": "sert_boru", "od": 25.0, "id": 19.0, "pts": [[0, 0, 0.0], [0, 0, 400.0], [0, -1290, 400.0], [-585, -1290, 400.0], [-585, -1290, -35.0], [-5830, -1290, -35.0], [-5830, -705, -35.0], [-5980, -705, -35.0], [-5980, -705, 450.0]], "yay_payi_mm": 0, "rb_mm": 37.5, "ucler": ["A122", "A59"], "kirp": [30.0, 40.0]}, "H11R": {"tip": "sert_boru", "od": 16.0, "id": 12.0, "pts": [[0, 0, 0.0], [0, 0, 392.5]], "yay_payi_mm": 0, "rb_mm": 24.0, "ucler": ["H10", "BRK"]}, "H11H": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [0, 0, 360], [0, 435, 360]], "yay_payi_mm": 358, "rb_mm": 90, "ucler": ["BRK", "A65"], "hortum_uzunluk_mm": 1153, "takip": {"idx": [1, 2]}, "halka": [false, true], "u_halka": {"seg": 1, "eksen": "x", "isaret": 1, "derinlik": 179.0, "genislik": 180.0}}, "H12": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0.0, 0], [0, 322.5, 0], [0, 322.5, -130], [-435, 322.5, -130], [-435, 572.5, -130], [-435, 572.5, 10], [-450, 572.5, 10]], "yay_payi_mm": 252, "rb_mm": 90, "ucler": ["H10", "A130"], "hortum_uzunluk_mm": 1545, "u_halka": {"seg": 2, "eksen": "y", "isaret": 1, "derinlik": 126.0, "genislik": 180.0}}, "H21": {"tip": "sert_boru", "od": 48.0, "id": 38.0, "pts": [[0, 0, 0.0], [0, 0, -580.0], [270, 0, -580.0], [270, -595, -580.0], [990, -595, -580.0]], "yay_payi_mm": 0, "rb_mm": 72.0, "ucler": ["A59", "H20"], "kirp": [40.0, 0.0]}, "H20H": {"tip": "hortum", "od": 70.0, "id": 50.8, "pts": [[0, 0, 0], [0, -510, 0], [0, -510, -340]], "yay_payi_mm": 200, "rb_mm": 450, "ucler": ["A65", "BRK"], "hortum_uzunluk_mm": 1050, "takip": {"idx": [0, 1]}}, "H20R": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -500], [0, 65, -500], [3060, 65, -500]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, true]}, "H22": {"tip": "hortum", "od": 48.0, "id": 31.8, "pts": [[0, 0, 0], [120, 0, 0], [120, 0, 75], [120, -715, 75], [85, -715, 75], [85, -715, -175]], "yay_payi_mm": 400, "rb_mm": 250, "ucler": ["A130", "BRK"], "hortum_uzunluk_mm": 1595, "u_halka": {"seg": 2, "eksen": "x", "isaret": 1, "derinlik": 200.0, "genislik": 500.0}}, "H23": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 0, -400], [0, 65, -400], [-1335, 65, -400]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["BRK", "H24"], "halka": [false, false]}, "H24": {"tip": "sert_boru", "od": 89.0, "id": 80.0, "pts": [[0, 0, 0], [0, 125, 0]], "yay_payi_mm": 0, "rb_mm": 133.5, "ucler": ["H20R", "A61"], "halka": [false, true]}, "H30": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-195, 0, 0], [-195, 0, 664], [290, 0, 664], [290, 263, 664], [500, 263, 664], [500, 263, 259], [500, 100, 259], [485, 100, 259], [485, 100, 194]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2465}, "H31": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-195, 0, 0], [-195, 0, 694], [290, 0, 694], [290, 313, 694], [535, 313, 694], [535, 313, 219], [535, 255, 219], [485, 255, 219], [485, 255, 194]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2540}, "H32": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-160, 0, 0], [-160, 0, 542], [290, 0, 542], [290, 263, 542], [430, 263, 542], [430, 263, -138], [430, 100, -138], [485, 100, -138], [485, 100, -208]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2523}, "H33": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-160, 0, 0], [-160, 0, 572], [290, 0, 572], [290, 313, 572], [465, 313, 572], [465, 313, -178], [465, 255, -178], [485, 255, -178], [485, 255, -208]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2528}, "H34": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-125, 0, 0], [-125, 0, 420], [290, 0, 420], [290, -693, 420], [500, -693, 420], [500, -693, 135], [500, -530, 135], [485, -530, 135], [485, -530, 70]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2391}, "H35": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-125, 0, 0], [-125, 0, 450], [290, 0, 450], [290, -643, 450], [535, -643, 450], [535, -643, 95], [535, -585, 95], [485, -585, 95], [485, -585, 70]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2366}, "H36": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-90, 0, 0], [-90, 0, 298], [290, 0, 298], [290, -693, 298], [430, -693, 298], [430, -693, -262], [430, -530, -262], [485, -530, -262], [485, -530, -332]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2449}, "H37": {"tip": "hortum", "od": 21.0, "id": 9.5, "pts": [[0, 0, 0], [-90, 0, 0], [-90, 0, 328], [290, 0, 328], [290, -643, 328], [465, -643, 328], [465, -643, -302], [465, -585, -302], [485, -585, -302], [485, -585, -332]], "yay_payi_mm": 0, "rb_mm": 90, "ucler": ["A168", "A167"], "hortum_uzunluk_mm": 2354}, "H40": {"tip": "hortum", "od": 8.0, "id": 6.0, "pts": [[0, 0, 0], [40, 0, 0], [40, 0, 810], [40, -455, 810], [-505, -455, 810], [-505, -455, 735], [-465, -455, 735]], "yay_payi_mm": 0, "rb_mm": 50, "ucler": ["A170", "A171"], "hortum_uzunluk_mm": 1965}, "H41": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 45, 0], [0, 45, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 85}, "H42": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 85, 0], [0, 85, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 125}, "H43": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 125, 0], [0, 125, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 165}, "H44": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H45": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H46": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, 425, 0], [0, 425, -680], [0, 395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H47": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -45, 0], [0, -45, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 85}, "H48": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -85, 0], [0, -85, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 125}, "H49": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -125, 0], [0, -125, -40]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 165}, "H50": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H51": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H52": {"tip": "hortum", "od": 6.0, "id": 4.0, "pts": [[0, 0, 0], [0, -425, 0], [0, -425, -680], [0, -395, -680]], "yay_payi_mm": 0, "rb_mm": 35, "ucler": ["A171", "A23"], "hortum_uzunluk_mm": 1135}, "H38": {"tip": "sert_boru", "od": 20.0, "id": 16.0, "pts": [[0, 0, 0.0], [0, 0, 906.0], [0, 730, 906.0], [0, 730, 881.0]], "yay_payi_mm": 0, "rb_mm": 30.0, "ucler": ["H01c", "A168"]}, "H39": {"tip": "sert_boru", "od": 25.0, "id": 19.0, "pts": [[0, 0, 0], [0, 0, 205], [0, -390, 205], [0, -390, 235], [0, -730, 235], [0, -730, -860], [0, -850, -860], [0, -850, -1065], [0, -829.5, -1065]], "yay_payi_mm": 0, "rb_mm": 37.5, "ucler": ["A168", "H20R"]}}}, "local_origin": "hattin ilk noktasi (baglanti agzi merkezi); eksenler global ile paralel; hat verisi params/hatlar.json'dan tools/hat_senkron.py ile uretilir (elle degistirme)", "note": "hortum = esnek, referans konumda (kalip yuksekligi 400, vurus alt, mafsal kapali) cizilir; A65 uclari vurus ile Z'de kayar (takip). ikiz_tasarim varsayimi.", "instances": [{"name": "A160_1", "pos": [2960.0, 485.0, -400.0], "rot": [0, 0, 0], "hat": "H01a", "bbox": [2921.6, 60.0, -400.0, 2998.4, 523.4, -291.6]}, {"name": "A160_2", "pos": [2960.0, -60.0, -330.0], "rot": [0, 0, 0], "hat": "H01b", "bbox": [2580.0, -578.4, -368.4, 2998.4, -60.0, -291.6]}, {"name": "A160_3", "pos": [2420.0, -540.0, -330.0], "rot": [0, 0, 0], "hat": "H01c", "bbox": [-2983.4, -578.4, -664.0, 2420.0, 38.4, -220.0]}, {"name": "A160_4", "pos": [-1990.0, -540.0, -616.0], "rot": [0, 0, 0], "hat": "H02R", "bbox": [-2028.4, -578.4, -616.0, -1951.6, -501.6, -300.0]}, {"name": "A160_5", "pos": [-1990.0, -540.0, -300.0], "rot": [0, 0, 0], "hat": "H02H"}, {"name": "A160_6", "pos": [2385.0, -516.0, -380.0], "rot": [0, 0, 0], "hat": "H03", "bbox": [2250.0, -516.0, -406.4, 2436.0, -28.6, -198.6]}, {"name": "A160_7", "pos": [2250.0, -55.0, -295.0], "rot": [0, 0, 0], "hat": "H04", "bbox": [2238.6, -81.4, -321.4, 2334.0, 26.4, -100.0]}, {"name": "A160_8", "pos": [2250.0, 55.0, -295.0], "rot": [0, 0, 0], "hat": "H05", "bbox": [1845.0, 33.0, -317.0, 2290.0, 152.0, -63.0]}, {"name": "A160_9", "pos": [2205.0, -100.0, -240.0], "rot": [0, 0, 0], "hat": "H06", "bbox": [993.0, -540.0, -262.0, 2227.0, -100.0, -8.0]}, {"name": "A160_10", "pos": [2205.0, -100.0, -190.0], "rot": [0, 0, 0], "hat": "H07", "bbox": [997.4, -561.0, -207.6, 2222.6, -100.0, 47.6]}, {"name": "A160_11", "pos": [1010.0, -62.5, -57.5], "rot": [0, 0, 0], "hat": "H08", "bbox": [992.4, -80.1, -121.0, 1027.6, 80.1, -57.5]}, {"name": "A160_12", "pos": [2980.0, 705.0, -670.0], "rot": [0, 0, 0], "hat": "H10", "bbox": [-3020.0, -597.5, -717.5, 3000.0, 725.0, -220.0]}, {"name": "A160_13", "pos": [-1945.0, -585.0, -692.5], "rot": [0, 0, 0], "hat": "H11R", "bbox": [-1957.8, -597.8, -692.5, -1932.2, -572.2, -300.0]}, {"name": "A160_14", "pos": [-1945.0, -585.0, -300.0], "rot": [0, 0, 0], "hat": "H11H"}, {"name": "A160_15", "pos": [2700.0, -572.5, -270.0], "rot": [0, 0, 0], "hat": "H12", "bbox": [2250.0, -572.5, -410.5, 2711.6, 11.6, -248.4]}, {"name": "A160_16", "pos": [-3050.0, 0.0, -220.0], "rot": [0, 0, 0], "hat": "H21", "bbox": [-3088.4, -633.4, -838.4, -2060.0, 38.4, -220.0]}, {"name": "A160_17", "pos": [-2060.0, -150.0, 40.0], "rot": [0, 0, 0], "hat": "H20H"}, {"name": "A160_18", "pos": [-2060.0, -660.0, -300.0], "rot": [0, 0, 0], "hat": "H20R", "bbox": [-2104.5, -704.5, -871.2, 1000.0, -523.8, -300.0]}, {"name": "A160_19", "pos": [2250.0, 55.0, -225.0], "rot": [0, 0, 0], "hat": "H22", "bbox": [2250.0, -686.4, -400.0, 2594.0, 81.4, -126.0]}, {"name": "A160_20", "pos": [2335.0, -660.0, -400.0], "rot": [0, 0, 0], "hat": "H23", "bbox": [1000.0, -704.5, -844.5, 2379.5, -550.5, -400.0]}, {"name": "A160_21", "pos": [1000.0, -595.0, -800.0], "rot": [0, 0, 0], "hat": "H24", "bbox": [928.8, -595.0, -871.2, 1071.2, -470.0, -728.8]}, {"name": "A160_22", "pos": [-400.0, 215.0, 36.0], "rot": [0, 0, 0], "hat": "H30", "bbox": [-605.5, 203.4, 24.4, 110.5, 488.5, 710.5]}, {"name": "A160_23", "pos": [-400.0, 165.0, 36.0], "rot": [0, 0, 0], "hat": "H31", "bbox": [-605.5, 153.4, 24.4, 145.5, 488.5, 740.5]}, {"name": "A160_24", "pos": [-400.0, 215.0, 98.0], "rot": [0, 0, 0], "hat": "H32", "bbox": [-570.5, 203.4, -110.0, 96.5, 488.5, 650.5]}, {"name": "A160_25", "pos": [-400.0, 165.0, 98.0], "rot": [0, 0, 0], "hat": "H33", "bbox": [-570.5, 153.4, -110.0, 96.5, 488.5, 680.5]}, {"name": "A160_26", "pos": [-400.0, 215.0, 160.0], "rot": [0, 0, 0], "hat": "H34", "bbox": [-535.5, -488.5, 148.4, 110.5, 226.6, 590.5]}, {"name": "A160_27", "pos": [-400.0, 165.0, 160.0], "rot": [0, 0, 0], "hat": "H35", "bbox": [-535.5, -488.5, 148.4, 145.5, 176.6, 620.5]}, {"name": "A160_28", "pos": [-400.0, 215.0, 222.0], "rot": [0, 0, 0], "hat": "H36", "bbox": [-500.5, -488.5, -110.0, 96.5, 226.6, 530.5]}, {"name": "A160_29", "pos": [-400.0, 165.0, 222.0], "rot": [0, 0, 0], "hat": "H37", "bbox": [-500.5, -488.5, -110.0, 96.5, 176.6, 560.5]}, {"name": "A160_30", "pos": [2105.0, 455.0, -210.0], "rot": [0, 0, 0], "hat": "H40", "bbox": [1596.0, -4.4, -214.4, 2149.0, 459.4, 604.0]}, {"name": "A160_31", "pos": [1675.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H41", "bbox": [1671.7, 65.0, 490.0, 1678.3, 113.3, 533.3]}, {"name": "A160_32", "pos": [1695.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H42", "bbox": [1691.7, 65.0, 490.0, 1698.3, 153.3, 533.3]}, {"name": "A160_33", "pos": [1715.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H43", "bbox": [1711.7, 65.0, 490.0, 1718.3, 193.3, 533.3]}, {"name": "A160_34", "pos": [1735.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H44", "bbox": [1731.7, 65.0, -153.3, 1738.3, 493.0, 533.3]}, {"name": "A160_35", "pos": [1755.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H45", "bbox": [1751.7, 65.0, -153.3, 1758.3, 493.0, 533.3]}, {"name": "A160_36", "pos": [1775.0, 65.0, 530.0], "rot": [0, 0, 0], "hat": "H46", "bbox": [1771.7, 65.0, -153.3, 1778.3, 493.0, 533.3]}, {"name": "A160_37", "pos": [1675.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H47", "bbox": [1671.7, -113.3, 490.0, 1678.3, -65.0, 533.3]}, {"name": "A160_38", "pos": [1695.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H48", "bbox": [1691.7, -153.3, 490.0, 1698.3, -65.0, 533.3]}, {"name": "A160_39", "pos": [1715.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H49", "bbox": [1711.7, -193.3, 490.0, 1718.3, -65.0, 533.3]}, {"name": "A160_40", "pos": [1735.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H50", "bbox": [1731.7, -493.0, -153.3, 1738.3, -65.0, 533.3]}, {"name": "A160_41", "pos": [1755.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H51", "bbox": [1751.7, -493.0, -153.3, 1758.3, -65.0, 533.3]}, {"name": "A160_42", "pos": [1775.0, -65.0, 530.0], "rot": [0, 0, 0], "hat": "H52", "bbox": [1771.7, -493.0, -153.3, 1778.3, -65.0, 533.3]}, {"name": "A160_43", "pos": [-350.0, -540.0, -616.0], "rot": [0, 0, 0], "hat": "H38", "bbox": [-366.0, -556.0, -616.0, -334.0, 206.0, 300.0]}, {"name": "A160_44", "pos": [-280.0, 190.0, 265.0], "rot": [0, 0, 0], "hat": "H39", "bbox": [-300.0, -672.5, -820.0, -260.0, 210.0, 512.5]}]},
   "A161": {
    "name": "Itici strok sinirlama mansonu (A41 baglanti postu uzerinde, ayarli)",
    "dims": {
@@ -9887,7 +10133,171 @@
      110,
      260
     ],
-    "ports": "P,T,A1..A4,B1..B4 (modellenmez)",
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): A/B -X yuzunde (lokal x-180) flush, Y165/215 global, Z = A169_i valf Z; P/T ust yuz (+Z, lokal z130) flush. Ic galeriler (P/T Z boyunca, A/B valf altindan) cizilmez. Konum lokal; global = lokal + pos (rot 0). bbox degismez.",
+     "liste": [
+      {
+       "ad": "A1",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        -25.0,
+        -99.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H31",
+       "hiz_m_s": 2.5,
+       "valf": "A169_1"
+      },
+      {
+       "ad": "B1",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        25.0,
+        -99.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H30",
+       "hiz_m_s": 2.5,
+       "valf": "A169_1"
+      },
+      {
+       "ad": "A2",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        -25.0,
+        -37.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H33",
+       "hiz_m_s": 2.5,
+       "valf": "A169_2"
+      },
+      {
+       "ad": "B2",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        25.0,
+        -37.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H32",
+       "hiz_m_s": 2.5,
+       "valf": "A169_2"
+      },
+      {
+       "ad": "A3",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        -25.0,
+        25.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H35",
+       "hiz_m_s": 2.5,
+       "valf": "A169_3"
+      },
+      {
+       "ad": "B3",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        25.0,
+        25.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H34",
+       "hiz_m_s": 2.5,
+       "valf": "A169_3"
+      },
+      {
+       "ad": "A4",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        -25.0,
+        87.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H37",
+       "hiz_m_s": 2.5,
+       "valf": "A169_4"
+      },
+      {
+       "ad": "B4",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -180,
+        25.0,
+        87.0
+       ],
+       "d": 10,
+       "derinlik": 25,
+       "dis": "G3/8",
+       "hat": "H36",
+       "hiz_m_s": 2.5,
+       "valf": "A169_4"
+      },
+      {
+       "ad": "P",
+       "yuz": "+Z",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -130,
+        0,
+        130
+       ],
+       "d": 16,
+       "derinlik": 30,
+       "dis": "G1/2",
+       "hat": null,
+       "hiz_m_s": 3.91,
+       "not": "besleme hatti yok (hidrolik-muhendisi); 4 maca es zamanli 47.1 L/dk"
+      },
+      {
+       "ad": "T",
+       "yuz": "+Z",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -60,
+        0,
+        130
+       ],
+       "d": 20,
+       "derinlik": 30,
+       "dis": "G3/4",
+       "hat": null,
+       "hiz_m_s": 2.5,
+       "not": "donus hatti yok; 4 maca geri donus tam alan 47.1 L/dk"
+      }
+     ]
+    },
     "valve_pitch": 62.0,
     "primitives": [
      {
@@ -10124,6 +10534,27 @@
    "name": "Mafsal merkezi yaglama pompasi M10 (75 W, rezervuar + seviye/basinc salteri)",
    "dims": {
     "motor_W": 75,
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): cikis salter blogu +X yuzu merkezinde flush; PA12 8x1 tup icin itmeli rakor M10x1 (cizilmez). bbox degismez.",
+     "liste": [
+      {
+       "ad": "cikis",
+       "yuz": "+X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        80,
+        0,
+        320
+       ],
+       "d": 6,
+       "derinlik": 15,
+       "dis": "M10x1",
+       "hat": "H40",
+       "hiz_m_s": 0.09,
+       "not": "pompa debisi 0.15 L/dk VARSAYIM"
+      }
+     ]
+    },
     "reservoir_d": 76.0,
     "reservoir_l": 1.5,
     "base": [
@@ -10462,6 +10893,39 @@
    "name": "Cek valf CV1 (H01 uzerinde, DN32 flansli govde, boruyu sarar)",
    "dims": {
     "body_od": 80.0,
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): SAE J518 kod 61 1-1/4in (DN32) VARSAYIM; boru OD48/ID38 govde deliginden gecer (bore_clear r24.8), port = govde uc yuzu; akis +Y->-Y. Geometri degismez.",
+     "liste": [
+      {
+       "ad": "giris",
+       "yuz": "+Y",
+       "tip": "flans_yuzu",
+       "konum_lokal": [
+        0,
+        60,
+        0
+       ],
+       "d": 32,
+       "boru_od": 48,
+       "hat": "H01a",
+       "hiz_m_s": 3.96
+      },
+      {
+       "ad": "cikis",
+       "yuz": "-Y",
+       "tip": "flans_yuzu",
+       "konum_lokal": [
+        0,
+        -60,
+        0
+       ],
+       "d": 32,
+       "boru_od": 48,
+       "hat": "H01b",
+       "hiz_m_s": 3.96
+      }
+     ]
+    },
     "len": 120.0,
     "pipe_od": 48.0,
     "bore_clear": 24.8,
@@ -10541,6 +11005,39 @@
    "name": "Basinc filtresi PF1 (H01 X kosusu, kafa + alt kase)",
    "dims": {
     "head_od": 80.0,
+    "ports": {
+     "not": "TASARIM VARSAYIMI (ikiz_tasarim, 2026-11-20, olcu-mimari): SAE J518 kod 61 1-1/4in (DN32) VARSAYIM; boru OD48/ID38 govde deliginden gecer (bore_clear r24.8), port = govde uc yuzu; akis +X->-X. Geometri degismez.",
+     "liste": [
+      {
+       "ad": "giris",
+       "yuz": "+X",
+       "tip": "flans_yuzu",
+       "konum_lokal": [
+        80,
+        0,
+        0
+       ],
+       "d": 32,
+       "boru_od": 48,
+       "hat": "H01b",
+       "hiz_m_s": 3.96
+      },
+      {
+       "ad": "cikis",
+       "yuz": "-X",
+       "tip": "flans_yuzu",
+       "konum_lokal": [
+        -80,
+        0,
+        0
+       ],
+       "d": 32,
+       "boru_od": 48,
+       "hat": "H01c",
+       "hiz_m_s": 3.96
+      }
+     ]
+    },
     "head_len": 160.0,
     "bowl_d": 90.0,
     "bowl_len": 95.0,

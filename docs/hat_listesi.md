@@ -1,9 +1,9 @@
 # Hat listesi (params/hatlar.json ozeti)
 
 Kaynak: params/hatlar.json (tek dogruluk kaynagi; params.json A160 tools/hat_senkron.py ile uretilir). Referans poz: kalip yuksekligi 400, vurus alt, mafsal kapali. Hepsi ikiz_tasarim varsayimi.
-Guvenlik: onarim/teshis oncesi S121 DV1 akumulator desarji + PT2 < 2 bar dogrula + basinc bosaltma + LOTO (CLAUDE.md kural 10). H01c/H10/H21 A59 akumulator blogunda biter; Y4 (H30..H37) A168 uzerinden sistem basinci tasir.
+Guvenlik: onarim/teshis oncesi S121 DV1 akumulator desarji + PT2 < 2 bar dogrula + basinc bosaltma + LOTO (CLAUDE.md kural 10). H01c/H10/H21 A59 akumulator blogunda biter; Y4 (H30..H39) A168 uzerinden sistem basinci tasir (H38 P, H01c'den dogrudan; A59 akumulator deşarji H38'i de bosaltir, A168 P portunda manometre ile 0 bar dogrula).
 
-Toplam 42 hat.
+Toplam 44 hat (A160 adedi 44; bom.json qty 42 -> BOM_TALEBI).
 
 | ID | Hat | Kaynak -> Hedef | Tip | Dis/ic mm | Q L/dk | p bar | v m/s | L mm | Hareket | Bukum uyari |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -36,6 +36,8 @@ Toplam 42 hat.
 | H35 | Y4.3 maca A hortumu: A168 A3 -> A167_3 kapak (A, maca ileri/in) portu | A168.A3 -> A167.A_kapak | hortum | 21/9.5 | 11.78 | 140 | 2.77 | 2366 | sabit | 3 |
 | H36 | Y4.4 maca B hortumu: A168 B4 -> A167_4 kol (B, maca geri/out) portu | A168.B4 -> A167.B_kol | hortum | 21/9.5 | 8.09 | 140 | 1.9 | 2449 | sabit | 4 |
 | H37 | Y4.4 maca A hortumu: A168 A4 -> A167_4 kapak (A, maca ileri/in) portu | A168.A4 -> A167.A_kapak | hortum | 21/9.5 | 11.78 | 140 | 2.77 | 2354 | sabit | 4 |
+| H38 | Y4 maca P besleme: H01c P rafi T-tee (X-350) -> A168 ust yuz P portu | H01c.TEE_PA168 -> A168.P | sert | 20/16 | 47.1 | 140 | 3.91 | 1685 | sabit | 1 |
+| H39 | Y4 maca T donus: A168 ust yuz T portu -> T rafi T-tee (H20R X-280) | A168.T -> H20R.TEE_TA168 | sert | 25/19 | 47.1 | 5 | 2.77 | 2450 | sabit | 1 |
 | H40 | Yaglama besleme: A170 M10 pompa cikisi -> A171 dagitici girisi | A170.cikis -> A171.giris | hortum | 8.0/6.0 | 0.15 | 30.0 | 0.09 | 1965 | sabit | 3 |
 | H41 | Yaglama cikisi 1: A171 +Y1 -> A23 nipel -> mafsal pimi A34_AT | A171.cikis_+Y1 -> A23.yag_AT_ust | hortum | 6.0/4.0 | 0.0125 | 30.0 | 0.02 | 85 | sabit | 0 |
 | H42 | Yaglama cikisi 2: A171 +Y2 -> A23 nipel -> mafsal pimi A34_BT1 | A171.cikis_+Y2 -> A23.yag_BT1_ust | hortum | 6.0/4.0 | 0.0125 | 30.0 | 0.02 | 125 | sabit | 0 |
@@ -56,7 +58,8 @@ Toplam 42 hat.
 - T: H21 A59 T -> T rafi; H20H/H20R A65 T -> T rafi Y-595 Z-800 -> TEE_T; H22/H23 A130 T -> TEE_T; H24 TEE_T -> A61 T donus portu (1000,-470,-800).
 - Kapama/itici: H04/H05 A130 -> A35; H06/H07 A130 A2/B2 -> A41 (-Y serit Y-495/-545); H08 A41 capraz.
 - Y4 maca (H30..H37, DN10): A168 -X yuzu (X-400, A Y165 / B Y215, Z valf 36/98/160/222) -> ic ice L dusus X-490..-595 -> A21 ustu Z520..730 katmanli -> X-110 Y kosusu -> Y+-478 serit (kolon Y410 ile kapi Y500 arasi) -> A167 port stub'lari (Y+-315 B, Y+-420 A). A22 min kalip yuksekliginde X200: hatlar X<=146.
-- Yaglama: H40 A170 cikis (+X salter blogu) -> Z600 -> A171 -X girisi; H41..H52 (PA12 6x1) A171 +-Y cikislari -> A23 nipelleri: ust yuz Z490 (AT/BT1/CT/ET/BT2/DT), yan yuz Y+-460 Z-150 (AB/BB1/CB/EB/BB2/DB); pime A23 ic kanallari (VARSAYIM). Hepsi A23 ile kalip yuksekliginde kayar.
+- Y4 maca P/T (H38/H39, sert boru; A168 sabit plaka arka yuzu, goreli hareket yok): H38 H01c TEE_PA168 (-350,-540,-640) -> Y-540 dikey (sase duvari ile A165 kapi izi arasi) -> Z290 +Y (A13_3 cubugu alti, A25_3 somunu -X tarafi) -> A168 P (-350,190,265). H39 A168 T (-280,190,265) -> Z470 -Y -> Y-200'de Z500 (A25_3 ustu) -> Y-540 dikey -> Z-595 kapi izi alti -> Y-660 yukseltici -> TEE_TA168 (-280,-595,-800) H20R. H30..H37 Z520..730 katmanina girmez.
+- Yaglama: H40 A170 cikis (+X salter blogu) -> Z600 -> A171 -X girisi; H41..H52 (PA12 6x1) A171 +-Y cikislari -> A23 nipelleri: ust yuz Z490 (AT/BT1/CT/ET/BT2/DT), yan yuz Y+-460 Z-150 (AB/BB1/CB/EB/BB2/DB); nipeller A23.dims.yaglama_nipelleri (2026-11-20), pime A23 ic kanallari cizilmez (VARSAYIM). Hepsi A23 ile kalip yuksekliginde kayar.
 
 ## Kontrol
 - check.py hat-parca cakismasi 0; hat-hat mesafe taramasi (kapsul, <5 mm): yalniz tee/braket/fitting birlesimleri (H01c-H02R/H03, H10-H11R/H12, H20R-H21/H23/H24, H02R-H02H, H11R-H11H, H20H-H20R, H22-H23).
@@ -67,6 +70,7 @@ Toplam 42 hat.
 - RISK-YUKSEK: A65 T hizli vurus donusu 1625 L/dk: H20H DN51 13 m/s, H20R 5.4 m/s
 - RISK: A130 hortumlari 550 mm kayar (kalip yuksekligi): sabit uclar hareketli blok bolgesi disinda (TEE_PA130 X2385, TEE_PLA130 X2700, BRK_A130_T Y-660); H12 serit A120 motor ustune 9.5 mm, H03 serit PF1 kasesine 11 mm
 - RISK: A41 hortumlari her cevrimde 420 mm gidip gelir (yorulma/ome)
+- RISK: H38 A13_3 cubugu / A25_3 somunu 10 mm; H39 A13_3 flansi 7,5 mm, H01c 8,5 mm, A25_3 12,5 mm
 - RISK: T rafi A72 panosuna 12 mm, P rafi sase duvarina 16 mm bosluk
 - RISK: tum rijit/hortum kisa bacaklar (<2Rb) bukum uyarisi: dirsek fitting ile (hat.kontrol.bukum_uyari)
 
