@@ -47,7 +47,13 @@
         "A57",
         "A65",
         "A66",
-        "A67"
+        "A67",
+        "A140",
+        "A141",
+        "A142",
+        "A143",
+        "A144",
+        "A145"
       ]
     },
     {
@@ -57,6 +63,10 @@
         "A59",
         "A63",
         "A64",
+        "A130",
+        "A131",
+        "A132",
+        "A133",
         "A61",
         "A62",
         "A98",
@@ -226,6 +236,10 @@
           "qty": 1,
           "script": "parts/A35_kapama_silindiri.py"
         },
+        {"id": "A130", "name": "Kapama valf blogu (manifold)", "qty": 1, "script": "parts/A130_kapama_valf_blogu.py"},
+        {"id": "A131", "name": "Kapama valf blogu konsolu (A35 bilezik)", "qty": 1, "script": "parts/A131_kapama_konsol.py"},
+        {"id": "A132", "name": "Kapama kartus valf", "qty": 4, "script": "parts/A132_kapama_kartus.py"},
+        {"id": "A133", "name": "Kapama solenoid bobini", "qty": 2, "script": "parts/A133_kapama_solenoid.py"},
         {
           "id": "A36",
           "name": "Capraz kafa baglanti kolu",
@@ -300,7 +314,13 @@
         },
         {"id": "A65", "name": "Enjeksiyon valf blogu (Y1 manifold + S424)", "qty": 1, "script": "parts/A65_enj_valf_blogu.py"},
         {"id": "A66", "name": "Enjeksiyon konum sensoru + LS2", "qty": 1, "script": "parts/A66_enj_konum_sensoru.py"},
-        {"id": "A67", "name": "Enjeksiyon basinc vericisi", "qty": 2, "script": "parts/A67_basinc_vericisi.py"}
+        {"id": "A67", "name": "Enjeksiyon basinc vericisi", "qty": 2, "script": "parts/A67_basinc_vericisi.py"},
+        {"id": "A140", "name": "Kamara flansi civatalari (6xM12)", "qty": 1, "script": "parts/A140_burc_flans_civata.py"},
+        {"id": "A141", "name": "Dolum agzi hunisi (pour cup)", "qty": 1, "script": "parts/A141_dolum_agzi_hunisi.py"},
+        {"id": "A142", "name": "Kamara sogutma baglanti stub'lari", "qty": 1, "script": "parts/A142_kamara_sogutma_stub.py"},
+        {"id": "A143", "name": "Plunger yaglama unitesi", "qty": 1, "script": "parts/A143_plunger_yaglama.py"},
+        {"id": "A144", "name": "Piston kolu koruyucu kapak", "qty": 1, "script": "parts/A144_piston_kolu_koruyucu.py"},
+        {"id": "A145", "name": "A54 on kafa tutucu saplama uclari (4xM24)", "qty": 1, "script": "parts/A145_enj_silindiri_saplama.py"}
       ]
     },
     {

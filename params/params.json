@@ -34,7 +34,7 @@
   "shot_follow": {
    "rule": "TEK KAYNAK = shot_position + shot_positions_z. z_sel = shot_positions_z[shot_position]; dz = z_sel - shot_positions_z['alt']. Asagidaki tum alanlar TURETILMISTIR ve su an 'alt' degerini tasir; resolver (assemble.load_params) bunlari z_sel'e gore yeniden yazar. Elle degistirmeyin.",
    "derived_scalar": "global.shot_offset_z = z_sel",
-   "instances_pos_z_eq_shot": ["A51", "A52", "A54", "A55", "A65", "A66", "A67"],
+   "instances_pos_z_eq_shot": ["A51", "A52", "A54", "A55", "A65", "A66", "A67", "A140", "A141", "A142", "A143", "A144", "A145"],
    "bbox_zmin_follow": ["A64"],
    "instances_rule": "bu parcalarin tum instance'larinda pos[2] = z_sel (lokal orijin vurus ekseni uzerinde); bbox[2] ve bbox[5] += dz",
    "dims_eq_shot": ["A21.dims.shot_hole.center_yz[1]", "A81.dims.sleeve_bore.center_yz[1]"],
@@ -1189,6 +1189,93 @@
     {"name": "A67_2", "pos": [-1300.0, 0, -150.0], "rot": [0, 0, 0], "z_off": 150, "bbox": [-1320.0, -20.0, 0.0, -1280.0, 20.0, 60.0]}
    ],
    "note": "A67_1 = DB68.PENJ_G (silindir giris/kafa basinci, A65 blogu ustunde); A67_2 = DB68.PENJ_C (cikis/rot basinci, on kafa ustunde). Temsili."
+  },
+  "A140": {
+   "name": "Kamara flansi civatalari (6xM12 SHCS basi)",
+   "dims": {"count": 6, "pcd": 166.0, "start_angle_deg": 0, "head_d": 18.0, "head_h": 12.0, "washer_d": 24.0, "washer_t": 3.0, "socket_d": 8.0, "socket_depth": 6.0},
+   "local_origin": "Flans arka yuzu merkezi (x=pos), vurus ekseni; basliklar -X'te flans arkasinda. Saft flans/A21'de gomulu, modellenmez. DESIGN ASSUMPTION: 6xM12 pcd166 (veri sahadan teyit).",
+   "instances": [
+    {"name": "A140_1", "pos": [-245.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-260.0, -95.0, -233.9, -245.0, 95.0, -66.1]}
+   ]
+  },
+  "A141": {
+   "name": "Dolum agzi hunisi (pour cup)",
+   "dims": {"hole": {"length_x": 100.0, "width_y": 60.0}, "base_z": 70.0, "collar": {"wall_x": 3.0, "wall_y": 15.0, "height": 40.0}, "flare": {"outer_len": 150.0, "outer_w": 130.0, "hole_len": 110.0, "hole_w": 80.0, "height": 25.0}},
+   "local_origin": "Dolum agzi merkezi (x,y), vurus ekseni z=0; taban z=+70 (kamara ust cizgisi). Iki kademeli stadyum huni; kamara 100x60 yuvasi ile ayni eksen. DESIGN ASSUMPTION: yukseklik 65, flare 150x130 (A21 arka yuzu X=-220'ye 5 mm kala), yaka x duvari 3 (A51 flansi X=-245'e kadar).",
+   "instances": [
+    {"name": "A141_1", "pos": [-300.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-375.0, -65.0, -80.0, -225.0, 65.0, -15.0]}
+   ]
+  },
+  "A142": {
+   "name": "Kamara sogutma baglanti stub'lari (IN -Y, OUT +Y)",
+   "dims": {"sleeve_r": 70.0, "boss_d": 40.0, "boss_h": 8.0, "pipe_d": 22.0, "pipe_len": 42.0, "nipple_d": 30.0, "nipple_h": 14.0, "port_d": 12.0, "port_depth": 14.0, "stubs": [{"name": "IN", "x": -430.0, "side": -1}, {"name": "OUT", "x": -290.0, "side": 1}]},
+   "local_origin": "Kamara ekseni uzerinde (pos x=0), stub x ve yon dims.stubs'ta; radyal +-Y. DESIGN ASSUMPTION: G1/2 ~ d22 boru, IN x-430 / OUT x-290; ic kanal modellenmez.",
+   "instances": [
+    {"name": "A142_1", "pos": [0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-450.0, -120.0, -170.0, -270.0, 120.0, -130.0]}
+   ]
+  },
+  "A143": {
+   "name": "Plunger yaglama unitesi (lubrikator)",
+   "dims": {"plate": {"x_half": 30.0, "y": [-57.0, -45.0], "z": [72.0, 108.0]}, "shelf": {"x_half": 30.0, "y": [-135.0, -45.0], "z": [72.0, 84.0]}, "reservoir": {"d": 60.0, "y_c": -100.0, "z": [84.0, 184.0]}, "cap": {"d": 40.0, "h": 10.0}, "line": {"d": 10.0, "len": 34.0, "y_c": -62.0, "z": 96.0}},
+   "local_origin": "A141 ile ayni orijin (dolum agzi merkezi, vurus ekseni). Huni -Y yanina konsollu; rezervuar d60x100. DESIGN ASSUMPTION: dozaj hatti temsili.",
+   "instances": [
+    {"name": "A143_1", "pos": [-300.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-330.0, -135.0, -78.0, -270.0, -45.0, 44.0]}
+   ]
+  },
+  "A144": {
+   "name": "Piston kolu koruyucu kapak (boru + yarik)",
+   "dims": {"length": 400.0, "od": 150.0, "id": 124.0, "end_collar": {"od": 170.0, "length": 20.0}, "slot": {"width_z": 40.0, "side": "+Y"}},
+   "local_origin": "Kamara arka uc yuzu merkezi (x=pos), boru -X yonunde 400. +Y'de 40 mm yarik (mikne kolu A66 gecisi). Sabit; kamara arka yuzune dayanir. DESIGN ASSUMPTION: od150/id124 (kaplin d110 icinden gecer).",
+   "instances": [
+    {"name": "A144_1", "pos": [-470.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-870.0, -85.0, -235.0, -470.0, 82.6, -65.0]}
+   ]
+  },
+  "A145": {
+   "name": "A54 on kafa tutucu saplama uclari (4x M24)",
+   "dims": {"pattern_y": [-125.0, -45.0, 45.0, 125.0], "top_z": 150.0, "washer_d": 44.0, "washer_t": 4.0, "nut_d": 36.0, "nut_h": 19.0, "stud_d": 24.0, "stud_end_h": 10.0},
+   "local_origin": "A54 on kafa ust yuzu merkezi (x=-1300 semer ekseni, y=0), vurus ekseni z=0; ust yuz z=+150. Rondela+somun+saplama ucu. On kafa sabit, arka kafa kayar (isil genlesme). Arka kafa ustu A65 blogu oldugundan saplama yok.",
+   "instances": [
+    {"name": "A145_1", "pos": [-1300.0, 0, -150.0], "rot": [0, 0, 0], "bbox": [-1322.0, -147.0, 0.0, -1278.0, 147.0, 33.0]}
+   ]
+  },
+  "A130": {
+   "name": "Kapama valf blogu (manifold: Y2 yon valfi + Y3 + RV/hiz kartuslari)",
+   "dims": {
+    "block": {"len_x": 260, "width_y": 200, "height_z": 180},
+    "ports": {"stub_d": 30, "stub_len": 30, "yz": [[-55, 35], [55, 35], [-55, -35], [55, -35]], "names": ["P", "T", "A", "B"], "gauge_port": {"d": 20, "len": 25, "x": 0, "y": 0}}
+   },
+   "local_origin": "Blok merkezi. P/T/A/B kisa tapali stub +X (arka) yuzunde (sirasiyla y-55 z35 / y55 z35 / y-55 z-35 / y55 z-35); PT1/manometre portu ust yuzde.",
+   "instances": [{"name": "A130_1", "pos": [2090.0, 0, -260.0], "rot": [0, 0, 0], "bbox": [1960.0, -100.0, -350.0, 2250.0, 100.0, -145.0]}],
+   "note": "ikiz_tasarim varsayimi (2026-11-20): kapama silindiri A35 ALTINDA, A92 halkasi (x<=1930) arkasinda; celik manifold 260x200x180, A35 govdesine 2 bilezik (A131) ile asili -> A35/A23 ile birlikte kalip yuksekligiyle hareket eder (DIE_HEIGHT_GROUP_FIXED'e eklenmez). Temsili: ic kanal yok."
+  },
+  "A131": {
+   "name": "Kapama valf blogu konsolu (A35 govde bileziklerini + dikmeler)",
+   "dims": {"collar": {"od": 260, "id": 204, "len": 60, "x_starts": [195.0, 355.0], "web_y": 120, "web_z0": -170.0, "web_z1": -110.0}},
+   "local_origin": "A35 ekseni, A35 flans montaj yuzu (x=0), +X arkaya. Bilezik ic cap 204 (A35 govde 200'e 2 mm bosluk, civatali kelepce temsili); dikmeler bilezik altindan blok ustune.",
+   "instances": [{"name": "A131_1", "pos": [1805.0, 0, 0], "rot": [0, 0, 0], "bbox": [2000.0, -130.0, -170.0, 2220.0, 130.0, 130.0]}],
+   "note": "ikiz_tasarim varsayimi. A130 ile dikme/blok temasi allowed_contacts'ta."
+  },
+  "A132": {
+   "name": "Kapama kartus valf (flansli, 4 adet: Y2, Y3, RV3, hiz/basinc)",
+   "dims": {"flange": {"size_xz": 56, "t": 16}, "body": {"d": 36, "len": 45}},
+   "local_origin": "Blok yan yuzu merkezi; govde +Y yonunde (flans y 0..16, govde 16..61).",
+   "instances": [
+    {"name": "A132_1", "pos": [2050.0, 100.0, -260.0], "rot": [0, 0, 0], "bbox": [2022.0, 100.0, -288.0, 2078.0, 161.0, -232.0]},
+    {"name": "A132_2", "pos": [2150.0, 100.0, -260.0], "rot": [0, 0, 0], "bbox": [2122.0, 100.0, -288.0, 2178.0, 161.0, -232.0]},
+    {"name": "A132_3", "pos": [2050.0, -100.0, -260.0], "rot": [0, 0, 180], "bbox": [2022.0, -161.0, -288.0, 2078.0, -100.0, -232.0]},
+    {"name": "A132_4", "pos": [2150.0, -100.0, -260.0], "rot": [0, 0, 180], "bbox": [2122.0, -161.0, -288.0, 2178.0, -100.0, -232.0]}
+   ],
+   "note": "A132_1=Y2 (kapama yon), _2=Y3 (itici yon), _3=RV3 (kapama emniyet, varsayim), _4=kapama hiz/basinc kartusu (varsayim). Temsili."
+  },
+  "A133": {
+   "name": "Kapama kartus solenoid bobini (Y2, Y3)",
+   "dims": {"coil": {"d": 46, "len": 60}, "connector": {"size_x": 26, "size_y": 28, "size_z": 24, "y_center": 30}},
+   "local_origin": "Kartus govde ucu yuzu merkezi; bobin +Y yonunde, DIN konnektor +Z.",
+   "instances": [
+    {"name": "A133_1", "pos": [2050.0, 161.0, -260.0], "rot": [0, 0, 0], "bbox": [2027.0, 161.0, -283.0, 2073.0, 221.0, -215.0]},
+    {"name": "A133_2", "pos": [2150.0, 161.0, -260.0], "rot": [0, 0, 0], "bbox": [2127.0, 161.0, -283.0, 2173.0, 221.0, -215.0]}
+   ],
+   "note": "A133_1=Y2 bobini, A133_2=Y3 bobini (elektrik.json Y2/Y3). Temsili."
   },
   "A57": {
    "name": "Enjeksiyon tasiyici konsol",
@@ -3006,6 +3093,9 @@
  "clearances": {
   "min_gap_default": 2.0,
   "allowed_contacts": [
+   ["A130", "A131"],
+   ["A130", "A132"],
+   ["A132", "A133"],
    ["A11", "A12"],
    ["A11", "A56"],
    ["A11", "A57"],
@@ -3033,7 +3123,7 @@
    ["A32", "A34"],
    ["A33", "A34"],
    ["A41", "A42"],
-   ["A51", "A52"],
+   ["A51", "A52"], ["A51", "A140"], ["A21", "A140"], ["A51", "A141"], ["A51", "A142"], ["A141", "A143"], ["A51", "A144"], ["A54", "A145"],
    ["A51", "A81"],
    ["A52", "A54"],
    ["A54", "A55"],

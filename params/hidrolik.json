@@ -119,12 +119,16 @@
     "id": "Y2",
     "tip": "Mengene Kapama Yön Valfi",
     "bobin": "Y2",
+    "bagli_id": ["A130", "A131", "A132", "A133"],
+    "yerlesim": "A35 altı, kapama valf bloğu A130 (kartuş A132_1 + bobin A133_1), A35 gövdesine A131 bilezikle asılı; kalıp yüksekliğiyle birlikte hareket eder (ikiz_tasarim varsayımı)",
     "fonksiyon": "A22 hareketli plaka ileri/geri"
    },
    {
     "id": "Y3",
     "tip": "İtici Yön Valfi",
     "bobin": "Y3",
+    "bagli_id": ["A130", "A132", "A133"],
+    "yerlesim": "A130 bloğu, kartuş A132_2 + bobin A133_2",
     "fonksiyon": "A41 itici silindirleri ileri/geri"
    },
    {
