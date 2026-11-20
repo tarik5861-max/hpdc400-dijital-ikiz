@@ -239,13 +239,13 @@
     "edge_chamfer": 5,
     "t_slots": {
      "optional": true,
-     "count": 4,
-     "direction": "along Y",
-     "z_positions": [-240, 240, -330, 330],
-     "width": 28,
-     "depth": 20,
-     "y_range": [-460, -300],
-     "note": "cosmetic; if drawn keep only outside die footprint or omit"
+     "note": "ASSUMPTION (DIN 650 benzeri, M24 civata icin 28 yuva): kalip yuzunde (x=0) acik T kanallari; yatay (along Y) + dikey (along Z) izgara. Kanallar plaka kenarina acik. Shot penceresi (Y +-70, Z -220..+70), kolon delikleri (|y|>=290, |z|>=320) ve kalip ayak izi ile cakismaz.",
+     "neck_width": 28,
+     "neck_depth": 18,
+     "head_width": 46,
+     "head_depth": 28,
+     "horizontal_z_positions": [-290, 150, 290],
+     "vertical_y_positions": [-180, 180]
     },
     "support_mount": {
      "optional": true,
@@ -305,6 +305,16 @@
      "pin_axis": "Y"
     },
     "edge_chamfer": 5,
+    "t_slots": {
+     "optional": true,
+     "note": "ASSUMPTION: kalip yuzunde (x=0) T kanallari, A21 ile ayni kesit. Z=+-270 ve Y=+-180 secildi: merkez delik d80, itici delikleri (+-90,+-140), kolon delikleri (|y|>=275,|z|>=305) ile cakismaz.",
+     "neck_width": 28,
+     "neck_depth": 18,
+     "head_width": 46,
+     "head_depth": 28,
+     "horizontal_z_positions": [-270, 270],
+     "vertical_y_positions": [-180, 180]
+    },
     "ejector_unit_mount": {
      "optional": true,
      "thread": "M30",
@@ -1640,8 +1650,10 @@
     },
     "handle": {
      "optional": true,
-     "on": "+Y face"
-    }
+     "on": "+Y face",
+     "note": "kol artik A128"
+    },
+    "infill_thk": 4
    },
    "local_origin": "Midpoint of the panel bottom edge at its -X end, at panel mid-thickness. Panel along +X (0..1500), up +Z (0..1400), thickness +-20 in Y. Shown closed (covers die space).",
    "instances": [
@@ -1650,6 +1662,96 @@
      "pos": [-100, 560, -530.0],
      "rot": [0, 0, 0],
      "bbox": [-100, 500, -570.0, 2300, 580, 870.0]
+    }
+   ]
+  },
+  "A124": {
+   "name": "Kapi polikarbonat paneller",
+   "dims": {
+    "x_ranges": [[250, 730], [770, 1250]],
+    "z_range": [500, 1200],
+    "thk": 8,
+    "material": "polikarbonat (2 ayri panel, orta ayirici A71)"
+   },
+   "local_origin": "A71 ile AYNI lokal orijin (panel alt -X ucu, orta Y, kapi kapali konumda); instance pos = A71_1 pos.",
+   "instances": [
+    {
+     "name": "A124_1",
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [150.0, 556.0, -30.0, 1150.0, 564.0, 670.0]
+    }
+   ]
+  },
+  "A125": {
+   "name": "Ust ray + asili makara arabalari + ray dikmeleri",
+   "dims": {
+    "top_track": {"x_range": [0, 2400], "y_range": [-30, 30], "z_range": [1450, 1510]},
+    "hanger": {"x_centers": [120, 1380], "plate_x_w": 80, "plate_inner_y": 32, "plate_thk": 10, "foot_z": [1400, 1440], "top_z": 1580},
+    "wheel": {"d": 60, "width": 30, "axle_d": 16},
+    "posts": {"x_ranges": [[0, 30], [2370, 2400]], "y_range": [-58, -30], "z0": 0}
+   },
+   "local_origin": "A71 ile AYNI lokal orijin (panel alt -X ucu, orta Y, kapi kapali konumda); instance pos = A71_1 pos.",
+   "instances": [
+    {
+     "name": "A125_1",
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-100.0, 502.0, -530.0, 2300.0, 602.0, 1050.0]
+    }
+   ]
+  },
+  "A126": {
+   "name": "Pnomatik kapi tahrik silindiri + baglanti braketi",
+   "dims": {
+    "cylinder": {"bore_d": 50, "wall": 5, "rod_d": 20, "cap_thk": 15, "cap_over": 5, "axis_z": 1620, "body_x_range": [1430, 2370], "stroke": 900, "port_x": [1470, 2330], "port_d": 12, "port_h": 15},
+    "bracket": {"x_range": [480, 520], "foot_z": [1400, 1440], "foot_y_half": 42, "upright_y": [45, 57], "arm_z": [1595, 1645], "arm_over": 10},
+    "post_ext": {"x_range": [2370, 2400], "y_range": [-58, 25], "z_range": [1510, 1645]},
+    "note": "ASSUMPTION: pnomatik d50 silindir ust rayin ustunde, kol kapali konumda 900 mm disarida; kapi acma = kol kisalir (stroke 900 = kapi hareketi 1500->2400). Boru/valf modellenmez."
+   },
+   "local_origin": "A71 ile AYNI lokal orijin (panel alt -X ucu, orta Y, kapi kapali konumda); instance pos = A71_1 pos.",
+   "instances": [
+    {
+     "name": "A126_1",
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [380.0, 502.0, 870.0, 2300.0, 617.0, 1135.0]
+    }
+   ]
+  },
+  "A127": {
+   "name": "Kilitli guvenlik anahtari (kapali + acik) + kapi dili",
+   "dims": {
+    "x_closed": 1450,
+    "x_open": 2350,
+    "switch": {"body_x_w": 30, "body_y": [-58, -33], "body_z": [0, 80], "slot": {"w": 20, "depth": 8, "z": [8, 32]}, "lock_d": 22, "lock_h": 20},
+    "tongue": {"w": 16, "y_range": [-37, -20], "z": [10, 30]},
+    "note": "ASSUMPTION: x_open = x_closed + kapi stroku 900 (A126). Kapali=KA9 zinciri DI5.01/DI5.02 (A71), acik=DCM kapi acik limiti; dil kapi -Y yuzunde."
+   },
+   "local_origin": "A71 ile AYNI lokal orijin (panel alt -X ucu, orta Y, kapi kapali konumda); instance pos = A71_1 pos.",
+   "instances": [
+    {
+     "name": "A127_1",
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [1335.0, 502.0, -530.0, 2265.0, 540.0, -430.0]
+    }
+   ]
+  },
+  "A128": {
+   "name": "Kapi kolu + mekanik koruyucu kenar",
+   "dims": {
+    "door": {"len_x": 1500, "thickness_y": 40, "height": 1400},
+    "handle": {"x": 1480, "z_range": [650, 1050], "bar_d": 25, "standoff": 30, "standoff_d": 20, "inset": 25},
+    "edge_guard": {"holder_thk": 6, "bumper_d": 24}
+   },
+   "local_origin": "A71 ile AYNI lokal orijin (panel alt -X ucu, orta Y, kapi kapali konumda); instance pos = A71_1 pos.",
+   "instances": [
+    {
+     "name": "A128_1",
+     "pos": [-100, 560, -530.0],
+     "rot": [0, 0, 0],
+     "bbox": [-130.0, 540.0, -530.0, 1392.5, 635.0, 870.0]
     }
    ]
   },

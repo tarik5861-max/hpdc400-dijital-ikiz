@@ -85,6 +85,11 @@
         "A121",
         "A122",
         "A123",
+        "A124",
+        "A125",
+        "A126",
+        "A127",
+        "A128",
         "A71",
         "A72",
         "A81",
@@ -371,7 +376,14 @@
           "id": "A71",
           "name": "Operator koruma kapisi",
           "qty": 1,
-          "script": "parts/A71_koruma_kapisi.py"
+          "script": "parts/A71_koruma_kapisi.py",
+          "children": [
+            {"id": "A124", "name": "Kapi polikarbonat paneller (2 panel)", "qty": 1, "script": "parts/A124_kapi_paneller.py"},
+            {"id": "A125", "name": "Ust ray + makara arabalari + dikmeler", "qty": 1, "script": "parts/A125_ust_ray_makara.py"},
+            {"id": "A126", "name": "Pnomatik kapi tahrik silindiri", "qty": 1, "script": "parts/A126_tahrik_silindir.py"},
+            {"id": "A127", "name": "Kilitli guvenlik anahtari (kapali+acik)", "qty": 1, "script": "parts/A127_guvenlik_anahtari.py"},
+            {"id": "A128", "name": "Kapi kolu + koruyucu kenar", "qty": 1, "script": "parts/A128_kol_kenar.py"}
+          ]
         },
         {
           "id": "A72",
