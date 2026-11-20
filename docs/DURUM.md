@@ -23,5 +23,7 @@ _Son güncelleme: 2026-11-19. Her `/kapanis`'te yeniden yazılır (en fazla ~60 
 - OLCU_TALEBI: A11 +X bölmesi 1540 mm açıklık (kaburgasız, A22/A23 + mafsal ağırlığı raylar üzerinden) mukavemet sağlaması (olcu-mimari). -X bölmesi OLCU_TALEBI'si kapandı (kaburgalar geri).
 - Elektrik: A72 → A120 klemens (X 3360, gland -Y) ~5,6 m (+%10 pay ~6,1 m) < L_motor_m 8; ELEKTRIK_TALEBI yok.
 
+- rev3 (2026-11-20, kullanıcı: motoru 90° döndür, ortaya hizala): A62 grubu rz 90, plaka X 2410..3050 / Y ±800 (orta Y=0), mil Y boyunca X 2730; pompa +Y, motor -Y, klemens gland -X. A121 emiş: pompa üstü → -X → -Y (Y 380) → A11 uç plaka + kaburga 2150 (Y 380) → tank portu (X 2135, Y 380). A122/A123 rijit. overall_length 6220, genişlik 1950. Kablo A72→A120 ~4,5 m (+%10 ~5,0 m) < 8 m. 172 instance, tüm kontroller YEŞİL. Önizleme out/preview_redk_*.png (rev2 notu yukarıda tarihsel).
+
 ## Sıradaki adım
 - Kademe 4 (Yazılım / PLC durum makinesi ve sıralama mantığı) çalışmalarına başlanması.
