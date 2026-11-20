@@ -154,3 +154,18 @@ Açık riskler:
 - DB68.ENC artik `aktif`, bagli_id A54/A52/A66. Faz gecisleri ikizde hala sure tabanli; gercek makine dogrulamasi gerekir.
 - DB68.PENJ_G / PENJ_C -> A67; DB68.A09, U16, hidrolik_esleme Y1 -> A65 eklendi.
 - VERI_BEKLIYOR: A66 sensor tipi/cozunurluk/sinyal tipi; LS2 (DI1.02) elektrik.json'da kanal kaydi yok (yalniz hidrolik.json'da); S424 icin ayri kayit yok.
+
+## Yeni geometri parcalari: elektrik baglantilari (ikiz_tasarim, saha verisi yok)
+| Kanal / kayit | Yon | Durum | bagli_id | Not |
+|---|---|---|---|---|
+| DI5.01, DI5.02 (kapi KAPALI limit 2/1, KA9 zinciri) | DI | aktif (mevcut) | + A127 | kilitli guvenlik anahtari kapali konum kontagi |
+| DI5.22 (on kapi ACIK limiti) | DI | aktif (mevcut) | + A127 | guvenlik anahtari acik konum kontagi |
+| DO4.13 / DO4.14 (motorlu kapi ac/kapa) | DO | istege_bagli (mevcut) | + A126 | pnomatik kapi silindiri; A71/A124/A125/A128 zaten A71 uzerinden (kapi grubu) |
+| Y2 kapama / Y3 itici (hidrolik_esleme) | - | mevcut | + A133, A130, A132 | bom'da A133/A132 qty 2 (A133_1/_2 ayri id degil, KURAL_ELEK_BAGLI yalniz bom id kabul eder); bobin ayrimi Y2 = S210A/S211, Y3 = S301/S302 |
+| DO7.06 (S605 piston yaglama) | DO | aktif (mevcut) | + A143 | plunger yaglama dozaj valfi/pompasi; slot 7'de bos DO YOK, mevcut kanal kullanildi |
+| DI5.30 (A143 rezervuar seviye DUSUK, NC: OK=1) | DI | aktif, YENI | A143 | ikiz_tasarim; slot 5 eski "okunamadi/ayrilmis" kanal; slot 9 tam dolu |
+| DI5.31 (A142 giris hatti su akis anahtari, akis=1) | DI | aktif, YENI | A142 | ikiz_tasarim; slot 5 eski ayrilmis kanal |
+| AI10.4 (TT2 kamara sogutma cikis suyu sicakligi) | AI | istege_bagli, YENI | A142 | ikiz_tasarim; eski yedek analog, 0-100 C |
+
+Sayim guncel (131 kayit): DI 65 (aktif 47, istege_bagli 6, ayrilmis 8, kapsam disi 4) · DO 48 (aktif 23, istege_bagli 16, ayrilmis 1, kapsam disi 8) · AI 9 (aktif 6, istege_bagli 3) · AO 9. Mantik eki yok (yalniz kanal tanimi).
+VERI_BEKLIYOR: DI5.30/DI5.31 bayt.bit eslemesi (HW Config), A127 kontak sayisi/KA9 zincirine baglanma sekli.

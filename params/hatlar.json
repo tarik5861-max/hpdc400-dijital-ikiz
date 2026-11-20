@@ -1,0 +1,1791 @@
+{
+ "meta": {
+  "aciklama": "HPDC-400 gorunur hidrolik boru/hortum hat listesi - TEK DOGRULUK KAYNAGI (hat tanimi)",
+  "tarih": "2026-11-20",
+  "yazan": "hidrolik-muhendisi",
+  "kaynaklar": [
+   "params/params.json bbox/pos",
+   "params/hidrolik.json",
+   "docs/hidrolik_sema_taslak.md"
+  ],
+  "koordinat": "global mm; referans poz: die_height_current 400, shot_position alt (z -150), mafsal kapali (s0)",
+  "etiket": "ikiz_tasarim varsayimi; port yerleri bom/params de yoksa VARSAYIM isaretli",
+  "uretim": "ortogonal polyline; ara noktalar bos hacimde; kontrol: AABB cakisma + hat-hat mesafesi (tee dugumleri disinda 0 ihlal)"
+ },
+ "raf": {
+  "aciklama": "sase -Y yan duvari disinda hat rafi (A11 Y -500 yuz); iki katman",
+  "P": {
+   "y": -540,
+   "z": -640
+  },
+  "pilot": {
+   "y": -585,
+   "z": -705
+  },
+  "T": {
+   "y": -595,
+   "z": -800
+  },
+  "T_riser_y": -660,
+  "A72_not": "A72 panosu Y<=-650: T rafi 12 mm bosluk"
+ },
+ "hortum_tipleri": {
+  "DN32": {
+   "ic": 31.8,
+   "dis": 48,
+   "rb": 250,
+   "seri": "4SH/R12 DN32"
+  },
+  "DN25": {
+   "ic": 25.4,
+   "dis": 40,
+   "rb": 200,
+   "seri": "4SH/R12 DN25"
+  },
+  "DN19": {
+   "ic": 19.0,
+   "dis": 32,
+   "rb": 130,
+   "seri": "4SH/R12 DN19"
+  },
+  "DN10": {
+   "ic": 9.5,
+   "dis": 21,
+   "rb": 90,
+   "seri": "2SN DN10 (pilot)"
+  },
+  "DN51": {
+   "ic": 50.8,
+   "dis": 70,
+   "rb": 450,
+   "seri": "4SP DN51"
+  }
+ },
+ "rijit_tipleri": {
+  "P48x5": {
+   "dis_mm": 48,
+   "et_mm": 5
+  },
+  "P25x3": {
+   "dis_mm": 25,
+   "et_mm": 3
+  },
+  "P16x2": {
+   "dis_mm": 16,
+   "et_mm": 2
+  },
+  "T89x4.5": {
+   "dis_mm": 89,
+   "et_mm": 4.5
+  }
+ },
+ "hareket_tanimi": {
+  "kalip_yuksekligi": {
+   "eksen": "X",
+   "aralik_mm": [
+    -200,
+    350
+   ],
+   "kaynak": "global.die_height_min 200/max 750 - current 400; A35,A130,A131 birlikte kayar (kinematics DIE_HEIGHT_GROUP)"
+  },
+  "itici_acilma": {
+   "eksen": "X",
+   "aralik_mm": [
+    0,
+    420
+   ],
+   "kaynak": "global.opening_stroke, A22+A41 A130 ye gore"
+  },
+  "vurus_pozisyonu": {
+   "eksen": "Z",
+   "aralik_mm": [
+    0,
+    150
+   ],
+   "kaynak": "global.shot_positions_z alt/orta/ust; A54/A55/A65 kayar"
+  }
+ },
+ "hatlar": [
+  {
+   "id": "H01",
+   "ad": "P1 ana basinc hatti: A98 cikis stub -> A59 akumulator blogu P (CV1 + PF1 hat uzerinde)",
+   "sinif": "P",
+   "kaynak": {
+    "id": "A122",
+    "port": "P1_cikis",
+    "nokta": [
+     2960,
+     485,
+     -400
+    ],
+    "inst": "A122_1"
+   },
+   "hedef": {
+    "id": "A59",
+    "port": "P_alt",
+    "nokta": [
+     -2945,
+     0,
+     -180
+    ],
+    "tray_deligi": true
+   },
+   "bagli_id": [
+    "A122",
+    "A59"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 48,
+   "et_mm": 5,
+   "ic_cap_mm": 38,
+   "min_bukum_yaricap_mm": 72.0,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     2960,
+     485,
+     -400
+    ],
+    "ara_noktalar": [
+     [
+      2960,
+      485,
+      -330
+     ],
+     [
+      2960,
+      -540,
+      -330
+     ],
+     [
+      2385,
+      -540,
+      -330
+     ],
+     [
+      2385,
+      -540,
+      -640
+     ],
+     [
+      -2800,
+      -540,
+      -640
+     ],
+     [
+      -2800,
+      0,
+      -640
+     ],
+     [
+      -2945,
+      0,
+      -640
+     ]
+    ],
+    "bitis": [
+     -2945,
+     0,
+     -180
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.81,
+   "dp_bar_tahmin": 0.41,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=70 kisa"
+    ]
+   }
+  },
+  {
+   "id": "H02R",
+   "ad": "P dallanma (sert kisim): ana hat T-tee -> A65 braket",
+   "sinif": "P",
+   "kaynak": {
+    "id": "H01",
+    "port": "TEE_PA65",
+    "nokta": [
+     -1990,
+     -540,
+     -640
+    ]
+   },
+   "hedef": {
+    "id": "BRK",
+    "port": "BRK_A65_P",
+    "nokta": [
+     -1990,
+     -540,
+     -300
+    ]
+   },
+   "bagli_id": [],
+   "tip": "sert_boru",
+   "dis_cap_mm": 48,
+   "et_mm": 5,
+   "ic_cap_mm": 38,
+   "min_bukum_yaricap_mm": 72.0,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     -1990,
+     -540,
+     -640
+    ],
+    "ara_noktalar": [],
+    "bitis": [
+     -1990,
+     -540,
+     -300
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.81,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H02H",
+   "ad": "P dallanma (hortum): braket -> A65 P (hizli-yavas vurus P1 beslemesi); A65 Z kaymasi 0..150",
+   "sinif": "P",
+   "kaynak": {
+    "id": "BRK",
+    "port": "BRK_A65_P",
+    "nokta": [
+     -1990,
+     -540,
+     -300
+    ]
+   },
+   "hedef": {
+    "id": "A65",
+    "port": "P",
+    "nokta": [
+     -1990,
+     -150,
+     125
+    ]
+   },
+   "bagli_id": [
+    "A65"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 48,
+   "hortum": {
+    "seri": "4SH/R12 DN32",
+    "ic_cap_mm": 31.8,
+    "min_bukulme_yaricap_mm": 250,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "Z",
+    "aralik_mm": [
+     0,
+     150
+    ],
+    "kaynak": "global.shot_positions_z (alt/orta/ust), A65 hareketli uc"
+   },
+   "yay_payi_mm": 860,
+   "hortum_uzunluk_mm": 1675,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     -1990,
+     -540,
+     -300
+    ],
+    "ara_noktalar": [
+     [
+      -1990,
+      -540,
+      125
+     ]
+    ],
+    "bitis": [
+     -1990,
+     -150,
+     125
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 4.01,
+   "dp_bar_tahmin": 0.12,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H03",
+   "ad": "P kapama dali (hortum): ana hat T-tee -> A130 P; A130 X kaymasi -200..+350 (kalip yuksekligi)",
+   "sinif": "P",
+   "kaynak": {
+    "id": "H01",
+    "port": "TEE_PA130",
+    "nokta": [
+     2285,
+     -540,
+     -640
+    ]
+   },
+   "hedef": {
+    "id": "A130",
+    "port": "P",
+    "nokta": [
+     2250,
+     -55,
+     -225
+    ]
+   },
+   "bagli_id": [
+    "A130"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 48,
+   "hortum": {
+    "seri": "4SH/R12 DN32",
+    "ic_cap_mm": 31.8,
+    "min_bukulme_yaricap_mm": 250,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     -200,
+     350
+    ],
+    "kaynak": "global.die_height_min/max - current"
+   },
+   "yay_payi_mm": 1060,
+   "hortum_uzunluk_mm": 1995,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     2285,
+     -540,
+     -640
+    ],
+    "ara_noktalar": [
+     [
+      2285,
+      -540,
+      -225
+     ],
+     [
+      2285,
+      -55,
+      -225
+     ]
+    ],
+    "bitis": [
+     2250,
+     -55,
+     -225
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 4.01,
+   "dp_bar_tahmin": 0.17,
+   "debi_kaynak": "hidrolik.json pompalar P1 191.2 L/dk, 140 bar",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak2=485<500",
+     "bacak3=35<250"
+    ]
+   }
+  },
+  {
+   "id": "H04",
+   "ad": "Kapama A hortumu: A130 A -> A35 kapak tarafi A portu (genislemede 280 L/dk donus)",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A130",
+    "port": "A",
+    "nokta": [
+     2250,
+     -55,
+     -295
+    ]
+   },
+   "hedef": {
+    "id": "A35",
+    "port": "A_kapak",
+    "nokta": [
+     2265,
+     0,
+     -100
+    ],
+    "varsayim": "port yeri ikiz_tasarim: kapak alt yuzu"
+   },
+   "bagli_id": [
+    "A35",
+    "A130"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 48,
+   "hortum": {
+    "seri": "4SH/R12 DN32",
+    "ic_cap_mm": 31.8,
+    "min_bukulme_yaricap_mm": 250,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A130 ile A35 birlikte hareket eder: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 355,
+   "yay_payi_not": "goreli sabit: yalniz montaj payi (nominal yola %3)",
+   "guzergah": {
+    "baslangic": [
+     2250,
+     -55,
+     -295
+    ],
+    "ara_noktalar": [
+     [
+      2310,
+      -55,
+      -295
+     ],
+     [
+      2310,
+      0,
+      -295
+     ],
+     [
+      2310,
+      0,
+      -140
+     ],
+     [
+      2265,
+      0,
+      -140
+     ]
+    ],
+    "bitis": [
+     2265,
+     0,
+     -100
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 279.7,
+   "basinc_bar": 140,
+   "hiz_m_s": 5.87,
+   "dp_bar_tahmin": 0.41,
+   "debi_kaynak": "A35 kapama: P1 191.2 (A sevk) / kapak donus 280 L/dk (alan orani 160/90)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=60<250",
+     "bacak2=55<500",
+     "bacak3=155<500",
+     "bacak4=45<500",
+     "bacak5=40<250"
+    ]
+   }
+  },
+  {
+   "id": "H05",
+   "ad": "Kapama B hortumu: A130 B -> A35 on flans arka yuz B portu (A92 tupu ic halkasindan)",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A130",
+    "port": "B",
+    "nokta": [
+     2250,
+     55,
+     -295
+    ]
+   },
+   "hedef": {
+    "id": "A35",
+    "port": "B_kol",
+    "nokta": [
+     1845,
+     150,
+     -80
+    ],
+    "varsayim": "port yeri ikiz_tasarim: on flans arka yuzu, A92 tup ic"
+   },
+   "bagli_id": [
+    "A35",
+    "A130"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 40,
+   "hortum": {
+    "seri": "4SH/R12 DN25",
+    "ic_cap_mm": 25.4,
+    "min_bukulme_yaricap_mm": 200,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "A130 ile A35 birlikte hareket eder: goreli sabit"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 755,
+   "yay_payi_not": "goreli sabit: yalniz montaj payi (nominal yola %3)",
+   "guzergah": {
+    "baslangic": [
+     2250,
+     55,
+     -295
+    ],
+    "ara_noktalar": [
+     [
+      2270,
+      55,
+      -295
+     ],
+     [
+      2270,
+      150,
+      -295
+     ],
+     [
+      2270,
+      150,
+      -80
+     ]
+    ],
+    "bitis": [
+     1845,
+     150,
+     -80
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 191.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 6.29,
+   "dp_bar_tahmin": 0.51,
+   "debi_kaynak": "A35 B: P1 191.2 L/dk veya itici 65 L/dk (VARSAYIM: itici 100 mm/s)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=20<200",
+     "bacak2=95<400",
+     "bacak3=215<400"
+    ]
+   }
+  },
+  {
+   "id": "H06",
+   "ad": "Itici A (kapak) hortumu: A130 A2 -> A41 -Y silindir kapak portu; A22 acilmasi 420 mm (dinamik)",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A130",
+    "port": "A2",
+    "nokta": [
+     2200,
+     -100,
+     -225
+    ],
+    "varsayim": "ek port: Y3 icin -Y yuz, ikiz_tasarim; OLCU_TALEBI A130"
+   },
+   "hedef": {
+    "id": "A41",
+    "port": "A_kapak_-Y",
+    "nokta": [
+     1015,
+     -120,
+     0
+    ],
+    "varsayim": "port yeri ikiz_tasarim"
+   },
+   "bagli_id": [
+    "A130",
+    "A41"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 40,
+   "hortum": {
+    "seri": "4SH/R12 DN25",
+    "ic_cap_mm": 25.4,
+    "min_bukulme_yaricap_mm": 200,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     420
+    ],
+    "kaynak": "global.opening_stroke (A41, A22 ile)"
+   },
+   "yay_payi_mm": 838,
+   "hortum_uzunluk_mm": 3068,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     2200,
+     -100,
+     -225
+    ],
+    "ara_noktalar": [
+     [
+      2200,
+      -520,
+      -225
+     ],
+     [
+      1015,
+      -520,
+      -225
+     ],
+     [
+      1015,
+      -520,
+      0
+     ]
+    ],
+    "bitis": [
+     1015,
+     -120,
+     0
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 94.2,
+   "basinc_bar": 140,
+   "hiz_m_s": 3.1,
+   "dp_bar_tahmin": 0.26,
+   "debi_kaynak": "A35 kapama: P1 191.2 (A sevk) / kapak donus 280 L/dk (alan orani 160/90)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak3=225<400"
+    ]
+   }
+  },
+  {
+   "id": "H07",
+   "ad": "Itici B (kol tarafi) hortumu: A130 B2 -> A41 on flans galerisi (iki silindir ortak); 420 mm dinamik",
+   "sinif": "B",
+   "kaynak": {
+    "id": "A130",
+    "port": "B2",
+    "nokta": [
+     2200,
+     -100,
+     -295
+    ],
+    "varsayim": "ek port, ikiz_tasarim; OLCU_TALEBI A130"
+   },
+   "hedef": {
+    "id": "A41",
+    "port": "B_flans_-Y",
+    "nokta": [
+     822,
+     -120,
+     0
+    ],
+    "varsayim": "ortak kopru galerisi"
+   },
+   "bagli_id": [
+    "A130",
+    "A41"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 32,
+   "hortum": {
+    "seri": "4SH/R12 DN19",
+    "ic_cap_mm": 19.0,
+    "min_bukulme_yaricap_mm": 130,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     420
+    ],
+    "kaynak": "global.opening_stroke"
+   },
+   "yay_payi_mm": 618,
+   "hortum_uzunluk_mm": 3191,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     2200,
+     -100,
+     -295
+    ],
+    "ara_noktalar": [
+     [
+      2200,
+      -560,
+      -295
+     ],
+     [
+      822,
+      -560,
+      -295
+     ],
+     [
+      822,
+      -560,
+      0
+     ]
+    ],
+    "bitis": [
+     822,
+     -120,
+     0
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 65.0,
+   "basinc_bar": 140,
+   "hiz_m_s": 3.82,
+   "dp_bar_tahmin": 0.54,
+   "debi_kaynak": "A35 B: P1 191.2 L/dk veya itici 65 L/dk (VARSAYIM: itici 100 mm/s)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H08",
+   "ad": "Itici kapak capraz hortumu: A41 -Y kapak -> +Y kapak (paralel silindir); A31 crosshead carpisma RISKI",
+   "sinif": "A",
+   "kaynak": {
+    "id": "A41",
+    "port": "A_kapak_-Y",
+    "nokta": [
+     1015,
+     -120,
+     0
+    ]
+   },
+   "hedef": {
+    "id": "A41",
+    "port": "A_kapak_+Y",
+    "nokta": [
+     1015,
+     120,
+     0
+    ]
+   },
+   "bagli_id": [
+    "A41"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 32,
+   "hortum": {
+    "seri": "4SH/R12 DN19",
+    "ic_cap_mm": 19.0,
+    "min_bukulme_yaricap_mm": 130,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     0,
+     0
+    ],
+    "kaynak": "iki silindir birlikte hareket eder"
+   },
+   "yay_payi_mm": 0,
+   "hortum_uzunluk_mm": 580,
+   "yay_payi_not": "goreli sabit: yalniz montaj payi (nominal yola %3)",
+   "guzergah": {
+    "baslangic": [
+     1015,
+     -120,
+     0
+    ],
+    "ara_noktalar": [
+     [
+      1015,
+      -150,
+      0
+     ],
+     [
+      1015,
+      -150,
+      -110
+     ],
+     [
+      1015,
+      150,
+      -110
+     ],
+     [
+      1015,
+      150,
+      0
+     ]
+    ],
+    "bitis": [
+     1015,
+     120,
+     0
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 47.1,
+   "basinc_bar": 140,
+   "hiz_m_s": 2.77,
+   "dp_bar_tahmin": 0.11,
+   "debi_kaynak": "A35 kapama: P1 191.2 (A sevk) / kapak donus 280 L/dk (alan orani 160/90)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=30<130",
+     "bacak2=110<260",
+     "bacak4=110<260",
+     "bacak5=30<130"
+    ]
+   },
+   "not": "RISK: A41 kapagi acik konumda crosshead A31 yuzune 13 mm; hortum Z-110 pozisyonu motion_check ile dogrulanmali"
+  },
+  {
+   "id": "H10",
+   "ad": "P2 pilot ana hatti: A122_2 ucu -> A59 pilot portu",
+   "sinif": "PL",
+   "kaynak": {
+    "id": "A122",
+    "port": "P2_cikis",
+    "nokta": [
+     2980,
+     705,
+     -700
+    ],
+    "inst": "A122_2"
+   },
+   "hedef": {
+    "id": "A59",
+    "port": "Pi_alt",
+    "nokta": [
+     -3000,
+     0,
+     -180
+    ],
+    "tray_deligi": true
+   },
+   "bagli_id": [
+    "A122",
+    "A59"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 25,
+   "et_mm": 3,
+   "ic_cap_mm": 19,
+   "min_bukum_yaricap_mm": 37.5,
+   "kelepce_aralik_mm": 1000,
+   "guzergah": {
+    "baslangic": [
+     2980,
+     705,
+     -700
+    ],
+    "ara_noktalar": [
+     [
+      2980,
+      705,
+      -270
+     ],
+     [
+      2980,
+      -585,
+      -270
+     ],
+     [
+      2395,
+      -585,
+      -270
+     ],
+     [
+      2395,
+      -585,
+      -705
+     ],
+     [
+      -2850,
+      -585,
+      -705
+     ],
+     [
+      -2850,
+      0,
+      -705
+     ],
+     [
+      -3000,
+      0,
+      -705
+     ]
+    ],
+    "bitis": [
+     -3000,
+     0,
+     -180
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 23.1,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.36,
+   "dp_bar_tahmin": 0.35,
+   "debi_kaynak": "hidrolik.json P2 23.1 L/dk (dal hatlari VARSAYIM 6 L/dk)",
+   "kontrol": {
+    "parca_cakisma": [
+     "A62_1 bacak1 bosluk=-12.5mm"
+    ],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H11R",
+   "ad": "Pilot dali (sert): tee -> A65 braket",
+   "sinif": "PL",
+   "kaynak": {
+    "id": "H10",
+    "port": "TEE_PLA65",
+    "nokta": [
+     -1945,
+     -585,
+     -705
+    ]
+   },
+   "hedef": {
+    "id": "BRK",
+    "port": "BRK_A65_PL",
+    "nokta": [
+     -1945,
+     -585,
+     -300
+    ]
+   },
+   "bagli_id": [],
+   "tip": "sert_boru",
+   "dis_cap_mm": 16,
+   "et_mm": 2,
+   "ic_cap_mm": 12,
+   "min_bukum_yaricap_mm": 24.0,
+   "kelepce_aralik_mm": 700,
+   "guzergah": {
+    "baslangic": [
+     -1945,
+     -585,
+     -705
+    ],
+    "ara_noktalar": [],
+    "bitis": [
+     -1945,
+     -585,
+     -300
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 6.0,
+   "basinc_bar": 140,
+   "hiz_m_s": 0.88,
+   "dp_bar_tahmin": 0.02,
+   "debi_kaynak": "hidrolik.json P2 23.1 L/dk (dal hatlari VARSAYIM 6 L/dk)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H11H",
+   "ad": "Pilot dali (hortum): braket -> A65 pilot portu; A65 Z kaymasi 0..150",
+   "sinif": "PL",
+   "kaynak": {
+    "id": "BRK",
+    "port": "BRK_A65_PL",
+    "nokta": [
+     -1945,
+     -585,
+     -300
+    ]
+   },
+   "hedef": {
+    "id": "A65",
+    "port": "Pi",
+    "nokta": [
+     -1945,
+     -150,
+     60
+    ],
+    "varsayim": "servo valf pilot portu ikiz_tasarim"
+   },
+   "bagli_id": [
+    "A65"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "Z",
+    "aralik_mm": [
+     0,
+     150
+    ],
+    "kaynak": "shot_positions_z"
+   },
+   "yay_payi_mm": 358,
+   "hortum_uzunluk_mm": 1153,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     -1945,
+     -585,
+     -300
+    ],
+    "ara_noktalar": [
+     [
+      -1945,
+      -585,
+      60
+     ]
+    ],
+    "bitis": [
+     -1945,
+     -150,
+     60
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 6.0,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.41,
+   "dp_bar_tahmin": 0.13,
+   "debi_kaynak": "hidrolik.json P2 23.1 L/dk (dal hatlari VARSAYIM 6 L/dk)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H12",
+   "ad": "Pilot kapama dali (hortum): tee -> A130 pilot portu; A130 X kaymasi",
+   "sinif": "PL",
+   "kaynak": {
+    "id": "H10",
+    "port": "TEE_PLA130",
+    "nokta": [
+     2245,
+     -585,
+     -705
+    ]
+   },
+   "hedef": {
+    "id": "A130",
+    "port": "Pi",
+    "nokta": [
+     2250,
+     0,
+     -260
+    ],
+    "varsayim": "pilot portu +X yuz merkez ikiz_tasarim; OLCU_TALEBI A130"
+   },
+   "bagli_id": [
+    "A130"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 21,
+   "hortum": {
+    "seri": "2SN DN10 (pilot)",
+    "ic_cap_mm": 9.5,
+    "min_bukulme_yaricap_mm": 90,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     -200,
+     350
+    ],
+    "kaynak": "kalip yuksekligi"
+   },
+   "yay_payi_mm": 558,
+   "hortum_uzunluk_mm": 1593,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     2245,
+     -585,
+     -705
+    ],
+    "ara_noktalar": [
+     [
+      2245,
+      -585,
+      -485
+     ],
+     [
+      2245,
+      0,
+      -485
+     ],
+     [
+      2245,
+      0,
+      -260
+     ]
+    ],
+    "bitis": [
+     2250,
+     0,
+     -260
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 6.0,
+   "basinc_bar": 140,
+   "hiz_m_s": 1.41,
+   "dp_bar_tahmin": 0.21,
+   "debi_kaynak": "hidrolik.json P2 23.1 L/dk (dal hatlari VARSAYIM 6 L/dk)",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak4=5<90"
+    ]
+   }
+  },
+  {
+   "id": "H21",
+   "ad": "T: A59 DV1/RV2 bosaltma portu -> T rafi (A65 tee)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "A59",
+    "port": "T_alt",
+    "nokta": [
+     -3055,
+     0,
+     -180
+    ],
+    "tray_deligi": true
+   },
+   "hedef": {
+    "id": "H20",
+    "port": "TEE_TA65",
+    "nokta": [
+     -2060,
+     -595,
+     -800
+    ]
+   },
+   "bagli_id": [
+    "A59"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 48,
+   "et_mm": 5,
+   "ic_cap_mm": 38,
+   "min_bukum_yaricap_mm": 72.0,
+   "kelepce_aralik_mm": 1500,
+   "guzergah": {
+    "baslangic": [
+     -3055,
+     0,
+     -180
+    ],
+    "ara_noktalar": [
+     [
+      -3055,
+      0,
+      -800
+     ],
+     [
+      -2780,
+      0,
+      -800
+     ],
+     [
+      -2780,
+      -595,
+      -800
+     ]
+    ],
+    "bitis": [
+     -2060,
+     -595,
+     -800
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 290.0,
+   "basinc_bar": 5,
+   "hiz_m_s": 4.26,
+   "dp_bar_tahmin": 0.26,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": []
+   }
+  },
+  {
+   "id": "H20H",
+   "ad": "T: A65 T portu -> braket (hortum, A65 Z kaymasi 0..150)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "A65",
+    "port": "T",
+    "nokta": [
+     -2060,
+     -150,
+     40
+    ]
+   },
+   "hedef": {
+    "id": "BRK",
+    "port": "BRK_A65_T",
+    "nokta": [
+     -2060,
+     -660,
+     -300
+    ]
+   },
+   "bagli_id": [
+    "A65"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 70,
+   "hortum": {
+    "seri": "4SP DN51",
+    "ic_cap_mm": 50.8,
+    "min_bukulme_yaricap_mm": 450,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "Z",
+    "aralik_mm": [
+     0,
+     150
+    ],
+    "kaynak": "shot_positions_z"
+   },
+   "yay_payi_mm": 1489,
+   "hortum_uzunluk_mm": 2339,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     -2060,
+     -150,
+     40
+    ],
+    "ara_noktalar": [
+     [
+      -2060,
+      -660,
+      40
+     ]
+    ],
+    "bitis": [
+     -2060,
+     -660,
+     -300
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 1625.8,
+   "basinc_bar": 5,
+   "hiz_m_s": 13.37,
+   "dp_bar_tahmin": 0.72,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak2=340<450"
+    ]
+   },
+   "not": "RISK: hizli vurus kol tarafi dönüs debisi ~1625 L/dk; tek hat ve 89 mm rijit hat 5.4 m/s (80 ic), DN51 hortumda 13 m/s"
+  },
+  {
+   "id": "H20R",
+   "ad": "T: A65 braket -> T rafi -> tank T-tee (ana donus)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "BRK",
+    "port": "BRK_A65_T",
+    "nokta": [
+     -2060,
+     -660,
+     -300
+    ]
+   },
+   "hedef": {
+    "id": "H24",
+    "port": "TEE_T",
+    "nokta": [
+     1000,
+     -595,
+     -800
+    ]
+   },
+   "bagli_id": [],
+   "tip": "sert_boru",
+   "dis_cap_mm": 89,
+   "et_mm": 4.5,
+   "ic_cap_mm": 80.0,
+   "min_bukum_yaricap_mm": 133.5,
+   "kelepce_aralik_mm": 2000,
+   "guzergah": {
+    "baslangic": [
+     -2060,
+     -660,
+     -300
+    ],
+    "ara_noktalar": [
+     [
+      -2060,
+      -660,
+      -800
+     ],
+     [
+      -2060,
+      -595,
+      -800
+     ]
+    ],
+    "bitis": [
+     1000,
+     -595,
+     -800
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 1625.8,
+   "basinc_bar": 5,
+   "hiz_m_s": 5.39,
+   "dp_bar_tahmin": 0.24,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak2=65 kisa"
+    ]
+   }
+  },
+  {
+   "id": "H22",
+   "ad": "T: A130 T -> braket (hortum; A130 X kaymasi)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "A130",
+    "port": "T",
+    "nokta": [
+     2250,
+     55,
+     -225
+    ]
+   },
+   "hedef": {
+    "id": "BRK",
+    "port": "BRK_A130_T",
+    "nokta": [
+     2335,
+     -660,
+     -400
+    ]
+   },
+   "bagli_id": [
+    "A130"
+   ],
+   "tip": "hortum",
+   "dis_cap_mm": 48,
+   "hortum": {
+    "seri": "4SH/R12 DN32",
+    "ic_cap_mm": 31.8,
+    "min_bukulme_yaricap_mm": 250,
+    "varsayim": "VARSAYIM: bukulme yaricapi tipik katalog; SAHA_DOGRULAMA katalog/uretici"
+   },
+   "kelepce_aralik_mm": 600,
+   "hareket": {
+    "eksen": "X",
+    "aralik_mm": [
+     -200,
+     350
+    ],
+    "kaynak": "kalip yuksekligi"
+   },
+   "yay_payi_mm": 1060,
+   "hortum_uzunluk_mm": 2035,
+   "yay_payi_not": "VARSAYIM: U-halka L_ekstra = pi*Rb + S/2; cizen ajan nominal yola U-halka (Rb) ekler, hortum referans konumda (die_height_current 400, shot alt, mafsal kapali) sarkik cizilir",
+   "guzergah": {
+    "baslangic": [
+     2250,
+     55,
+     -225
+    ],
+    "ara_noktalar": [
+     [
+      2335,
+      55,
+      -225
+     ],
+     [
+      2335,
+      55,
+      -400
+     ]
+    ],
+    "bitis": [
+     2335,
+     -660,
+     -400
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 280.0,
+   "basinc_bar": 5,
+   "hiz_m_s": 5.88,
+   "dp_bar_tahmin": 0.34,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=85<250",
+     "bacak2=175<500"
+    ]
+   }
+  },
+  {
+   "id": "H23",
+   "ad": "T: A130 braket -> T rafi -> tank T-tee",
+   "sinif": "T",
+   "kaynak": {
+    "id": "BRK",
+    "port": "BRK_A130_T",
+    "nokta": [
+     2335,
+     -660,
+     -400
+    ]
+   },
+   "hedef": {
+    "id": "H24",
+    "port": "TEE_T",
+    "nokta": [
+     1000,
+     -595,
+     -800
+    ]
+   },
+   "bagli_id": [],
+   "tip": "sert_boru",
+   "dis_cap_mm": 89,
+   "et_mm": 4.5,
+   "ic_cap_mm": 80.0,
+   "min_bukum_yaricap_mm": 133.5,
+   "kelepce_aralik_mm": 2000,
+   "guzergah": {
+    "baslangic": [
+     2335,
+     -660,
+     -400
+    ],
+    "ara_noktalar": [
+     [
+      2335,
+      -660,
+      -800
+     ],
+     [
+      2335,
+      -595,
+      -800
+     ]
+    ],
+    "bitis": [
+     1000,
+     -595,
+     -800
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 280.0,
+   "basinc_bar": 5,
+   "hiz_m_s": 0.93,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak2=65 kisa"
+    ]
+   }
+  },
+  {
+   "id": "H24",
+   "ad": "T: tank donus portu (A11 -Y duvar gecisi + tank -Y yuz T portu, filtre RF1 girisi)",
+   "sinif": "T",
+   "kaynak": {
+    "id": "H20R",
+    "port": "TEE_T",
+    "nokta": [
+     1000,
+     -595,
+     -800
+    ]
+   },
+   "hedef": {
+    "id": "A61",
+    "port": "T_donus",
+    "nokta": [
+     1000,
+     -470,
+     -800
+    ],
+    "varsayim": "tank -Y yuz T portu; OLCU_TALEBI A61 port + A11 duvar gecisi d95"
+   },
+   "bagli_id": [
+    "A61"
+   ],
+   "tip": "sert_boru",
+   "dis_cap_mm": 89,
+   "et_mm": 4.5,
+   "ic_cap_mm": 80.0,
+   "min_bukum_yaricap_mm": 133.5,
+   "kelepce_aralik_mm": 2000,
+   "guzergah": {
+    "baslangic": [
+     1000,
+     -595,
+     -800
+    ],
+    "ara_noktalar": [],
+    "bitis": [
+     1000,
+     -470,
+     -800
+    ],
+    "dik": true,
+    "not_": "global koordinat, referans poz; tum bacaklar eksene paralel"
+   },
+   "debi_lpm": 1905.8,
+   "basinc_bar": 5,
+   "hiz_m_s": 6.32,
+   "dp_bar_tahmin": 0.01,
+   "debi_kaynak": "T hat debileri: A65 hizli vurus kol tarafi 1626 L/dk (hizli_vurus_sonuc A54 3 m/s), A130 dönüş 280, A59 DV1 deşarj 290 L/dk VARSAYIM",
+   "kontrol": {
+    "parca_cakisma": [],
+    "bukum_uyari": [
+     "bacak1=125 kisa"
+    ]
+   }
+  }
+ ],
+ "dugumler": [
+  {
+   "id": "TEE_PA65",
+   "nokta": [
+    -1990,
+    -540,
+    -640
+   ],
+   "not_": "H01 uzerinde T-tee, P dalı A65"
+  },
+  {
+   "id": "TEE_PA130",
+   "nokta": [
+    2285,
+    -540,
+    -640
+   ],
+   "not_": "H01 uzerinde T-tee, P dalı A130 (hortum dikey)"
+  },
+  {
+   "id": "TEE_PLA65",
+   "nokta": [
+    -1945,
+    -585,
+    -705
+   ],
+   "not_": "H10 uzerinde pilot tee"
+  },
+  {
+   "id": "TEE_PLA130",
+   "nokta": [
+    2245,
+    -585,
+    -705
+   ],
+   "not_": "H10 uzerinde pilot tee"
+  },
+  {
+   "id": "TEE_TA65",
+   "nokta": [
+    -2060,
+    -595,
+    -800
+   ],
+   "not_": "H21 -> H20R birlesim (boru capi 48 -> 89 kademe)"
+  },
+  {
+   "id": "TEE_T",
+   "nokta": [
+    1000,
+    -595,
+    -800
+   ],
+   "not_": "H20R + H23 -> H24 tank donusu"
+  },
+  {
+   "id": "BRK_A65_P",
+   "nokta": [
+    -1990,
+    -540,
+    -300
+   ],
+   "not_": "sabit braket (rijit -> hortum gecisi), sase -Y yan duvarina; bom.json ID yok -> OLCU_TALEBI"
+  },
+  {
+   "id": "BRK_A65_PL",
+   "nokta": [
+    -1945,
+    -585,
+    -300
+   ],
+   "not_": "sabit braket, ayni konsol"
+  },
+  {
+   "id": "BRK_A65_T",
+   "nokta": [
+    -2060,
+    -660,
+    -300
+   ],
+   "not_": "sabit braket, ayni konsol"
+  },
+  {
+   "id": "BRK_A130_T",
+   "nokta": [
+    2335,
+    -660,
+    -400
+   ],
+   "not_": "sabit braket (A130 T hortum ucu), sase -Y yani; kayar uc A130 ile 550 mm"
+  }
+ ],
+ "inline_elemanlar": [
+  {
+   "id": "CV1",
+   "ad": "Cek valf (pompa hatti, akumulator geri akis korumasi)",
+   "hat": "H01",
+   "nokta": [
+    2960,
+    0,
+    -330
+   ],
+   "bagli_id": null,
+   "OLCU_TALEBI": "CV1 cek valf govdesi bom.json de yok (ID uydurulmadi); konum: H01 ilk Y kosusu ortasi"
+  },
+  {
+   "id": "PF1",
+   "ad": "Basinc filtresi",
+   "hat": "H01",
+   "nokta": [
+    2500,
+    -540,
+    -330
+   ],
+   "bagli_id": null,
+   "OLCU_TALEBI": "PF1 filtre govdesi bom.json de yok; konum: H01 Z-330 kosusu"
+  },
+  {
+   "id": "RF1",
+   "ad": "Donus filtresi (A61 return_filter_cap, +Y yuz X1200 Z-820 + -Y T portu ic manifold)",
+   "hat": "H24",
+   "nokta": [
+    1200,
+    495,
+    -820
+   ],
+   "bagli_id": "A61",
+   "OLCU_TALEBI": "A61 -Y yuz T portu + RF1 girisi ic baglantisi (A61 dims eklenmeli)"
+  }
+ ],
+ "olcu_talepleri": [
+  "OLCU_TALEBI: A130 Y3 icin ek portlar A2/B2 (-Y yuz X2200, Z-225/-295, d30 stub 30) ve pilot portu Pi (+X yuz merkez 2250,0,-260 d12); bloktaki 4 port yalniz P/T/A/B",
+  "OLCU_TALEBI: A35 baglanti portlari: A_kapak (alt, 2265,0,-100) ve B_kol (on flans arka yuz, 1845,150,-80) dims.ports yalniz d30 optional",
+  "OLCU_TALEBI: A41 port tanimi: kapak yan portlari (1015,+-120,0) ve ortak flans galeri portu (822,-120,0)",
+  "OLCU_TALEBI: A65 -Y yuz port tanimi: P (-1990,-150,125), T (-2060,-150,40), Pi (-1945,-150,60)",
+  "OLCU_TALEBI: A59 valf blogu alt portlari P(-2945,0,-180), Pi(-3000,0,-180), T(-3055,0,-180) + sepet plakasi 3 delik d60 (Z-220..-180)",
+  "OLCU_TALEBI: A61 -Y yuz tank T donus portu (1000,-470,-800) + A11 -Y yan duvar gecisi d95 (X1000,Z-800) + A11.pipe_passages girdisi",
+  "OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok",
+  "OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)",
+  "OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok"
+ ],
+ "saha_dogrulama": [
+  "Hortum min bukulme yaricaplari ve dis caplar (DN10..DN51) katalogdan",
+  "Itici hizi 100 mm/s (VARSAYIM) -> A41 hat debileri 94/65 L/dk",
+  "DV1 acil desarj debisi 290 L/dk (VARSAYIM) ve T hat boyutu",
+  "Kelepce araliklari (ISO tipik tablo) uretici/ISO 4413 ile",
+  "A65 kol tarafi donus debisi ~1626 L/dk icin dönüs devresi (regeneratif/yuksek debili T) karari"
+ ],
+ "riskler": [
+  "RISK-YUKSEK: A41 kapak caprazi (H08) ve H06 hortum ucu acik konumda A31 crosshead yuzune 13 mm (motion_check ile dogrula)",
+  "RISK-YUKSEK: A65 T hizli vurus donusu 1625 L/dk: H20H DN51 13 m/s, H20R 5.4 m/s",
+  "RISK: A130 hortumlari 550 mm kayar (kalip yuksekligi): DN32 Rb 250 U-halka sase -Y yan bosluguna sigmali",
+  "RISK: A41 hortumlari her cevrimde 420 mm gidip gelir (yorulma/ome)",
+  "RISK: T rafi A72 panosuna 12 mm, P rafi sase duvarina 16 mm bosluk",
+  "RISK: tum rijit/hortum kisa bacaklar (<2Rb) bukum uyarisi: dirsek fitting ile (hat.kontrol.bukum_uyari)"
+ ]
+}

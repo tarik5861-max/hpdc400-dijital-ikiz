@@ -78,17 +78,17 @@
    "yag_sicaklik_dur_C = 65",
    "onay = CLAUDE_KARARI_SAHA_DOGRULAMASI: 0.9/1.07/0.8 x sistem basinci ve 55/65 C standart degil, isletme degerleri gelince degisir",
    "7) Kanal sayilari (yon -> durum)",
-   "DI: {'aktif': 43, 'ayrilmis': 12, 'kapsam_disi': 4, 'istege_bagli': 6, 'toplam': 65}",
-   "DO: {'istege_bagli': 16, 'aktif': 23, 'ayrilmis': 3, 'kapsam_disi': 6, 'toplam': 48}",
-   "AI: {'aktif': 6, 'istege_bagli': 2, 'ayrilmis': 1, 'toplam': 9}",
+   "DI: {'aktif': 47, 'ayrilmis': 8, 'kapsam_disi': 4, 'istege_bagli': 6, 'toplam': 65}",
+   "DO: {'istege_bagli': 16, 'aktif': 23, 'ayrilmis': 1, 'kapsam_disi': 8, 'toplam': 48}",
+   "AI: {'aktif': 6, 'istege_bagli': 3, 'toplam': 9}",
    "AO: {'aktif': 5, 'ayrilmis': 4, 'toplam': 9}",
-   "genel: {'aktif': 77, 'ayrilmis': 20, 'istege_bagli': 24, 'kapsam_disi': 10, 'toplam': 131}",
+   "genel: {'aktif': 81, 'ayrilmis': 13, 'istege_bagli': 25, 'kapsam_disi': 12, 'toplam': 131}",
    "2026-11-18 karar turu (olcu-mimari): kullanici bekleyen kararlari devretti -> K-EL-01..06f (kararlar[]). FKAP esigi: 5 kN/somun -> motor 2,64 Nm (dogrusal); 7,24 Nm nominal -> 13,7 kN/somun x 4 = 54,8 kN; esik 50 kN (%91). A97: 1450/60 x 2 = 48,3 Hz, darbe genisligi 10,3 ms (standart DI icin sinirda)."
   ],
   "kanal_sayilari": {
    "DI": {
-    "aktif": 43,
-    "ayrilmis": 12,
+    "aktif": 47,
+    "ayrilmis": 8,
     "kapsam_disi": 4,
     "istege_bagli": 6,
     "toplam": 65
@@ -96,14 +96,14 @@
    "DO": {
     "istege_bagli": 16,
     "aktif": 23,
-    "ayrilmis": 3,
-    "kapsam_disi": 6,
+    "ayrilmis": 1,
+    "kapsam_disi": 8,
     "toplam": 48
    },
    "AI": {
     "aktif": 6,
-    "istege_bagli": 2,
-    "ayrilmis": 1,
+    "istege_bagli": 3,
+    "ayrilmis": 0,
     "toplam": 9
    },
    "AO": {
@@ -112,10 +112,10 @@
     "toplam": 9
    },
    "genel": {
-    "aktif": 77,
-    "ayrilmis": 20,
-    "istege_bagli": 24,
-    "kapsam_disi": 10,
+    "aktif": 81,
+    "ayrilmis": 13,
+    "istege_bagli": 25,
+    "kapsam_disi": 12,
     "toplam": 131
    }
   },
@@ -899,13 +899,14 @@
    "aciklama": "on kapi acma kontrolu (motorlu kapi M4)",
    "durum": "istege_bagli",
    "bagli_id": [
-    "A71"
+    "A71",
+    "A126"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
    "gerekce": "motorlu kapi varsayilmadi: A71 elle surgulu kapi (params A71 bottom_track); M4 kapi motoru istege bagli",
-   "not": "L10 role karti uzerinden; klemens notasyonu okunamadi"
+   "not": "L10 role karti uzerinden; klemens notasyonu okunamadi; A126 pnomatik kapi silindiri (ikiz_tasarim baglantisi)"
   },
   {
    "id": "DO4.14",
@@ -917,13 +918,14 @@
    "aciklama": "on kapi kapama kontrolu (motorlu kapi M4)",
    "durum": "istege_bagli",
    "bagli_id": [
-    "A71"
+    "A71",
+    "A126"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
    "gerekce": "motorlu kapi varsayilmadi: A71 elle surgulu kapi (params A71 bottom_track); M4 kapi motoru istege bagli",
-   "not": "L10 role karti uzerinden; klemens notasyonu okunamadi"
+   "not": "L10 role karti uzerinden; klemens notasyonu okunamadi; A126 pnomatik kapi silindiri (ikiz_tasarim baglantisi)"
   },
   {
    "id": "DO4.15",
@@ -970,12 +972,13 @@
    "aciklama": "front door close limit 2",
    "durum": "aktif",
    "bagli_id": [
-    "A71"
+    "A71",
+    "A127"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "KA9 donanim zincirinin 2. kontagi; PLC izler; kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
+   "not": "KA9 donanim zincirinin 2. kontagi; PLC izler; kanal no = okuma sirasi, klemens/bit DOGRULANMADI; A127 kilitli guvenlik anahtari KAPALI konum kontagi (ikiz_tasarim baglantisi)"
   },
   {
    "id": "DI5.02",
@@ -987,12 +990,13 @@
    "aciklama": "front door close limit 1",
    "durum": "aktif",
    "bagli_id": [
-    "A71"
+    "A71",
+    "A127"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "PLC cesitli (diverse) izleme; kanal no = okuma sirasi, klemens/bit DOGRULANMADI",
+   "not": "PLC cesitli (diverse) izleme; kanal no = okuma sirasi, klemens/bit DOGRULANMADI; A127 kilitli guvenlik anahtari KAPALI konum kontagi (ikiz_tasarim baglantisi)",
    "saglam_deger": 1,
    "saglam_aciklama": "NC mantik: on kapi limit 1 kapali = 1"
   },
@@ -1341,12 +1345,13 @@
    "aciklama": "on kapi acik limiti",
    "durum": "aktif",
    "bagli_id": [
-    "A71"
+    "A71",
+    "A127"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
    "guven": "orta",
-   "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI"
+   "not": "kanal no = okuma sirasi, klemens/bit DOGRULANMADI; A127 guvenlik anahtari ACIK konum kontagi (ikiz_tasarim baglantisi)"
   },
   {
    "id": "DI5.23",
@@ -1463,13 +1468,17 @@
    "kanal": 30,
    "klemens": null,
    "tag": null,
-   "aciklama": "okunamadi (bulanik tarama)",
-   "durum": "ayrilmis",
-   "bagli_id": [],
+   "aciklama": "plunger yaglama rezervuar seviye DUSUK (A143), NC: seviye OK = 1",
+   "durum": "aktif",
+   "saglam_deger": 1,
+   "saglam_aciklama": "NC: rezervuar seviyesi OK = 1",
+   "bagli_id": [
+    "A143"
+   ],
    "hidrolik": null,
-   "koken": "dcc630_sablon",
+   "koken": "ikiz_tasarim",
    "guven": "dusuk",
-   "gerekce": "semadan okunamadi; muhtemel itici ileri/geri limitleri burada (DO4.05 'ejector forward limit' sinyali var)"
+   "gerekce": "ikiz_tasarim: A143 icin slot 7/9 bos DI yok; slot 5 ayrilmis (okunamadi) kanal kullanildi; sahada degisebilir"
   },
   {
    "id": "DI5.31",
@@ -1478,13 +1487,17 @@
    "kanal": 31,
    "klemens": null,
    "tag": null,
-   "aciklama": "okunamadi (bulanik tarama)",
-   "durum": "ayrilmis",
-   "bagli_id": [],
+   "aciklama": "kamara sogutma giris hatti su akis anahtari (A142), akis var = 1",
+   "durum": "aktif",
+   "saglam_deger": 1,
+   "saglam_aciklama": "su akisi var = 1",
+   "bagli_id": [
+    "A142"
+   ],
    "hidrolik": null,
-   "koken": "dcc630_sablon",
+   "koken": "ikiz_tasarim",
    "guven": "dusuk",
-   "gerekce": "semadan okunamadi; muhtemel itici ileri/geri limitleri burada (DO4.05 'ejector forward limit' sinyali var)"
+   "gerekce": "ikiz_tasarim: A142 giris hatti akis anahtari; slot 5 ayrilmis (okunamadi) kanal kullanildi; sahada degisebilir"
   },
   {
    "id": "DI5.32",
@@ -1599,11 +1612,13 @@
    "aciklama": "piston yaglama",
    "durum": "aktif",
    "bagli_id": [
-    "A52"
+    "A52",
+    "A143"
    ],
    "hidrolik": null,
    "koken": "dcc630_sablon",
-   "guven": "orta"
+   "guven": "orta",
+   "not": "A143 plunger yaglama unitesi dozaj valfi/pompasi bu kanaldan (slot 7'de bos DO yok; ikiz_tasarim)"
   },
   {
    "id": "DO7.07",
@@ -2392,13 +2407,17 @@
    "slot": 10,
    "kanal": 4,
    "klemens": null,
-   "tag": null,
-   "aciklama": "yedek",
-   "durum": "ayrilmis",
-   "bagli_id": [],
+   "tag": "TT2",
+   "aciklama": "kamara sogutma cikis suyu sicakligi (A142)",
+   "durum": "istege_bagli",
+   "bagli_id": [
+    "A142"
+   ],
    "hidrolik": null,
-   "koken": "yeni",
-   "guven": "-"
+   "koken": "ikiz_tasarim",
+   "guven": "dusuk",
+   "gerekce": "ikiz_tasarim: yedek analog; akis anahtari DI5.31 yeterliyse kullanilmaz",
+   "olcek": {"birim": "C", "min": 0, "max": 100}
   },
   {
    "id": "AO10.1",
@@ -3061,7 +3080,10 @@
     "AO10.1/AO10.2 U12 hiz/basinc"
    ],
    "bagli_id": [
-    "A35"
+    "A35",
+    "A133",
+    "A130",
+    "A132"
    ],
    "guven": "yuksek"
   },
@@ -3073,7 +3095,10 @@
    ],
    "bagli_id": [
     "A41",
-    "A42"
+    "A42",
+    "A133",
+    "A130",
+    "A132"
    ],
    "guven": "yuksek",
    "not": "tek 4/3 valf, A41'in iki silindiri paralel; senkron mekanik kopru (A41 flansi) ile"
