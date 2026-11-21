@@ -3,6 +3,7 @@
 _Son güncelleme: 2026-11-21 (sabah). Her `/kapanis`'te baştan yazılır (en fazla ~60 satır)._
 
 ## Şu an
+- 2026-11-21: A54 piston kolu ayrıldı → A186 (piston+kol, A52 ile +X px ilerler; A54 ön kafada kol geçiş deliği). check.py 0/0, 301 instance; motion_check sonucu out/motion_A186.txt, out/vurus_A186.txt.
 - Model 300 instance, 46 hat (A160). Kontroller YEŞİL: check.py HATA 0 / UYARI 0, motion_check (+ `--kalip-yuksekligi`) 0 çarpışma, itici taraması 0, elektrik 11 senaryo 0 hata, hidrolik + hidrolik ağ testleri geçti.
 - Maça: A81 kavite + yan cepler + kılavuz, A82 eş cepler, A184 maça çekirdeği ×4 (A167 koluna bağlı); çevrim makrosu maçayı hareket ettirir (faz 3 gir, faz 12 çek). Model 300 instance.
 - Akşam: Kademe 1b çevrim makrosu yazıldı: `lib/cevrim.py` (16 faz, saf python, `python3 lib/cevrim.py` kural testi 0 ihlal) + `HPDC400_cevrim.FCMacro` (cevrim_baslat/tek/durdur/hiz/faz). Plunger 0..500 temiz (tarama), itici yalnız s=1, plunger yalnız s=0. FreeCAD'de canlı denenmedi (sahte FreeCAD ile duman testi geçti). Sınır: A54 kol ucu sabit (plunger kaplini ondan ayrılır), yağlama yalnız faz adı (maça artık gerçek hareket).

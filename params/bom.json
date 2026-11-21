@@ -59,7 +59,8 @@
     "A144",
     "A145",
     "A182",
-    "A183"
+    "A183",
+    "A186"
    ]
   },
   {
@@ -580,6 +581,15 @@
      "ad_tr": "Enjeksiyon bağlantı borusu",
      "ad_en": "Injection unit rigid pipe",
      "islev": "A54 kol tarafı ve A55 çarpan tahrik portunu A65'e bağlayan sert boru. (varsayım)"
+    },
+    {
+     "id": "A186",
+     "name": "Enjeksiyon piston + kol grubu",
+     "qty": 1,
+     "script": "parts/A186_enj_piston_kolu.py",
+     "ad_tr": "Enjeksiyon piston ve kolu",
+     "ad_en": "Injection piston and rod",
+     "islev": "A54 silindirinin hareketli iç grubu; kol ucu A52 bağlantısına değer, A52 ile birlikte ilerler. (varsayım)"
     }
    ]
   },

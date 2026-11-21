@@ -94,7 +94,8 @@
     "A144",
     "A145",
     "A182",
-    "A183"
+    "A183",
+    "A186"
    ],
    "bbox_zmin_follow": [
     "A64"
@@ -2675,8 +2676,7 @@
     },
     "rod": {
      "d": 90,
-     "protrusion_plus_x": 80.0,
-     "note": "retracted; rod end face contacts A52 coupling"
+     "bore_note": "on kafada d(rod.d) gecis deligi; kol ve piston A186'da (hareketli, A52 ile ilerler)"
     },
     "tie_rods": {
      "count": 4,
@@ -2747,7 +2747,7 @@
      }
     ]
    },
-   "local_origin": "Center of the front head front (+X) face. Body along -X (x -820..0); piston rod protrudes +X (x 0..80). Square heads have flat bottoms resting on A57 saddles.",
+   "local_origin": "Center of the front head front (+X) face. Body along -X (x -820..0); front head has rod through-hole (rod+piston = A186). Square heads have flat bottoms resting on A57 saddles.",
    "instances": [
     {
      "name": "A54_1",
@@ -2766,7 +2766,7 @@
       -2080.0,
       -158.0,
       -300.0,
-      -1180.0,
+      -1260.0,
       158.0,
       8.0
      ]
@@ -13309,6 +13309,54 @@
     }
    ]
   },
+  "A186": {
+   "name": "Enjeksiyon piston + kol grubu",
+   "dims": {
+    "rod": {
+     "d": 90,
+     "x_range": [
+      -640.0,
+      80.0
+     ]
+    },
+    "piston": {
+     "d": 138.0,
+     "thickness": 60.0,
+     "x_range": [
+      -640.0,
+      -580.0
+     ]
+    },
+    "stroke": 500.0,
+    "protrusion_plus_x": 80.0,
+    "turetme": "TURETILMIS (2026-11-21): rod.d = A54.rod.d; piston.d = A54.barrel.bore - 2; piston on yuz = A54.front_head.x0 - A52.stroke (retracted), kalinlik 60 (varsayim); kol x_range = [piston arka yuz, +protrusion_plus_x]; kol on ucu A52 baglanti arka yuzune (global x -1180) degen. Ileri stroklu piston on yuzu on kafa ic yuzune (x -80) tam deger."
+   },
+   "local_origin": "A54 lokal orijini (on kafa on yuzu merkezi); A54_1 ile ayni pos/rot. Retracted konumda cizili; +X px (A52 ile ayni) hareket eder. DESIGN ASSUMPTION 2026-11-21.",
+   "instances": [
+    {
+     "name": "A186_1",
+     "note": "pos[2] TURETILMIS: global.shot_follow (pos[2] = z_sel); hareket: A52 ile ayni +X px",
+     "pos": [
+      -1260.0,
+      0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "bbox": [
+      -1900.0,
+      -69.0,
+      -219.0,
+      -1180.0,
+      69.0,
+      -81.0
+     ]
+    }
+   ]
+  },
   "A184": {
    "name": "Maca cekirdegi (kayar maca pimi, A167 koluna bagli)",
    "dims": {
@@ -14217,6 +14265,14 @@
    [
     "A184",
     "A167"
+   ],
+   [
+    "A186",
+    "A54"
+   ],
+   [
+    "A186",
+    "A52"
    ]
   ],
   "allowed_limits": [
