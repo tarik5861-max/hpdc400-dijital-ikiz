@@ -74,6 +74,10 @@ class ElektrikMantik:
         self.hw_saglam = {e["id"]: e["saglam_deger"] for e in self.mk["hw_girisler"]}
         self.di_saglam = {k["id"] for k in self.cfg["kanallar"] if k.get("saglam_deger", 0) == 1}
         self.sq_cfg = self.mk["siralayici"]
+        self.maca_bobin = {}
+        for e in self.hw:
+            if e["id"].startswith("HW.MACA") and e["id"].endswith("_BOBIN"):
+                self.maca_bobin[e["ifade"][1]] = e["id"]
         self.adim_tanim = {a["ad"]: a for a in self.sq_cfg["adimlar"]}
         self.girdi = {}
         self.zorla = {}
@@ -210,7 +214,8 @@ class ElektrikMantik:
     def _sira_baslat(self):
         self.sq = {"adim": self.sq_cfg["adimlar"][0]["ad"], "faz": 0, "faz_t": 0.0, "cevrim": 0,
                    "yag": 0, "yag_t": 0.0, "pg": 0, "pg_t": 0.0, "faz3_bitti": 0, "loto": 0,
-                   "sayac": 0, "a_son": 0, "ofset_mm": None}
+                   "sayac": 0, "a_son": 0, "ofset_mm": None,
+                   "adim_t": 0.0, "maca_t": 0.0, "maca_alarm": 0}
         self.hata_yok = True
 
     def _sayi(self, x):
@@ -220,6 +225,10 @@ class ElektrikMantik:
         if isinstance(x, str) and x.startswith("zamanlar."):
             return self.mk["zamanlar"][x[len("zamanlar."):]]
         return self._deger(x)
+
+    def _maca_secili(self, mc):
+        """Secici DI5.14..17 (VARSAYIM: 1 = maca otomatik cevrimde kullanilir) -- en az biri 1 mi."""
+        return any(bool(self._get(x)) for x in mc["secici"])
 
     def _sirala(self, dt):
         q, c = self.sq, self.sq_cfg
@@ -251,6 +260,9 @@ class ElektrikMantik:
         elif g("HMI.LOTO_BASLAT"):
             q["loto"] = 1
         s["S.LOTO_MODU"] = q["loto"]
+        if g("HMI.RESET"):
+            q["maca_alarm"] = 0                         # maca zaman asimi alarmi (muhurlu) resetle silinir
+        s["S.MACA_ALARM"] = q["maca_alarm"]
         s["S.OPERATOR_DESARJ_ISTEGI"] = int(bool(g("HMI.DESARJ")))
         self.cur.update(s)        # kosullar bu taramanin degerlerini gorsun
         # --- OTO cevrim siralayicisi
@@ -289,6 +301,17 @@ class ElektrikMantik:
                         adim = t["sonraki"]
             elif q["faz"] != 0:
                 adim, q["faz"] = ilk, 0                   # izin vurus ortasinda kayboldu
+        elif "maca" in t:                                 # maca adimi (sure tabanli, geri bildirim kanali yok)
+            mc = t["maca"]
+            q["adim_t"] += dt
+            if self.ev(mc["izin"], "maca.izin"):
+                q["maca_t"] += dt                         # sure yalniz izin varken birikir (kalip durumu uygun)
+            sure = self._sayi(mc["sure"])
+            if not self._maca_secili(mc) or q["maca_t"] >= sure:
+                adim = t["sonraki"]
+            elif q["adim_t"] >= sure * self._sayi(mc["zaman_asimi_carpan"]):
+                q["maca_alarm"] = 1                       # zaman asimi: alarm + BOSTA'ya iptal
+                adim, q["faz"] = ilk, 0
         elif self.ev(t["bitis"], "bitis." + adim):
             adim = t["sonraki"]
             if t.get("cikis_eylemi"):                     # cevrim sonu: sayac, yaglama tetigi
@@ -296,6 +319,11 @@ class ElektrikMantik:
                 q["faz3_bitti"] = 0
                 if q["cevrim"] % self._sayi(c["mafsal_yaglama"]["aralik_cevrim"]) == 0:
                     q["yag"], q["yag_t"] = 1, 0.0
+        while adim != onceki and "maca" in tan[adim] and not self._maca_secili(tan[adim]["maca"]):
+            adim = tan[adim]["sonraki"]                   # hic maca secili degil: adim ayni taramada gecilir
+        if adim != q["adim"]:
+            q["adim_t"], q["maca_t"] = 0.0, 0.0
+        s["S.MACA_ALARM"] = q["maca_alarm"]
         # --- adim gecisi yan etkileri
         pg, my = c["piston_geri"], c["mafsal_yaglama"]
         if adim != onceki:
@@ -363,6 +391,8 @@ class ElektrikMantik:
         v = self.prev
         if kanal == "DO7.05":
             return v["HW.S210A_bobin"]
+        if kanal in self.maca_bobin:                       # maca cift solenoid: HW bobini (beslemeye VE karsi cikis kilidi)
+            return v[self.maca_bobin[kanal]]
         return int(bool(v.get(kanal, 0)) and bool(v["HW.VALF_BESLEME"]))
 
     def aku_bosaltiyor(self):

@@ -169,3 +169,12 @@ Açık riskler:
 
 Sayim guncel (131 kayit): DI 65 (aktif 47, istege_bagli 6, ayrilmis 8, kapsam disi 4) · DO 48 (aktif 23, istege_bagli 16, ayrilmis 1, kapsam disi 8) · AI 9 (aktif 6, istege_bagli 3) · AO 9. Mantik eki yok (yalniz kanal tanimi).
 VERI_BEKLIYOR: DI5.30/DI5.31 bayt.bit eslemesi (HW Config), A127 kontak sayisi/KA9 zincirine baglanma sekli.
+
+## Maca (core) adimlari (Kademe 4, adim 1) - VARSAYIM
+- Siralayici: BOSTA -> MACA_GIR -> KAPAMA -> ENJ -> MACA_CEK -> ACMA -> ITICI_ILERI -> ITICI_GERI -> BOSTA (lib/cevrim.py faz 3 maca gir, faz 12 maca cek ile ayni sira).
+- MACA_GIR yalniz kalip ACIKKEN (S.KALIP_ACIK: DI5.08=0 ve AI10.1>20 mm, itici geride); MACA_CEK yalniz kalip KAPALI ve S.FAZ3_BITTI iken.
+- Cikislar: core1..4 in = DO7.17/19/21/23, out = DO7.18/20/22/24 (PLC ifadesi + HW.MACAn_GIR/CEK_BOBIN: valf beslemesine VE karsi cikis kilidi).
+- VARSAYIM secici: DI5.14..17 = n. maca otomatik cevrimde kullanilsin (1) / atlansin (0). Hic secili yoksa adimlar ayni taramada gecilir. VERI_BEKLIYOR: gercek secici anlami.
+- Geri bildirim yok: sure tabanli P.MACA_SURE_ms = 2000 ms (VARSAYIM, A167 80 mm). Zaman asimi = sure x 2 -> S.MACA_ALARM (muhurlu, HMI.RESET) + BOSTA; AL_MACA_ZAMAN_ASIMI.
+- Oneri (kanal eklenmedi): maca basina ileri/geri limit sensoru (koken yeni).
+- Acik: cevrim.py faz 10-11 (katilasma, plunger geri) maca cekmeden once; PLC'de katilasma suresi yok, piston geri ACMA bitisinden (karar). Maca manuel (DI4.08) jog yok.

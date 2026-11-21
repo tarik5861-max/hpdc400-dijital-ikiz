@@ -22,5 +22,5 @@ _Son güncelleme: 2026-11-21 (sabah). Her `/kapanis`'te baştan yazılır (en fa
 - Temizlik: `parts/A21_sabit_plaka.py` ~satır 29 sabit sayı; `lib/kinematics.py` eski yorum; `docs/olcu_notlari.md` eski A14 tablosu; `lib/hidrolik_mantik.py` eski sabitler. Faz geçişleri süre tabanlı, DB68.ENC ile konum tabanlı olmalı.
 
 ## Sıradaki adım
-- Kendi PC'nde `git pull` → `HPDC400_yukle.FCMacro` sonra `HPDC400_cevrim.FCMacro` ile 1b'yi dene; sonra Kademe 4 (PLC durum makinesi).
+- Kendi PC'nde `git pull` → `HPDC400_yukle.FCMacro` sonra `HPDC400_cevrim.FCMacro` ile 1b'yi dene; Kademe 4 adım 1 YAPILDI (PLC MACA_GIR/MACA_CEK, elektrik 15 senaryo 0 HATA). Sıradaki: adım 2 kapalı döngü (çıkış→hareket→sensör) + cevrim.py faz 10–11 ile PLC eşle (katılaşma süresi / piston dönüşü farkı); adım 3 arıza enjeksiyonu.
 - Alt plan A (tonaj → ölçülendirme motoru, 1000 t gibi makineler için) en sonda; şimdilik tüm ölçüler 400 t'ye elle yazılı.

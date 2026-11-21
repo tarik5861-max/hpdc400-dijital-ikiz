@@ -3303,7 +3303,9 @@
     "onay": "CLAUDE_KARARI_SAHA_DOGRULAMASI: P.ITICI_ACIKLIK_MIN_mm, faz sureleri, P.PISTON_GERI_SURE_ms (500 mm kurs / ~0,3 m/s geri + ivme), P.MAFSAL_YAGLAMA_SURE_ms (M10 tipik 3-10 s) tahmini",
     "P.KAPAMA_KUVVET_SENSORU_VAR": 0,
     "P.PISTON_GERI_SURE_ms": 2500,
-    "P.MAFSAL_YAGLAMA_SURE_ms": 5000
+    "P.MAFSAL_YAGLAMA_SURE_ms": 5000,
+    "P.MACA_SURE_ms": 2000,
+    "maca_onay": "VARSAYIM: A167 strok 80 mm (params.json) / ~40 mm/s (140 bar, orifis/akis ayari bilinmiyor) -> 2000 ms; maca konum geri bildirimi YOK -> sure tabanli. VERI_BEKLIYOR: gercek hiz/sure"
    },
    "NC_kurali": "NC kontaklar 'saglam/kapali' iken 1 doner (HW.ST1_1 = 1 -> buton basilmamis)"
   },
@@ -3332,7 +3334,9 @@
    "geri_bildirim_ms": 300,
    "S118_bosaltma_ms": 1500,
    "yaglama_aralik_cevrim": 10,
-   "onay": "CLAUDE_KARARI_SAHA_DOGRULAMASI (S118, yaglama araligi tahmini)"
+   "onay": "CLAUDE_KARARI_SAHA_DOGRULAMASI (S118, yaglama araligi tahmini)",
+   "maca_zaman_asimi_carpan": 2,
+   "maca_onay": "VARSAYIM: maca adimi zaman asimi = P.MACA_SURE_ms x 2 (kullanici istegi)"
   },
   "donanim": [
    {
@@ -3511,6 +3515,126 @@
     },
     "aciklama": "ince; ince limit NC bobin yolunda",
     "koken": "400t_hesap"
+   },
+   {
+    "id": "HW.MACA1_GIR_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.17",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.18"
+     ]
+    ],
+    "aciklama": "core1 GIR bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA1_CEK_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.18",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.17"
+     ]
+    ],
+    "aciklama": "core1 CEK bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA2_GIR_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.19",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.20"
+     ]
+    ],
+    "aciklama": "core2 GIR bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA2_CEK_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.20",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.19"
+     ]
+    ],
+    "aciklama": "core2 CEK bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA3_GIR_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.21",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.22"
+     ]
+    ],
+    "aciklama": "core3 GIR bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA3_CEK_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.22",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.21"
+     ]
+    ],
+    "aciklama": "core3 CEK bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA4_GIR_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.23",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.24"
+     ]
+    ],
+    "aciklama": "core4 GIR bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "HW.MACA4_CEK_BOBIN",
+    "ifade": [
+     "and",
+     "DO7.24",
+     "HW.VALF_BESLEME",
+     [
+      "not",
+      "DO7.23"
+     ]
+    ],
+    "aciklama": "core4 CEK bobini: PLC cikisi VE valf beslemesi (E-stop -> duser) VE karsi cikis 0. Karsi-bobin kilidi PLC'de oldugu gibi bobin seviyesinde de uygulanir; kablolu role kilidi ONERI (saha onayi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
    }
   ],
   "plc": [
@@ -4256,6 +4380,206 @@
     "koken": "400t_hesap",
     "durum": "claude_karari_saha_dogrulamasi_gerekir",
     "karar": "K-EL-06f"
+   },
+   {
+    "id": "S.KALIP_ACIK",
+    "ifade": [
+     "and",
+     [
+      "not",
+      "DI5.08"
+     ],
+     [
+      "gt",
+      "AI10.1",
+      "AI10_1_kalip_acik_min_mm"
+     ]
+    ],
+    "aciklama": "maca girisi icin kalip acik: kilit kapali degil VE aralik > 20 mm",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "S.MACA_IZIN_ORTAK",
+    "ifade": [
+     "and",
+     "S.MOTOR_CALISIYOR",
+     "DI5.12",
+     [
+      "not",
+      "S.DESARJ_ISTEGI"
+     ],
+     [
+      "not",
+      "S.LOTO_MODU"
+     ],
+     [
+      "not",
+      "S.KAPI_UYUMSUZ"
+     ]
+    ],
+    "aciklama": "maca hareketi ortak izin: pompa calisiyor, E-stop saglam, desarj/LOTO yok",
+    "koken": "yeni"
+   },
+   {
+    "id": "S.MACA_GIR_IZIN",
+    "ifade": [
+     "and",
+     "S.MACA_IZIN_ORTAK",
+     "S.KALIP_ACIK",
+     "S.ITICI_GERIDE"
+    ],
+    "aciklama": "maca gir yalniz kalip ACIKKEN ve itici geride",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "S.MACA_CEK_IZIN",
+    "ifade": [
+     "and",
+     "S.MACA_IZIN_ORTAK",
+     "S.KALIP_KAPALI",
+     "S.FAZ3_BITTI"
+    ],
+    "aciklama": "maca cek yalniz kalip KAPALI ve ENJ bitince (S.FAZ3_BITTI)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.17",
+    "tag": "MACA1_GIR",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_GIR",
+     "DI5.14",
+     "S.MACA_GIR_IZIN",
+     [
+      "not",
+      "DO7.18"
+     ]
+    ],
+    "aciklama": "core1 in: MACA_GIR adimi + secici DI5.14 + izin; karsi bobin (DO7.18) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.18",
+    "tag": "MACA1_CEK",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_CEK",
+     "DI5.14",
+     "S.MACA_CEK_IZIN",
+     [
+      "not",
+      "DO7.17"
+     ]
+    ],
+    "aciklama": "core1 out: MACA_CEK adimi + secici DI5.14 + izin; karsi bobin (DO7.17) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.19",
+    "tag": "MACA2_GIR",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_GIR",
+     "DI5.15",
+     "S.MACA_GIR_IZIN",
+     [
+      "not",
+      "DO7.20"
+     ]
+    ],
+    "aciklama": "core2 in: MACA_GIR adimi + secici DI5.15 + izin; karsi bobin (DO7.20) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.20",
+    "tag": "MACA2_CEK",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_CEK",
+     "DI5.15",
+     "S.MACA_CEK_IZIN",
+     [
+      "not",
+      "DO7.19"
+     ]
+    ],
+    "aciklama": "core2 out: MACA_CEK adimi + secici DI5.15 + izin; karsi bobin (DO7.19) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.21",
+    "tag": "MACA3_GIR",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_GIR",
+     "DI5.16",
+     "S.MACA_GIR_IZIN",
+     [
+      "not",
+      "DO7.22"
+     ]
+    ],
+    "aciklama": "core3 in: MACA_GIR adimi + secici DI5.16 + izin; karsi bobin (DO7.22) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.22",
+    "tag": "MACA3_CEK",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_CEK",
+     "DI5.16",
+     "S.MACA_CEK_IZIN",
+     [
+      "not",
+      "DO7.21"
+     ]
+    ],
+    "aciklama": "core3 out: MACA_CEK adimi + secici DI5.16 + izin; karsi bobin (DO7.21) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.23",
+    "tag": "MACA4_GIR",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_GIR",
+     "DI5.17",
+     "S.MACA_GIR_IZIN",
+     [
+      "not",
+      "DO7.24"
+     ]
+    ],
+    "aciklama": "core4 in: MACA_GIR adimi + secici DI5.17 + izin; karsi bobin (DO7.24) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   },
+   {
+    "id": "DO7.24",
+    "tag": "MACA4_CEK",
+    "ifade": [
+     "and",
+     "S.OTO_MACA_CEK",
+     "DI5.17",
+     "S.MACA_CEK_IZIN",
+     [
+      "not",
+      "DO7.23"
+     ]
+    ],
+    "aciklama": "core4 out: MACA_CEK adimi + secici DI5.17 + izin; karsi bobin (DO7.23) 1 iken 0 (PLC kilidi)",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
    }
   ],
   "alarmlar": [
@@ -4392,6 +4716,15 @@
      "A95",
      "A97"
     ]
+   },
+   {
+    "id": "AL_MACA_ZAMAN_ASIMI",
+    "kosul": "S.MACA_ALARM",
+    "eylem": "maca adimi suresi*2 asildi: muhurlu alarm, siralayici BOSTA'ya iptal, maca cikislari 0; HMI.RESET ile silinir, silinmeden yeni cevrim yok",
+    "bagli_id": [
+     "A167",
+     "A169"
+    ]
    }
   ],
   "vurus_konumu": {
@@ -4496,6 +4829,10 @@
      [
       "not",
       "S.OTO_PISTON_GERI"
+     ],
+     [
+      "not",
+      "S.MACA_ALARM"
      ]
     ],
     "not": "S.MOTOR_CALISIYOR onceki tarama degeri; piston geri suresi dolmadan yeni cevrim yok (yeni sart)"
@@ -4524,7 +4861,25 @@
      "ad": "BOSTA",
      "cikis": null,
      "bitis": "baslatma.kosul",
-     "sonraki": "KAPAMA"
+     "sonraki": "MACA_GIR"
+    },
+    {
+     "ad": "MACA_GIR",
+     "cikis": "S.OTO_MACA_GIR",
+     "maca": {
+      "secici": [
+       "DI5.14",
+       "DI5.15",
+       "DI5.16",
+       "DI5.17"
+      ],
+      "sure": "P.MACA_SURE_ms",
+      "zaman_asimi_carpan": "zamanlar.maca_zaman_asimi_carpan",
+      "izin": "S.MACA_GIR_IZIN"
+     },
+     "bitis": "maca.sure (izin varken biriken sure >= P.MACA_SURE_ms) VEYA hic maca secili degil",
+     "sonraki": "KAPAMA",
+     "aciklama": "BOSTA -> MACA_GIR -> KAPAMA. Secili maca(lar) (DI5.14..17=1) kalip acikken ileri girer; secici kapaliysa o maca atlanir; hic secili yoksa adim ayni taramada gecilir. Zaman asimi -> AL_MACA_ZAMAN_ASIMI + BOSTA."
     },
     {
      "ad": "KAPAMA",
@@ -4554,7 +4909,7 @@
      "faz_baslangici": "izin (onceki tarama S.ENJ_IZIN) ilk kez 1 olunca faz 1",
      "bitis": "FAZ3 suresi doldu",
      "bitis_cikisi": "S.FAZ3_BITTI",
-     "sonraki": "ACMA",
+     "sonraki": "MACA_CEK",
      "iptal": [
       {
        "kosul": [
@@ -4570,6 +4925,24 @@
        "aciklama": "izin vurus ortasinda kayboldu"
       }
      ]
+    },
+    {
+     "ad": "MACA_CEK",
+     "cikis": "S.OTO_MACA_CEK",
+     "maca": {
+      "secici": [
+       "DI5.14",
+       "DI5.15",
+       "DI5.16",
+       "DI5.17"
+      ],
+      "sure": "P.MACA_SURE_ms",
+      "zaman_asimi_carpan": "zamanlar.maca_zaman_asimi_carpan",
+      "izin": "S.MACA_CEK_IZIN"
+     },
+     "bitis": "maca.sure (izin varken biriken sure >= P.MACA_SURE_ms) VEYA hic maca secili degil",
+     "sonraki": "ACMA",
+     "aciklama": "ENJ (S.FAZ3_BITTI) -> MACA_CEK -> ACMA. Maca kalip KAPALIYKEN geri cekilir; ACMA ancak maca cekildikten (sure) sonra."
     },
     {
      "ad": "ACMA",
@@ -4670,7 +5043,22 @@
    },
    "koken": "400t_hesap",
    "durum": "claude_karari_saha_dogrulamasi_gerekir",
-   "karar": "K-EL-06e"
+   "karar": "K-EL-06e",
+   "maca": {
+    "aciklama": "Maca (core) adimlari: A167 silindir + A169 NG6 valf, Y4 hidrolik hatti. VARSAYIM etiketli yorumlar asagida.",
+    "secici_yorumu": "VARSAYIM: DI5.14..17 'core n in/out secici' = n. maca OTOMATIK cevrimde kullanilsin mi (1 = kullan: MACA_GIR/MACA_CEK'te hareket eder, 0 = atla, cikis 0). Gercek sema gelince (secici 2 konumlu anahtar mi, tutma konumu mu) degisebilir. Gerekce: kanal tek giris, bobin cifti (in/out) DO7.17..24'te ayri; cevrim in/out'u adimdan alir, secici yalniz secim olabilir. VERI_BEKLIYOR.",
+    "geri_bildirim": "yok: sure tabanli (P.MACA_SURE_ms); piston_geri ile ayni yontem",
+    "limit_sensor_onerisi": {
+     "koken": "yeni",
+     "durum": "istege_bagli",
+     "aciklama": "ONERI (kanal eklenmedi): her maca icin 'maca ileri' ve 'maca geri' limit/proximity sensor (4x2 = 8 DI). Gelirse sure tabanli bitis yerine sensor VE sure kullanilir; zaman asimi aynen kalir."
+    },
+    "kilit": "in/out bobinleri ayni anda 1 olamaz: PLC (DO7.17..24 ifadesinde karsi cikis not) + HW bobin (HW.MACAn_GIR/CEK_BOBIN).",
+    "zaman_asimi": "adim suresi >= P.MACA_SURE_ms x zamanlar.maca_zaman_asimi_carpan (izin olmasa da sayilir) -> S.MACA_ALARM (muhurlu, HMI.RESET) + BOSTA",
+    "iptal": "genel_iptal (OTO kapali, E-stop, LOTO) -> BOSTA -> S.OTO_MACA_* 0 -> DO7.17..24 = 0; ayrica S.MACA_IZIN_ORTAK kaybi cikislari keser",
+    "koken": "yeni",
+    "durum": "claude_karari_saha_dogrulamasi_gerekir"
+   }
   }
  },
  "loto": {
@@ -5131,6 +5519,48 @@
      "sicak yag -> hacim degisimi",
      [
       "A61"
+     ]
+    ]
+   ]
+  },
+  {
+   "belirti": "Maca girmiyor/cekilmiyor veya maca zaman asimi alarmi",
+   "guvenlik": "GUVENLIK ON ADIMI: LOTO 1-7 (kalip acik, motor dur, akumulator desarj + PT2<2 bar dogrula, ana salter kilitli, enerji yok olculdu). Maca silindiri (A167) kalip icinde: hareket ettirmeden once kalip tam acik, itici geride; basincli hatta elle mudahale yok.",
+   "kontrol": [
+    [
+     "DI5.14..DI5.17",
+     "maca secici: 0 ise maca atlanir (alarm degil, hareketsiz)",
+     [
+      "A167"
+     ]
+    ],
+    [
+     "S.MACA_GIR_IZIN / S.MACA_CEK_IZIN",
+     "kalip acik(gir)/kapali+FAZ3_BITTI(cek), motor, desarj yok",
+     [
+      "A167"
+     ]
+    ],
+    [
+     "DO7.17..DO7.24",
+     "PLC cikisi var, bobinde gerilim yok -> valf beslemesi (KA_ES) / kablo",
+     [
+      "A169"
+     ]
+    ],
+    [
+     "Y4 hatti 140 bar",
+     "maca silindirine basinc/debi",
+     [
+      "A167",
+      "A169"
+     ]
+    ],
+    [
+     "S.MACA_ALARM",
+     "sure*2 asildi: mekanik sikisma/kismen girmis maca; HMI.RESET sonrasi yeniden",
+     [
+      "A167"
      ]
     ]
    ]

@@ -567,6 +567,210 @@ def mut_s10b(cfg):
     cfg["mantik"]["esikler"]["FKAP_kilitli_esik_kN"] = 0
 
 
+# ---------------------------------------------------------------- maca (core) adimlari (Kademe 4 adim 1)
+GIR = ["DO7.17", "DO7.19", "DO7.21", "DO7.23"]     # core1..4 in
+CEK = ["DO7.18", "DO7.20", "DO7.22", "DO7.24"]     # core1..4 out
+SEC = ["DI5.14", "DI5.15", "DI5.16", "DI5.17"]     # VARSAYIM: 1 = maca otomatik cevrimde kullanilir
+
+
+def _maca_cikislar(v):
+    return [v.get(k, 0) for k in GIR + CEK]
+
+
+def _maca_hazirla(m, secili=(0, 2), kalip_acik=True):
+    _oto_hazirla(m)
+    m.girdi["P.MAFSAL_YAGLAMA_SURE_ms"] = 0
+    for i in secili:
+        m.girdi[SEC[i]] = 1
+    m.girdi.update({"DI5.08": 0, "AI10.1": 100 if kalip_acik else 0, "DI9.10": 1, "DI9.11": 0})
+
+
+def s12(m):
+    """Tam cevrim sirasi: BOSTA -> MACA_GIR -> KAPAMA -> ENJ -> MACA_CEK -> ACMA; gir yalniz kalip acikken, cek kalip kapaliyken."""
+    r = Sonuc()
+    _maca_hazirla(m, secili=(0, 2), kalip_acik=False)
+    P = m.P
+    sure = P["P.MACA_SURE_ms"]
+    m.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m, 100)
+    r.kos(m.prev["S.OTO_ADIM"] == "MACA_GIR", "baslatma MACA_GIR'e gecmedi")
+    r.kos(m.prev["DO7.17"] == 0 and m.prev["DO7.21"] == 0, "kalip KAPALI iken maca gir cikisi 1")
+    m.girdi["AI10.1"] = 100
+    adim(m, 30)
+    v = m.prev
+    r.kos(v["DO7.17"] == 1 and v["DO7.21"] == 1, "kalip acik: secili maca(lar) (1,3) gir cikisi yok")
+    r.kos(v["DO7.19"] == 0 and v["DO7.23"] == 0, "secili olmayan maca (2,4) girdi")
+    r.kos(all(v[k] == 0 for k in CEK), "MACA_GIR sirasinda cek cikisi 1")
+    r.kos(m.bobin("DO7.17") == 1 and m.bobin("DO7.21") == 1 and m.bobin("DO7.19") == 0, "gir bobinleri (HW) yanlis")
+    adim(m, sure - 250)
+    r.kos(m.prev["S.OTO_ADIM"] == "MACA_GIR", "MACA_GIR P.MACA_SURE_ms dolmadan bitti")
+    adim(m, 400)
+    r.kos(m.prev["S.OTO_ADIM"] == "KAPAMA" and not any(_maca_cikislar(m.prev)), "sure sonunda KAPAMA'ya gecilmedi / maca cikisi acik kaldi")
+    m.girdi["DI5.08"] = 1
+    adim(m, 30)
+    r.kos(m.prev["S.OTO_ADIM"] == "ENJ", "kalip kapali -> ENJ gecmedi")
+    r.kos(not any(_maca_cikislar(m.prev)), "ENJ sirasinda maca cikisi 1")
+    adim(m, P["P.FAZ1_SURE_ms"] + P["P.FAZ2_SURE_ms"] + P["P.FAZ3_SURE_ms"] + 60)
+    v = m.prev
+    r.kos(v["S.OTO_ADIM"] == "MACA_CEK" and v["S.FAZ3_BITTI"] == 1, "ENJ sonrasi MACA_CEK'e gecilmedi (ACMA'ya atladi?)")
+    r.kos(v["DO7.18"] == 1 and v["DO7.22"] == 1 and v["DO7.20"] == 0 and all(v[k] == 0 for k in GIR), "MACA_CEK cikislari yanlis")
+    r.kos(m.bobin("DO7.18") == 1 and m.bobin("DO7.17") == 0, "cek bobinleri (HW) yanlis")
+    m.girdi["DI5.08"] = 0                      # kalip kapali degil -> cek cikisi kesilir
+    adim(m, 30)
+    r.kos(m.prev["DO7.18"] == 0 and m.prev["DO7.22"] == 0, "kalip KAPALI degilken maca cek cikisi 1")
+    m.girdi["DI5.08"] = 1
+    adim(m, 30)
+    r.kos(m.prev["DO7.18"] == 1, "kalip tekrar kapali: cek cikisi donmedi")
+    adim(m, sure - 250)
+    r.kos(m.prev["S.OTO_ADIM"] == "MACA_CEK", "MACA_CEK sure dolmadan bitti (ACMA erken)")
+    adim(m, 500)
+    r.kos(m.prev["S.OTO_ADIM"] == "ACMA" and not any(_maca_cikislar(m.prev)), "MACA_CEK sonunda ACMA'ya gecilmedi / cikis acik kaldi")
+    r.kos(m.prev["S.OTO_ACMA_ADIMI"] == 1, "ACMA adimi cikisi yok")
+    return r.hata
+
+
+def s13(m):
+    """Secici (DI5.14..17) kapali: hic secili yok -> maca adimlari atlanir; yalniz secili maca hareket eder."""
+    r = Sonuc()
+    _maca_hazirla(m, secili=(), kalip_acik=True)
+    m.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m, 30)
+    r.kos(m.prev["S.OTO_ADIM"] in ("KAPAMA", "ENJ"), "secici hepsi kapali: MACA_GIR atlanmadi")
+    r.kos(not any(_maca_cikislar(m.prev)), "secici kapali: maca cikisi 1")
+    m2 = ElektrikMantik(cfg=m.cfg)      # ayni (varsa bozulmus) mantik
+    _maca_hazirla(m2, secili=(1,), kalip_acik=True)
+    m2.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m2, 100)
+    v = m2.prev
+    r.kos(v["S.OTO_ADIM"] == "MACA_GIR" and v["DO7.19"] == 1, "yalniz core2 secili: core2 gir yok")
+    r.kos(v["DO7.17"] == 0 and v["DO7.21"] == 0 and v["DO7.23"] == 0, "secili olmayan maca (1,3,4) hareket etti")
+    m2.girdi[SEC[1]] = 0      # secici cevrim ortasinda kapandi: adim biter, cikis kesilir
+    adim(m2, 30)
+    r.kos(m2.prev["DO7.19"] == 0, "secici kapaninca core2 cikisi kesilmedi")
+    return r.hata
+
+
+def s14(m):
+    """Zaman asimi (sure*2) -> muhurlu alarm + BOSTA; LOTO/genel iptalde maca cikislari 0; resetle yeniden baslar."""
+    r = Sonuc()
+    _maca_hazirla(m, secili=(0,), kalip_acik=False)          # izin yok -> sure birikmez -> zaman asimi
+    sure = m.P["P.MACA_SURE_ms"]
+    m.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m, int(sure * 2) - 100)
+    r.kos(m.prev["S.OTO_ADIM"] == "MACA_GIR" and m.prev["S.MACA_ALARM"] == 0, "zaman asimi erken (sure*2 dolmadan)")
+    adim(m, 200)
+    v = m.prev
+    r.kos(v["S.MACA_ALARM"] == 1 and v["AL_MACA_ZAMAN_ASIMI"] == 1 and v["S.HERHANGI_ALARM"] == 1, "sure*2 sonrasi alarm yok")
+    r.kos(v["S.OTO_ADIM"] == "BOSTA" and not any(_maca_cikislar(v)), "alarmda BOSTA'ya iptal / cikis 0 olmadi")
+    adim(m, 200)
+    r.kos(m.prev["S.OTO_ADIM"] == "BOSTA", "alarm silinmeden yeni cevrim basladi")
+    m.girdi["AI10.1"] = 100
+    m.girdi["HMI.RESET"] = 1
+    adim(m, 20)
+    m.girdi["HMI.RESET"] = 0
+    adim(m, 50)
+    r.kos(m.prev["S.MACA_ALARM"] == 0 and m.prev["S.OTO_ADIM"] == "MACA_GIR", "reset sonrasi alarm silinmedi / cevrim baslamadi")
+    r.kos(m.prev["DO7.17"] == 1, "reset sonrasi maca gir cikisi yok")
+    # LOTO: cikislar hemen 0 ve BOSTA
+    m.girdi["HMI.LOTO_BASLAT"] = 1
+    adim(m, 30)
+    v = m.prev
+    r.kos(not any(_maca_cikislar(v)) and v["S.OTO_ADIM"] == "BOSTA", "LOTO'da maca cikislari 0 / BOSTA olmadi")
+    r.kos(all(m.bobin(k) == 0 for k in GIR + CEK), "LOTO'da maca bobini enerjili")
+    # genel iptal: OTO modu kapandi
+    m.girdi.update({"HMI.LOTO_BASLAT": 0, "HMI.LOTO_BITIR": 1})
+    adim(m, 20)
+    m.girdi["HMI.LOTO_BITIR"] = 0
+    adim(m, 50)
+    r.kos(m.prev["DO7.17"] == 1, "LOTO sonrasi cevrim tekrar baslamadi (test hazirligi)")
+    m.girdi["DI4.09"] = 0
+    adim(m, 30)
+    r.kos(not any(_maca_cikislar(m.prev)) and m.prev["S.OTO_ADIM"] == "BOSTA", "oto modu kapaninca maca cikislari 0 olmadi")
+    return r.hata
+
+
+def s15(m):
+    """Cift solenoid kilidi: in/out ayni anda 1 olamaz (PLC ifadesi ve HW bobini)."""
+    r = Sonuc()
+    _maca_hazirla(m, secili=(0,), kalip_acik=True)
+    m.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m, 50)
+    r.kos(m.prev["DO7.17"] == 1, "hazirlik: gir cikisi yok")
+    # karsi cikis ariza ile 1 -> PLC gir'i keser
+    m.zorla = {"DO7.18": 1}
+    adim(m, 30)
+    r.kos(m.prev["DO7.17"] == 0, "PLC: DO7.18=1 iken DO7.17 kesilmedi (in/out kilidi)")
+    # PLC arizasi: ikisi birden zorla 1 -> HW bobinleri ikisi de 0
+    m.zorla = {"DO7.17": 1, "DO7.18": 1}
+    adim(m, 30)
+    r.kos(m.bobin("DO7.17") == 0 and m.bobin("DO7.18") == 0, "HW: in+out birlikte 1 iken bobin enerjili (kilit yok)")
+    # E-stop: valf beslemesi duser -> maca bobinleri 0
+    m.zorla = {}
+    adim(m, 30)
+    m.girdi["HW.ST1_1"] = 0
+    adim(m, 50)
+    r.kos(all(m.bobin(k) == 0 for k in GIR + CEK), "E-stop'ta maca bobini enerjili")
+    return r.hata
+
+
+def _plc_tanim(cfg, id_):
+    for e in cfg["mantik"]["plc"]:
+        if e["id"] == id_:
+            return e
+    raise KeyError(id_)
+
+
+def mut_s12a(cfg):     # ENJ sonrasi maca cek yok
+    for a in cfg["mantik"]["siralayici"]["adimlar"]:
+        if a["ad"] == "ENJ":
+            a["sonraki"] = "ACMA"
+
+
+def mut_s12b(cfg):     # maca gir kalip acik kosulu yok
+    e = _plc_tanim(cfg, "S.MACA_GIR_IZIN")
+    e["ifade"] = cikar(e["ifade"], "S.KALIP_ACIK")
+
+
+def mut_s12c(cfg):     # maca cek kalip kapali kosulu yok
+    e = _plc_tanim(cfg, "S.MACA_CEK_IZIN")
+    e["ifade"] = cikar(e["ifade"], "S.KALIP_KAPALI")
+
+
+def mut_s13a(cfg):     # core1 secicisi yok sayilir
+    e = _plc_tanim(cfg, "DO7.19")
+    e["ifade"] = cikar(e["ifade"], "DI5.15")
+    e = _plc_tanim(cfg, "DO7.17")
+    e["ifade"] = cikar(e["ifade"], "DI5.14")
+
+
+def mut_s14a(cfg):     # zaman asimi carpani cok buyuk
+    cfg["mantik"]["zamanlar"]["maca_zaman_asimi_carpan"] = 1000
+
+
+def mut_s14b(cfg):     # LOTO/genel iptalde cikis kesilmez: izin LOTO'yu icermez, genel iptal LOTO'suz
+    e = _plc_tanim(cfg, "S.MACA_IZIN_ORTAK")
+    e["ifade"] = cikar(cikar(cikar(e["ifade"], ["not", "S.LOTO_MODU"]), "DI5.12"), ["not", "S.DESARJ_ISTEGI"])
+    gi = cfg["mantik"]["siralayici"]["genel_iptal"]
+    gi["kosul"] = cikar(gi["kosul"], "S.LOTO_MODU")
+
+
+def mut_s14c(cfg):     # alarm silinmeden yeni cevrim
+    k = cfg["mantik"]["siralayici"]["baslatma"]["kosul"]
+    cfg["mantik"]["siralayici"]["baslatma"]["kosul"] = cikar(k, ["not", "S.MACA_ALARM"])
+
+
+def mut_s15a(cfg):     # PLC in/out kilidi yok
+    for i in GIR + CEK:
+        e = _plc_tanim(cfg, i)
+        e["ifade"] = [e["ifade"][0]] + [x for x in e["ifade"][1:] if not (isinstance(x, list) and x[0] == "not")]
+
+
+def mut_s15b(cfg):     # HW bobininde karsi cikis kilidi yok
+    for e in cfg["mantik"]["donanim"]:
+        if e["id"].startswith("HW.MACA"):
+            e["ifade"] = [x for x in e["ifade"] if not (isinstance(x, list) and x[0] == "not")]
+
+
 SENARYOLAR = [
     (1, "Start birakilinca motor devam (muhur); stop ve E-stop durdurur", s1, [mut_s1a, mut_s1b]),
     (2, "KM2/KM3 asla birlikte 1 degil; KM3 dususunden >=50 ms sonra KM2", s2, [mut_s2a, mut_s2b]),
@@ -579,6 +783,10 @@ SENARYOLAR = [
     (9, "OTO cevrim: faz sureleri, piston geri ACMA bitisinden sureli, yeni cevrim piston geri sonrasi", s9, [mut_s9a, mut_s9b]),
     (10, "Mafsal yaglama sureli (N. cevrimde)", s9b, [mut_s9c]),
     (11, "A97 sayaci die_height_current'tan, FKAP 50 kN esigi, LOTO 6-8 yalniz elle", s10, [mut_s10a, mut_s10b]),
+    (12, "MACA tam cevrim: MACA_GIR (kalip acik) -> KAPAMA -> ENJ -> MACA_CEK (kalip kapali) -> ACMA", s12, [mut_s12a, mut_s12b, mut_s12c]),
+    (13, "MACA secici DI5.14..17 kapali -> maca atlanir; yalniz secili maca hareket eder", s13, [mut_s13a]),
+    (14, "MACA zaman asimi (sure*2) -> muhurlu alarm + BOSTA; LOTO/genel iptalde cikis 0", s14, [mut_s14a, mut_s14b, mut_s14c]),
+    (15, "MACA in/out cift solenoid kilidi (PLC + HW bobin), E-stop'ta bobin 0", s15, [mut_s15a, mut_s15b]),
 ]
 
 

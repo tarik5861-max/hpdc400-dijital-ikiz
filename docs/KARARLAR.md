@@ -58,3 +58,4 @@ Yeni karar en üste eklenir. Bir karar değişirse eskisi silinmez, yanına "→
 | 2026-11-15 | Fable yalnızca ölçü / koordinat ve çözülemeyen çakışma; çizim Sonnet, kontrol Haiku | Maliyet; kullanıcı isteği |
 | 2026-11-15 | Nihai hedef arıza teşhisi; proje kademe kademe tam simülasyona büyüyecek | Servis bağımlılığını bitirmek |
 | 2026-11-20 | Hat/hortumlar (hatlar.json H01..H24, 19 hat) tek generic script A160 (parts/A160_hat_boru.py) ile cizilir; veri params A160.dims.hatlar (tools/hat_senkron.py tek yonlu); hortum referans konumda, motion_check'te atlanir, uclar blok yuzunde biter (port/delik cizilmez) | Tek dogruluk kaynagi + ucuz/saglam; hortum esnek, A130/A41 kaymasi sahte cakisma uretmesin |
+| 2026-11-21 | PLC maça adımları süre tabanlı (P.MACA_SURE_ms 2000, zaman aşımı x2 → AL_MACA_ZAMAN_ASIMI, BOSTA); seçici DI5.14..17 = "maça n otomatikte kullanılır"; giriş/çıkış kilidi | Varsayım, saha teyidi sonra |
