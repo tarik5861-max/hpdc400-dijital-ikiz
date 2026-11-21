@@ -4,6 +4,7 @@ _Son güncelleme: 2026-11-21 (sabah). Her `/kapanis`'te baştan yazılır (en fa
 
 ## Şu an
 - Model 296 instance, 46 hat (A160). Kontroller YEŞİL: check.py HATA 0 / UYARI 0, motion_check (+ `--kalip-yuksekligi`) 0 çarpışma, itici taraması 0, elektrik 11 senaryo 0 hata, hidrolik + hidrolik ağ testleri geçti.
+- Akşam: Kademe 1b çevrim makrosu yazıldı: `lib/cevrim.py` (16 faz, saf python, `python3 lib/cevrim.py` kural testi 0 ihlal) + `HPDC400_cevrim.FCMacro` (cevrim_baslat/tek/durdur/hiz/faz). Plunger 0..500 temiz (tarama), itici yalnız s=1, plunger yalnız s=0. FreeCAD'de canlı denenmedi (sahte FreeCAD ile duman testi geçti). Sınır: A54 kol ucu sabit (plunger kaplini ondan ayrılır), maça çek/gir ve yağlama yalnız faz adı.
 - Öğleden sonra: A54 B / A55 PA hatları kapandı (A183 ×2 sert boru, A65'e B/PA portu, ayrıntı KARARLAR). Model 296 instance.
 - Bu oturumda (2026-11-21 sabah): A52 plunger su yolu (kör delik d26 + iç boru d14/d10, coupling'de radyal giriş +Y x-790 / çıkış -Y x-740), A182 kamara arka desteği (eyer+dikme, A11'e dayanır, vuruş konumuyla yükselir), A54 (5 port: B -Y yüz, 2 hava alma, 2 basınç) ve A55 (5 port: PA üst, 2 hava alma, PT, DR) ek portları, A181 hat kelepçesi ×18 (6 konsol × P/pilot/T; A175 P/pilot rafı genişletildi). Hepsi DESIGN ASSUMPTION. check HATA 0, 3 vuruş konumu 0, motion 0 (+kalıp yüksekliği 0), hidrolik testler geçti.
 - Önceki oturum: A11 +X mukavemeti kapandı (`tools/a11_mukavemet.py`, SF 4,7, takviye yok); A65 dönüşü 2 × DN51 hortum (H20H + H20H2, 6,7 m/s) + H20R2 kol (60,3×3,6, TEE_T2R), A176 braket T2 deliği. Önceki oturum: portlar/delikler, Y4 maça hortumları H30..H52, yağlama hatları, 109 parça adı (`docs/PARCA_ADLARI.md`).
@@ -20,5 +21,5 @@ _Son güncelleme: 2026-11-21 (sabah). Her `/kapanis`'te baştan yazılır (en fa
 - Temizlik: `parts/A21_sabit_plaka.py` ~satır 29 sabit sayı; `lib/kinematics.py` eski yorum; `docs/olcu_notlari.md` eski A14 tablosu; `lib/hidrolik_mantik.py` eski sabitler. Faz geçişleri süre tabanlı, DB68.ENC ile konum tabanlı olmalı.
 
 ## Sıradaki adım
-- Kademe 1b çevrim makrosu (`HPDC400_cevrim.FCMacro`, KARARLAR 2026-11-20); sonra Kademe 4 (PLC durum makinesi).
+- Kendi PC'nde `git pull` → `HPDC400_yukle.FCMacro` sonra `HPDC400_cevrim.FCMacro` ile 1b'yi dene; sonra Kademe 4 (PLC durum makinesi).
 - Alt plan A (tonaj → ölçülendirme motoru, 1000 t gibi makineler için) en sonda; şimdilik tüm ölçüler 400 t'ye elle yazılı.

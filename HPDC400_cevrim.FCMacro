@@ -1,0 +1,106 @@
+# HPDC-400 - tam dokum cevrimi animasyonu (Kademe 1b). Once HPDC400_yukle.FCMacro ile montaj acik olmali.
+# Faz tablosu ve sayilar: lib/cevrim.py (zaman tabanli). Hareketler: HPDC400_hareket.FCMacro (mafsal, kalip yuksekligi, hortumlar) + plunger A52 + itici seti.
+# Konsol komutlari:
+#   cevrim_baslat()      -> surekli cevrim
+#   cevrim_durdur()      -> durdur, kalip acik/baslangic konumuna don
+#   cevrim_hiz(2.0)      -> animasyon hizi carpani
+#   cevrim_faz(7)        -> cevrimi 7. faza (1..16) sar ve baslat
+#   cevrim_tek()         -> tek cevrim, sonunda durur
+import os, sys, json, importlib
+import FreeCAD as App, FreeCADGui as Gui
+from PySide import QtCore
+
+_ROOT = os.environ.get("HPDC_ROOT") or r"C:\Users\tarik\projects\hpdc400"
+# hareket makrosunun fonksiyonlarini al (son satir hpdc_baslat() calistirilmaz)
+_src = open(os.path.join(_ROOT, "HPDC400_hareket.FCMacro"), encoding="utf-8").read().rstrip().splitlines()
+if _src and _src[-1].strip() == "hpdc_baslat()":
+    _src = _src[:-1]
+exec(compile("\n".join(_src), "HPDC400_hareket.FCMacro", "exec"), globals())
+import cevrim
+importlib.reload(cevrim)
+_H = json.load(open(os.path.join(_ROOT, "params", "hidrolik.json"), encoding="utf-8"))
+_C = cevrim.ayarlar(_P, _H)
+_EJ = [i["name"] for pid in ("A42", "A83", "A84", "A85") for i in _P["parts"][pid]["instances"]]
+_PL = [i["name"] for i in _P["parts"]["A52"]["instances"]]
+_cs = {"t": 0.0, "hiz": 1.0, "timer": None, "tek": False, "ls": None, "T": cevrim.toplam(_C), "son_i": -1}
+
+
+def _T(dx):
+    return App.Placement(App.Vector(dx, 0, 0), App.Rotation())
+
+
+def _uygula(d):
+    s = d["s"]
+    trs, info = kinematics.pose_full(s, _P, _state["dh"])
+    for name, M in trs.items():
+        o = _doc.getObject(name)
+        if o is not None:
+            o.Placement = _plc(M).multiply(_base(o))
+    if _cs["ls"] is None or abs(_cs["ls"] - s) > 1e-9:      # hortumlar yalniz mafsal degisince
+        _hortumlar(info)
+        _cs["ls"] = s
+    _state["s"] = s
+    for n in _EJ:                                            # itici seti: platen hareketi ustune -X ileri
+        o = _doc.getObject(n)
+        if o is not None:
+            o.Placement = _T(d["ej"]).multiply(o.Placement)
+    for n in _PL:                                            # plunger A52 (A54 kolu temsili sabit kalir)
+        o = _doc.getObject(n)
+        if o is not None:
+            o.Placement = _T(d["px"]).multiply(_base(o))
+    Gui.getMainWindow().statusBar().showMessage(
+        f"HPDC-400 cevrim  [{d['faz']}]  {d['not']}  |  mafsal s={s:.2f}  plaka={info['dx_platen']:.0f} mm  plunger={d['px']:.0f} mm  itici={-d['ej']:.0f} mm")
+    Gui.updateGui()
+
+
+def _cevrim_tick():
+    _cs["t"] += DT_MS / 1000.0 * _cs["hiz"]
+    if _cs["tek"] and _cs["t"] >= _cs["T"]:
+        cevrim_durdur()
+        return
+    d = cevrim.durum(_cs["t"], _C)
+    if d["i"] != _cs["son_i"]:
+        _cs["son_i"] = d["i"]
+        print(d["faz"], "-", d["not"])
+    _uygula(d)
+
+
+def _basla(t0=0.0, tek=False):
+    cevrim_durdur(reset=False)
+    _kaliplar(True)
+    _cs.update(t=t0, tek=tek, son_i=-1, ls=None)
+    t = QtCore.QTimer()
+    t.timeout.connect(_cevrim_tick)
+    t.start(DT_MS)
+    _cs["timer"] = t
+
+
+def cevrim_baslat():
+    _basla()
+
+
+def cevrim_tek():
+    _basla(tek=True)
+
+
+def cevrim_faz(n):
+    tab = cevrim.faz_tablosu(_C)
+    n = max(1, min(len(tab), int(n)))
+    _basla(sum(f[1] for f in tab[:n - 1]) + 1e-6)
+
+
+def cevrim_hiz(k):
+    _cs["hiz"] = float(k)
+
+
+def cevrim_durdur(reset=True):
+    if _cs["timer"] is not None:
+        _cs["timer"].stop()
+        _cs["timer"] = None
+    if reset:
+        _cs["ls"] = None
+        _uygula(cevrim.durum(0.0, _C))      # kalip acik, plunger geride, itici geride
+        _hortumlar(kinematics.pose_full(1.0, _P, _state["dh"])[1])
+
+
+cevrim_baslat()
