@@ -70,6 +70,7 @@ Kaynak: params/bom.json (tools/adlar_tablo.py ile üretilir; elle düzenleme).
 | A144 | Piston kolu koruyucu kapak | Plunger rod guard | 1 | Hareketli piston kolunu çevreden koruyan kapak. (varsayım) |
 | A145 | Ön kafa tutucu saplama uçları (A54) | Cylinder tie rod ends (A54) | 1 | Enjeksiyon silindiri ön kafasını tutan M24 saplama uçları. (varsayım) |
 | A182 | Kamara arka desteği | Shot sleeve rear support | 1 | Soğuk kamaranın arka ucunu şase üst yüzüne dayayan eyer ve dikme. (varsayım) |
+| A183 | Enjeksiyon bağlantı borusu | Injection unit rigid pipe | 2 | A54 kol tarafı ve A55 çarpan tahrik portunu A65'e bağlayan sert boru. (varsayım) |
 
 ## A60 Hidrolik unite
 

@@ -27,5 +27,8 @@ def build(d, G, g):
         b, hl = _port(g, p, fh["size_yz"][0] / 2)
         bosses.append(b)
         holes.append(hl)
+    fx1 = fh["local_x_range"][1]
+    for p in d.get("ports_x", []):   # on yuz (+X): yalniz delik (flans A183'te)
+        holes.append(g.move(g.cyl(p["port_d"] / 2, p["port_depth"], "x"), fx1 - p["port_depth"] / 2, p["y"], p["z"]))
     s = g.fuse(blk(fh), blk(rh), barrel, rodc, *bosses)
     return g.cut(s, *holes) if holes else s

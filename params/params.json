@@ -40,7 +40,8 @@
    "SHOT POSITION LIMITS: 3 separate d140 holes impossible (step 75 < 140; range -150..+70 max) -> physical A21 vertical window 140x290 (Z -220..+70) with 2 bolted 75 mm filler blocks; model draws only the selected hole. Upper limit Z<=+70 from A55 vs A14 upper rib (Z 220, 10 mm), Z<=+150 from A54 vs A13_3. Ladle free height above pour hole under A13_3 rod: 390/315/240 mm (under front flange 340/265/190). 'ust' = machine centre (Z=0).",
    "INJECTION REACTION per position (430 kN, line at Z_s, conservative; two-level column statics N_L+N_U=430, N_L(-150)+N_U(370)=430 Z_s): lower column each 215/184/153 kN (27.4/23.4/19.5 MPa), upper 0/62/124 kN (0/5.5/11.0 MPa). A57/A14 base overturning 430*(Z_s+530) = 163/196/228 kNm -> front saddle hold-down 221/264/308 kN (4 x M24 10.9 preload 988 kN), base bolt group 194/233/271 kN (8 x M30 10.9). X force by shear keys (friction would need 2150 kN clamp at mu 0.2): key 300x40, 30 engagement -> 23.9 MPa bearing / 17.9 MPa shear; A11 stop block weld a=10 x 960 -> 44.8 MPa. Static OK; A14 base weld fatigue per shot verified 2026-11-19 (17.8 MPa, cat 36*, SF 1.11). A54-to-A13 clamp option dropped: lower columns fixed at Z=-150 cannot follow orta/ust.",
    "2026-11-20 port/delik (olcu-mimari): port bore hizlari v=Q/(pi d^2/4): A130 A2 d20 94.2 L/dk 5.0, B2 d16 65 5.4, Pi d12 0.9; A35 A d32 279.7 5.8, B d25 191.2 6.5; A41 A d16 94.2 7.8 (yuksek), B d16 5.4, capraz d14 47.1 5.1; A65 P d32 191.2 4.0, T d51 1625.8 13.4 (2xd51 6.7), Pi d10 1.3; A59 P d38 2.8, Pi d19 1.4, T d30 290 6.8; A61 T d80 1905.8 6.3 (tepe, ort ~1.9). A11 -Y duvar gecisi d150 (H24 flans d142 = 89x1.6).",
-   "2026-11-20 port-2 (olcu-mimari): v=Q/(pi d^2/4): A168 A/B d10 11.78 L/dk 2.50 m/s (B 8.09 -> 1.72); P d16 47.1 L/dk (4 maca es zamanli) 3.91; T d20 47.1 2.50; A170 cikis d6 0.15 L/dk 0.09; A172/A173 DN32 d32 191.2 L/dk 3.96 (boru ID38 2.81). A23 12 gomme nipel d12/havsa d16 boy 18; yan yuz nipel araligi 20 -> havsa arasi et 4 mm. Hat ucu - port farki 25 hat ucunun hepsinde 0.0 mm (A168 P/T hatsiz)."
+   "2026-11-20 port-2 (olcu-mimari): v=Q/(pi d^2/4): A168 A/B d10 11.78 L/dk 2.50 m/s (B 8.09 -> 1.72); P d16 47.1 L/dk (4 maca es zamanli) 3.91; T d20 47.1 2.50; A170 cikis d6 0.15 L/dk 0.09; A172/A173 DN32 d32 191.2 L/dk 3.96 (boru ID38 2.81). A23 12 gomme nipel d12/havsa d16 boy 18; yan yuz nipel araligi 20 -> havsa arasi et 4 mm. Hat ucu - port farki 25 hat ucunun hepsinde 0.0 mm (A168 P/T hatsiz).",
+   "2026-11-21 A54 B / A55 PA hatlari (olcu-mimari, ikiz_tasarim): kol tarafi alan pi/4(0.14^2-0.09^2)=0.009032 m2 x 3.0 m/s = 1625.8 L/dk. v=Q/(pi d^2/4): eski B d32 33.7 m/s; 2xDN51 6.68 (>6, red); boru 88.9x5 id78.9 5.54 (secildi), 89x4.5 id80 5.39 (210 bar tepe icin et yetersiz: s_gerek 3.94/0.875=4.51); port d76 5.97. Et DIN 2413 benzeri s=pD/(2*Re/1.5), E355: 140 bar 2.63, 210 bar 3.94 mm (+%12.5 tol 4.51 <= 5.0). dp B (L 1.03 m, 2 SR dirsek, giris/cikis) ~0.6 bar. Carpan: kafa hacmi ~9.7 L (silindir 7.7 + hat 2), K_yag 1.5 GPa, 140->286 bar dV=94 cm3, carpan plunger 6.1 mm, tahrik hacmi x2.041=193 cm3; yukselme 15/20/30 ms -> 771/578/385 L/dk. PA 60.3x5.6 id49.1: 20 ms'de 5.09 m/s (d38 8.5), dp ~0.37 bar; port d50 4.91 m/s. On kafa port ligamenti 22/20 mm, cember 140 bar 24/27 MPa."
   ],
   "state": "die_closed_at_die_height_400",
   "units": "mm, deg",
@@ -92,7 +93,8 @@
     "A143",
     "A144",
     "A145",
-    "A182"
+    "A182",
+    "A183"
    ],
    "bbox_zmin_follow": [
     "A64"
@@ -2686,17 +2688,6 @@
     "total_length": 820.0,
     "ports": [
      {
-      "ad": "B",
-      "face": "-Y",
-      "x": -40,
-      "c": 0,
-      "boss_d": 70,
-      "boss_h": 8,
-      "port_d": 32,
-      "port_depth": 45,
-      "not": "kol tarafi (B) ana port, on kafa -Y yuz (ust A67_2 + A145 saplama somunlari dolu); SAE 1-1/4 VARSAYIM"
-     },
-     {
       "ad": "BL_ON",
       "face": "+Z",
       "x": -40,
@@ -2741,7 +2732,20 @@
       "not": "arka kafa basinc olcum G1/4"
      }
     ],
-    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss yuksekligi <=8 (A13 kolon bosluğu Y 20 mm). A port = A65 flansi (arka kafa ust). Ust on kafa: A67_2 + A145 dolu."
+    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss yuksekligi <=8 (A13 kolon boslugu Y 20 mm). A port = A65 flansi (arka kafa ust). Ust on kafa: A67_2 + A145 dolu. B portu 2026-11-21 -Y d32 -> +X d76 (ports_x; A183_1 sert boru ile A65 +X B portuna).",
+    "ports_x": [
+     {
+      "ad": "B",
+      "face": "+X",
+      "y": -90.0,
+      "z": 92.0,
+      "port_d": 76.0,
+      "port_depth": 40.0,
+      "ic_kanal": "port dibinden kol odasi halkasina (rod d90 / bore d140) egik d60 kanal; cizilmez",
+      "flans": "A183_1 bas flansi 100(Y) x 90(Z) x 25, 4xM16 (SAE J518 kod 61 3in esdegeri, kare)",
+      "not": "DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari): kol tarafi (B) ana port. -Y yuz A13 kolonuna 20 mm (fitting sigmaz), ust yuz A67_2+A145 dolu -> on yuz (+X) sol-ust ceyrek. Ligament -Y kenar 22, ust kenar 20 mm (cember gerilmesi 140 bar 27 MPa). 1625.8 L/dk port hizi 5.97 m/s. A54 scripti +X port cizmez (ports_x) -> parca-cizer: _port +-X destegi."
+     }
+    ]
    },
    "local_origin": "Center of the front head front (+X) face. Body along -X (x -820..0); piston rod protrudes +X (x 0..80). Square heads have flat bottoms resting on A57 saddles.",
    "instances": [
@@ -2802,11 +2806,11 @@
       "face": "+Z",
       "x": -250,
       "c": 0,
-      "boss_d": 80,
+      "boss_d": 90,
       "boss_h": 10,
-      "port_d": 38,
+      "port_d": 50,
       "port_depth": 50,
-      "not": "carpan tahrik (A55 piston) ana port; SAE 1-1/2 VARSAYIM"
+      "not": "carpan tahrik (A55 piston d200) ana port; DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari): d38 -> d50 (carpan dolum 578 L/dk @20 ms yukselme; d38 8.5 m/s, d50 4.9 m/s). A183_2 bas flansi 90x90x20 boss ustune (z 140..160)."
      },
      {
       "ad": "BL_ON",
@@ -2853,7 +2857,7 @@
       "not": "kacak yag / drenaj G3/8"
      }
     ],
-    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss <=10 (govde r130 -> r140 = flans yaricapi, bbox degismez). A54 baglanti portu flansli (hat yok)."
+    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss <=10 (govde r130 -> r140 = flans yaricapi, bbox degismez). A54 baglanti portu flansli (hat yok). PA -> A65 -X yuz PA portu: A183_2 sert boru."
    },
    "local_origin": "Center of the front (+X) flange face, bolted to A54 rear head. Axis along -X (x -450..0).",
    "instances": [
@@ -3321,7 +3325,40 @@
        "hat": "H11H",
        "hiz_m_s": 1.27
       }
-     ]
+     ],
+     "liste_x": [
+      {
+       "ad": "B",
+       "yuz": "+X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        80,
+        -90,
+        254
+       ],
+       "d": 76,
+       "derinlik": 40,
+       "hat": "A183_1",
+       "hiz_m_s": 5.97,
+       "not": "DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari): A54 kol tarafi donusu/geri vurus beslemesi; flans 100x90 (y -140..-40, z 209..299)"
+      },
+      {
+       "ad": "PA",
+       "yuz": "-X",
+       "tip": "flush_delik",
+       "konum_lokal": [
+        -80,
+        0,
+        230
+       ],
+       "d": 50,
+       "derinlik": 40,
+       "hat": "A183_2",
+       "hiz_m_s": 4.91,
+       "not": "DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari): carpan (A55) tahrik; flans 90x90 (y +-45, z 185..275)"
+      }
+     ],
+     "liste_x_not": "A65 scripti yalniz liste (-Y yuz) keser; liste_x (+-X yuz) icin parca-cizer kesim ekler (eksen x)."
     }
    },
    "local_origin": "Vurus ekseni yuksekligi (pos Z = shot z_sel), blok merkezi x/y. Blok A54 arka kafasi ustunde (kafa ust yuzu +150 lokal), servo valf (S424, U16 TDP050EH) +Y yan yuzunde. A64 toplayici boru blok ustune iner.",
@@ -13039,6 +13076,157 @@
       0
      ],
      "note": "pos[2] TURETILMIS: global.shot_follow (pos[2] = z_sel)"
+    }
+   ]
+  },
+  "A183": {
+   "name": "Enjeksiyon unitesi sert baglanti borulari (A54 B -> A65, A55 PA -> A65)",
+   "dims": {
+    "acik_pay": 1.0,
+    "hatlar": {
+     "B": {
+      "od": 88.9,
+      "id": 78.9,
+      "malzeme": "E355+N (St52.4) DIN EN 10305-4 88.9x5",
+      "pts": [
+       [
+        -1260.0,
+        -90.0,
+        92.0
+       ],
+       [
+        -1160.0,
+        -90.0,
+        92.0
+       ],
+       [
+        -1160.0,
+        -90.0,
+        254.0
+       ],
+       [
+        -1930.0,
+        -90.0,
+        254.0
+       ]
+      ],
+      "flanslar": [
+       {
+        "t": 25.0,
+        "boy": [
+         100.0,
+         90.0
+        ]
+       },
+       {
+        "t": 25.0,
+        "boy": [
+         100.0,
+         90.0
+        ]
+       }
+      ],
+      "rb_mm": 76.0,
+      "ucler": [
+       "A54.B",
+       "A65.B"
+      ],
+      "not": "kisa yaricapli (1D) dovme dirsek x2 (dik bacak 162 >= 2x76); 1625.8 L/dk 5.54 m/s"
+     },
+     "PA": {
+      "od": 60.3,
+      "id": 49.1,
+      "malzeme": "E355+N 60.3x5.6",
+      "pts": [
+       [
+        -2330.0,
+        0.0,
+        140.0
+       ],
+       [
+        -2330.0,
+        0.0,
+        230.0
+       ],
+       [
+        -2090.0,
+        0.0,
+        230.0
+       ]
+      ],
+      "flanslar": [
+       {
+        "t": 20.0,
+        "boy": [
+         90.0,
+         90.0
+        ]
+       },
+       {
+        "t": 25.0,
+        "boy": [
+         90.0,
+         90.0
+        ]
+       }
+      ],
+      "rb_mm": 60.0,
+      "ucler": [
+       "A55.PA",
+       "A65.PA"
+      ],
+      "not": "578 L/dk (20 ms carpan yukselmesi) 5.09 m/s"
+     }
+    }
+   },
+   "local_origin": "x/y global, z vurus eksenine gore (pos = [0, 0, z_sel]); global.shot_follow ile A54/A55/A65 ile birlikte kayar (goreli hareket yok -> sert boru). Instance anahtari 'hat' (B | PA). DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari).",
+   "note": "DESIGN ASSUMPTION / ikiz_tasarim (2026-11-21, olcu-mimari): A160 sabit (hat_senkron takip yalniz bir uc) oldugundan vurus konumuyla tasinan ayri parca. Boru dis cap/et: B 88.9x5 (140 bar s_gerek 3.0, 210 bar tepe 4.5 mm), PA 60.3x5.6. Flanslar kare 4 civata temsili. On kafa sabit, arka kafa kayar (isil genlesme 30 K'de 0.24 mm) -> A65 ucu O-halkali flans payi.",
+   "instances": [
+    {
+     "name": "A183_1",
+     "pos": [
+      0.0,
+      0.0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "hat": "B",
+     "note": "pos[2] ve bbox Z TURETILMIS: global.shot_follow (pos[2] = z_sel)",
+     "bbox": [
+      -1930.0,
+      -140.0,
+      -103.0,
+      -1115.5,
+      -40.0,
+      149.0
+     ]
+    },
+    {
+     "name": "A183_2",
+     "pos": [
+      0.0,
+      0.0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "hat": "PA",
+     "note": "pos[2] ve bbox Z TURETILMIS: global.shot_follow (pos[2] = z_sel)",
+     "bbox": [
+      -2375.0,
+      -45.0,
+      -10.0,
+      -2090.0,
+      45.0,
+      125.0
+     ]
     }
    ]
   }

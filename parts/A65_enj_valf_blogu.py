@@ -14,4 +14,9 @@ def build(d, G, g):
         if e["tip"].endswith("tapali"):  # tapa: delik dibinden, yuzden 1/4 derinlik icerde (bbox degismez)
             tl = e["derinlik"] * 3 / 4
             r = g.fuse(r, g.move(g.cyl(e["d"] / 2 * 0.8, tl + 1, "y", center=False), x, y + e["derinlik"] - tl, z))
+    hx = b["len_x"] / 2
+    for e in d["ports"].get("liste_x", []):  # +-X yuz flush delikler
+        x, y, z = e["konum_lokal"]
+        sg = 1 if e["yuz"] == "+X" else -1
+        r = g.cut(r, g.move(g.cyl(e["d"] / 2, e["derinlik"], "x"), sg * (hx - e["derinlik"] / 2), y, z))
     return r

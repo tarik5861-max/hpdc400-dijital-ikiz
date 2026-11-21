@@ -83,7 +83,7 @@ Toplam 44 hat (A160 adedi 44; bom.json qty 42 -> BOM_TALEBI).
 - COZULDU 2026-11-20 (A61.dims.return_port + A11.pipe_passages): OLCU_TALEBI: A61 -Y yuz tank T donus portu (1000,-470,-800) + A11 -Y yan duvar gecisi d95 (X1000,Z-800) + A11.pipe_passages girdisi
 - COZULDU 2026-11-20 (A175 hat rafi konsolu x6, A176 A65 braketi, A177 A130 T braketi agacta): OLCU_TALEBI: hat rafi konsollari (sase -Y yan duvari, Y-540/-585/-595, Z-640/-705/-800), BRK_* hortum braketleri; bom.json ID yok
 - COZULDU 2026-11-20 (A172/A173 agacta, H01 -> H01a/b/c bolundu): OLCU_TALEBI: CV1 cek valf ve PF1 basinc filtresi govdesi bom.json de yok (ID uydurulmadi)
-- OLCU_TALEBI: A54-A65 arasi dogrudan flansli varsayildi (hat yok); A54 kol tarafi portu ve A55 baglanti portu params de yok
+- COZULDU 2026-11-21: A54 kol tarafi (B, +X on yuz d76) ve A55 PA (ust, d50) portlari A65'e A183 sert borulariyla baglandi: H60 88,9x5 (1625,8 L/dk, 5,54 m/s, L~1030), H61 60,3x5,6 (578 L/dk, 5,09 m/s, L~330). A160 disinda (vurusla birlikte kayar); kayit hatlar.json `hatlar_a183`. Kalan: A54 ic kanal cizilmez, flans temsili (SAE kod 61 3in daha buyuk), A65 ic valf/kanal B/PA tanimsiz (hidrolik-muhendisi), 210 bar tepe varsayim.
 - OLCU_TALEBI: A168 port tanimi (A1..A4 / B1..B4 -X yuzu X-400 Y165/Y215 Z36/98/160/222 VARSAYIM) + P/T besleme portlari; A168.dims.ports 'modellenmez'
 - OLCU_TALEBI: A170 yaglama pompasi cikis portu (VARSAYIM +X salter blogu 2105,455,-210 d8)
 - OLCU_TALEBI: A23 yaglama nipelleri (12): ust yuz Z490 X1675/1695/1715 Y+-110/150/190; yan yuz Y+-460 Z-150 X1735/1755/1775; pime ic kanallar

@@ -174,3 +174,16 @@ Açık kalanlar: A31 ve A35 scriptleri eski dims anahtarlarını okuyor (check.p
 - A23 `dims.yaglama_nipelleri` (yeni, 12): üst yüz +Z lokal (50/70/90, ±110/±150/±190, 490) AT/BT1/CT/ET/BT2/DT; yan yüz ±Y lokal (110/130/150, ±460, -150) AB/BB1/CB/EB/BB2/DB. İtmeli rakor M8x1 gövde d12 boy 18, d6,2 tüp deliği, yüzden 18 mm havşaya (d16) gömülü. Neden gömme: kalıp değişiminde darbe koruması + bbox değişmez (BBOX_SAPMA yok) + tüp ucu yüzde kalır (A160×A23 örtüşme yok). Yan nipel aralığı 20 -> havşa arası et 4 mm. Pim iç kanalları çizilmez.
 - Hat ucu - port farkı: 25 hat ucunun hepsinde 0,0 mm; hat ucu değişmedi.
 - Kontrol: check.py 0 hata.
+
+## A54 B / A55 PA -> A65 hatları (OLCU_TALEBI kapanışı) – 2026-11-21 (olcu-mimari)
+- Hepsi İKİZ TASARIM VARSAYIMI (ikiz_tasarim), saha teyidi sonra. Hesap meta.notes (2026-11-21 A54 B / A55 PA).
+- A54 `dims.ports` B (-Y yüz, x-40, c0, boss d70 h8, port d32) -> kaldırıldı; yeni `dims.ports_x` B: +X (ön kafa ön yüzü) y-90 z+92 (lokal), d76 derinlik 40, iç kanal kol odası halkasına (çizilmez). Neden: d32'de 1625,8 L/dk 33,7 m/s; -Y yüz A13 kolonuna 20 mm (d76 fitting/flanş sığmaz), üst yüz A67_2 + A145 dolu; ön yüz sol-üst çeyrek boş (A52 kaplin r55'e boru 10,8 mm, ligament 22/20 mm, çember 24/27 MPa). A54 scripti ±X port çizmez -> parca-cizer.
+- A55 PA: boss_d 80 -> 90, port_d 38 -> 50. Neden: çarpan dolum (140->286 bar, 193 cm³, 20 ms) 578 L/dk; d38 8,5 m/s, d50 4,9 m/s. Boss üstü lokal z140 değişmedi (bbox aynı).
+- A65 `dims.ports.liste_x` (yeni): B +X yüz lokal (80,-90,254) d76 der. 40 (5,97 m/s); PA -X yüz (-80,0,230) d50 der. 40. A65 scripti yalnız `liste` (-Y) keser -> parca-cizer ±X kesim ekler.
+- A183 (yeni parça, vuruş takipli sert boru, global.shot_follow.instances_pos_z_eq_shot'a eklendi): lokal orijin x/y global, z vuruş ekseni (pos [0,0,z_sel]); instance `hat`.
+  - A183_1 "B": 88,9×5 E355 (id 78,9), (-1260,-90,92) -> +X (-1160) -> +Z (254) -> -X (-1930); uç flanşları 100×90×25; 2 kısa yarıçaplı dövme dirsek (R76); 5,54 m/s, Δp ~0,6 bar. bbox [-1930,-140,-103,-1115.5,-40,149] (alt).
+  - A183_2 "PA": 60,3×5,6 E355 (id 49,1), (-2330,0,140) -> +Z (230) -> +X (-2090); flanş 90×90×20 (A55 boss) / 90×90×25 (A65 -X); 5,09 m/s. bbox [-2375,-45,-10,-2090,45,125] (alt).
+- Boru seçimi: 2×DN51 hortum 6,68 m/s (>6) red; 89×4,5 id80 5,39 m/s ama 210 bar tepe (yavaşlama darbesi varsayımı) için et yetersiz (gerek 4,51) -> 88,9×5.
+- Boşluklar (BRepExtrema, alt/üst): A183_1–H11H (A160_14) ferrul 10,6, –A52 kaplin 10,8, –A13_3 (üst) 21,5, –A145 22,2, –A67_1 22,8, –H02H 35,1, –A67_2 38,8, –A13_2 42,8. A183_2–A13_3 (üst) 35, –A54 36,4, –A64 64. İlk deneme y-95: H11H 6,1 -> y-90'a alındı (min 10 hedefi).
+- Doğrulama (geçici kopyada A183 scripti + bom + kinematics ile): check HATA 0 (296 instance), --vurus-tarama 3×0, motion_check --kalip-yuksekligi 0, --vurus-tarama 0.
+- Uyarı: ön kafa sabit, arka kafa kayar (ısıl genleşme 30 K'de 0,24 mm) -> A65 ucunda O-halkalı flanş payı; A65 bloğu B ve PA dahili kanal/valf tanımı hidrolik-muhendisi'nde.

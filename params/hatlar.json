@@ -4448,5 +4448,32 @@
   "RISK: T rafi A72 panosuna 12 mm, P rafi sase duvarina 16 mm bosluk",
   "RISK: tum rijit/hortum kisa bacaklar (<2Rb) bukum uyarisi: dirsek fitting ile (hat.kontrol.bukum_uyari)",
   "RISK: H38 (P 20x2) A13_3 cubugu altina ~10 mm, A25_3 somununa X'te ~10 mm; H39 (T 25x3) A25_3 somun ustune ~10 mm, H01c ustune ~8 mm; kapi izi (A165) ic tarafi Y-540 dikeyleri"
- ]
+ ],
+ "hatlar_a183": {
+  "not": "A160'a girmez: A54/A55/A65 vurusla birlikte kaydigi icin hat_senkron (tek uc takipli) yerine A183 parcasi (params.parts.A183) cizer. 2026-11-21 olcu-mimari, ikiz_tasarim varsayimi.",
+  "H60": {
+   "ad": "A54 kol tarafi (B) -> A65 B (sert, tek DN80)",
+   "parca": "A183_1",
+   "dis_cap_mm": 88.9,
+   "ic_cap_mm": 78.9,
+   "debi_lpm": 1625.8,
+   "basinc_bar": 140,
+   "tepe_bar": 210,
+   "hiz_m_s": 5.54,
+   "L_mm": 1030,
+   "dp_bar": 0.6,
+   "hareket": "yok (A54/A55/A65 birlikte kayar)"
+  },
+  "H61": {
+   "ad": "A55 PA (carpan tahrik) -> A65 PA (sert)",
+   "parca": "A183_2",
+   "dis_cap_mm": 60.3,
+   "ic_cap_mm": 49.1,
+   "debi_lpm": 578,
+   "basinc_bar": 140,
+   "hiz_m_s": 5.09,
+   "L_mm": 330,
+   "hareket": "yok"
+  }
+ }
 }
