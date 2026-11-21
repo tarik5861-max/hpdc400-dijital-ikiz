@@ -7255,7 +7255,62 @@
      "depth": 25,
      "height_from_back": 30
     },
-    "edge_chamfer": 5
+    "edge_chamfer": 5,
+    "cavity": {
+     "x_range": [
+      70.0,
+      170.0
+     ],
+     "y": [
+      -150.0,
+      150.0
+     ],
+     "z": [
+      -50.0,
+      210.0
+     ],
+     "not": "DESIGN ASSUMPTION (2026-11-21): sabit yari ana kavite (A82 cavity_pocket ayni y/z izi, A82'de 15 derin -> toplam 115)."
+    },
+    "side_pockets": [
+     {
+      "x_range": [
+       60.0,
+       170.0
+      ],
+      "y": [
+       60.0,
+       150.0
+      ],
+      "z": [
+       -210.0,
+       -130.0
+      ]
+     },
+     {
+      "x_range": [
+       60.0,
+       170.0
+      ],
+      "y": [
+       -150.0,
+       -60.0
+      ],
+      "z": [
+       -210.0,
+       -130.0
+      ]
+     }
+    ],
+    "core_guides": {
+     "d": 30.0,
+     "x": 85.0,
+     "z": [
+      170.0,
+      -170.0
+     ],
+     "y_in": 150.0,
+     "not": "DESIGN ASSUMPTION: 4 maca (A167) Y ekseninde yan yuzden kaviteye/yan cebe; maca d26, kilavuz d30. Yan cepler biscuit (d80, y +-40) ile 20 mm et birakir."
+    }
    },
    "local_origin": "Center of the back face (contact with fixed platen die face = global origin). Thickness along +X (x 0..170).",
    "instances": [
@@ -7532,7 +7587,31 @@
      },
      "die_ejection_stroke": 65,
      "note": "ejector box = rear part of the 230 mm moving die half (die height unchanged). A83 stroke 65 = A83 front (x -95) to cavity plate back (x -160)."
-    }
+    },
+    "side_pockets": [
+     {
+      "y": [
+       60.0,
+       150.0
+      ],
+      "z": [
+       -210.0,
+       -130.0
+      ],
+      "depth": 15.0
+     },
+     {
+      "y": [
+       -150.0,
+       -60.0
+      ],
+      "z": [
+       -210.0,
+       -130.0
+      ],
+      "depth": 15.0
+     }
+    ]
    },
    "local_origin": "Center of the back face (contact with moving platen die face). Thickness along -X (x -230..0); parting face at local x=-230 = global X=170.",
    "instances": [
@@ -13229,6 +13308,74 @@
      ]
     }
    ]
+  },
+  "A184": {
+   "name": "Maca cekirdegi (kayar maca pimi, A167 koluna bagli)",
+   "dims": {
+    "len": 170.0,
+    "d": 26.0,
+    "collar_d": 28.0,
+    "collar_len": 12.0
+   },
+   "local_origin": "A167 flans montaj yuzu merkezi (A167 ile ayni pos/rot). Maca kalibin ICINDE (ileri) konumda cizili; cekili konum = lokal +X 80 mm (A167 stroke). Uc y=+-100 (kavite/yan cep icinde). DESIGN ASSUMPTION 2026-11-21.",
+   "instances": [
+    {
+     "name": "A184_1",
+     "pos": [
+      85.0,
+      270.0,
+      170.0
+     ],
+     "rot": [
+      0,
+      0,
+      90
+     ],
+     "elektrik": "core1 (A167_1); animasyon: lokal +X'e 80 mm = cekili"
+    },
+    {
+     "name": "A184_2",
+     "pos": [
+      85.0,
+      270.0,
+      -170.0
+     ],
+     "rot": [
+      0,
+      0,
+      90
+     ],
+     "elektrik": "core2 (A167_2); animasyon: lokal +X'e 80 mm = cekili"
+    },
+    {
+     "name": "A184_3",
+     "pos": [
+      85.0,
+      -270.0,
+      170.0
+     ],
+     "rot": [
+      0,
+      0,
+      -90
+     ],
+     "elektrik": "core3 (A167_3); animasyon: lokal +X'e 80 mm = cekili"
+    },
+    {
+     "name": "A184_4",
+     "pos": [
+      85.0,
+      -270.0,
+      -170.0
+     ],
+     "rot": [
+      0,
+      0,
+      -90
+     ],
+     "elektrik": "core4 (A167_4); animasyon: lokal +X'e 80 mm = cekili"
+    }
+   ]
   }
  },
  "mates": [
@@ -14066,6 +14213,10 @@
    [
     "A182",
     "A11"
+   ],
+   [
+    "A184",
+    "A167"
    ]
   ],
   "allowed_limits": [
@@ -14073,6 +14224,11 @@
     "A160",
     "A160",
     15000
+   ],
+   [
+    "A184",
+    "A167",
+    60000.0
    ]
   ],
   "allowed_limits_note": "A160 hat/hortum T-tee, dirsek ve boru-hortum gecis birlesimleri icin cift-bazli esik (mm3): fitting gomulmesi <=15 cm3",

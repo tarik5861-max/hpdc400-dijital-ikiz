@@ -119,6 +119,7 @@
     "A165",
     "A166",
     "A167",
+    "A184",
     "A168",
     "A169",
     "A172",
@@ -1126,6 +1127,15 @@
      "ad_tr": "Maça çekme silindiri",
      "ad_en": "Core pull cylinder",
      "islev": "Kalıp maçasını döküm sonrası çeken/süren hidrolik silindir."
+    },
+    {
+     "id": "A184",
+     "name": "Maca cekirdegi (kayar maca pimi, A167 koluna bagli)",
+     "qty": 4,
+     "script": "parts/A184_maca_cekirdegi.py",
+     "ad_tr": "Maça çekirdeği",
+     "ad_en": "Core slide pin",
+     "islev": "A167 silindirinin kolu ucunda kaviteye giren kayar maça pimi; çekili/ileri konum. (varsayım)"
     },
     {
      "id": "A168",

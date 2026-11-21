@@ -22,6 +22,7 @@ _H = json.load(open(os.path.join(_ROOT, "params", "hidrolik.json"), encoding="ut
 _C = cevrim.ayarlar(_P, _H)
 _EJ = [i["name"] for pid in ("A42", "A83", "A84", "A85") for i in _P["parts"][pid]["instances"]]
 _PL = [i["name"] for i in _P["parts"]["A52"]["instances"]]
+_MA = [(i["name"], 1 if i["pos"][1] > 0 else -1) for i in _P["parts"]["A184"]["instances"]]   # maca cekili yonu = disari (+-Y)
 _cs = {"t": 0.0, "hiz": 1.0, "timer": None, "tek": False, "ls": None, "T": cevrim.toplam(_C), "son_i": -1}
 
 
@@ -48,8 +49,12 @@ def _uygula(d):
         o = _doc.getObject(n)
         if o is not None:
             o.Placement = _T(d["px"]).multiply(_base(o))
+    for n, sg in _MA:                                        # maca pimleri A184: A167 stroku kadar disari (ma=1 cekili)
+        o = _doc.getObject(n)
+        if o is not None:
+            o.Placement = App.Placement(App.Vector(0, sg * _C["ma"] * d["ma"], 0), App.Rotation()).multiply(_base(o))
     Gui.getMainWindow().statusBar().showMessage(
-        f"HPDC-400 cevrim  [{d['faz']}]  {d['not']}  |  mafsal s={s:.2f}  plaka={info['dx_platen']:.0f} mm  plunger={d['px']:.0f} mm  itici={-d['ej']:.0f} mm")
+        f"HPDC-400 cevrim  [{d['faz']}]  {d['not']}  |  mafsal s={s:.2f}  plaka={info['dx_platen']:.0f} mm  plunger={d['px']:.0f} mm  itici={-d['ej']:.0f} mm  maca={d['ma'] * _C['ma']:.0f}/{_C['ma']:.0f} mm cekili")
     Gui.updateGui()
 
 

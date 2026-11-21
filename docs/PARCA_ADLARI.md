@@ -144,6 +144,7 @@ Kaynak: params/bom.json (tools/adlar_tablo.py ile üretilir; elle düzenleme).
 | A84 | İtici pimi | Ejector pin | 24 | Soğuyan dökümü kalıp boşluğundan dışarı iten pim. |
 | A85 | Geri dönüş pimi | Return pin | 4 | Kalıp kapanırken itici plakayı geri başlangıç konumuna iten pim. |
 | A167 | Maça çekme silindiri | Core pull cylinder | 4 | Kalıp maçasını döküm sonrası çeken/süren hidrolik silindir. |
+| A184 | Maça çekirdeği | Core slide pin | 4 | A167 silindirinin kolu ucunda kaviteye giren kayar maça pimi; çekili/ileri konum. (varsayım) |
 | A168 | Maça valf manifoldu | Core pull valve manifold | 1 | 4 adet NG6 maça valfini taşıyan alt plaka. |
 | A169 | Maça NG6 yön valfi | Core pull NG6 directional valve | 4 | Maça silindirinin yönünü belirleyen 4/3 çift solenoidli valf. |
 

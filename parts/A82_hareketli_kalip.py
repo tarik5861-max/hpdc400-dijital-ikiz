@@ -31,6 +31,9 @@ def build(d, G, g):
     if "cavity_pocket" in d:
         p = d["cavity_pocket"]; py, pz = p["size_yz"]; cy, cz = p["center_yz"]
         cuts.append(g.move(g.box(p["depth"] + 1, py, pz), -t + (p["depth"] - 1) / 2, cy, cz))
+    for sp in d.get("side_pockets", []):   # A81 yan maca ceplerinin esi (ayrim yuzunde)
+        sy0, sy1 = sp["y"]; sz0, sz1 = sp["z"]
+        cuts.append(g.move(g.box(sp["depth"] + 1, sy1 - sy0, sz1 - sz0), -t + (sp["depth"] - 1) / 2, (sy0 + sy1) / 2, (sz0 + sz1) / 2))
     if "runner_groove" in d:
         r = d["runner_groove"]; z0, z1 = r["from_yz"][1], r["to_yz"][1]
         cuts.append(g.move(g.box(r["depth"] + 1, r["width"], abs(z1 - z0)),
