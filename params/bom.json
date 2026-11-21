@@ -57,7 +57,8 @@
     "A142",
     "A143",
     "A144",
-    "A145"
+    "A145",
+    "A182"
    ]
   },
   {
@@ -123,6 +124,7 @@
     "A173",
     "A174",
     "A175",
+    "A181",
     "A176",
     "A177",
     "A178",
@@ -558,6 +560,15 @@
      "ad_tr": "Ön kafa tutucu saplama uçları (A54)",
      "ad_en": "Cylinder tie rod ends (A54)",
      "islev": "Enjeksiyon silindiri ön kafasını tutan M24 saplama uçları. (varsayım)"
+    },
+    {
+     "id": "A182",
+     "name": "Kamara arka destegi (eyer + dikme + taban)",
+     "qty": 1,
+     "script": "parts/A182_kamara_arka_destek.py",
+     "ad_tr": "Kamara arka desteği",
+     "ad_en": "Shot sleeve rear support",
+     "islev": "Soğuk kamaranın arka ucunu şase üst yüzüne dayayan eyer ve dikme. (varsayım)"
     }
    ]
   },
@@ -893,6 +904,15 @@
      "ad_tr": "Hat rafı konsolu",
      "ad_en": "Pipe rack bracket",
      "islev": "Şase yan duvarında P/pilot/T hatlarını katmanlı taşıyan konsol. (varsayım)"
+    },
+    {
+     "id": "A181",
+     "name": "Hat kelepcesi (A175 rafina omega kelepce; P/pilot/T)",
+     "qty": 18,
+     "script": "parts/A181_hat_kelepcesi.py",
+     "ad_tr": "Hat kelepçesi",
+     "ad_en": "Pipe clamp",
+     "islev": "P/pilot/T hatlarını A175 rafına bağlayan kelepçe. (varsayım)"
     },
     {
      "id": "A176",

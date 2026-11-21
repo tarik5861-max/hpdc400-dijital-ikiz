@@ -91,7 +91,8 @@
     "A142",
     "A143",
     "A144",
-    "A145"
+    "A145",
+    "A182"
    ],
    "bbox_zmin_follow": [
     "A64"
@@ -2587,7 +2588,28 @@
      70,
      80,
      90
-    ]
+    ],
+    "water": {
+     "bore_d": 26,
+     "bore_x": [
+      -760,
+      -8
+     ],
+     "tube_od": 14,
+     "tube_id": 10,
+     "tube_x": [
+      -762,
+      -30
+     ],
+     "feed_x": [
+      -790,
+      -760
+     ],
+     "in_x": -790,
+     "out_x": -740,
+     "port_d": 12,
+     "note": "DESIGN ASSUMPTION (2026-11-21): plunger ucu su sogutma yolu temsili: kor delik d26 (x -760..-8) + ic besleme borusu d14/d10 (tup-ici-tup); giris radyal d12 coupling +Y (x-790) -> ic boru -> uc -> halka kanal -> cikis radyal d12 coupling -Y (x-740). Doner rakor/hortum modellenmez; portlar A144 koruyucu icinde (yuva yok)."
+    }
    },
    "local_origin": "Center of the plunger tip front face. Axis along -X: tip x -100..0, rod x -720..-100, coupling x -820..-720. Shown retracted (tip face 10 mm behind pour hole).",
    "instances": [
@@ -2661,7 +2683,65 @@
      "optional": true
     },
     "stroke": 500.0,
-    "total_length": 820.0
+    "total_length": 820.0,
+    "ports": [
+     {
+      "ad": "B",
+      "face": "-Y",
+      "x": -40,
+      "c": 0,
+      "boss_d": 70,
+      "boss_h": 8,
+      "port_d": 32,
+      "port_depth": 45,
+      "not": "kol tarafi (B) ana port, on kafa -Y yuz (ust A67_2 + A145 saplama somunlari dolu); SAE 1-1/4 VARSAYIM"
+     },
+     {
+      "ad": "BL_ON",
+      "face": "+Z",
+      "x": -40,
+      "c": -85,
+      "boss_d": 24,
+      "boss_h": 8,
+      "port_d": 8,
+      "port_depth": 20,
+      "not": "on kafa hava alma G1/8 (A145 rondelalari arasi)"
+     },
+     {
+      "ad": "BL_ARKA",
+      "face": "-Y",
+      "x": -780,
+      "c": 60,
+      "boss_d": 24,
+      "boss_h": 8,
+      "port_d": 8,
+      "port_depth": 20,
+      "not": "arka kafa hava alma G1/8 (ust yuz A65 flansi altinda)"
+     },
+     {
+      "ad": "PG_ON",
+      "face": "+Y",
+      "x": -40,
+      "c": 0,
+      "boss_d": 30,
+      "boss_h": 8,
+      "port_d": 10,
+      "port_depth": 25,
+      "not": "on kafa basinc olcum G1/4"
+     },
+     {
+      "ad": "PG_ARKA",
+      "face": "-Y",
+      "x": -780,
+      "c": -60,
+      "boss_d": 30,
+      "boss_h": 8,
+      "port_d": 10,
+      "port_depth": 25,
+      "not": "arka kafa basinc olcum G1/4"
+     }
+    ],
+    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss yuksekligi <=8 (A13 kolon bosluğu Y 20 mm). A port = A65 flansi (arka kafa ust). Ust on kafa: A67_2 + A145 dolu."
    },
    "local_origin": "Center of the front head front (+X) face. Body along -X (x -820..0); piston rod protrudes +X (x 0..80). Square heads have flat bottoms resting on A57 saddles.",
    "instances": [
@@ -2680,11 +2760,11 @@
      ],
      "bbox": [
       -2080.0,
-      -150,
+      -158.0,
       -300.0,
       -1180.0,
-      150,
-      0.0
+      158.0,
+      8.0
      ]
     }
    ]
@@ -2715,7 +2795,65 @@
      "pressure_ratio": 2.041,
      "model": "may be drawn solid"
     },
-    "end_dome_radius_hint": 20
+    "end_dome_radius_hint": 20,
+    "ports": [
+     {
+      "ad": "PA",
+      "face": "+Z",
+      "x": -250,
+      "c": 0,
+      "boss_d": 80,
+      "boss_h": 10,
+      "port_d": 38,
+      "port_depth": 50,
+      "not": "carpan tahrik (A55 piston) ana port; SAE 1-1/2 VARSAYIM"
+     },
+     {
+      "ad": "BL_ON",
+      "face": "+Z",
+      "x": -120,
+      "c": 70,
+      "boss_d": 24,
+      "boss_h": 8,
+      "port_d": 8,
+      "port_depth": 20,
+      "not": "hava alma G1/8"
+     },
+     {
+      "ad": "BL_ARKA",
+      "face": "+Z",
+      "x": -420,
+      "c": 70,
+      "boss_d": 24,
+      "boss_h": 8,
+      "port_d": 8,
+      "port_depth": 20,
+      "not": "hava alma G1/8"
+     },
+     {
+      "ad": "PT",
+      "face": "-Y",
+      "x": -250,
+      "c": 0,
+      "boss_d": 30,
+      "boss_h": 10,
+      "port_d": 10,
+      "port_depth": 25,
+      "not": "basinc vericisi G1/4"
+     },
+     {
+      "ad": "DR",
+      "face": "+Y",
+      "x": -100,
+      "c": 0,
+      "boss_d": 40,
+      "boss_h": 10,
+      "port_d": 16,
+      "port_depth": 30,
+      "not": "kacak yag / drenaj G3/8"
+     }
+    ],
+    "ports_note": "DESIGN ASSUMPTION (2026-11-21): ek portlar; boss <=10 (govde r130 -> r140 = flans yaricapi, bbox degismez). A54 baglanti portu flansli (hat yok)."
    },
    "local_origin": "Center of the front (+X) flange face, bolted to A54 rear head. Axis along -X (x -450..0).",
    "instances": [
@@ -11288,7 +11426,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11304,7 +11442,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11376,7 +11514,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11392,7 +11530,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11464,7 +11602,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11480,7 +11618,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11552,7 +11690,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11568,7 +11706,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11640,7 +11778,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11656,7 +11794,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11728,7 +11866,7 @@
         20
        ],
        "y": [
-        -70,
+        -95,
         -12
        ],
        "z": [
@@ -11744,7 +11882,7 @@
         20
        ],
        "y": [
-        -100,
+        -125,
         -12
        ],
        "z": [
@@ -11771,7 +11909,7 @@
      ]
     }
    ],
-   "note": "ASSUMPTION (ikiz tasarim varsayimi, 2026-11-20): ASSUMPTION: 12 mm sac gövde + 8 mm kollar; kelepce/U-civata modellenmez"
+   "note": "ASSUMPTION (ikiz tasarim varsayimi, 2026-11-20): ASSUMPTION: 12 mm sac gövde + 8 mm kollar; kelepce/U-civata modellenmez 2026-11-21: P rafi y -95, pilot rafi y -125'e genisletildi (A181 kelepce ayagi civatasi)."
   },
   "A176": {
    "name": "A65 hortum gecis braketi (BRK_A65_P/PL/T: P d48, pilot d21, T d70 x2 (T,T2) hortum -> sert boru)",
@@ -12555,6 +12693,354 @@
     }
    ],
    "note": "ASSUMPTION (ikiz tasarim varsayimi, 2026-11-20): ASSUMPTION: 15 buton 3x5 izgara (70 mm), HMI 300x160; sehpa 100x80 profil"
+  },
+  "A181": {
+   "name": "Hat kelepcesi (A175 rafina omega kelepce; P/pilot/T)",
+   "dims": {
+    "strap_w": 20.0,
+    "strap_t": 3.0,
+    "gap": 0.75,
+    "shelf_gap": 2.0,
+    "foot_t": 3.0,
+    "foot_len": 16.0,
+    "bolt_d": 8.0
+   },
+   "local_origin": "Boru ekseni (y=z=0), konsol X'inde; eksen X'e paralel. Instance: R (boru dis yaricapi), foot=+-1 (ayak yonu Y). DESIGN ASSUMPTION (2026-11-21): ust yarim halka + ayak tarafi ceyrek halka, ayak A175 rafina M8 ile; P/pilot ayagi -Y (konsol plakasi 4 mm), T ayagi +Y (A72 yan tarafi dolu). 6 konsol x 3 katman = 18.",
+   "instances": [
+    {
+     "name": "A181_1",
+     "katman": "P",
+     "pos": [
+      -2650.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_2",
+     "katman": "pilot",
+     "pos": [
+      -2650.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_3",
+     "katman": "T",
+     "pos": [
+      -2650.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": 1
+    },
+    {
+     "name": "A181_4",
+     "katman": "P",
+     "pos": [
+      -1700.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_5",
+     "katman": "pilot",
+     "pos": [
+      -1700.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_6",
+     "katman": "T",
+     "pos": [
+      -1700.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 44.5,
+     "foot": 1
+    },
+    {
+     "name": "A181_7",
+     "katman": "P",
+     "pos": [
+      -750.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_8",
+     "katman": "pilot",
+     "pos": [
+      -750.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_9",
+     "katman": "T",
+     "pos": [
+      -750.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 44.5,
+     "foot": 1
+    },
+    {
+     "name": "A181_10",
+     "katman": "P",
+     "pos": [
+      200.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_11",
+     "katman": "pilot",
+     "pos": [
+      200.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_12",
+     "katman": "T",
+     "pos": [
+      200.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 44.5,
+     "foot": 1
+    },
+    {
+     "name": "A181_13",
+     "katman": "P",
+     "pos": [
+      1150.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_14",
+     "katman": "pilot",
+     "pos": [
+      1150.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_15",
+     "katman": "T",
+     "pos": [
+      1150.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 44.5,
+     "foot": 1
+    },
+    {
+     "name": "A181_16",
+     "katman": "P",
+     "pos": [
+      2100.0,
+      -540.0,
+      -640.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 24.0,
+     "foot": -1
+    },
+    {
+     "name": "A181_17",
+     "katman": "pilot",
+     "pos": [
+      2100.0,
+      -585.0,
+      -705.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 12.5,
+     "foot": -1
+    },
+    {
+     "name": "A181_18",
+     "katman": "T",
+     "pos": [
+      2100.0,
+      -595.0,
+      -800.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "R": 44.5,
+     "foot": 1
+    }
+   ]
+  },
+  "A182": {
+   "name": "Kamara arka destegi (eyer + dikme + taban)",
+   "dims": {
+    "cradle_x": [
+     -466.0,
+     -442.0
+    ],
+    "pillar_x": [
+     -464.0,
+     -444.0
+    ],
+    "foot_x": [
+     -468.0,
+     -440.0
+    ],
+    "cradle_z": [
+     -100.0,
+     -25.0
+    ],
+    "cradle_half_y": 80.0,
+    "pillar_half_y": 35.0,
+    "foot_half_y": 70.0,
+    "foot_t": 12.0,
+    "sleeve_r": 70.0,
+    "seat_gap": 0.5,
+    "bottom_local_z": -380.0
+   },
+   "local_origin": "Vurus ekseni (y=0, z=z_sel), x global (pos x=0). bottom_local_z TURETILMIS = global.frame_top_z - z_sel (resolve_shot). DESIGN ASSUMPTION (2026-11-21): A51 arka ucuna (x -470) 4 mm onde eyer; dikme A11 ust yuzune (z=-530) dayanir; vidasiz temsili; A142 IN stub'una 5 mm, A144'e 2 mm bosluk.",
+   "instances": [
+    {
+     "name": "A182_1",
+     "pos": [
+      0.0,
+      0.0,
+      -150.0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "note": "pos[2] TURETILMIS: global.shot_follow (pos[2] = z_sel)"
+    }
+   ]
   }
  },
  "mates": [
@@ -13384,6 +13870,14 @@
    [
     "A178",
     "A72"
+   ],
+   [
+    "A181",
+    "A175"
+   ],
+   [
+    "A182",
+    "A11"
    ]
   ],
   "allowed_limits": [

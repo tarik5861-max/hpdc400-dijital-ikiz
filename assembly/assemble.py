@@ -45,6 +45,8 @@ def resolve_shot(P, shot=None):
         m = re.fullmatch(r"(\w+)\.dims\.(\w+)\.(\w+)\[(\d+)\]", path)
         pid, k1, k2, idx = m.group(1), m.group(2), m.group(3), int(m.group(4))
         P["parts"][pid]["dims"][k1][k2][idx] = z_sel
+    if "A182" in P["parts"]:   # kamara arka destegi: dikme tabani sase ust yuzunde sabit (A11), vurus ekseniyle yukselir
+        P["parts"]["A182"]["dims"]["bottom_local_z"] = G["frame_top_z"] - z_sel
     a57 = P["parts"]["A57"]
     ha = a57["dims"]["height_adjust"]["saddle_top_local_z_alt"]
     a57["dims"]["saddles"]["local_z_range"][1] = ha + dz

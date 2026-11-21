@@ -69,6 +69,7 @@ Kaynak: params/bom.json (tools/adlar_tablo.py ile üretilir; elle düzenleme).
 | A143 | Plunger yağlama ünitesi | Plunger lubrication unit | 1 | Plunger ve kamara yüzeyine yağlayıcı uygulayan ünite. (varsayım) |
 | A144 | Piston kolu koruyucu kapak | Plunger rod guard | 1 | Hareketli piston kolunu çevreden koruyan kapak. (varsayım) |
 | A145 | Ön kafa tutucu saplama uçları (A54) | Cylinder tie rod ends (A54) | 1 | Enjeksiyon silindiri ön kafasını tutan M24 saplama uçları. (varsayım) |
+| A182 | Kamara arka desteği | Shot sleeve rear support | 1 | Soğuk kamaranın arka ucunu şase üst yüzüne dayayan eyer ve dikme. (varsayım) |
 
 ## A60 Hidrolik unite
 
@@ -102,7 +103,7 @@ Kaynak: params/bom.json (tools/adlar_tablo.py ile üretilir; elle düzenleme).
 | A121 | Emiş hattı (sert boru) | Suction line (rigid pipe) | 1 | Tank yağını pompa giriş gövdesine ileten emiş borusu. |
 | A122 | Basınç hattı stub'ı | Pressure line stub | 2 | Pompa P1/P2 çıkışlarından basınç hattına geçiş yapan kısa boru ucu. (varsayım) |
 | A123 | Boru tespit konsolu | Pipe support bracket | 2 | Boru hatlarını dikme ve kelepce ile sabitleyen konsol. (varsayım) |
-| A160 | Hidrolik hatlar (boru + hortum) | Hydraulic lines (pipe + hose) | 19 | Hidrolik üniteleri birbirine bağlayan sert boru ve hortum hatları. |
+| A160 | Hidrolik hatlar (boru + hortum) | Hydraulic lines (pipe + hose) | 46 | Hidrolik üniteleri birbirine bağlayan sert boru ve hortum hatları. |
 | A59 | Akümülatör sepeti + valf bloğu | Accumulator rack + valve block | 1 | Akümülatörleri taşıyan sepet ve emniyet/boşaltma valf bloğu. (varsayım) |
 | A63 | Akümülatör kelepce bantları | Accumulator clamp straps | 2 | Akümülatör tüplerini sepete sabitleyen bantlar. (varsayım) |
 | A64 | Akümülatör toplayıcı borusu | Accumulator manifold pipe | 1 | Akümülatörlerin çıkışlarını ortak hatta toplayan boru. (varsayım) |
@@ -110,6 +111,7 @@ Kaynak: params/bom.json (tools/adlar_tablo.py ile üretilir; elle düzenleme).
 | A173 | Basınç filtresi PF1 | Pressure filter PF1 | 1 | Basınç hattındaki yağı süzen filtre. |
 | A174 | Dönüş filtresi RF1 | Return filter RF1 | 1 | Tanka dönen yağı süzen dönüş filtresi. |
 | A175 | Hat rafı konsolu | Pipe rack bracket | 6 | Şase yan duvarında P/pilot/T hatlarını katmanlı taşıyan konsol. (varsayım) |
+| A181 | Hat kelepçesi | Pipe clamp | 18 | P/pilot/T hatlarını A175 rafına bağlayan kelepçe. (varsayım) |
 | A176 | A65 hortum geçiş braketi | A65 hose transition bracket | 1 | A65 bloğundaki hortumlardan sert boruya geçişi tutan braket. (varsayım) |
 | A177 | A130 T hortum braketi | A130 T hose bracket | 1 | A130 T hortumunu d89 sert boruya bağlayan braket. (varsayım) |
 
