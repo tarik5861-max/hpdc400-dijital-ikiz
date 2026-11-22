@@ -215,7 +215,7 @@ class ElektrikMantik:
         self.sq = {"adim": self.sq_cfg["adimlar"][0]["ad"], "faz": 0, "faz_t": 0.0, "cevrim": 0,
                    "yag": 0, "yag_t": 0.0, "pg": 0, "pg_t": 0.0, "faz3_bitti": 0, "loto": 0,
                    "sayac": 0, "a_son": 0, "ofset_mm": None,
-                   "adim_t": 0.0, "maca_t": 0.0, "maca_alarm": 0}
+                   "adim_t": 0.0, "maca_t": 0.0, "maca_alarm": 0, "enj_alarm": 0, "pg_alarm": 0}
         self.hata_yok = True
 
     def _sayi(self, x):
@@ -225,6 +225,10 @@ class ElektrikMantik:
         if isinstance(x, str) and x.startswith("zamanlar."):
             return self.mk["zamanlar"][x[len("zamanlar."):]]
         return self._deger(x)
+
+    def _konum_modu(self):
+        """P.ENC_BILDIRIM=1: faz/piston geri gecisleri DB68.ENC konumuna bagli; 0: eski sure tabani (yedek)."""
+        return bool(self._param("P.ENC_BILDIRIM"))
 
     def _maca_secili(self, mc):
         """Secici DI5.14..17 (VARSAYIM: 1 = maca otomatik cevrimde kullanilir) -- en az biri 1 mi."""
@@ -261,8 +265,10 @@ class ElektrikMantik:
             q["loto"] = 1
         s["S.LOTO_MODU"] = q["loto"]
         if g("HMI.RESET"):
-            q["maca_alarm"] = 0                         # maca zaman asimi alarmi (muhurlu) resetle silinir
+            q["maca_alarm"] = q["enj_alarm"] = q["pg_alarm"] = 0   # muhurlu zaman asimi alarmlari resetle silinir
         s["S.MACA_ALARM"] = q["maca_alarm"]
+        s["S.ENJ_KONUM_ALARM"] = q["enj_alarm"]
+        s["S.PISTON_GERI_ALARM"] = q["pg_alarm"]
         s["S.OPERATOR_DESARJ_ISTEGI"] = int(bool(g("HMI.DESARJ")))
         self.cur.update(s)        # kosullar bu taramanin degerlerini gorsun
         # --- OTO cevrim siralayicisi
@@ -291,7 +297,15 @@ class ElektrikMantik:
                 if q["faz"] == 0:
                     q["faz"], q["faz_t"] = 1, 0.0
                 q["faz_t"] += dt
-                if q["faz_t"] >= self._sayi(alt[q["faz"] - 1]["sure"]):
+                f = alt[q["faz"] - 1]
+                if self._konum_modu() and "bitis_konum" in f:     # konum tabanli gecis (DB68.ENC), zaman asimi = alarm
+                    if self._get("DB68.ENC") >= self._sayi(f["bitis_konum"]):
+                        q["faz"] += 1
+                        q["faz_t"] = 0.0
+                    elif q["faz_t"] >= self._sayi(f["zaman_asimi"]):
+                        q["enj_alarm"] = 1
+                        adim, q["faz"] = ilk, 0
+                elif q["faz_t"] >= self._sayi(f["sure"]):
                     if q["faz"] < len(alt):
                         q["faz"] += 1
                         q["faz_t"] = 0.0
@@ -324,6 +338,7 @@ class ElektrikMantik:
         if adim != q["adim"]:
             q["adim_t"], q["maca_t"] = 0.0, 0.0
         s["S.MACA_ALARM"] = q["maca_alarm"]
+        s["S.ENJ_KONUM_ALARM"] = q["enj_alarm"]
         # --- adim gecisi yan etkileri
         pg, my = c["piston_geri"], c["mafsal_yaglama"]
         if adim != onceki:
@@ -333,7 +348,12 @@ class ElektrikMantik:
                 q["yag"] = 0
         if q["pg"]:
             q["pg_t"] += dt
-            if q["pg_t"] >= self._sayi(pg["sure"]):
+            if self._konum_modu():                        # konum tabanli bitis: ENC geri konumda; sure dolarsa alarm
+                if self._get("DB68.ENC") <= self._sayi(pg["bitis_konum"]) + self._sayi(pg["tolerans"]):
+                    q["pg"] = 0
+                elif q["pg_t"] >= self._sayi(pg["zaman_asimi"]):
+                    q["pg"], q["pg_alarm"] = 0, 1
+            elif q["pg_t"] >= self._sayi(pg["sure"]):
                 q["pg"] = 0
         if q["yag"]:
             q["yag_t"] += dt
@@ -347,6 +367,7 @@ class ElektrikMantik:
                 s[f["cikis"]] = int(adim == a_["ad"] and q["faz"] == i + 1)
             if a_.get("bitis_cikisi"):
                 s[a_["bitis_cikisi"]] = int(q["faz3_bitti"])
+        s["S.PISTON_GERI_ALARM"] = q["pg_alarm"]
         s[pg["cikis"]] = int(q["pg"])
         s[my["cikis"]] = int(q["yag"])
         self.cur.update(s)
@@ -419,3 +440,151 @@ class ElektrikMantik:
         if e.get("elle_dogrulama") and elle_onay is not None:
             v = v and bool(elle_onay)
         return int(v)
+
+
+# ---------------------------------------------------------------------- kapali dongu (Kademe 4 adim 2)
+def _params_tum():
+    with open(os.path.join(ROOT, "params", "params.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
+class KapaliDongu:
+    """PLC cikislari (DO bobinleri, m.bobin) -> hareket modeli (konum/zaman) -> sensor/limit DI + DB68.ENC -> PLC.
+
+    Sabitler: elektrik.json mantik.hareket_modeli (DESIGN ASSUMPTION, saha olcumu gerekir) + params.json kurslari.
+    Birim: mafsal s 0 kapali..1 acik (lib/cevrim.py ile ayni), px plunger +X mm, ej itici mm (pozitif = ileri,
+    cevrim.py'de ej negatif), ma maca 0 kavitede..1 cekili. hiz_olcek={"plunger":0.5,...} hizlari olcekler;
+    ariza={"enc_sabit":0.0} ENC okumasini dondurur (sensor/kablo arizasi).
+    Kural izleme (cevrim.py ile ayni uzay): plunger yalniz s=0, itici yalniz s=1, maca kalip durmadayken.
+    Bilinen farklar mantik.hareket_modeli.bilinen_fark; etiket self.fark (FARK_*), kural ihlali self.ihlal (IHLAL_*).
+    """
+
+    def __init__(self, m, hiz_olcek=None, ariza=None):
+        self.m = m
+        self.h = m.mk["hareket_modeli"]
+        P = _params_tum()
+        self.kurs_mafsal = float(P["global"]["opening_stroke"])
+        self.kurs_pl = float(P["parts"]["A52"]["dims"]["stroke"])
+        a82 = P["parts"]["A82"]["dims"]
+        self.kurs_ej = float(a82.get("ejector_box", {}).get("die_ejection_stroke", P["global"].get("die_ejection_stroke", 65.0)))
+        self.kurs_ma = float(P["parts"]["A167"]["dims"]["stroke"])
+        self.olcek = hiz_olcek or {}
+        self.ariza = ariza or {}
+        self.s, self.px, self.ej, self.ma = 1.0, 0.0, 0.0, [1.0] * 4
+        self.fark, self.ihlal = set(), set()
+        self.olay = []                       # (t_ms, adim, faz) adim/faz degisimleri
+        self._son = None
+        self.max_px = 0.0
+        self.gecis = {}                      # "ADIM[.fazN]" -> ilk giris zamani (ms)
+        self.gecis_durum = {}                # ayni anahtar -> (px, s, ej, ma[]) gecis anindaki hareket durumu
+        self.girdi_ilk = {"DI4.09": 1, "DB68.PT2": self.h["PT2_bar"], "P.VURUS_KONUMU_GIRILDI": 1,
+                          "DI5.01": 1, "DI5.03": 1, "DI9.04": 1, "DI5.14": 1, "DI5.15": 1, "DI5.16": 1, "DI5.17": 1,
+                          "P.MAFSAL_YAGLAMA_SURE_ms": 0}
+        m.girdi.update(self.girdi_ilk)
+        self._sensor()
+
+    def _v(self, ad, anahtar):
+        return self.h[ad][anahtar] * self.olcek.get(ad, 1.0)
+
+    def _sensor(self):
+        h, g = self.h, self.m.girdi
+        mm = self.s * self.kurs_mafsal
+        g["AI10.1"] = mm
+        g["DI5.08"] = int(mm <= h["mafsal"]["kilit_mm"])
+        g["DI9.10"] = int(self.ej <= h["itici"]["limit_mm"])
+        g["DI9.11"] = int(self.ej >= self.kurs_ej - h["itici"]["limit_mm"])
+        g["DI9.16"] = int(self.px >= self.kurs_pl - h["plunger"]["ls2_mm"])
+        if "enc_sabit" in self.ariza:
+            g["DB68.ENC"] = self.ariza["enc_sabit"]
+        else:
+            r = h["enkoder"]["cozunurluk_mm"]
+            g["DB68.ENC"] = round(self.px / r) * r
+
+    def step(self, dt_ms=None):
+        m, h = self.m, self.h
+        dt_ms = dt_ms or h["tarama_ms"]
+        dt = dt_ms / 1000.0
+        b = m.bobin
+        s0, px0, ej0, ma0 = self.s, self.px, self.ej, list(self.ma)
+        # kalip (mafsal): kapama DO7.05, acma DO7.04
+        if b("DO7.05") and not b("DO7.04"):
+            self.s = max(0.0, self.s - dt / (h["mafsal"]["kapama_s"] / self.olcek.get("mafsal", 1.0)))
+        elif b("DO7.04") and not b("DO7.05"):
+            self.s = min(1.0, self.s + dt / (h["mafsal"]["acma_s"] / self.olcek.get("mafsal", 1.0)))
+        # plunger: geri DO7.26; hizli DO7.01+DO7.11; yavas DO7.25; faz 3 DO7.10+DO7.12
+        if b("DO7.26"):
+            self.px -= self._v("plunger", "geri_mm_s") * dt
+        elif b("DO7.01") and b("DO7.11"):
+            self.px += self._v("plunger", "hizli_mm_s") * dt
+        elif b("DO7.25"):
+            self.px += self._v("plunger", "yavas_mm_s") * dt
+        elif b("DO7.10") and b("DO7.12"):
+            self.px += self._v("plunger", "faz3_mm_s") * dt
+        self.px = min(max(self.px, 0.0), self.kurs_pl)       # strok sonu = kavite dolu / mekanik dayanak
+        self.max_px = max(self.max_px, self.px)
+        # itici A41: ileri DO7.13, geri DO7.14
+        if b("DO7.13") and not b("DO7.14"):
+            self.ej = min(self.kurs_ej, self.ej + self._v("itici", "hiz_mm_s") * dt)
+        elif b("DO7.14") and not b("DO7.13"):
+            self.ej = max(0.0, self.ej - self._v("itici", "hiz_mm_s") * dt)
+        # maca n: in DO7.17+2n (0'a), out DO7.18+2n (1'e)
+        for n in range(4):
+            gir, cek = b(f"DO7.{17 + 2 * n}"), b(f"DO7.{18 + 2 * n}")
+            d = self._v("maca", "hiz_mm_s") * dt / self.kurs_ma
+            if gir and not cek:
+                self.ma[n] = max(0.0, self.ma[n] - d)
+            elif cek and not gir:
+                self.ma[n] = min(1.0, self.ma[n] + d)
+        self._kural(s0, px0, ej0, ma0)
+        self._sensor()
+        v = m.step(dt_ms)
+        adim, faz = v["S.OTO_ADIM"], v.get("S.FAZ1", 0) * 1 + v.get("S.FAZ2", 0) * 2 + v.get("S.FAZ3", 0) * 3
+        if (adim, faz) != self._son:
+            self._son = (adim, faz)
+            self.olay.append((m.t, adim, faz))
+            anahtar = adim if not faz else f"{adim}.FAZ{faz}"
+            if anahtar not in self.gecis:
+                self.gecis[anahtar] = m.t
+                self.gecis_durum[anahtar] = (self.px, self.s, self.ej, list(self.ma))
+        if v.get("S.OTO_PISTON_GERI") and "OTO_PISTON_GERI" not in self.gecis:
+            self.gecis["OTO_PISTON_GERI"] = m.t
+            self.gecis_durum["OTO_PISTON_GERI"] = (self.px, self.s, self.ej, list(self.ma))
+        return v
+
+    def _kural(self, s0, px0, ej0, ma0):
+        e = 1e-9
+        adim = self._son[0] if self._son else "BOSTA"
+        pg = bool(self.m.prev.get("S.OTO_PISTON_GERI", 0))
+        acik_mm = self.s * self.kurs_mafsal
+        kalip_hareket = abs(self.s - s0) > e
+        if abs(self.px - px0) > e and self.s > e:
+            self.fark.add("FARK_SIRA_PISTON_GERI") if pg else self.ihlal.add("IHLAL_PLUNGER_KALIP_ACIK")
+        if kalip_hareket and self.px > 1.0:
+            self.fark.add("FARK_SIRA_PISTON_GERI") if adim == "ACMA" else self.ihlal.add("IHLAL_KALIP_PLUNGER_ILERIDE")
+        if abs(self.ej - ej0) > e and self.s < 1.0 - e:
+            if acik_mm >= self.m._param("P.ITICI_ACIKLIK_MIN_mm"):
+                self.fark.add("FARK_ACMA_300")
+            else:
+                self.ihlal.add("IHLAL_ITICI_KALIP_KAPALI")
+        if any(abs(a - b_) > e for a, b_ in zip(self.ma, ma0)) and kalip_hareket:
+            self.ihlal.add("IHLAL_MACA_KALIP_HAREKET")
+
+    def calistir_cevrim(self, max_ms=60000, baslat=True):
+        """Bir tam OTO cevrimi: HMI.OTO_BASLAT -> ... -> BOSTA (piston geri dahil). Sure ms dondurur (None = bitmedi)."""
+        m = self.m
+        n0 = m.prev.get("S.CEVRIM_SAYAC", 0)
+        t0 = m.t
+        if baslat:
+            m.girdi["HMI.OTO_BASLAT"] = 1
+        baslamis = False
+        while m.t - t0 < max_ms:
+            v = self.step()
+            if v["S.OTO_ADIM"] != "BOSTA":
+                baslamis = True
+                m.girdi["HMI.OTO_BASLAT"] = 0
+            if (baslamis and v["S.OTO_ADIM"] == "BOSTA" and not v["S.OTO_PISTON_GERI"]
+                    and v["S.CEVRIM_SAYAC"] > n0):
+                return m.t - t0
+            if baslamis and v["S.OTO_ADIM"] == "BOSTA" and (v["S.ENJ_KONUM_ALARM"] or v["S.PISTON_GERI_ALARM"] or v["S.MACA_ALARM"]):
+                return None
+        return None

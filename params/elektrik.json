@@ -2732,7 +2732,7 @@
    "hidrolik": null,
    "koken": "dcc630_sema_9-8",
    "guven": "orta",
-   "gerekce": "Sema 9-8 (DCC630): 'injection encoder' -> INCODER modulu (V+/V-/A/B/Z, +5 V) -> enkoder karti; PLC standart DI degil. Olcum: artimli kuadratur A/B/Z. A66 = bu enkoderin geometrisi (lineer sensor kolu A52 kaplinine bagli). Cozunurluk IKIZ TASARIM KARARI: 0,05 mm/sayim (x4 sonrasi); hizli vurus 5 m/s -> 100 kHz sayim hizi -> standart DI (<~100 Hz) YETMEZ, hizli sayici/enkoder karti zorunlu (semayla uyumlu). Faz gecisleri ikizde hala sure tabanli; ENC ile birlikte kullanilir.",
+   "gerekce": "Sema 9-8 (DCC630): 'injection encoder' -> INCODER modulu (V+/V-/A/B/Z, +5 V) -> enkoder karti; PLC standart DI degil. Olcum: artimli kuadratur A/B/Z. A66 = bu enkoderin geometrisi (lineer sensor kolu A52 kaplinine bagli). Cozunurluk IKIZ TASARIM KARARI: 0,05 mm/sayim (x4 sonrasi); hizli vurus 5 m/s -> 100 kHz sayim hizi -> standart DI (<~100 Hz) YETMEZ, hizli sayici/enkoder karti zorunlu (semayla uyumlu). Kademe 4 adim 2: FAZ1/FAZ2 gecisi ve piston geri bitisi ENC konum tabanli (P.ENC_BILDIRIM); kapali dongu hareket modeli ENC'yi mm olarak uretir (DESIGN ASSUMPTION).",
    "sinyal": {
     "tip": "artimli kuadratur A/B/Z",
     "besleme": "+5 V",
@@ -3305,7 +3305,15 @@
     "P.PISTON_GERI_SURE_ms": 2500,
     "P.MAFSAL_YAGLAMA_SURE_ms": 5000,
     "P.MACA_SURE_ms": 2000,
-    "maca_onay": "VARSAYIM: A167 strok 80 mm (params.json) / ~40 mm/s (140 bar, orifis/akis ayari bilinmiyor) -> 2000 ms; maca konum geri bildirimi YOK -> sure tabanli. VERI_BEKLIYOR: gercek hiz/sure"
+    "maca_onay": "VARSAYIM: A167 strok 80 mm (params.json) / ~40 mm/s (140 bar, orifis/akis ayari bilinmiyor) -> 2000 ms; maca konum geri bildirimi YOK -> sure tabanli. VERI_BEKLIYOR: gercek hiz/sure",
+    "P.ENC_BILDIRIM": 1,
+    "P.ENC_GERI_mm": 0,
+    "P.ENC_TOL_mm": 2,
+    "P.FAZ1_BITIS_mm": 150,
+    "P.FAZ2_BITIS_mm": 490,
+    "P.FAZ1_ZAMAN_ASIMI_ms": 3000,
+    "P.FAZ2_ZAMAN_ASIMI_ms": 300,
+    "konum_onay": "DESIGN ASSUMPTION (Kademe 4 adim 2): P.ENC_BILDIRIM=1 -> FAZ1/FAZ2 gecisi ve piston geri bitisi DB68.ENC konumuna bagli (0 = eski sure tabani, yedek mod). Esikler lib/cevrim.py ile uyumlu: FAZ1->FAZ2 150 mm (cevrim 'slow'), FAZ2->FAZ3 490 mm (= plunger_stroke 500 - faz3 strok 10). FARK: hidrolik.json faz1 165,6 mm / faz2 180 mm (sure tabanli hesap) ile birebir degil; saha ENC okumasi gelince esikler guncellenir. Zaman asimi = konum gelmezse muhurlu alarm + BOSTA. SAHA OLCUMU GEREKIR: gercek faz-gecis konumlari (ST2/enkoder), enkoder karti kesme gecikmesi."
    },
    "NC_kurali": "NC kontaklar 'saglam/kapali' iken 1 doner (HW.ST1_1 = 1 -> buton basilmamis)"
   },
@@ -3983,11 +3991,13 @@
    },
    {
     "id": "S.FAZ_SIRALAYICI",
-    "aciklama": "FAZ1 -> FAZ2 -> FAZ3 gecisleri ikizde parametre/zaman tabanli (DB68.ENC kapsam disi). Gercek makinede konum tabanli.",
+    "aciklama": "FAZ1->FAZ2->FAZ3: FAZ1/FAZ2 gecisleri DB68.ENC konum tabanli (P.ENC_BILDIRIM=1; yedek mod 0 = sure); FAZ3 bitisi sure (katilasma). Gercek makinede enkoder karti hizli sayici (kesme).",
     "parametreler": [
      "P.FAZ1_SURE_ms",
      "P.FAZ2_SURE_ms",
-     "P.FAZ3_SURE_ms"
+     "P.FAZ3_SURE_ms",
+     "P.FAZ1_BITIS_mm",
+     "P.FAZ2_BITIS_mm"
     ]
    },
    {
@@ -4725,6 +4735,26 @@
      "A167",
      "A169"
     ]
+   },
+   {
+    "id": "AL_ENJ_KONUM_ZAMAN_ASIMI",
+    "kosul": "S.ENJ_KONUM_ALARM",
+    "eylem": "FAZ1/FAZ2 konum esigine (DB68.ENC) zaman asimi icinde ulasilamadi: muhurlu alarm, siralayici BOSTA'ya iptal; HMI.RESET ile silinir, silinmeden yeni cevrim yok",
+    "bagli_id": [
+     "A52",
+     "A66",
+     "A54"
+    ]
+   },
+   {
+    "id": "AL_PISTON_GERI_ZAMAN_ASIMI",
+    "kosul": "S.PISTON_GERI_ALARM",
+    "eylem": "piston geri suresi icinde DB68.ENC geri konuma (P.ENC_GERI_mm+tol) inmedi: muhurlu alarm; HMI.RESET ile silinir, silinmeden yeni cevrim yok",
+    "bagli_id": [
+     "A52",
+     "A66",
+     "A54"
+    ]
    }
   ],
   "vurus_konumu": {
@@ -4833,6 +4863,14 @@
      [
       "not",
       "S.MACA_ALARM"
+     ],
+     [
+      "not",
+      "S.ENJ_KONUM_ALARM"
+     ],
+     [
+      "not",
+      "S.PISTON_GERI_ALARM"
      ]
     ],
     "not": "S.MOTOR_CALISIYOR onceki tarama degeri; piston geri suresi dolmadan yeni cevrim yok (yeni sart)"
@@ -4895,15 +4933,20 @@
      "alt_fazlar": [
       {
        "cikis": "S.FAZ1",
-       "sure": "P.FAZ1_SURE_ms"
+       "sure": "P.FAZ1_SURE_ms",
+       "bitis_konum": "P.FAZ1_BITIS_mm",
+       "zaman_asimi": "P.FAZ1_ZAMAN_ASIMI_ms"
       },
       {
        "cikis": "S.FAZ2",
-       "sure": "P.FAZ2_SURE_ms"
+       "sure": "P.FAZ2_SURE_ms",
+       "bitis_konum": "P.FAZ2_BITIS_mm",
+       "zaman_asimi": "P.FAZ2_ZAMAN_ASIMI_ms"
       },
       {
        "cikis": "S.FAZ3",
-       "sure": "P.FAZ3_SURE_ms"
+       "sure": "P.FAZ3_SURE_ms",
+       "not": "FAZ3 = cevrim.py faz 9 (basinc artirma) + faz 10 (katilasma) birlesik; bitis SURE tabanli (P.FAZ3_SURE_ms) cunku katilasma icin sensor yok (proses suresi). VERI_BEKLIYOR: kalip sicakligi/basinc tabanli katilasma tespiti."
       }
      ],
      "faz_baslangici": "izin (onceki tarama S.ENJ_IZIN) ilk kez 1 olunca faz 1",
@@ -4924,7 +4967,8 @@
        "hedef": "BOSTA",
        "aciklama": "izin vurus ortasinda kayboldu"
       }
-     ]
+     ],
+     "konum_modu": "P.ENC_BILDIRIM=1: faz k ENC >= bitis_konum ise sonraki faza gecer; faz_t >= zaman_asimi ise S.ENJ_KONUM_ALARM (muhurlu, HMI.RESET) + BOSTA. P.ENC_BILDIRIM=0: eski sure tabani (sure alani)."
     },
     {
      "ad": "MACA_CEK",
@@ -4987,7 +5031,12 @@
     "baslangic": "ACMA adimi bitisi (ITICI_ILERI girisi)",
     "sure": "P.PISTON_GERI_SURE_ms",
     "gerekce": "enjeksiyon konum enkoderi ayrilmis -> sure tabanli. Kalip acilirken biskuvi dokumle birlikte burctan cekilir; piston ancak kalip acildiktan sonra geri alinir (DCC630/lib eski: ACMA boyunca).",
-    "kilit": "DO7.26 ifadesindeki not S.ENJ_AKTIF"
+    "kilit": "DO7.26 ifadesindeki not S.ENJ_AKTIF",
+    "bitis_konum": "P.ENC_GERI_mm",
+    "tolerans": "P.ENC_TOL_mm",
+    "zaman_asimi": "P.PISTON_GERI_SURE_ms",
+    "konum_modu": "P.ENC_BILDIRIM=1: DB68.ENC <= P.ENC_GERI_mm + P.ENC_TOL_mm ise biter; P.PISTON_GERI_SURE_ms dolarsa S.PISTON_GERI_ALARM (muhurlu, HMI.RESET). P.ENC_BILDIRIM=0: yalniz sure.",
+    "cevrim_farki": "VARSAYIM/FARK: lib/cevrim.py faz 11 piston geri KALIP KAPALIYKEN (maca cekmeden once); PLC'de ACMA bitisinden sonra (kalip acilmis, biskuvi dokumle cekilir - K-EL karari). Katilasma: cevrim faz 10 = PLC FAZ3 sonu (sure)."
    },
    "piston_yaglama": {
     "cikis": "S.PISTON_YAGLAMA_ADIMI",
@@ -5059,6 +5108,119 @@
     "koken": "yeni",
     "durum": "claude_karari_saha_dogrulamasi_gerekir"
    }
+  },
+  "hareket_modeli": {
+   "durum": "DESIGN ASSUMPTION (Kademe 4 adim 2): kapali dongu hareket modeli, saha olcumu gerekir (hizlar, kurslar). Kod: lib/elektrik_mantik.py KapaliDongu.",
+   "tarama_ms": 2,
+   "mafsal": {
+    "kurs_mm_kaynak": "params.global.opening_stroke",
+    "kapama_s": 2.5,
+    "acma_s": 3.0,
+    "kilit_mm": 0.5,
+    "not": "DESIGN ASSUMPTION: cevrim.py animasyon 2,0 s; gercek sure saha olcumu."
+   },
+   "plunger": {
+    "kurs_mm_kaynak": "params.parts.A52.dims.stroke",
+    "yavas_mm_s": 200,
+    "hizli_mm_s": 3000,
+    "faz3_mm_s": 20,
+    "geri_mm_s": 400,
+    "ls2_mm": 0.5,
+    "not": "yavas 0,2 m/s = hidrolik.json faz1 (165,6 mm/0,8 s); hizli 3,0 m/s = hizli_vurus_tasarim; faz3 20 mm/s (10 mm / 0,5 s, kavite dolu: strok sonunda mekanik dayanak); geri 400 mm/s (cevrim.py 500 mm/1,2 s). Hizli hiz DO7.01 VE DO7.11 bobini ile secilir."
+   },
+   "itici": {
+    "kurs_mm_kaynak": "params.parts.A82.dims.ejector_box.die_ejection_stroke",
+    "hiz_mm_s": 100,
+    "limit_mm": 0.5
+   },
+   "maca": {
+    "kurs_mm_kaynak": "params.parts.A167.dims.stroke",
+    "hiz_mm_s": 100,
+    "not": "saha teyidi: ST2 yeri ve maca hizi 100 mm/s (DURUM acik nokta); maca limit sensoru kanali yok -> PLC sure tabanli kalir"
+   },
+   "enkoder": {
+    "cozunurluk_mm": 0.05,
+    "kaynak": "DB68.ENC kanal sinyal.cozunurluk_mm_sayim; ENC mm olarak enkoder kartindan gelir (DESIGN ASSUMPTION)"
+   },
+   "PT2_bar": 150,
+   "cevrim_esleme": [
+    {
+     "plc": "MACA_GIR",
+     "cevrim": "3 Maca gir (A167)",
+     "fark": null
+    },
+    {
+     "plc": "KAPAMA",
+     "cevrim": "4 Kalip kapanir",
+     "fark": null
+    },
+    {
+     "plc": "KAPAMA->ENJ",
+     "cevrim": "5 Kilitle",
+     "fark": null,
+     "not": "DI5.08 (kilitli LS) KAPAMA'yi bitirir"
+    },
+    {
+     "plc": "ENJ.FAZ1",
+     "cevrim": "7 Yavas vurus",
+     "fark": null,
+     "not": "bitis ENC >= P.FAZ1_BITIS_mm"
+    },
+    {
+     "plc": "ENJ.FAZ2",
+     "cevrim": "8 Hizli vurus",
+     "fark": null,
+     "not": "bitis ENC >= P.FAZ2_BITIS_mm"
+    },
+    {
+     "plc": "ENJ.FAZ3",
+     "cevrim": "9 Basinc artirma + 10 Katilasma",
+     "fark": "FARK_KATILASMA_SURE",
+     "not": "VARSAYIM: cevrim 9 ve 10 PLC'de tek FAZ3 (P.FAZ3_SURE_ms 3000 ms, sure tabanli); cevrim.py animasyon suresi 0,6+1,5 s"
+    },
+    {
+     "plc": "MACA_CEK",
+     "cevrim": "12 Maca cek (A167)",
+     "fark": "FARK_SIRA_PISTON_GERI",
+     "not": "VARSAYIM: cevrim: 11 piston geri -> 12 maca cek; PLC: maca cek -> ACMA -> piston geri"
+    },
+    {
+     "plc": "ACMA",
+     "cevrim": "13 Kalip acilir",
+     "fark": "FARK_ACMA_300",
+     "not": "VARSAYIM: PLC acmayi AI10.1 >= P.ITICI_ACIKLIK_MIN_mm (300) ile durdurur; cevrim s=1 (420 mm)"
+    },
+    {
+     "plc": "OTO_PISTON_GERI",
+     "cevrim": "11 Plunger geri",
+     "fark": "FARK_SIRA_PISTON_GERI",
+     "not": "VARSAYIM: PLC'de kalip acildiktan sonra, ENC<=P.ENC_GERI_mm+tol ile biter (cevrim: kalip kapali, sure)"
+    },
+    {
+     "plc": "ITICI_ILERI",
+     "cevrim": "14 Itici ileri",
+     "fark": "FARK_ACMA_300",
+     "not": "VARSAYIM: bitis DI9.11"
+    },
+    {
+     "plc": "ITICI_GERI",
+     "cevrim": "16 Itici geri",
+     "fark": null,
+     "not": "bitis DI9.10; cevrim 15 'Parca alma' PLC'de adim degil (robot/HMI, Kademe 6)"
+    },
+    {
+     "plc": null,
+     "cevrim": "1 Kalip acik bekle / 2 Yaglama sprey",
+     "fark": "FARK_SPREY_PLC_YOK",
+     "not": "VARSAYIM: PLC'de sprey/yaglama adimi yok (Kademe 5/6); mafsal yaglama M10 ayri"
+    }
+   ],
+   "bilinen_fark": [
+    "FARK_KATILASMA_SURE",
+    "FARK_SIRA_PISTON_GERI",
+    "FARK_ACMA_300",
+    "FARK_SPREY_PLC_YOK"
+   ]
   }
  },
  "loto": {
@@ -5561,6 +5723,41 @@
      "sure*2 asildi: mekanik sikisma/kismen girmis maca; HMI.RESET sonrasi yeniden",
      [
       "A167"
+     ]
+    ]
+   ]
+  },
+  {
+   "belirti": "Enjeksiyon konum zaman asimi veya piston geri gelmiyor (AL_ENJ_KONUM_ZAMAN_ASIMI / AL_PISTON_GERI_ZAMAN_ASIMI)",
+   "guvenlik": "GUVENLIK ON ADIMI: LOTO 1-7 (kalip acik, motor dur, akumulator desarj + PT2<2 bar dogrula, ana salter kilitli, enerji yok olculdu). Enjeksiyon silindiri/plunger hareket edebilir: mekanik sikisma kontrolunde plunger destegi, basincli hatta elle mudahale yok; enkoder kablosu gerilim altinda cekilmez.",
+   "kontrol": [
+    [
+     "DB68.ENC",
+     "enkoder okumasi sabit 0 / ilerlemiyor: enkoder kablosu/kart (A66) mi, plunger takili mi",
+     [
+      "A66"
+     ]
+    ],
+    [
+     "DO7.25 / DO7.11+DO7.01 bobin",
+     "FAZ1/FAZ2 cikisi var, bobinde gerilim yok -> valf beslemesi / kablo",
+     [
+      "A54"
+     ]
+    ],
+    [
+     "DB68.PT2",
+     "akumulator basinci dusuk: hizli vurus yetmez",
+     [
+      "A56"
+     ]
+    ],
+    [
+     "DO7.26 + S.OTO_PISTON_GERI",
+     "piston geri bobini / yag basinci; geri konuma inmiyor",
+     [
+      "A52",
+      "A54"
      ]
     ]
    ]

@@ -10,7 +10,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
-from elektrik_mantik import ElektrikMantik, yukle   # noqa
+from elektrik_mantik import ElektrikMantik, KapaliDongu, yukle   # noqa
 
 DT = 10.0
 
@@ -228,7 +228,7 @@ def s5(m):
             calistir(m)           # E-stop motoru da durdurdu
             m.girdi.update({"DI4.09": 1})
     # fail-safe kutup: E-stop'ta valf beslemesi gider; P=0 -> bosaltir, P=1 (DCC630 yorumu) -> bosaltmaz
-    m3 = yeni()
+    m3 = _klon(m)
     calistir(m3)
     m3.girdi["HW.ST1_1"] = 0
     adim(m3, 50)
@@ -421,7 +421,8 @@ def mut_s8b(cfg):   # esik karsilastirmasi ters
 
 def _oto_hazirla(m):
     calistir(m)
-    m.girdi.update({"DI4.09": 1, "DB68.PT2": 150, "P.VURUS_KONUMU_GIRILDI": 1})
+    # eski senaryolar (S9..S15) sure tabanli yedek modda: ENC beslenmez (konum tabanli mod S16..S19'da)
+    m.girdi.update({"DI4.09": 1, "DB68.PT2": 150, "P.VURUS_KONUMU_GIRILDI": 1, "P.ENC_BILDIRIM": 0})
 
 
 def _cevrim(m, r, tur):
@@ -771,6 +772,199 @@ def mut_s15b(cfg):     # HW bobininde karsi cikis kilidi yok
             e["ifade"] = [x for x in e["ifade"] if not (isinstance(x, list) and x[0] == "not")]
 
 
+# ---------------------------------------------------------------- kapali dongu (Kademe 4 adim 2)
+def _kd(m, **kw):
+    calistir(m)
+    return KapaliDongu(m, **kw)
+
+
+def _klon(m):
+    """m ile ayni (mutasyonlu olabilir) konfigurasyonla yeni ornek."""
+    return ElektrikMantik(cfg=copy.deepcopy(m.cfg))
+
+
+def _faz_sureleri(k):
+    g = k.gecis
+    return g["ENJ.FAZ2"] - g["ENJ.FAZ1"], g["ENJ.FAZ3"] - g["ENJ.FAZ2"]
+
+
+def s16(m):
+    """Kapali dongu: DO -> hareket -> DI/ENC -> PLC; tam cevrim, faz gecisleri konumda, alarm yok."""
+    r = Sonuc()
+    k = _kd(m)
+    sure = k.calistir_cevrim()
+    v = m.prev
+    r.kos(sure is not None, "kapali dongu cevrimi bitmedi (zaman asimi/alarm)")
+    if sure is None:
+        return r.hata
+    r.kos(v["S.CEVRIM_SAYAC"] == 1 and v["S.OTO_ADIM"] == "BOSTA", "cevrim sayaci 1 / BOSTA degil")
+    r.kos(not (v["S.ENJ_KONUM_ALARM"] or v["S.PISTON_GERI_ALARM"] or v["S.MACA_ALARM"] or v["S.HERHANGI_ALARM"]), "alarm var")
+    sira = [o[1] for o in k.olay]
+    r.kos(sira == ["MACA_GIR", "KAPAMA", "ENJ", "ENJ", "ENJ", "ENJ", "MACA_CEK", "ACMA", "ITICI_ILERI", "ITICI_GERI", "BOSTA"],
+          f"adim sirasi beklenenden farkli: {sira}")
+    G, D, P = k.gecis, k.gecis_durum, m.P
+    # faz gecisleri HAREKET durumuna bagli (sure degil): FAZ2 girisinde plunger >= FAZ1 esigi, FAZ3 girisinde >= FAZ2 esigi
+    r.kos(P["P.FAZ1_BITIS_mm"] <= D["ENJ.FAZ2"][0] <= P["P.FAZ1_BITIS_mm"] + 3, f"FAZ2 girisinde px={D['ENJ.FAZ2'][0]:.1f} (esik {P['P.FAZ1_BITIS_mm']})")
+    r.kos(P["P.FAZ2_BITIS_mm"] <= D["ENJ.FAZ3"][0] <= P["P.FAZ2_BITIS_mm"] + 8, f"FAZ3 girisinde px={D['ENJ.FAZ3'][0]:.1f} (esik {P['P.FAZ2_BITIS_mm']})")
+    r.kos(D["ENJ"][1] <= 0.002 and D["ENJ.FAZ1"][1] <= 0.002, "ENJ kalip kilitlenmeden basladi (s>0)")
+    r.kos(all(x < 1e-6 for x in D["KAPAMA"][3]), "KAPAMA girisinde maca kavitede degil (ma=0 beklenir)")
+    r.kos(all(x > 1 - 1e-6 for x in D["ACMA"][3]), "ACMA girisinde maca cekili degil")
+    r.kos(abs(D["ITICI_ILERI"][1] * k.kurs_mafsal - k.kurs_mafsal * D["ITICI_ILERI"][1]) < 1e-9 and
+          D["ITICI_ILERI"][1] * k.kurs_mafsal >= P["P.ITICI_ACIKLIK_MIN_mm"], "ITICI_ILERI acilik < minimum")
+    r.kos(D["ITICI_GERI"][2] >= k.kurs_ej - 1, "ITICI_GERI girisinde itici ileri limitte degil")
+    r.kos(D["BOSTA"][2] <= 1, "BOSTA'da itici geride degil")
+    r.kos(k.px <= P["P.ENC_TOL_mm"], f"cevrim sonunda plunger geride degil (px={k.px:.1f})")
+    r.kos(k.max_px > k.kurs_pl - 5, f"plunger strok sonuna ulasmadi (max {k.max_px:.0f})")
+    r.kos(not k.ihlal, f"hareket kurali ihlali: {sorted(k.ihlal)}")
+    return r.hata
+
+
+def s17(m):
+    """Konum tabanli: plunger yavaslayinca FAZ sureleri uzar (sure tabani degil); cok yavassa zaman asimi alarmi."""
+    r = Sonuc()
+    k0 = _kd(yeni())
+    k0.calistir_cevrim()
+    n1, n2 = _faz_sureleri(k0)
+    k = _kd(m, hiz_olcek={"plunger": 0.5})
+    sure = k.calistir_cevrim()
+    r.kos(sure is not None, "plunger 0,5x: cevrim bitmedi (konum tabani yavas hizda da tamamlanmali)")
+    if sure is None:
+        return r.hata
+    f1, f2 = _faz_sureleri(k)
+    r.kos(1.8 * n1 <= f1 <= 2.2 * n1, f"FAZ1 suresi hiz ile olceklenmedi ({f1:.0f} ms, nominal {n1:.0f})")
+    r.kos(1.8 * n2 <= f2 <= 2.2 * n2 + 6, f"FAZ2 suresi hiz ile olceklenmedi ({f2:.0f} ms, nominal {n2:.0f})")
+    r.kos(k.gecis_durum["ENJ.FAZ2"][0] >= m.P["P.FAZ1_BITIS_mm"], "yavas plunger: FAZ2'ye 150 mm'den once gecildi (sure tabani)")
+    r.kos(not k.ihlal, f"ihlal: {sorted(k.ihlal)}")
+    # cok yavas: FAZ1 zaman asimi -> muhurlu alarm + BOSTA, resetsiz yeni cevrim yok
+    m2 = _klon(m)
+    k2 = _kd(m2, hiz_olcek={"plunger": 0.2})
+    k2.calistir_cevrim()
+    r.kos(m2.prev["S.ENJ_KONUM_ALARM"] == 1 and m2.prev["S.OTO_ADIM"] == "BOSTA", "yavas plunger: zaman asimi alarmi/BOSTA yok")
+    r.kos(m2.prev["S.HERHANGI_ALARM"] == 1, "AL_ENJ_KONUM_ZAMAN_ASIMI S.HERHANGI_ALARM'a yansimadi")
+    m2.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m2, 500)
+    r.kos(m2.prev["S.OTO_ADIM"] == "BOSTA", "alarm silinmeden yeni cevrim basladi")
+    m2.girdi["HMI.RESET"] = 1
+    adim(m2, 20)
+    m2.girdi["HMI.RESET"] = 0
+    adim(m2, 100)
+    r.kos(m2.prev["S.ENJ_KONUM_ALARM"] == 0 and m2.prev["S.OTO_ADIM"] != "BOSTA", "RESET sonrasi alarm silinmedi/cevrim baslamadi")
+    # yedek mod: P.ENC_BILDIRIM=0 -> sure tabani (FAZ1 = P.FAZ1_SURE_ms, hizdan bagimsiz)
+    m3 = _klon(m)
+    k3 = _kd(m3, hiz_olcek={"plunger": 0.5})
+    m3.girdi["P.ENC_BILDIRIM"] = 0
+    k3.calistir_cevrim()
+    g1, _ = _faz_sureleri(k3)
+    r.kos(abs(g1 - m3.P["P.FAZ1_SURE_ms"]) <= 10, f"yedek sure modu: FAZ1 {g1:.0f} ms (beklenen {m3.P['P.FAZ1_SURE_ms']})")
+    return r.hata
+
+
+def s18(m):
+    """Enkoder arizasi (ENC=0 sabit) -> FAZ1 zaman asimi; piston geri takilinca AL_PISTON_GERI_ZAMAN_ASIMI."""
+    r = Sonuc()
+    k = _kd(m, ariza={"enc_sabit": 0.0})
+    k.calistir_cevrim()
+    t = k.gecis.get("ENJ.FAZ1")
+    r.kos(m.prev["S.ENJ_KONUM_ALARM"] == 1 and m.prev["S.OTO_ADIM"] == "BOSTA", "ENC=0: zaman asimi alarmi/BOSTA yok")
+    r.kos(abs((m.t - t) - m.P["P.FAZ1_ZAMAN_ASIMI_ms"]) <= 20, f"FAZ1 zaman asimi {m.t - t:.0f} ms (beklenen {m.P['P.FAZ1_ZAMAN_ASIMI_ms']})")
+    r.kos(m.prev["DO7.25"] == 0, "alarmdan sonra yavas enjeksiyon cikisi acik kaldi")
+    # piston geri takilir (hiz 0,05x): 2500 ms icinde ENC geri konuma inmez
+    m2 = _klon(m)
+    k2 = _kd(m2, hiz_olcek={"plunger": 1.0})
+    k2.olcek["plunger"] = 1.0
+    orig = k2._v
+
+    def v_yavas_geri(ad, a):
+        return orig(ad, a) * (0.05 if a == "geri_mm_s" else 1.0)
+    k2._v = v_yavas_geri
+    k2.calistir_cevrim()
+    r.kos(m2.prev["S.PISTON_GERI_ALARM"] == 1 and m2.prev["S.HERHANGI_ALARM"] == 1, "piston geri takildi: AL_PISTON_GERI_ZAMAN_ASIMI yok")
+    r.kos(m2.prev["S.OTO_PISTON_GERI"] == 0, "piston geri alarminda cikis kapanmadi")
+    m2.girdi["HMI.OTO_BASLAT"] = 1
+    adim(m2, 300)
+    r.kos(m2.prev["S.OTO_ADIM"] == "BOSTA", "piston geri alarmi silinmeden yeni cevrim basladi")
+    return r.hata
+
+
+def s19(m):
+    """cevrim.py esleme: PLC adimlari <-> faz 1..16; esikler cevrim.ayarlar ile ayni; fark yalniz bilinen/etiketli."""
+    import json as _j
+    import cevrim
+    r = Sonuc()
+    k = _kd(m)
+    k.calistir_cevrim()
+    hm = m.mk["hareket_modeli"]
+    PJ = _j.load(open(os.path.join(ROOT, "params", "params.json"), encoding="utf-8"))
+    HJ = _j.load(open(os.path.join(ROOT, "params", "hidrolik.json"), encoding="utf-8"))
+    c = cevrim.ayarlar(PJ, HJ)
+    tab = {int(f[0].split()[0]): f[0] for f in cevrim.faz_tablosu(c)}
+    P = m.P
+    r.kos(P["P.FAZ1_BITIS_mm"] == c["slow"], f"FAZ1 esigi {P['P.FAZ1_BITIS_mm']} != cevrim slow {c['slow']}")
+    r.kos(P["P.FAZ2_BITIS_mm"] == c["stroke"] - c["f3"], f"FAZ2 esigi {P['P.FAZ2_BITIS_mm']} != stroke-f3 {c['stroke'] - c['f3']}")
+    r.kos(abs(k.kurs_pl - c["stroke"]) < 1e-9 and abs(k.kurs_ej - c["ej"]) < 1e-9 and abs(k.kurs_ma - c["ma"]) < 1e-9, "kurslar cevrim.ayarlar ile ayni degil")
+    # esleme tablosu: faz numaralari cevrim.py'de var, farklar bilinen listede
+    bil = set(hm["bilinen_fark"])
+    gorulen_num = []
+    for e in hm["cevrim_esleme"]:
+        for tok in e["cevrim"].replace("/", "+").split("+"):
+            n = int(tok.split()[0])
+            r.kos(n in tab, f"esleme: cevrim faz {n} yok")
+            r.kos(e["cevrim"].split("+")[0].split("/")[0].strip().split(" ", 1)[1][:6] == tab.get(int(e["cevrim"].split()[0]), " x")[len(str(int(e["cevrim"].split()[0]))) + 1:][:6]
+                  if n == int(e["cevrim"].split()[0]) else True, f"esleme faz adi uyusmuyor: {e['cevrim']}")
+        r.kos(e["fark"] is None or e["fark"] in bil, f"esleme farki bilinen listede degil: {e['fark']}")
+        r.kos(e["fark"] is None or "VARSAYIM" in e.get("not", ""), f"fark VARSAYIM etiketsiz: {e['plc']}")
+    # dinamik: gozlenen farklar tanimli listede ve beklenen ikisi gozleniyor
+    r.kos(k.fark <= bil, f"etiketsiz fark: {sorted(k.fark - bil)}")
+    r.kos(k.fark == {"FARK_SIRA_PISTON_GERI", "FARK_ACMA_300"}, f"gozlenen fark kumesi {sorted(k.fark)}")
+    r.kos(not k.ihlal, f"ihlal: {sorted(k.ihlal)}")
+    # sira: PLC adimlarinin cevrim faz numaralari azalmiyor, tek ters sira 'piston geri' (FARK_SIRA_PISTON_GERI)
+    plc_sira = [("MACA_GIR", 3), ("KAPAMA", 4), ("ENJ.FAZ1", 7), ("ENJ.FAZ2", 8), ("ENJ.FAZ3", 9), ("MACA_CEK", 12),
+                ("ACMA", 13), ("OTO_PISTON_GERI", 11), ("ITICI_ILERI", 14), ("ITICI_GERI", 16)]
+    zaman = [(k.gecis[a], n, a) for a, n in plc_sira]
+    zaman.sort()
+    ters = [(a, n) for (t1, n1, a1), (t2, n2, a) in zip(zaman, zaman[1:]) for n in [n2] if n2 < n1]
+    r.kos([a for a, _ in ters] == ["OTO_PISTON_GERI"], f"cevrim sirasina ters adimlar: {ters} (yalniz OTO_PISTON_GERI beklenir)")
+    r.kos(all(e["fark"] == "FARK_SIRA_PISTON_GERI" for e in hm["cevrim_esleme"] if e["plc"] == "OTO_PISTON_GERI"), "piston geri esleme farki etiketsiz")
+    # cevrim faz 10 katilasma = PLC FAZ3 sonu: sure tabanli, etiketli
+    f3 = k.gecis["MACA_CEK"] - k.gecis["ENJ.FAZ3"]
+    r.kos(abs(f3 - m.P["P.FAZ3_SURE_ms"]) <= 10, f"FAZ3 (katilasma) suresi {f3:.0f} != P.FAZ3_SURE_ms")
+    r.kos(any(e["fark"] == "FARK_KATILASMA_SURE" for e in hm["cevrim_esleme"]), "katilasma farki etiketsiz")
+    return r.hata
+
+
+def _mut_param(ad, deger):
+    def f(cfg):
+        cfg["mantik"]["ifade_dili"]["parametreler"][ad] = deger
+    f.__name__ = f"mut_param_{ad}"
+    return f
+
+
+def mut_s16b(cfg):     # PLC: konum modu kapali (sure tabani)
+    cfg["mantik"]["ifade_dili"]["parametreler"]["P.ENC_BILDIRIM"] = 0
+
+
+def mut_s16c(cfg):     # piston geri bitis toleransi cok genis -> plunger inmeden biter
+    cfg["mantik"]["siralayici"]["piston_geri"]["tolerans"] = 600
+
+
+def mut_s16d(cfg):     # alarmda yeni cevrim engeli kalkti
+    b = cfg["mantik"]["siralayici"]["baslatma"]
+    b["kosul"] = [x for x in b["kosul"] if x not in (["not", "S.ENJ_KONUM_ALARM"], ["not", "S.PISTON_GERI_ALARM"])]
+
+
+def mut_s16e(cfg):     # FAZ1/FAZ2 zaman asimi sonsuz
+    p = cfg["mantik"]["ifade_dili"]["parametreler"]
+    p["P.FAZ1_ZAMAN_ASIMI_ms"] = p["P.FAZ2_ZAMAN_ASIMI_ms"] = 10 ** 9
+
+
+mut_param_f1 = _mut_param("P.FAZ1_BITIS_mm", 600)
+
+
+def mut_s19a(cfg):     # esikler cevrim.py ile uyumsuz
+    cfg["mantik"]["ifade_dili"]["parametreler"]["P.FAZ2_BITIS_mm"] = 400
+
+
+
 SENARYOLAR = [
     (1, "Start birakilinca motor devam (muhur); stop ve E-stop durdurur", s1, [mut_s1a, mut_s1b]),
     (2, "KM2/KM3 asla birlikte 1 degil; KM3 dususunden >=50 ms sonra KM2", s2, [mut_s2a, mut_s2b]),
@@ -787,6 +981,10 @@ SENARYOLAR = [
     (13, "MACA secici DI5.14..17 kapali -> maca atlanir; yalniz secili maca hareket eder", s13, [mut_s13a]),
     (14, "MACA zaman asimi (sure*2) -> muhurlu alarm + BOSTA; LOTO/genel iptalde cikis 0", s14, [mut_s14a, mut_s14b, mut_s14c]),
     (15, "MACA in/out cift solenoid kilidi (PLC + HW bobin), E-stop'ta bobin 0", s15, [mut_s15a, mut_s15b]),
+    (16, "Kapali dongu: DO -> hareket -> DI/DB68.ENC -> PLC; tam cevrim, FAZ gecisleri konumda", s16, [mut_s16b, mut_s16c, mut_param_f1]),
+    (17, "Konum tabani: plunger yavaslayinca FAZ suresi uzar; cok yavassa zaman asimi alarmi + RESET; yedek sure modu", s17, [mut_s16b, mut_s16d, mut_s16e]),
+    (18, "ENC arizasi (0 sabit) -> FAZ1 zaman asimi; piston geri takilirsa alarm", s18, [mut_s16e, mut_s16d]),
+    (19, "cevrim.py esleme (faz 1..16): esikler/kurslar ayni, farklar etiketli (FARK_*), ihlal yok", s19, [mut_s19a]),
 ]
 
 

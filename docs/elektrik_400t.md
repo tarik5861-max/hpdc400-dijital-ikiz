@@ -178,3 +178,11 @@ VERI_BEKLIYOR: DI5.30/DI5.31 bayt.bit eslemesi (HW Config), A127 kontak sayisi/K
 - Geri bildirim yok: sure tabanli P.MACA_SURE_ms = 2000 ms (VARSAYIM, A167 80 mm). Zaman asimi = sure x 2 -> S.MACA_ALARM (muhurlu, HMI.RESET) + BOSTA; AL_MACA_ZAMAN_ASIMI.
 - Oneri (kanal eklenmedi): maca basina ileri/geri limit sensoru (koken yeni).
 - Acik: cevrim.py faz 10-11 (katilasma, plunger geri) maca cekmeden once; PLC'de katilasma suresi yok, piston geri ACMA bitisinden (karar). Maca manuel (DI4.08) jog yok.
+
+## Kapali dongu simulasyonu (Kademe 4, adim 2) - DESIGN ASSUMPTION
+- Dongu: PLC DO bobini (m.bobin: cikis VE valf beslemesi) -> KapaliDongu hareket modeli (mafsal s, plunger px, itici ej, maca ma[4]) -> sensor DI (DI5.08 kilitli LS, AI10.1 cetvel, DI9.10/11 itici limit, DI9.16 LS2, DB68.ENC mm) -> siralayici. Kod: lib/elektrik_mantik.py `KapaliDongu`; sabitler elektrik.json `mantik.hareket_modeli` (tarama 2 ms).
+- Konum tabanli gecisler (P.ENC_BILDIRIM=1): FAZ1->FAZ2 ENC >= P.FAZ1_BITIS_mm (150), FAZ2->FAZ3 ENC >= P.FAZ2_BITIS_mm (490 = 500 - 10, cevrim.py), piston geri bitisi ENC <= P.ENC_GERI_mm + P.ENC_TOL_mm. Zaman asimi: P.FAZ1_ZAMAN_ASIMI_ms 3000, P.FAZ2_ZAMAN_ASIMI_ms 300, piston geri P.PISTON_GERI_SURE_ms -> muhurlu alarm (S.ENJ_KONUM_ALARM / S.PISTON_GERI_ALARM), HMI.RESET. P.ENC_BILDIRIM=0: eski sure tabani (yedek).
+- Zaten sensor tabanli: KAPAMA (DI5.08), ACMA (AI10.1 + DI5.08), ITICI_ILERI/GERI (DI9.11/DI9.10). Hala sure tabanli: FAZ3/katilasma (P.FAZ3_SURE_ms), MACA_GIR/CEK (maca limit sensoru kanali yok), mafsal yaglama.
+- cevrim.py esleme (hareket_modeli.cevrim_esleme): MACA_GIR=3, KAPAMA=4, kilit=5, FAZ1=7, FAZ2=8, FAZ3=9+10, MACA_CEK=12, ACMA=13, OTO_PISTON_GERI=11, ITICI_ILERI=14, ITICI_GERI=16.
+- VARSAYIM FARKLAR: FARK_KATILASMA_SURE (cevrim 9+10 tek FAZ3, sure); FARK_SIRA_PISTON_GERI (cevrim 11 kalip kapali, PLC ACMA sonrasi); FARK_ACMA_300 (PLC 300 mm'de durur, cevrim 420 mm); FARK_SPREY_PLC_YOK (cevrim faz 1-2).
+- Acik: hidrolik.json faz1 165,6 / faz2 180 mm ile esik farki; hizlar (yavas 0,2 / hizli 3,0 / geri 0,4 m/s, mafsal 2,5-3,0 s, itici/maca 100 mm/s) saha olcumu; geometri dogrulamasi: plunger geri acik kalipta ve itici 300 mm aciklikta (itici_tarama/kamara taramasi yalniz cevrim.py uzayi). VERI_BEKLIYOR: enkoder karti kesme gecikmesi, gercek faz-gecis konumlari.
