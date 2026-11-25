@@ -69,3 +69,12 @@ Notlar:
 - KAPANDI (2026-11-19): pompa tipi/debisi (4520VQ, P1 191,2 L/dk) ve hızlı vuruş: hedef 3,0 m/s (ikiz_tasarim varsayimi, params/hidrolik.json hizli_vurus_tasarim) → Q = A54 × v = 2771 L/dk; hızlı strok 180 mm (P.FAZ2_SURE 60 ms); ACC1 deşarjı 3,03 L (faz 2 %5 kayıplı 2,91 + A55 faz 3 0,31 − P1 0,19); ön dolum 113,4 bar. Sonuç params/hidrolik.json hizli_vurus_sonuc, döküm out/hidrolik_2026-11-19_hizli_vurus.txt.
 - A64 ana hat dış Ø90 / iç Ø80 (et 5 mm, ikiz_tasarim varsayımı) uygulandı: faz 2 9,0 m/s, sabit kayıp 1,2 bar, 15 ms rampada ivme Δp 12,4 bar (eski Ø60: 16 m/s, 21 bar).
 - Hortum/döner bağlantı payı: vuruş ekseni 3 konumlu (Z değişimi 150 mm) olduğundan A54/A55/A56 arası hatlar bunu karşılamalı.
+
+## A54 iç kanalları + A65 iç devresi (2026-11-25, ikiz tasarım varsayımı)
+Güvenlik: A65 kartuşuna müdahale öncesi LOTO 1-7 + S121/DV1 deşarj (PT2 < 2 bar) + S118 (PCARP < 2 bar) + Y1.4 arkasında hapsolmuş kapak basıncı (faz 3 sonu 285,7 bar) PENJ_G ve PG_ARKA manometresiyle < 2 bar.
+Veri: params/hidrolik.json `a65_ic_devre_tasarim` (girdi) / `a65_ic_devre_sonuc` (türetilmiş, lib/hidrolik_ag_modeli.py `a65_ic_devre_hesabi()`); döküm out/hidrolik_2026-11-25_a65_ic_devre.txt.
+- A54 A (kapak): A65 alt yüz → arka kafa oval 50×90 dikey kanal → kafa merkez deliği d140; 2909 L/dk 12,2 m/s, 1,6 bar.
+- A54 B (kol): ön kafa +X d76 port → eğik d60 → iç yüz halka oluk d140/d90; 1626 L/dk 9,6 m/s (port 5,97), 1,0 bar.
+- A65: Y1.1 yavaş P→A (NG25, DO7.25) · Y1.2 S120 P→A birleştirme (NG25) · Y1.3 S424 ACC→A (NG50, S113+U16) · Y1.4 A yolu lojik çek + S116 kilidi (NG50, 315 bar) · Y1.5 B→T/T2 (NG50, pilot DO7.25|S119|S116, U18 strok sınırlayıcı) · Y1.6 P→B geri (NG25, DO7.26) · Y1.7 A→T geri (NG32, DO7.26) · Y1.8 ACC→PA çarpan (NG32, S126+U17) · Y1.9 PA→T boşaltma (NG32, S118) · Y1.10 A55 PB 3/2 (NG16, A55 üzerinde, port yok) · Y1.11 RV_A 315 bar.
+- Faz 2 bütçe: ACC son 135,3 − A yolu 13,0 = kapak 122,4 bar; B karşı basınç 3,7 bar; net kısma payı 107 bar (> ivme 12,4) → 3,0 m/s OK. Geri vuruş P1 ile 0,353 m/s (1,42 s).
+- Açık: A65 160×300×160 kartuşlara yetmez (gerekli kapak yüzü 149 000 mm² > serbest 111 700) → OLCU_TALEBI, öneri asgari zarf ~570×300×180; A55 PB portu yok → OLCU_TALEBI.

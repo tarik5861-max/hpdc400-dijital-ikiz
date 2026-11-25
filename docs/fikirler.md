@@ -20,3 +20,4 @@ Beyin fırtınasında çıkan, henüz kademeye girmemiş fikirler. Tek satır: t
 - 2026-11-20 — A65 T dönüşü 1625,8 L/dk: A65'te T2 (d51, tapalı) ayrıldı; 2. DN51 dönüş hortumu mu, rejeneratif (kol→kapak) mı, ön-dolum/doğrudan tank valfi mi — KARAR 2026-11-20: 2. DN51 hortum (KARARLAR) — K3
 - 2026-11-20 — 1000 t gibi baska tonajlar: Alt plan A (olculendir motoru) gerekir; elle 1000 t params kurmak mumkun ama uzun ve tahmin olur. Maca P basinc dusurucu (RV/PRV) karari saha ile.
 - 2026-11-22: Plunger geri açık kalıpta / itici 300 mm açıklıkta geometrik doğrulama (cevrim.py s=0/s=1 kuralıyla çelişki); maça limit sensörü kanalı eklenmesi.
+- 2026-11-25: Hızlı vuruş geri dönüşü için A65'te rejeneratif kol→kapak devresi yeniden değerlendirilsin mi (A65 blok zarfı genişlerken); KURAL_HIDR_* kuralları (kapama vanası/emniyet/deşarj/ölçüm) — K3

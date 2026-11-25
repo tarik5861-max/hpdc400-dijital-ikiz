@@ -1,7 +1,7 @@
 {
  "meta": {
   "aciklama": "HPDC-400 hidrolik katmani - ISO 1219 elemanlari, valf/sensör ID'leri ve ağ modeli tam haritalaması",
-  "tarih": "2026-11-20",
+  "tarih": "2026-11-25",
   "yazan": "orkestratör",
   "kaynaklar": [
    "docs/hidrolik_sema_taslak.md",
@@ -113,7 +113,27 @@
     "id": "Y1",
     "tip": "Enjeksiyon Hızlı Vuruş Valfi (Oransal/Kartuş)",
     "bobin": "Y1",
-    "fonksiyon": "Hızlı vuruş akümülatör deşarjı"
+    "fonksiyon": "Hızlı vuruş akümülatör deşarjı",
+    "bagli_id": [
+     "A65",
+     "A54",
+     "A55",
+     "A183"
+    ],
+    "ic_valfler": [
+     "Y1.1",
+     "Y1.2",
+     "Y1.3",
+     "Y1.4",
+     "Y1.5",
+     "Y1.6",
+     "Y1.7",
+     "Y1.8",
+     "Y1.9",
+     "Y1.10",
+     "Y1.11"
+    ],
+    "ic_devre": "a65_ic_devre_tasarim / a65_ic_devre_sonuc (2026-11-25)"
    },
    {
     "id": "Y2",
@@ -151,7 +171,13 @@
     "id": "A55",
     "tip": "Basınç Artırma (Multiplikatör) Valfi",
     "bobin": "A55",
-    "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)"
+    "fonksiyon": "Enjeksiyon sonu artırılmış basınç (2.04x çarpan)",
+    "bagli_id": [
+     "A55",
+     "A65",
+     "A183"
+    ],
+    "not": "carpan valfleri A65 icinde: Y1.8 (S126/U17 ACC->PA), Y1.9 (S118 PA->T); halka PB valfi Y1.10 (OLCU_TALEBI: A55 PB portu)"
    },
    {
     "id": "Y4.1",
@@ -352,6 +378,42 @@
     },
     "varsayim": "VARSAYIM (ikiz tasarim): 12 cikis = 12 A34 pimi; A23 nipel + ic kanal; debi/basinc SAHA_DOGRULAMA"
    }
+  ],
+  "silindirler": [
+   {
+    "id": "CYL1",
+    "tip": "Enjeksiyon silindiri cift etkili (kapak A / kol B)",
+    "bagli_id": [
+     "A54",
+     "A186",
+     "A52"
+    ],
+    "bore_mm_kaynak": "params A54.barrel.bore (140)",
+    "rod_mm_kaynak": "params A186.rod.d (90)",
+    "portlar": {
+     "A": "arka kafa ust yuz -> A65 alt yuz (flans arayuzu, oval 50x90)",
+     "B": "on kafa +X d76 -> A183_1 (H60 88,9x5) -> A65 +X B"
+    },
+    "ic_kanallar": "a65_ic_devre_tasarim.a54_ic_kanallar",
+    "sensor": {
+     "A": "DB68.PENJ_G (A67_1)",
+     "B": "DB68.PENJ_C (A67_2)"
+    },
+    "varsayim": "ikiz_tasarim varsayimi; ic kanallar cizilmez"
+   },
+   {
+    "id": "INT1",
+    "tip": "Carpan (multiplikator) d200/d140, oran 2,0408",
+    "bagli_id": [
+     "A55"
+    ],
+    "portlar": {
+     "PA": "ust d50 -> A183_2 (H61 60,3x5,6) -> A65 -X PA",
+     "PB": "YOK (OLCU_TALEBI: halka portu, Y1.10)",
+     "DR": "+Y d16 kacak yag"
+    },
+    "varsayim": "ikiz_tasarim varsayimi; plunger dinlenmede A54 arka kafa dis yuzunde (VARSAYIM)"
+   }
   ]
  },
  "pompa_guc_kontrolu": {
@@ -528,5 +590,602 @@
   },
   "hesap": "lib/hidrolik_ag_modeli.py hizli_vurus_hesabi() (turetilmis; elle degistirme, yeniden hesapla)",
   "tarih": "2026-11-19"
+ },
+ "a65_ic_devre_tasarim": {
+  "etiket": "ikiz_tasarim varsayimi (tum degerler; saha verisi istenmedi, 2026-11-25 hidrolik-muhendisi)",
+  "hesap": "lib/hidrolik_ag_modeli.py a65_ic_devre_hesabi(); sonuc a65_ic_devre_sonuc (turetilmis)",
+  "guvenlik": "GUVENLIK ON ADIMI (CLAUDE.md kural 10): LOTO 1-7; S121 (DO7.15) + elle DV1 ac, PT2 < 2 bar 10 s + manometre; S118 (DO7.16) ile PA bosalt, DB68.PCARP < 2 bar; Y1.4 arkasinda HAPSOLMUS kapak basinci (faz 3 sonu 285,7 bar) -> DB68.PENJ_G ve A54 PG_ARKA manometresi < 2 bar dogrula; DB68.PENJ_C (B) < 2 bar; sonra kartus kapagi gevset.",
+  "fazlar": {
+   "0": "bosta",
+   "1": "yavas (P1)",
+   "2": "hizli (ACC1 + P1/S120)",
+   "3": "carpan (A55)",
+   "4": "carpan bosaltma (S118)",
+   "5": "piston geri (P1 -> B)"
+  },
+  "Cd": 0.7,
+  "Cd_not": "VARSAYIM: tam acik oturmali kartus 0,6-0,8; katalog dP-Q egrisi yok -> SAHA_DOGRULAMA",
+  "ng_tablosu": {
+   "16": {
+    "oturma_d_mm": 16,
+    "bosluk_D1_mm": 32,
+    "derinlik_mm": 56,
+    "kapak_mm": 65
+   },
+   "25": {
+    "oturma_d_mm": 25,
+    "bosluk_D1_mm": 45,
+    "derinlik_mm": 72,
+    "kapak_mm": 85
+   },
+   "32": {
+    "oturma_d_mm": 32,
+    "bosluk_D1_mm": 60,
+    "derinlik_mm": 85,
+    "kapak_mm": 100
+   },
+   "50": {
+    "oturma_d_mm": 50,
+    "bosluk_D1_mm": 90,
+    "derinlik_mm": 122,
+    "kapak_mm": 140
+   },
+   "63": {
+    "oturma_d_mm": 63,
+    "bosluk_D1_mm": 120,
+    "derinlik_mm": 155,
+    "kapak_mm": 180
+   },
+   "not": "VARSAYIM: ISO 7368 bosluk olculeri yaklasik; oturma capi = NG; kapak kare kenari tipik katalog -> SAHA_DOGRULAMA (katalog)"
+  },
+  "valf_dp_sinir_bar": 10.0,
+  "kanal_hiz_sinir_m_s": 15.0,
+  "sinir_not": "VARSAYIM: kisa ic kanal yalniz 60 ms hizli fazda <= 15 m/s; tam acik valf dP <= 10 bar (S424 kisma payi icin)",
+  "valfler": [
+   {
+    "id": "Y1.1",
+    "ad": "Yavas vurus valfi (1. faz)",
+    "tip": "2/2 oturmali lojik kartus + NG6 pilot",
+    "NG": 25,
+    "yol": "P -> A_dugum",
+    "bobin": "DO7.25 Y1_YAVAS",
+    "acik_fazlar": [
+     1
+    ],
+    "basinc_sinifi_bar": 210,
+    "bagli_id": [
+     "A65"
+    ]
+   },
+   {
+    "id": "Y1.2",
+    "ad": "Birlestirme valfi S120 (P1 hizli vurusa katilir)",
+    "tip": "2/2 lojik kartus, cek fonksiyonlu (A_dugum -> P geri akis yok)",
+    "NG": 25,
+    "yol": "P -> A_dugum",
+    "bobin": "DO7.02 S120",
+    "acik_fazlar": [
+     2
+    ],
+    "basinc_sinifi_bar": 210,
+    "not": "ELEKTRIK_TALEBI: DO7.02 icin PLC ifadesi yok; oneri S.ENJ_IZIN and S.FAZ2",
+    "bagli_id": [
+     "A65"
+    ]
+   },
+   {
+    "id": "Y1.3",
+    "ad": "Hizli vurus servo-oransal ana kademe S424",
+    "tip": "2/2 oturmali oransal kartus, LVDT; pilot S424 (+Y yuz flansi)",
+    "NG": 50,
+    "yol": "ACC (A64 ust yuz) -> A_dugum",
+    "bobin": "DO7.01 S113 enable + DB68.A09 U16 komut",
+    "acik_fazlar": [
+     2
+    ],
+    "basinc_sinifi_bar": 210,
+    "not": "meter-in hiz kontrolu (DB68.ENC kapali cevrim); enerjisiz = kapali (K-EL-01 saha teyidi)",
+    "bagli_id": [
+     "A65",
+     "A64",
+     "A56"
+    ]
+   },
+   {
+    "id": "Y1.4",
+    "ad": "A yolu lojik cek valf + carpan kilidi S116",
+    "tip": "2/2 lojik kartus, cek fonksiyonlu (A_dugum -> A54 A serbest, ters yon kapali); S116 kontrol odasina P verir",
+    "NG": 50,
+    "yol": "A_dugum -> A54.A (alt yuz arayuzu)",
+    "bobin": "DO7.10 S116 (enerjili = pozitif kilit)",
+    "acik_fazlar": [
+     1,
+     2
+    ],
+    "basinc_sinifi_bar": 315,
+    "not": "faz 3: kapak 285,7 bar ACC'ye (135 bar) geri basamaz; DB68.PENJ_G (A67_1) A54 TARAFINDA olcmeli",
+    "bagli_id": [
+     "A65",
+     "A54"
+    ]
+   },
+   {
+    "id": "Y1.5",
+    "ad": "B cikis lojik elemani (kol tarafi -> T/T2)",
+    "tip": "2/2 lojik kartus, oransal strok sinirlayici U18",
+    "NG": 50,
+    "yol": "A54.B (A183_1/H60, +X yuz) -> T + T2",
+    "bobin": "pilot mekik agi: DO7.25 | DO7.11 S119 | DO7.10 S116 (yeni bobin yok); U18 AO11.2 yalniz S119 aktifken acikligi sinirlar",
+    "acik_fazlar": [
+     1,
+     2,
+     3
+    ],
+    "basinc_sinifi_bar": 210,
+    "not": "bostada ve geride kapali (piston kaymasi yok); 2. faz frenleme/hiz U18",
+    "bagli_id": [
+     "A65",
+     "A54",
+     "A183"
+    ]
+   },
+   {
+    "id": "Y1.6",
+    "ad": "Piston geri besleme (P -> B)",
+    "tip": "2/2 lojik kartus",
+    "NG": 25,
+    "yol": "P -> A54.B",
+    "bobin": "DO7.26 Y1_GERI (ortak NG6 pilot)",
+    "acik_fazlar": [
+     5
+    ],
+    "basinc_sinifi_bar": 210,
+    "bagli_id": [
+     "A65",
+     "A54",
+     "A183"
+    ]
+   },
+   {
+    "id": "Y1.7",
+    "ad": "Piston geri kapak bosaltma (A -> T)",
+    "tip": "2/2 lojik kartus",
+    "NG": 32,
+    "yol": "A54.A (Y1.4 sonrasi) -> T",
+    "bobin": "DO7.26 Y1_GERI (ortak NG6 pilot)",
+    "acik_fazlar": [
+     5
+    ],
+    "basinc_sinifi_bar": 315,
+    "bagli_id": [
+     "A65",
+     "A54"
+    ]
+   },
+   {
+    "id": "Y1.8",
+    "ad": "Carpan tahrik valfi S126 (ACC -> PA)",
+    "tip": "2/2 oransal lojik kartus",
+    "NG": 32,
+    "yol": "ACC -> A55.PA (A183_2/H61, -X yuz)",
+    "bobin": "DO7.12 S126 enable + AO11.1 U17 (yukselme rampasi)",
+    "acik_fazlar": [
+     3
+    ],
+    "basinc_sinifi_bar": 210,
+    "bagli_id": [
+     "A65",
+     "A55",
+     "A183"
+    ]
+   },
+   {
+    "id": "Y1.9",
+    "ad": "Carpan bosaltma valfi S118 (PA -> T)",
+    "tip": "2/2 lojik kartus",
+    "NG": 32,
+    "yol": "A55.PA -> T",
+    "bobin": "DO7.16 S118",
+    "acik_fazlar": [
+     4,
+     5
+    ],
+    "basinc_sinifi_bar": 210,
+    "not": "ELEKTRIK_TALEBI: S118 yalniz tof 1500 ms (faz 4); A55 donusu icin piston geri (DO7.26) suresince de acik olmali",
+    "bagli_id": [
+     "A65",
+     "A55",
+     "A183"
+    ]
+   },
+   {
+    "id": "Y1.10",
+    "ad": "A55 halka (PB) valfi",
+    "tip": "3/2 (bosta PB -> T, enerjili P -> PB)",
+    "NG": 16,
+    "yol": "A55.PB <-> T / P",
+    "bobin": "DO7.26 Y1_GERI (ortak pilot, yeni bobin yok)",
+    "acik_fazlar": [
+     3,
+     5
+    ],
+    "basinc_sinifi_bar": 210,
+    "A65_icinde": false,
+    "not": "faz 3: halka -> T (havalandirma); faz 5: P -> PB, A55 geri. OLCU_TALEBI: A55 PB portu yok",
+    "bagli_id": [
+     "A55",
+     "A65"
+    ]
+   },
+   {
+    "id": "Y1.11",
+    "ad": "Kapak odasi emniyet valfi RV_A",
+    "tip": "dogrudan etkili emniyet kartusu",
+    "NG": 16,
+    "yol": "A54.A (Y1.4 sonrasi) -> T",
+    "bobin": "yok (ayar 315 bar, VARSAYIM)",
+    "acik_fazlar": [],
+    "basinc_sinifi_bar": 315,
+    "not": "Y1.4 + Y1.7 kapaliyken hapsolan kapak odasinin isil/carpan asiri basinc korumasi",
+    "bagli_id": [
+     "A65",
+     "A54"
+    ]
+   }
+  ],
+  "dugumler": {
+   "P": "A65 -Y P d32 (H02H, P1 191,2 L/dk) -> Y1.1, Y1.2, Y1.6, Y1.10",
+   "ACC": "A65 ust yuz A64 ana hat (ic 80) -> Y1.3, Y1.8",
+   "A_dugum": "Y1.1/Y1.2/Y1.3 cikisi -> Y1.4 girisi (A65 ic)",
+   "A54.A": "Y1.4 cikisi -> A65 alt yuz -> A54 arka kafa kanali; Y1.7, Y1.11, A67_1 (PENJ_G) bu dugumde",
+   "B": "A65 +X B d76 (A183_1/H60) <- A54 on kafa +X B; Y1.5 (cikis), Y1.6 (giris)",
+   "PA": "A65 -X PA d50 (A183_2/H61) -> A55 PA; Y1.8 (giris), Y1.9 (bosaltma)",
+   "T": "A65 -Y T + T2 2 x d51 (H20H + H20H2) <- Y1.5, Y1.7, Y1.9, Y1.10, Y1.11",
+   "Pi": "A65 -Y Pi d10 (H11H, P2 pilot) -> lojik elemanlarin NG6 pilotlari ve mekik agi"
+  },
+  "a54_ic_kanallar": {
+   "A": {
+    "ad": "kapak tarafi (arka kafa) besleme",
+    "kanal": {
+     "b": 50,
+     "l": 90
+    },
+    "yer": "A54 arka kafa (lokal x -805..-755, y -45..45) ust yuzden (z 150) dikey arka kafa merkez deligine d140 (r 70); A65 lokal x -55..-5 alt yuz arayuzu, O-halka",
+    "K_toplam": 2.5,
+    "varsayim": "VARSAYIM: oval 50x90 (kafa kalinligi 80, 15 mm et); A55 plunger dinlenmede A54 arka kafa dis yuzunde (x -820), arka kafa deligi kapak odasinin parcasi; cizilmez"
+   },
+   "B": {
+    "ad": "kol tarafi (on kafa) cikis/giris",
+    "kanal": {
+     "d": 60
+    },
+    "port_d_mm": 76,
+    "yer": "A54 on kafa +X B port d76 (y -90, z 92, derinlik 40) dibinden egik d60 -> on kafa ic yuzu (x -80) halka oluk d140/d90 x 12 derin",
+    "K_toplam": 2.5,
+    "varsayim": "VARSAYIM: halka oluk 12 mm (piston tam ileride on kafaya dayaninca kanal kapanmaz); params A54 ports_x ic_kanal notu ile ayni; cizilmez"
+   }
+  },
+  "faz2_metal_basinci_bar": 40.0,
+  "faz2_metal_not": "VARSAYIM: hizli dolumda kalip/gate direnci metal basinci 20-60 bar tipik; 40 secildi",
+  "faz3": {
+   "Q_PA_lpm": 578.0,
+   "Q_PA_kaynak": "KARARLAR 2026-11-21 olcu-mimari (carpan dolum 20 ms yukselme)",
+   "A55_strok_mm": 10.0
+  },
+  "faz4": {
+   "K_eff_Pa": 1400000000.0,
+   "t_dekompresyon_ms": 100.0,
+   "not": "VARSAYIM: HLP46 + hortum/hava esdeger K 1,4 GPa; dekompresyon 100 ms (sok sinirlama U17 rampasi yok, Y1.9 sabit)"
+  },
+  "faz5": {
+   "A55_donus_s": 0.5,
+   "not": "VARSAYIM: A55 geri donus 0,5 s (P1'den)"
+  },
+  "t_hat": {
+   "K_hortum_rakor": 1.5,
+   "K_H20R": 2.3,
+   "K_H60": 0.8,
+   "not": "VARSAYIM: rakor/dirsek/tee toplam K; RF1 filtre haric"
+  },
+  "yerlesim": {
+   "serbest_yuz_mm2": 111700,
+   "serbest_not": "VARSAYIM el hesabi: ust 48000-A64 flansi 19600-A67_1 1600=26800; +Y 25600-servo 19600=6000; -Y P/T/T2/Pi dolu=0; +X 48000-B 9000=39000; -X 48000-PA 8100=39900; alt A54 arayuzu=0",
+   "paketleme": 1.3,
+   "taban_et_mm": 20,
+   "alt_kanal_katmani_mm": 40,
+   "ust_yuz_dolu_mm2": 21200
+  }
+ },
+ "a65_ic_devre_sonuc": {
+  "etiket": "ikiz_tasarim varsayimi (tum degerler; saha verisi istenmedi, 2026-11-25 hidrolik-muhendisi)",
+  "alanlar_mm2": {
+   "A54_kapak": 15394.0,
+   "A54_halka": 9032.0,
+   "halka_kapak_oran": 0.5867,
+   "A55_buyuk": 31416.0,
+   "A55_kucuk": 15394.0,
+   "A55_halka": 16022.0
+  },
+  "a54_ic_kanallar": {
+   "A": {
+    "alan_mm2": 3963.0,
+    "Q_max_lpm": 2909.4,
+    "v_kanal_m_s": 12.23,
+    "v_port_m_s": 12.23,
+    "dp_bar": 1.63,
+    "durum": "OK",
+    "fazlar": {
+     "1": 191.2,
+     "2": 2909.4,
+     "5": 325.9
+    }
+   },
+   "B": {
+    "alan_mm2": 2827.0,
+    "Q_max_lpm": 1625.8,
+    "v_kanal_m_s": 9.58,
+    "v_port_m_s": 5.97,
+    "dp_bar": 1.0,
+    "durum": "OK",
+    "fazlar": {
+     "1": 112.2,
+     "2": 1625.8,
+     "3": 166.2,
+     "5": 191.2
+    }
+   }
+  },
+  "valfler": {
+   "Y1.1": {
+    "NG": 25,
+    "acik_fazlar": [
+     1
+    ],
+    "fazlar": {
+     "1": {
+      "Q_lpm": 191.2,
+      "dp_bar": 0.37,
+      "v_oturma_m_s": 6.49
+     }
+    },
+    "dp_max_bar": 0.37,
+    "durum": "OK"
+   },
+   "Y1.2": {
+    "NG": 25,
+    "acik_fazlar": [
+     2
+    ],
+    "fazlar": {
+     "2": {
+      "Q_lpm": 191.2,
+      "dp_bar": 0.37,
+      "v_oturma_m_s": 6.49
+     }
+    },
+    "dp_max_bar": 0.37,
+    "durum": "OK"
+   },
+   "Y1.3": {
+    "NG": 50,
+    "acik_fazlar": [
+     2
+    ],
+    "fazlar": {
+     "2": {
+      "Q_lpm": 2718.2,
+      "dp_bar": 4.73,
+      "v_oturma_m_s": 23.07
+     }
+    },
+    "dp_max_bar": 4.73,
+    "durum": "OK"
+   },
+   "Y1.4": {
+    "NG": 50,
+    "acik_fazlar": [
+     1,
+     2
+    ],
+    "fazlar": {
+     "1": {
+      "Q_lpm": 191.2,
+      "dp_bar": 0.02,
+      "v_oturma_m_s": 1.62
+     },
+     "2": {
+      "Q_lpm": 2909.4,
+      "dp_bar": 5.41,
+      "v_oturma_m_s": 24.7
+     }
+    },
+    "dp_max_bar": 5.41,
+    "durum": "OK"
+   },
+   "Y1.5": {
+    "NG": 50,
+    "acik_fazlar": [
+     1,
+     2,
+     3
+    ],
+    "fazlar": {
+     "1": {
+      "Q_lpm": 112.2,
+      "dp_bar": 0.01,
+      "v_oturma_m_s": 0.95
+     },
+     "2": {
+      "Q_lpm": 1625.8,
+      "dp_bar": 1.69,
+      "v_oturma_m_s": 13.8
+     },
+     "3": {
+      "Q_lpm": 166.2,
+      "dp_bar": 0.02,
+      "v_oturma_m_s": 1.41
+     }
+    },
+    "dp_max_bar": 1.69,
+    "durum": "OK"
+   },
+   "Y1.6": {
+    "NG": 25,
+    "acik_fazlar": [
+     5
+    ],
+    "fazlar": {
+     "5": {
+      "Q_lpm": 191.2,
+      "dp_bar": 0.37,
+      "v_oturma_m_s": 6.49
+     }
+    },
+    "dp_max_bar": 0.37,
+    "durum": "OK"
+   },
+   "Y1.7": {
+    "NG": 32,
+    "acik_fazlar": [
+     5
+    ],
+    "fazlar": {
+     "5": {
+      "Q_lpm": 325.9,
+      "dp_bar": 0.4,
+      "v_oturma_m_s": 6.75
+     }
+    },
+    "dp_max_bar": 0.4,
+    "durum": "OK"
+   },
+   "Y1.8": {
+    "NG": 32,
+    "acik_fazlar": [
+     3
+    ],
+    "fazlar": {
+     "3": {
+      "Q_lpm": 578.0,
+      "dp_bar": 1.27,
+      "v_oturma_m_s": 11.98
+     }
+    },
+    "dp_max_bar": 1.27,
+    "durum": "OK"
+   },
+   "Y1.9": {
+    "NG": 32,
+    "acik_fazlar": [
+     4,
+     5
+    ],
+    "fazlar": {
+     "4": {
+      "Q_lpm": 261.6,
+      "dp_bar": 0.26,
+      "v_oturma_m_s": 5.42
+     },
+     "5": {
+      "Q_lpm": 37.7,
+      "dp_bar": 0.01,
+      "v_oturma_m_s": 0.78
+     }
+    },
+    "dp_max_bar": 0.26,
+    "durum": "OK"
+   },
+   "Y1.10": {
+    "NG": 16,
+    "acik_fazlar": [
+     3,
+     5
+    ],
+    "fazlar": {
+     "3": {
+      "Q_lpm": 294.8,
+      "dp_bar": 5.3,
+      "v_oturma_m_s": 24.44
+     },
+     "5": {
+      "Q_lpm": 19.2,
+      "dp_bar": 0.02,
+      "v_oturma_m_s": 1.59
+     }
+    },
+    "dp_max_bar": 5.3,
+    "durum": "OK"
+   },
+   "Y1.11": {
+    "NG": 16,
+    "acik_fazlar": [],
+    "fazlar": {},
+    "dp_max_bar": 0.0,
+    "durum": "OK"
+   }
+  },
+  "faz3": {
+   "v_A55_m_s": 0.307,
+   "Q_PA_lpm": 578.0,
+   "Q_A55_halka_lpm": 294.8,
+   "Q_B_lpm": 166.2,
+   "p_kapak_bar": 285.71,
+   "Y1.4_kilit": "S116 (DO7.10) kapali tutar; kapak 285,7 bar > ACC ~135 bar geri akis yok"
+  },
+  "faz4": {
+   "L_olu_mm": 180.0,
+   "V_kapak_l": 10.47,
+   "dV_sikisma_l": 0.214,
+   "V_PA_geri_l": 0.436,
+   "Q_dekompresyon_lpm": 261.6
+  },
+  "faz5": {
+   "v_geri_m_s": 0.353,
+   "t_geri_s": 1.42,
+   "Q_B_giris_lpm": 191.2,
+   "Q_A_cikis_lpm": 325.9,
+   "F_geri_kN": 126.4
+  },
+  "faz2_butce": {
+   "p_acc_son_bar": 135.3,
+   "dp_A_yolu_bar": 12.95,
+   "p_kapak_bar": 122.4,
+   "Q_B_lpm": 1625.8,
+   "dp_B_kanal_H60_bar": 1.16,
+   "dp_T_hortum_bar": 0.44,
+   "dp_H20R_bar": 0.46,
+   "p_B_bar": 3.74,
+   "p_net_kapak_esd_bar": 120.2,
+   "F_net_kN": 185.0,
+   "p_metal_esd_bar": 13.1,
+   "kisma_payi_bar": 107.1,
+   "dp_ivme_rampa_bar": 12.38,
+   "durum": "OK",
+   "not": "RF1 donus filtresi dP haric (bypass acma basinci SAHA_DOGRULAMA); kisma payi S424 servo kontrol araligi"
+  },
+  "a65_yerlesim": {
+   "blok_mm": [
+    160.0,
+    300.0,
+    160.0
+   ],
+   "kapak_alani_top_mm2": 114700.0,
+   "gerekli_yuz_mm2": 149110.0,
+   "serbest_yuz_mm2": 111700.0,
+   "en_derin_bosluk_mm": 122.0,
+   "sigan_eksenler": [
+    "x",
+    "y",
+    "z"
+   ],
+   "durum": "YETERSIZ",
+   "onerilen_asgari_zarf_mm": [
+    570.0,
+    300.0,
+    180.0
+   ]
+  },
+  "hesap": "lib/hidrolik_ag_modeli.py a65_ic_devre_hesabi() (turetilmis; elle degistirme, yeniden hesapla)",
+  "tarih": "2026-11-25"
  }
 }

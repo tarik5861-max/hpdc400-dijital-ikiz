@@ -8,7 +8,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import math
-from lib.hidrolik_ag_modeli import HidrolikAgModeli, pompa_guc_kontrolu, hizli_vurus_hesabi
+from lib.hidrolik_ag_modeli import HidrolikAgModeli, pompa_guc_kontrolu, hizli_vurus_hesabi, a65_ic_devre_hesabi
 
 # Beklentiler elle hesaplandi (2026-11-19): 45VQ42 136 cm3/dev, 20VQ5 16.4 cm3/dev, A120 1480 d/dk,
 # eta_v 0.95, eta_hm 0.92, 140 bar, A54 bore 140 mm.
@@ -91,9 +91,45 @@ def test_akumulator_ters_hesap():
     assert s["rms_durum"] == "OK", s
     print("✓ ACC1 ters hesap testi BAŞARILI (4 tup yeterli, min 2).")
 
+def test_a65_ic_devre():
+    print("Test 5: A54 ic kanallar + A65 ic valfler (Y1.1..Y1.11) faz debileri, hiz, dP...")
+    r = a65_ic_devre_hesabi()
+    rho, Cd = 870.0, 0.7
+    def dp(Q, d):                                         # bagimsiz orifis el hesabi
+        return rho / 2 * (Q / 60000 / (Cd * math.pi * (d / 1000) ** 2 / 4)) ** 2 / 1e5
+    A_cap = math.pi * 140 ** 2 / 4; A_ann = A_cap - math.pi * 90 ** 2 / 4    # 15394 / 9032 mm2
+    QB2 = 2770.9 * A_ann / A_cap                          # 1625.8 L/dk (KARARLAR 2026-11-21)
+    v = r["valfler"]; k = r["a54_ic_kanallar"]
+    assert abs(r["alanlar_mm2"]["halka_kapak_oran"] - A_ann / A_cap) < 1e-4
+    assert abs(v["Y1.5"]["fazlar"][2]["Q_lpm"] - QB2) < 0.2, v["Y1.5"]
+    assert abs(k["B"]["v_port_m_s"] - QB2 / 60000 / (math.pi * 0.076 ** 2 / 4)) < 0.02   # 5.97 m/s
+    assert abs(v["Y1.3"]["fazlar"][2]["dp_bar"] - dp(2718.2, 50)) < 0.02                   # S424 NG50 4.73
+    assert abs(v["Y1.4"]["fazlar"][2]["Q_lpm"] - (2718.2 + 191.2)) < 0.2                  # ACC + P1 (S120)
+    assert abs(v["Y1.8"]["fazlar"][3]["Q_lpm"] - 578.0) < 0.1                              # PA d50 hatti
+    assert abs(r["faz5"]["v_geri_m_s"] - 191.2 / 60000 / (A_ann / 1e6)) < 0.001            # 0.353 m/s
+    assert abs(r["faz3"]["v_A55_m_s"] - 578 / 60000 / (math.pi * 0.2 ** 2 / 4)) < 0.001
+    assert abs(r["faz3"]["p_kapak_bar"] - BEKLENEN_FAZ3_BAR) < 0.01
+    for vid, x in v.items():
+        assert x["durum"] == "OK", (vid, x)
+    for ad in ("A", "B"):
+        assert k[ad]["durum"] == "OK", k[ad]
+    b = r["faz2_butce"]
+    assert b["durum"] == "OK" and b["kisma_payi_bar"] > b["dp_ivme_rampa_bar"], b
+    # faz 3'te Y1.4 kapali (kilit) ve hicbir A -> T / ACC yolu acik degil
+    ag = HidrolikAgModeli()
+    f3 = ag.a65_valf_durumu(3)
+    assert "Y1.4" not in f3 and "Y1.7" not in f3 and "Y1.3" not in f3, f3
+    assert set(ag.a65_valf_durumu(0)) == set(), ag.a65_valf_durumu(0)                      # bostada hepsi kapali
+    assert {"Y1.6", "Y1.7"} <= set(ag.a65_valf_durumu(5))
+    # yerlesim: 160x300x160 blok kartuslara yetmez -> OLCU_TALEBI (bilerek YETERSIZ beklenir)
+    assert r["a65_yerlesim"]["durum"] == "YETERSIZ", r["a65_yerlesim"]
+    print("  ", {i: x["dp_max_bar"] for i, x in v.items()}, b["kisma_payi_bar"], r["a65_yerlesim"]["onerilen_asgari_zarf_mm"])
+    print("✓ A65 ic devre testi BAŞARILI (yerlesim YETERSIZ -> OLCU_TALEBI).")
+
 if __name__ == "__main__":
     test_desarj_guvenligi()
     test_enjeksiyon_fazlari()
     test_pompa_guc()
     test_akumulator_ters_hesap()
+    test_a65_ic_devre()
     print("Tüm Kademe 3 hidrolik ağ simülasyon testleri başarıyla tamamlandı.")

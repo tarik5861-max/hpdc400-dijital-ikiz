@@ -277,6 +277,180 @@ def hizli_vurus_hesabi(hidrolik=None, params=None, elektrik=None):
     }
 
 
+def orifis_dp_bar(Q_lpm, d_mm, Cd, rho):
+    """Tam açık oturmalı kartuş / keskin orifis: dP = rho/2 * (Q / (Cd * A))^2 [bar] (A = pi d^2 / 4).
+    Denklem OpenHydraulics/Hopsan orifis modeliyle aynı türden (Q = Cd A sqrt(2 dP / rho)); kod bağımsız."""
+    A = math.pi * (d_mm / 1000.0) ** 2 / 4.0
+    Q = Q_lpm / 60000.0
+    return rho / 2.0 * (Q / (Cd * A)) ** 2 / 1e5
+
+
+def kesit_hiz_m_s(Q_lpm, alan_mm2):
+    return Q_lpm / 60000.0 / (alan_mm2 / 1e6)
+
+
+def _daire_mm2(d_mm):
+    return math.pi * d_mm ** 2 / 4.0
+
+
+def _kanal_alan_mm2(k):
+    """Kanal kesiti: {'d': ..} daire; {'b': genislik, 'l': boy} oval (stadyum) kesit."""
+    if "d" in k:
+        return _daire_mm2(float(k["d"])) * int(k.get("adet", 1))
+    b, l = float(k["b"]), float(k["l"])
+    return (b * (l - b) + _daire_mm2(b)) * int(k.get("adet", 1))
+
+
+def a65_ic_devre_hesabi(hidrolik=None, params=None, hatlar=None, vurus=None):
+    """A54 iç kanalları (A kapak / B kol) + A65 iç valfleri (Y1.1..Y1.11) faz bazlı debi, hız, dP.
+    Fazlar: 0 boşta, 1 yavaş, 2 hızlı, 3 çarpan, 4 çarpan boşaltma (S118), 5 piston geri.
+    Girdiler: params/hidrolik.json a65_ic_devre_tasarim (ikiz_tasarim varsayımı), params.json A54/A55/A65/A186,
+    hatlar.json T hatları, hizli_vurus_hesabi() faz debileri. Geometri DEĞİŞTİRMEZ, yalnız kontrol eder."""
+    hidrolik = hidrolik or _oku("params/hidrolik.json")
+    params = params or _oku("params/params.json")
+    hatlar = hatlar or _oku("params/hatlar.json")
+    vurus = vurus or hizli_vurus_hesabi(hidrolik, params)
+    tas = hidrolik["a65_ic_devre_tasarim"]
+    yag = hidrolik["hizli_vurus_tasarim"]["yag"]
+    rho, nu = float(yag["rho_kg_m3"]), float(yag["nu_cSt"])
+    Cd = float(tas["Cd"])
+    parts = params["parts"]
+    g = params["global"]
+    p1 = float(g["system_pressure_bar"])
+    d54 = parts["A54"]["dims"]
+    bore = float(d54["barrel"]["bore"])
+    rod = float(parts["A186"]["dims"]["rod"]["d"])
+    A_cap = _daire_mm2(bore)
+    A_ann = A_cap - _daire_mm2(rod)
+    oran_ba = A_ann / A_cap
+    a55 = parts["A55"]["dims"]["internal"]
+    A55_buyuk = _daire_mm2(float(a55["piston_d"]))
+    A55_kucuk = _daire_mm2(float(a55["plunger_d"]))
+    A55_halka = A55_buyuk - A55_kucuk
+    Qp1 = next(p for p in hidrolik["elemanlar"]["pompalar"] if p["id"] == "P1")["nominal_debi_lpm"]
+    f2 = vurus["faz2"]
+    Q_S424 = f2["Q_acc_ort_lpm"]                      # ACC1 -> S424
+    Q_A_faz2_valf = f2["Q_acc_ort_lpm"] + f2["Q_P1_lpm"]   # S424 + S120 -> A düğümü (kayıp dahil)
+    Q_piston2 = f2["Q_piston_lpm"]
+    Q_PA = float(tas["faz3"]["Q_PA_lpm"])
+    v55 = kesit_hiz_m_s(Q_PA, A55_buyuk)              # A55 = A54 faz 3 piston hızı (A55 küçük = A54 çap)
+    Q_halka55 = v55 * A55_halka * 60000.0 / 1e6
+    Q_B3 = v55 * A_ann * 60000.0 / 1e6
+    # faz 4 dekompresyon: kapak odası + A55 küçük taraf sıkışma hacmi (K_eff) -> PA tarafına geri
+    # ölü boy: geri konumda piston arka yüzü - arka kafa dış yüzü (A55 plunger dinlenmede kafa dış yüzünde, VARSAYIM)
+    L_olu = float(parts["A186"]["dims"]["piston"]["x_range"][0]) - float(d54["rear_head"]["local_x_range"][0])
+    L_kap = float(d54["stroke"]) + L_olu
+    V_kap_l = A_cap * L_kap / 1e6
+    dp3 = vurus["faz3"]["p_carpan_bar"]
+    dV_kap_l = V_kap_l * dp3 * 1e5 / float(tas["faz4"]["K_eff_Pa"])
+    V_PA_geri_l = dV_kap_l * A55_buyuk / A55_kucuk
+    Q_dek = V_PA_geri_l / (float(tas["faz4"]["t_dekompresyon_ms"]) / 1000.0) * 60.0
+    # faz 5 geri: P1 -> B
+    v_geri = kesit_hiz_m_s(Qp1, A_ann)
+    Q_A5 = v_geri * A_cap * 60000.0 / 1e6
+    Q_V55_geri = A55_halka * float(tas["faz3"]["A55_strok_mm"]) / 1e6 / (float(tas["faz5"]["A55_donus_s"])) * 60.0
+    debi = {  # valf id -> {faz: Q L/dk}
+        "Y1.1": {1: Qp1},
+        "Y1.2": {2: f2["Q_P1_lpm"]},
+        "Y1.3": {2: Q_S424},
+        "Y1.4": {1: Qp1, 2: Q_A_faz2_valf},
+        "Y1.5": {1: Qp1 * oran_ba, 2: Q_piston2 * oran_ba, 3: Q_B3},
+        "Y1.6": {5: Qp1},
+        "Y1.7": {5: Q_A5},
+        "Y1.8": {3: Q_PA},
+        "Y1.9": {4: Q_dek, 5: Q_V55_geri * A55_buyuk / A55_halka},   # A55 geri: büyük taraf -> T
+        "Y1.10": {3: Q_halka55, 5: Q_V55_geri},
+        "Y1.11": {},
+    }
+    valfler = {}
+    for v in tas["valfler"]:
+        ng = str(v["NG"])
+        ngt = tas["ng_tablosu"][ng]
+        dmax = {}
+        for faz, Q in debi.get(v["id"], {}).items():
+            dmax[faz] = {"Q_lpm": round(Q, 1), "dp_bar": round(orifis_dp_bar(Q, float(ngt["oturma_d_mm"]), Cd, rho), 2),
+                         "v_oturma_m_s": round(kesit_hiz_m_s(Q, _daire_mm2(float(ngt["oturma_d_mm"]))), 2)}
+        dpmax = max([x["dp_bar"] for x in dmax.values()], default=0.0)
+        valfler[v["id"]] = {"NG": v["NG"], "acik_fazlar": v["acik_fazlar"], "fazlar": dmax, "dp_max_bar": dpmax,
+                            "durum": "OK" if dpmax <= float(tas["valf_dp_sinir_bar"]) else "YUKSEK_DP"}
+    # A54 iç kanalları
+    kan = {}
+    akis = {"A": {1: Qp1, 2: Q_A_faz2_valf, 5: Q_A5}, "B": {1: Qp1 * oran_ba, 2: Q_piston2 * oran_ba, 3: Q_B3, 5: Qp1}}
+    for ad, k in tas["a54_ic_kanallar"].items():
+        A = _kanal_alan_mm2(k["kanal"])
+        Ap = _daire_mm2(float(k["port_d_mm"])) if "port_d_mm" in k else A
+        Qm = max(akis[ad].values())
+        v = kesit_hiz_m_s(Qm, A)
+        dp = float(k["K_toplam"]) * rho * v ** 2 / 2.0 / 1e5
+        kan[ad] = {"alan_mm2": round(A, 0), "Q_max_lpm": round(Qm, 1), "v_kanal_m_s": round(v, 2),
+                   "v_port_m_s": round(kesit_hiz_m_s(Qm, Ap), 2), "dp_bar": round(dp, 2),
+                   "durum": "OK" if v <= float(tas["kanal_hiz_sinir_m_s"]) else "HIZ_YUKSEK",
+                   "fazlar": {f: round(q, 1) for f, q in akis[ad].items()}}
+    # T karşı basıncı (faz 2, B -> Y1.5 -> T/T2 -> H20H/H20H2 -> H20R -> tank); RF1 hariç
+    hl = {h["id"]: h for h in hatlar["hatlar"]}
+    ru = float(hidrolik["hizli_vurus_tasarim"]["hat"]["puruzluluk_mm"])
+    QB2 = Q_piston2 * oran_ba
+    def _L(h):
+        if "hortum_uzunluk_mm" in h:
+            return h["hortum_uzunluk_mm"] / 1000.0
+        pts = [h["guzergah"]["baslangic"]] + h["guzergah"]["ara_noktalar"] + [h["guzergah"]["bitis"]]
+        return sum(sum(abs(a - b) for a, b in zip(p, q)) for p, q in zip(pts, pts[1:])) / 1000.0
+    Kh = float(tas["t_hat"]["K_hortum_rakor"])
+    dpH = max(_boru_dp_bar(QB2 / 2.0, hl[i].get("hortum", {}).get("ic_cap_mm", hl[i].get("ic_cap_mm")), _L(hl[i]),
+                           rho, nu, ru, Kh)[0] for i in ("H20H", "H20H2"))
+    dpR = _boru_dp_bar(QB2, hl["H20R"]["ic_cap_mm"], _L(hl["H20R"]), rho, nu, ru, float(tas["t_hat"]["K_H20R"]))[0]
+    H60 = hatlar["hatlar_a183"]["H60"]
+    dp60 = _boru_dp_bar(QB2, H60["ic_cap_mm"], H60["L_mm"] / 1000.0, rho, nu, ru, float(tas["t_hat"]["K_H60"]))[0]
+    pB = kan["B"]["dp_bar"] + dp60 + valfler["Y1.5"]["fazlar"][2]["dp_bar"] + dpH + dpR
+    # faz 2 basınç bütçesi (vuruş sonu, kararlı akış; ivme rampası ayrı)
+    hat = f2["hat_A64"]
+    p_acc2 = vurus["akumulator"]["p2_gercek_bar"]
+    dpA = (hat["dp_sabit_bar"] + valfler["Y1.3"]["fazlar"][2]["dp_bar"] + valfler["Y1.4"]["fazlar"][2]["dp_bar"]
+           + kan["A"]["dp_bar"])
+    p_kap = p_acc2 - dpA
+    p_net = p_kap - pB * oran_ba              # kapak eşdeğeri net (piston + metal direnci + sürtünme için)
+    F_net = p_net * 1e5 * A_cap / 1e6 / 1000.0
+    p_metal_esd = float(tas["faz2_metal_basinci_bar"]) * _daire_mm2(float(g["plunger_d"])) / A_cap
+    pay = p_net - p_metal_esd
+    # A65 yerleşim kontrolü (kartuş boşlukları ISO 7368 yaklaşık; geometri değişmez, yalnız rapor)
+    blk = parts["A65"]["dims"]["block"]
+    bx, by, bz = float(blk["len_x"]), float(blk["width_y"]), float(blk["z_range"][1] - blk["z_range"][0])
+    kapak_top = sum(float(tas["ng_tablosu"][str(v["NG"])]["kapak_mm"]) ** 2 for v in tas["valfler"] if v.get("A65_icinde", True))
+    derin_max = max(float(tas["ng_tablosu"][str(v["NG"])]["derinlik_mm"]) for v in tas["valfler"])
+    sigan_eksen = [ad for ad, L in (("x", bx), ("y", by), ("z", bz)) if derin_max + float(tas["yerlesim"]["taban_et_mm"]) <= L]
+    serbest = float(tas["yerlesim"]["serbest_yuz_mm2"])
+    yer_durum = "OK" if (kapak_top * float(tas["yerlesim"]["paketleme"]) <= serbest and len(sigan_eksen) >= 2) else "YETERSIZ"
+    # önerilen asgari zarf: tüm kartuşlar üst yüzden dikey (z), y genişliği korunur
+    z_min = derin_max + float(tas["yerlesim"]["taban_et_mm"]) + float(tas["yerlesim"]["alt_kanal_katmani_mm"])
+    x_min = (kapak_top * float(tas["yerlesim"]["paketleme"]) + float(tas["yerlesim"]["ust_yuz_dolu_mm2"])) / by
+    return {
+        "etiket": tas["etiket"],
+        "alanlar_mm2": {"A54_kapak": round(A_cap, 0), "A54_halka": round(A_ann, 0), "halka_kapak_oran": round(oran_ba, 4),
+                        "A55_buyuk": round(A55_buyuk, 0), "A55_kucuk": round(A55_kucuk, 0), "A55_halka": round(A55_halka, 0)},
+        "a54_ic_kanallar": kan,
+        "valfler": valfler,
+        "faz3": {"v_A55_m_s": round(v55, 3), "Q_PA_lpm": Q_PA, "Q_A55_halka_lpm": round(Q_halka55, 1),
+                 "Q_B_lpm": round(Q_B3, 1), "p_kapak_bar": dp3,
+                 "Y1.4_kilit": "S116 (DO7.10) kapali tutar; kapak 285,7 bar > ACC ~135 bar geri akis yok"},
+        "faz4": {"L_olu_mm": L_olu, "V_kapak_l": round(V_kap_l, 2), "dV_sikisma_l": round(dV_kap_l, 3), "V_PA_geri_l": round(V_PA_geri_l, 3),
+                 "Q_dekompresyon_lpm": round(Q_dek, 1)},
+        "faz5": {"v_geri_m_s": round(v_geri, 3), "t_geri_s": round(float(d54["stroke"]) / 1000.0 / v_geri, 2),
+                 "Q_B_giris_lpm": Qp1, "Q_A_cikis_lpm": round(Q_A5, 1), "F_geri_kN": round(p1 * 1e5 * A_ann / 1e6 / 1000.0, 1)},
+        "faz2_butce": {"p_acc_son_bar": p_acc2, "dp_A_yolu_bar": round(dpA, 2), "p_kapak_bar": round(p_kap, 1),
+                       "Q_B_lpm": round(QB2, 1), "dp_B_kanal_H60_bar": round(kan["B"]["dp_bar"] + dp60, 2),
+                       "dp_T_hortum_bar": round(dpH, 2), "dp_H20R_bar": round(dpR, 2), "p_B_bar": round(pB, 2),
+                       "p_net_kapak_esd_bar": round(p_net, 1), "F_net_kN": round(F_net, 1),
+                       "p_metal_esd_bar": round(p_metal_esd, 1), "kisma_payi_bar": round(pay, 1),
+                       "dp_ivme_rampa_bar": hat["dp_ivme_bar"],
+                       "durum": "OK" if pay - hat["dp_ivme_bar"] > 0 else "YETERSIZ",
+                       "not": "RF1 donus filtresi dP haric (bypass acma basinci SAHA_DOGRULAMA); kisma payi S424 servo kontrol araligi"},
+        "a65_yerlesim": {"blok_mm": [bx, by, bz], "kapak_alani_top_mm2": round(kapak_top, 0),
+                         "gerekli_yuz_mm2": round(kapak_top * float(tas["yerlesim"]["paketleme"]), 0),
+                         "serbest_yuz_mm2": serbest, "en_derin_bosluk_mm": derin_max, "sigan_eksenler": sigan_eksen,
+                         "durum": yer_durum, "onerilen_asgari_zarf_mm": [round(x_min, -1), by, round(z_min, -1)]},
+    }
+
+
 def _bul_anahtar(d, anahtar):
     """İç içe dict/list içinde anahtarı taşıyan ilk dict'i döner."""
     if isinstance(d, dict):
@@ -317,6 +491,19 @@ class HidrolikAgModeli:
             "A55": False  # Çarpan
         }
 
+    def a65_valf_durumu(self, faz: int):
+        """A65 iç valfleri (Y1.1..Y1.11) için faz bazlı açık/kapalı + debi (a65_ic_devre_hesabi).
+        faz: 0 boşta, 1 yavaş, 2 hızlı, 3 çarpan, 4 çarpan boşaltma, 5 piston geri."""
+        if not hasattr(self, "_a65"):
+            self._a65 = a65_ic_devre_hesabi(vurus=self.vurus)
+            self._a65_tas = {v["id"]: v for v in _oku("params/hidrolik.json")["a65_ic_devre_tasarim"]["valfler"]}
+        acik = {}
+        for vid, v in self._a65["valfler"].items():
+            if faz in v["acik_fazlar"]:
+                q = v["fazlar"].get(faz, {}).get("Q_lpm", v["fazlar"].get(str(faz), {}).get("Q_lpm", 0.0))
+                acik[vid] = {"yol": self._a65_tas[vid]["yol"], "Q_lpm": q, "bobin": self._a65_tas[vid]["bobin"]}
+        return acik
+
     def akumulator_desarj_simulasyonu(self, adim_saniye=0.5, sure_saniye=4.0):
         """E-stop veya duruş anında akümülatör basıncının deşarj vanası (DV1) üzerinden düşüşünü simüle eder."""
         zaman = 0.0
@@ -356,6 +543,7 @@ class HidrolikAgModeli:
             sonuc["kaynak"] = "Boşta / Bekleme"
             sonuc["akis_lpm"] = 0.0
             sonuc["aktif_valfler"] = ["DV1 (Güvenlik deşarjı kapalı)"]
+        sonuc["a65_acik"] = sorted(self.a65_valf_durumu(enjeksiyon_fazi))
         if sonuc.get("akis_lpm"):
             sonuc["a54_hiz_m_s"] = round(silindir_hizi_m_s(sonuc["akis_lpm"], self.a54_bore_mm), 3)
         return sonuc
@@ -364,3 +552,4 @@ class HidrolikAgModeli:
 if __name__ == "__main__":
     print(json.dumps(pompa_guc_kontrolu(), ensure_ascii=False, indent=1))
     print(json.dumps(hizli_vurus_hesabi(), ensure_ascii=False, indent=1))
+    print(json.dumps(a65_ic_devre_hesabi(), ensure_ascii=False, indent=1))
