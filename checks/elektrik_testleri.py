@@ -10,7 +10,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "lib"))
-from elektrik_mantik import ElektrikMantik, KapaliDongu, yukle   # noqa
+from elektrik_mantik import ElektrikMantik, KapaliDongu, yukle, teshis_kaydi   # noqa
 
 DT = 10.0
 
@@ -932,6 +932,47 @@ def s19(m):
     return r.hata
 
 
+# ---------------------------------------------------------------- ariza enjeksiyonu (Kademe 4 adim 3)
+def _s_ariza(ariza_id):
+    def f(m):
+        """Ariza enjekte -> PLC beklenen fazda/alarmla durmali; teshis kaydi alanlari dolu; guvenlik + LOTO 1..n sirali."""
+        r = Sonuc()
+        mod = next(x for x in m.cfg["mantik"]["ariza_enjeksiyon"]["modlar"] if x["id"] == ariza_id)
+        calistir(m)
+        t = teshis_kaydi(m, mod)
+        b = mod["beklenen"]
+        r.kos(t["faz"] == b["faz"], f"{ariza_id}: durus fazi {t['faz']} (beklenen {b['faz']})")
+        r.kos(t["alarm"] == b["alarm"], f"{ariza_id}: alarm {t['alarm']} (beklenen {b['alarm']})")
+        r.kos(t["tespit"] == ("alarm" if b["alarm"] else "sessiz_takilma"), f"{ariza_id}: tespit {t['tespit']}")
+        r.kos(bool(t["bekleyen_kosul"]) and t["bekleyen_kosul"] != "-", f"{ariza_id}: bekleyen kosul bos")
+        r.kos(len(t["sorumlu_ID"]) >= 2 and t["sorumlu_ID"][0] == (mod.get("hedef") or "DB68.ENC")
+              and any(i.startswith("A") and i[1:].isdigit() for i in t["sorumlu_ID"]), f"{ariza_id}: sorumlu_ID (kanal + mekanik A##) eksik {t['sorumlu_ID']}")
+        g = t["guvenlik_notu"]
+        r.kos(len(g) > 100 and "akumulator" in g.lower() and "LOTO" in g and "kilit" in g.lower(), f"{ariza_id}: guvenlik notu eksik")
+        no = [a["no"] for a in m.cfg["loto"]["adimlar"]]
+        r.kos(t["loto_adimlar"] == list(range(1, len(no) + 1)) == no, f"{ariza_id}: LOTO adimlari 1..n sirali degil {t['loto_adimlar']}")
+        r.kos(t["cikis_var_hareket_yok"] == (mod["tur"] == "bobin_yanik"), f"{ariza_id}: 'cikis var hareket yok' isareti {t['cikis_var_hareket_yok']}")
+        r.kos(t["etiket"] == "DESIGN ASSUMPTION", f"{ariza_id}: DESIGN ASSUMPTION etiketi yok")
+        return r.hata
+    f.__name__ = f"s_ariza_{ariza_id}"
+    f.__doc__ = f"Ariza {ariza_id}"
+    return f
+
+
+def s20(m):
+    """Kontrol: arizasiz tam cevrim TAMAMLANDI, alarm yok; ariza listesi >= 8 mod ve tum turler kapsamda."""
+    r = Sonuc()
+    calistir(m)
+    mods = m.cfg["mantik"]["ariza_enjeksiyon"]["modlar"]
+    r.kos(len(mods) >= 8, f"ariza sayisi {len(mods)} < 8")
+    turler = {x["tur"] for x in mods}
+    for z in ("sensor_sikismis_0", "sensor_sikismis_1", "bobin_yanik", "valf_takili", "enkoder_darbe_kaybi", "enkoder_sabit", "kablo_kopuk"):
+        r.kos(z in turler, f"ariza turu eksik: {z}")
+    k = KapaliDongu(m)
+    r.kos(k.calistir_cevrim() is not None and not m.prev["S.HERHANGI_ALARM"], "arizasiz cevrim bitmedi/alarm var")
+    return r.hata
+
+
 def _mut_param(ad, deger):
     def f(cfg):
         cfg["mantik"]["ifade_dili"]["parametreler"][ad] = deger
@@ -965,6 +1006,27 @@ def mut_s19a(cfg):     # esikler cevrim.py ile uyumsuz
 
 
 
+def mut_ariza_zaman_asimi_yok(cfg):     # FAZ1/FAZ2/piston geri zaman asimi sonsuz -> alarm beklenen testler yakalar
+    p = cfg["mantik"]["ifade_dili"]["parametreler"]
+    p["P.FAZ1_ZAMAN_ASIMI_ms"] = p["P.FAZ2_ZAMAN_ASIMI_ms"] = p["P.PISTON_GERI_SURE_ms"] = 10 ** 9
+
+
+def mut_ariza_guvenlik_bos(cfg):
+    cfg["mantik"]["ariza_enjeksiyon"]["guvenlik_ortak"] = ""
+    cfg["mantik"]["ariza_enjeksiyon"]["guvenlik_tur"] = {k: "" for k in cfg["mantik"]["ariza_enjeksiyon"]["guvenlik_tur"]}
+
+
+def mut_ariza_loto_sirasiz(cfg):
+    a = cfg["loto"]["adimlar"]
+    a[2]["no"], a[3]["no"] = a[3]["no"], a[2]["no"]
+
+
+def mut_ariza_beklenen_kayik(cfg):
+    for x in cfg["mantik"]["ariza_enjeksiyon"]["modlar"]:
+        if x["id"] == "ARZ06":
+            x["beklenen"]["faz"] = "ENJ.FAZ2"
+
+
 SENARYOLAR = [
     (1, "Start birakilinca motor devam (muhur); stop ve E-stop durdurur", s1, [mut_s1a, mut_s1b]),
     (2, "KM2/KM3 asla birlikte 1 degil; KM3 dususunden >=50 ms sonra KM2", s2, [mut_s2a, mut_s2b]),
@@ -985,6 +1047,19 @@ SENARYOLAR = [
     (17, "Konum tabani: plunger yavaslayinca FAZ suresi uzar; cok yavassa zaman asimi alarmi + RESET; yedek sure modu", s17, [mut_s16b, mut_s16d, mut_s16e]),
     (18, "ENC arizasi (0 sabit) -> FAZ1 zaman asimi; piston geri takilirsa alarm", s18, [mut_s16e, mut_s16d]),
     (19, "cevrim.py esleme (faz 1..16): esikler/kurslar ayni, farklar etiketli (FARK_*), ihlal yok", s19, [mut_s19a]),
+    (20, "Ariza enjeksiyonu: arizasiz cevrim TAMAM; >=8 ariza, tum turler kapsamda", s20, []),
+    (21, "Ariza DI5.08 sikismis-0 -> KAPAMA'da sessiz takilma (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ01"), [mut_ariza_loto_sirasiz]),
+    (22, "Ariza DI9.11 sikismis-0 -> ITICI_ILERI'de sessiz takilma (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ02"), []),
+    (23, "Ariza DI9.11 sikismis-1 -> MACA_GIR izin yok, AL_MACA_ZAMAN_ASIMI (yanlis yonlendirme) (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ03"), []),
+    (24, "Ariza DI9.10 kablo kopuk -> MACA_GIR izin yok, AL_MACA_ZAMAN_ASIMI (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ04"), []),
+    (25, "Ariza DO7.05 bobin yanik -> KAPAMA takilir (cikis var hareket yok) (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ05"), []),
+    (26, "Ariza DO7.25 bobin yanik -> FAZ1 AL_ENJ_KONUM_ZAMAN_ASIMI (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ06"), [mut_ariza_zaman_asimi_yok, mut_ariza_beklenen_kayik, mut_ariza_guvenlik_bos]),
+    (27, "Ariza DO7.01 valf takili -> FAZ2 AL_ENJ_KONUM_ZAMAN_ASIMI (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ07"), [mut_ariza_zaman_asimi_yok]),
+    (28, "Ariza ENC darbe kaybi %50 -> FAZ2 zaman asimi (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ08"), []),
+    (29, "Ariza ENC sabit 0 -> FAZ1 zaman asimi (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ09"), [mut_ariza_zaman_asimi_yok]),
+    (30, "Ariza ENC sabit 600 -> piston geri zaman asimi (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ10"), []),
+    (31, "Ariza DO7.26 valf takili -> AL_PISTON_GERI_ZAMAN_ASIMI (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ11"), [mut_ariza_zaman_asimi_yok]),
+    (32, "Ariza DO7.04 bobin yanik -> ACMA takilir (guvenlik + LOTO 1..n dolu)", _s_ariza("ARZ12"), []),
 ]
 
 

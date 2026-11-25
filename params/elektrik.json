@@ -5182,25 +5182,29 @@
      "plc": "MACA_CEK",
      "cevrim": "12 Maca cek (A167)",
      "fark": "FARK_SIRA_PISTON_GERI",
-     "not": "VARSAYIM: cevrim: 11 piston geri -> 12 maca cek; PLC: maca cek -> ACMA -> piston geri"
+     "not": "VARSAYIM: cevrim: 11 piston geri -> 12 maca cek; PLC: maca cek -> ACMA -> piston geri",
+     "geometri": "DOGRULANDI"
     },
     {
      "plc": "ACMA",
      "cevrim": "13 Kalip acilir",
      "fark": "FARK_ACMA_300",
-     "not": "VARSAYIM: PLC acmayi AI10.1 >= P.ITICI_ACIKLIK_MIN_mm (300) ile durdurur; cevrim s=1 (420 mm)"
+     "not": "VARSAYIM: PLC acmayi AI10.1 >= P.ITICI_ACIKLIK_MIN_mm (300) ile durdurur; cevrim s=1 (420 mm)",
+     "geometri": "DOGRULANDI"
     },
     {
      "plc": "OTO_PISTON_GERI",
      "cevrim": "11 Plunger geri",
      "fark": "FARK_SIRA_PISTON_GERI",
-     "not": "VARSAYIM: PLC'de kalip acildiktan sonra, ENC<=P.ENC_GERI_mm+tol ile biter (cevrim: kalip kapali, sure)"
+     "not": "VARSAYIM: PLC'de kalip acildiktan sonra, ENC<=P.ENC_GERI_mm+tol ile biter (cevrim: kalip kapali, sure)",
+     "geometri": "DOGRULANDI"
     },
     {
      "plc": "ITICI_ILERI",
      "cevrim": "14 Itici ileri",
      "fark": "FARK_ACMA_300",
-     "not": "VARSAYIM: bitis DI9.11"
+     "not": "VARSAYIM: bitis DI9.11",
+     "geometri": "DOGRULANDI"
     },
     {
      "plc": "ITICI_GERI",
@@ -5220,6 +5224,167 @@
     "FARK_SIRA_PISTON_GERI",
     "FARK_ACMA_300",
     "FARK_SPREY_PLC_YOK"
+   ],
+   "fark_dogrulama": {
+    "FARK_SIRA_PISTON_GERI": "geometrik dogrulandi (out/acik_kalip_tarama.txt: plunger acik kalipta her s'de temiz)",
+    "FARK_ACMA_300": "geometrik dogrulandi (out/acik_kalip_tarama.txt: itici s>=0.841 = 300 mm temiz)"
+   }
+  },
+  "ariza_enjeksiyon": {
+   "durum": "DESIGN ASSUMPTION (Kademe 4 adim 3): ariza modelleri ve sayilari saha teyidi gerektirir. Kod: lib/elektrik_mantik.py ariza_kwargs()/teshis_kaydi(); testler checks/elektrik_testleri.py S20..S31.",
+   "kablo_kopuk_di_degeri": 0,
+   "kablo_kopuk_not": "DESIGN ASSUMPTION: acik devre = DI 0 (24 V besleme kopunca giris dusuk).",
+   "valf_takili_hiz_carpani": 0.05,
+   "enkoder_darbe_kaybi_oran": 0.5,
+   "takilma_penceresi_ms": 12000,
+   "takilma_not": "DESIGN ASSUMPTION: durum 12 s degismezse 'sessiz takilma'. Alarmsiz takilan adimlar (KAPAMA/ACMA/ITICI_*) icin PLC'de adim zaman asimi alarmi YOK (bosluk, VERI/KARAR bekliyor).",
+   "guvenlik_ortak": "GUVENLIK ON ADIMI: LOTO 1..9 SIRASIYLA (1 cevrim durdur/manuel, 2 kalip ac + mafsal kilidi coz, 3 pompa dur, 4 akumulator desarj S121+DV1 ve PT2<2 bar dogrula, 5 hat basinci PT1/PCARP<2 bar, 6 ana salter kilit+etiket, 7 enerji yoklugu olc, 8 kapi zinciri kopruleme yasak/sicak yuzey, 9 ters sira geri alma); LOTO tamamlanmadan sensor/valf/kablo/bobin'e el uzatilmaz.",
+   "guvenlik_tur": {
+    "sensor_sikismis_0": "Sensor degisimi/ayari yalniz enerjisiz.",
+    "sensor_sikismis_1": "Sensor degisimi/ayari yalniz enerjisiz.",
+    "kablo_kopuk": "Kablo/klemens kontrolu yalniz enerjisiz.",
+    "bobin_yanik": "Bobin gerilimi/direnc olcumu yalniz yetkili; valf sokumu basincsiz hatta.",
+    "valf_takili": "Valf sokumu: akumulator desarji + hat basinci sifir dogrulanmadan baslanmaz.",
+    "enkoder_darbe_kaybi": "Enkoder/kablo kontrolu enerjisiz.",
+    "enkoder_sabit": "Enkoder/kablo kontrolu enerjisiz."
+   },
+   "modlar": [
+    {
+     "id": "ARZ01",
+     "ad": "Kalip kilitli LS sikismis-0",
+     "tur": "sensor_sikismis_0",
+     "hedef": "DI5.08",
+     "beklenen": {
+      "faz": "KAPAMA",
+      "alarm": null
+     },
+     "guvenlik_ek": "Kalip kapali-kilitli mafsalda 4000 kN elastik enerji: LS'e dokunmadan once kalip ACIK olmali (LOTO 2)."
+    },
+    {
+     "id": "ARZ02",
+     "ad": "Itici ileri LS sikismis-0",
+     "tur": "sensor_sikismis_0",
+     "hedef": "DI9.11",
+     "beklenen": {
+      "faz": "ITICI_ILERI",
+      "alarm": null
+     },
+     "guvenlik_ek": "Itici ileri uc konumda olabilir: mekanik itici geri/dayanak emniyeti, hidrolik bosaltma (LOTO 4-5) sonrasi sensore erisim."
+    },
+    {
+     "id": "ARZ03",
+     "ad": "Itici ileri LS sikismis-1",
+     "tur": "sensor_sikismis_1",
+     "hedef": "DI9.11",
+     "beklenen": {
+      "faz": "MACA_GIR",
+      "alarm": "AL_MACA_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "ITICI_ILERI atlanir (itici gercekte ilerlemedi); sensor yanlis onayi verir: parca cikmamis olabilir, kalip ici temassiz kontrol yalniz LOTO sonrasi.",
+     "not": "Yanlis yonlendirme: alarm maca (A167/A169) gosterir, kok neden itici LS; MACA_GIR_IZIN itici geride (DI9.10 = 1, DI9.11 = 0) ister."
+    },
+    {
+     "id": "ARZ04",
+     "ad": "Itici geri LS kablo kopuk",
+     "tur": "kablo_kopuk",
+     "hedef": "DI9.10",
+     "beklenen": {
+      "faz": "MACA_GIR",
+      "alarm": "AL_MACA_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "Klemens/kablo olcumu enerjisiz yapilir (LOTO 7); olcum aleti once bilinen kaynakta test.",
+     "not": "Yanlis yonlendirme: alarm maca (A167/A169) gosterir, kok neden itici LS; MACA_GIR_IZIN itici geride (DI9.10 = 1, DI9.11 = 0) ister."
+    },
+    {
+     "id": "ARZ05",
+     "ad": "Kalip kapama valfi bobini yanik",
+     "tur": "bobin_yanik",
+     "hedef": "DO7.05",
+     "beklenen": {
+      "faz": "KAPAMA",
+      "alarm": null
+     },
+     "guvenlik_ek": "Valf (S210A/Y2) sokulmeden once akumulator desarji (LOTO 4) ve hat basinci (LOTO 5) sifir dogrulanir; kapama hatti basincli olabilir."
+    },
+    {
+     "id": "ARZ06",
+     "ad": "Yavas enjeksiyon valfi bobini yanik",
+     "tur": "bobin_yanik",
+     "hedef": "DO7.25",
+     "beklenen": {
+      "faz": "ENJ.FAZ1",
+      "alarm": "AL_ENJ_KONUM_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "Enjeksiyon valf blogu (Y1) akumulatorlu hat: ACC1 desarji (LOTO 4) + manometre ile PT2 ~0 gozle dogrula; plunger mekanik emniyet takozu."
+    },
+    {
+     "id": "ARZ07",
+     "ad": "Hizli vurus valfi takili (yavas aciliyor)",
+     "tur": "valf_takili",
+     "hedef": "DO7.01",
+     "beklenen": {
+      "faz": "ENJ.FAZ2",
+      "alarm": "AL_ENJ_KONUM_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "S113/servo valf ve ACC1 yuksek basincli: valf demontaji yalniz akumulator desarj + basinc bosaltma (LOTO 4-5) sonrasi; azot tarafina dokunulmaz."
+    },
+    {
+     "id": "ARZ08",
+     "ad": "Enkoder darbe kaybi (%50)",
+     "tur": "enkoder_darbe_kaybi",
+     "hedef": "DB68.ENC",
+     "beklenen": {
+      "faz": "ENJ.FAZ2",
+      "alarm": "AL_ENJ_KONUM_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "Plunger gercek konumu ENC'den fazla ilerler (strok sonu dayanagi); enkoder sokumunde plunger ucu ve sicak burc: sogumadan temas yok (LOTO 8)."
+    },
+    {
+     "id": "ARZ09",
+     "ad": "Enkoder sabit 0",
+     "tur": "enkoder_sabit",
+     "hedef": "DB68.ENC",
+     "deger_mm": 0.0,
+     "beklenen": {
+      "faz": "ENJ.FAZ1",
+      "alarm": "AL_ENJ_KONUM_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "Plunger ilerlemis olabilir (gercek konum bilinmez): hidrolik bosaltma (LOTO 4-5) sonrasi plunger gozle/ruler ile kontrol."
+    },
+    {
+     "id": "ARZ10",
+     "ad": "Enkoder sabit yuksek (600 mm)",
+     "tur": "enkoder_sabit",
+     "hedef": "DB68.ENC",
+     "deger_mm": 600.0,
+     "beklenen": {
+      "faz": "OTO_PISTON_GERI",
+      "alarm": "AL_PISTON_GERI_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "FAZ1/FAZ2 kontrolsuz gecer, plunger konum esigi gormeden vurur: proses guvenligi icin enkoder degisene dek OTO yasak."
+    },
+    {
+     "id": "ARZ11",
+     "ad": "Piston geri valfi takili (cok yavas)",
+     "tur": "valf_takili",
+     "hedef": "DO7.26",
+     "beklenen": {
+      "faz": "OTO_PISTON_GERI",
+      "alarm": "AL_PISTON_GERI_ZAMAN_ASIMI"
+     },
+     "guvenlik_ek": "Plunger kamarada biskuvi ile kalmis olabilir: kalip acik, sicak parca/burc sogumadan temas yok; valf sokumu LOTO 4-5 sonrasi."
+    },
+    {
+     "id": "ARZ12",
+     "ad": "Kalip acma valfi bobini yanik",
+     "tur": "bobin_yanik",
+     "hedef": "DO7.04",
+     "beklenen": {
+      "faz": "ACMA",
+      "alarm": null
+     },
+     "guvenlik_ek": "Kalip kapali-kilitli kalabilir: mafsal elastik enerji 4000 kN; acma valfi (S211) sokulmeden kalip mekanik olarak guvenli konumda olmadan LOTO 2 saglanamaz, yetkili mudahale."
+    }
    ]
   }
  },

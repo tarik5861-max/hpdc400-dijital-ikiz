@@ -186,3 +186,11 @@ VERI_BEKLIYOR: DI5.30/DI5.31 bayt.bit eslemesi (HW Config), A127 kontak sayisi/K
 - cevrim.py esleme (hareket_modeli.cevrim_esleme): MACA_GIR=3, KAPAMA=4, kilit=5, FAZ1=7, FAZ2=8, FAZ3=9+10, MACA_CEK=12, ACMA=13, OTO_PISTON_GERI=11, ITICI_ILERI=14, ITICI_GERI=16.
 - VARSAYIM FARKLAR: FARK_KATILASMA_SURE (cevrim 9+10 tek FAZ3, sure); FARK_SIRA_PISTON_GERI (cevrim 11 kalip kapali, PLC ACMA sonrasi); FARK_ACMA_300 (PLC 300 mm'de durur, cevrim 420 mm); FARK_SPREY_PLC_YOK (cevrim faz 1-2).
 - Acik: hidrolik.json faz1 165,6 / faz2 180 mm ile esik farki; hizlar (yavas 0,2 / hizli 3,0 / geri 0,4 m/s, mafsal 2,5-3,0 s, itici/maca 100 mm/s) saha olcumu; geometri dogrulamasi: plunger geri acik kalipta ve itici 300 mm aciklikta (itici_tarama/kamara taramasi yalniz cevrim.py uzayi). VERI_BEKLIYOR: enkoder karti kesme gecikmesi, gercek faz-gecis konumlari.
+
+## Ariza enjeksiyonu (Kademe 4, adim 3) - DESIGN ASSUMPTION
+- Geometri: FARK_SIRA_PISTON_GERI ve FARK_ACMA_300 geometrik dogrulandi (out/acik_kalip_tarama.txt); cevrim.py degismedi.
+- Kod: `KapaliDongu(ariza={di_sabit, bobin_yanik, valf_olcek, enc_olcek, enc_sabit})`, `ariza_kwargs()`, `teshis_kaydi(m, mod)`; sabitler/modlar elektrik.json `mantik.ariza_enjeksiyon` (12 mod ARZ01..12). Testler S20 (kontrol) + S21..S32.
+- Teshis kaydi: {ariza, faz, bekleyen_kosul, alarm, sorumlu_ID (kanal + mekanik A##), guvenlik_notu (akumulator desarji, basinc bosaltma, LOTO), loto_adimlar 1..9, tespit alarm|sessiz_takilma}.
+- Sonuclar: KAPAMA'da DI5.08/DO7.05 arizasi ve ACMA'da DO7.04 arizasi, ITICI_ILERI'de DI9.11 arizasi ALARMSIZ takilir (adim zaman asimi alarmi yok = bosluk). FAZ1/FAZ2/piston geri arizalari alarmla durur. DI9.11 sikismis-1 ve DI9.10 kablo kopuk MACA_GIR'de AL_MACA_ZAMAN_ASIMI verir (alarm maca'yi gosterir, kok neden itici LS: yanlis yonlendirme).
+- Kapi (HW.ON_KAPI_L2) ve maca (limit sensoru kanali yok) arizalari kapsam disi.
+
