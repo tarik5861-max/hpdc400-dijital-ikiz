@@ -240,3 +240,64 @@ def kural_elektrik(el=None, bom=None):
     if not (nc("HW.KM2", "HW.KM3") and nc("HW.KM3", "HW.KM2")):
         err("KURAL_ELEK_HESAP", "KM2/KM3", "KM2 ile KM3 karsilikli NC kilitli degil")
     return E
+
+
+def kural_hidrolik(hid=None, bom=None):
+    """KURAL_HIDR_*: params/hidrolik.json guvenlik/tutarlilik kurallari (CLAUDE.md kural 10).
+    hid/bom verilmezse dosyadan okunur; hidrolik.json yoksa atlanir (hata degil)."""
+    import json
+    E = []
+    def err(t, part, msg): E.append({"part": part, "type": t, "msg": msg})
+    if hid is None:
+        yol = os.path.join(ROOT, "params", "hidrolik.json")
+        if not os.path.exists(yol):
+            return E
+        with open(yol, encoding="utf-8") as f:
+            hid = json.load(f)
+    if bom is None:
+        with open(os.path.join(ROOT, "params", "bom.json"), encoding="utf-8") as f:
+            bom = json.load(f)
+    bom_ids = _bom_idler(bom.get("tree", bom))
+    el = hid.get("elemanlar", {})
+    valfler = {v.get("id"): v for v in el.get("valfler", [])}
+    sensorler = {s.get("id"): s for s in el.get("sensorler", [])}
+
+    # 1. yuksek basincli akumulator: kapama vanasi + emniyet + kilitlenebilir desarj + basinc olcumu + LOTO
+    gerek = (("kapama", "kapama vanasi"), ("emniyet", "emniyet valfi"), ("desarj", "desarj valfi"),
+             ("pt", "basinc sensoru"), ("loto", "LOTO adimi"))
+    for a in el.get("akumulatorler", []):
+        if (a.get("basinc_bar") or 999) <= 50:      # pilot/kontrol akumulatoru (dusuk basinc) muaf
+            continue
+        g = str(a.get("guvenlik", "")).lower()
+        for anahtar, ad in gerek:
+            if anahtar not in g:
+                err("KURAL_HIDR_ACC_GUVENLIK", str(a.get("id")), f"guvenlik metninde {ad} yok")
+    # 2. desarj valfi + akumulator basinc sensoru (esik) tanimli
+    if "DV1" not in valfler:
+        err("KURAL_HIDR_DESARJ", "DV1", "deşarj valfi (DV1) elemanlar.valfler'de yok")
+    pt2 = sensorler.get("PT2")
+    if not pt2:
+        err("KURAL_HIDR_OLCUM", "PT2", "akumulator basinc sensoru PT2 yok")
+    elif not any("esig" in k and isinstance(v, (int, float)) for k, v in pt2.items()):
+        err("KURAL_HIDR_OLCUM", "PT2", "PT2 guvenlik esigi (bar) sayisal degil/yok")
+    if "PT1" not in sensorler:
+        err("KURAL_HIDR_OLCUM", "PT1", "sistem basinc sensoru PT1 yok")
+    # 3. bagli_id'ler bom'da
+    for grup in ("akumulatorler", "valfler", "sensorler", "silindirler"):
+        for x in el.get(grup, []):
+            for b in x.get("bagli_id") or []:
+                if b not in bom_ids:
+                    err("KURAL_HIDR_BAGLI", str(x.get("id")), f"bagli_id {b} bom.json'da yok")
+    # 4. kapama vanasi arkasinda hapsolan basinc (A65 Y1.4) guvenlik on adiminda bosaltilmali
+    a65 = hid.get("a65_ic_devre_tasarim")
+    if a65:
+        g = str(a65.get("guvenlik", "")).lower()
+        for anahtar, ad in (("loto", "LOTO"), ("s121", "S121 desarj"), ("pt2", "PT2 < 2 bar dogrulama"),
+                            ("hapsolmus", "Y1.4 arkasi hapsolmus basinc"), ("penj_g", "kapak basinci (PENJ_G) dogrulama")):
+            if anahtar not in g:
+                err("KURAL_HIDR_HAPSOLMA", "a65_ic_devre", f"guvenlik on adiminda {ad} yok")
+        ic = {v.get("id") for v in a65.get("valfler", [])}
+        for yid in ("Y1.4", "Y1.11"):
+            if yid not in ic:
+                err("KURAL_HIDR_HAPSOLMA", yid, "ic valf tanimi yok (A yolu kilidi / emniyet)")
+    return E

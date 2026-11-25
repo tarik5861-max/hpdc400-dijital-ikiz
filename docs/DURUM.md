@@ -16,7 +16,7 @@ _Son güncelleme: 2026-11-25. Her `/kapanis`'te baştan yazılır (en fazla ~60 
 - **OLCU_TALEBI-1:** A65 blok zarfı 160×300×160 kartuşlara yetmiyor (gereken kapak yüzü 149 100 mm², serbest 111 700). Asgari ~570×300×180 (A55 üstünde -X'e uzar); A64, B, PA, P/T port yerleri yeniden düzenlenecek → olcu-mimari.
 - **OLCU_TALEBI-2:** A55 PB halka portu yok, en az d32 (295 L/dk, 6,1 m/s); Y1.10 buna bağlanacak.
 - **ELEKTRIK_TALEBI:** DO7.02 (S120) PLC ifadesi yok, öneri `S.ENJ_IZIN and S.FAZ2`; DO7.16 (S118) piston geri (DO7.26) süresince de açık olmalı; `plunger.geri_mm_s` 400 vs P1 353 mm/s tutarsız.
-- **KARAR_ONERI:** kapama vanası + emniyet + deşarj + ölçüm `KURAL_HIDR_*` kuralları `checks/kurallar.py`'ye (Y1.4 arkasında hapsolan 285,7 bar dahil). Onay bekliyor.
+- `KURAL_HIDR_*` (akümülatör güvenliği, deşarj, ölçüm, bağlı_id, Y1.4 hapsolmuş basınç) ONAYLANDI ve eklendi (2026-11-25): `checks/kurallar.py kural_hidrolik`, check.py tam montajda çağırır.
 - Adım zaman aşımı alarmı YOK: KAPAMA/ACMA/ITICI_* adımlarında arıza sessiz takılır (karar bekliyor). Maça limit sensörü kanalı yok.
 - Maça P (H38): 140 bar basınç düşürücüsüz = KARAR ÖNERİSİ, onaysız; H38 son bacak 25 mm, 90° dirsek rakoru.
 - Hat ihlalleri: A41 A portu d16 7,8 m/s; A65 dönüşü DN51 6,7 m/s (60 ms); H08 A31'e 13 mm; H20R2 gusset yok; bükülme H22 8, H03 9, H12 7 dirsek.
@@ -27,5 +27,5 @@ _Son güncelleme: 2026-11-25. Her `/kapanis`'te baştan yazılır (en fazla ~60 
 
 ## Sıradaki adım
 - Yeni sohbet, tek iş: OLCU_TALEBI-1+2 → olcu-mimari (A65 blok zarfı + A55 PB portu), sonra hat/port senkronu ve check.
-- Sonra: ELEKTRIK_TALEBI (elektrik-mantik), KURAL_HIDR_* kararı, hat ihlalleri, zaman aşımı alarmı kararı, Kademe 7.
+- Sonra: ELEKTRIK_TALEBI (elektrik-mantik), hat ihlalleri, zaman aşımı alarmı kararı, Kademe 7.
 - Alt plan A (tonaj → ölçülendirme motoru) en sonda.

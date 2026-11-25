@@ -324,7 +324,7 @@
     "tip": "Akümülatör Basınç Sensörü",
     "kanal": "AI1.02",
     "aralik_bar": "0-250",
-    "guvenlik_ esigi_bar": 2.0
+    "guvenlik_esigi_bar": 2.0
    },
    {
     "id": "LS1",

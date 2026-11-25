@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.join(ROOT, "assembly")); sys.path.insert(0, os.path.j
 import geo                      # noqa
 from assemble import assemble   # noqa
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from kurallar import kural_kontrol  # noqa
+from kurallar import kural_kontrol, kural_hidrolik  # noqa
 
 TOL_VOL = 50.0      # mm3 altı çakışma = sayısal gürültü
 TOL_ALLOWED = 5000.0  # izinli temas çiftinde bile 5 cm3 üstü örtüşme = gömülme hatası
@@ -65,6 +65,8 @@ def run(phase=None, shot=None, write=True, verbose=True):
                            "msg": f"{v/1000:.1f} cm3"})
 
     errors += kural_kontrol(P)
+    if phase is None and shot is None:
+        errors += kural_hidrolik()
     if phase is None and shot is None:   # itici strok taramasi (A42 ej 0 / -65, mafsal s=0/1), yalniz tam montajda
         import itici_tarama
         for a, b, s_, ej, v in itici_tarama.tara(placed, P):
